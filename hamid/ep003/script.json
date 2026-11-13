@@ -1,0 +1,10 @@
+[
+  {"who": "H", "mode": "vo", "scene": "hook_scheme", "dev": "دو ہزار کے دس فون خریدے… اور ایک بھی آن نہیں ہوا۔", "rom": "Do hazaar ke das phone khareede… aur ek bhi on nahi hua."},
+  {"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن تین۔ بلال کی سکیم۔", "rom": "Day 3. Bilal ki scheme."},
+  {"who": "L", "mode": "talk", "scene": "market", "dev": "[excited] سستا لو، مہنگا بیچو! دس فون، صرف دو ہزار میں!", "rom": "Sasta lo, mehnga becho! Das phone, sirf do hazaar mein!"},
+  {"who": "H", "mode": "vo", "scene": "market", "dev": "ہزار میں نے دیے، ہزار بلال نے۔ پلان پکا۔", "rom": "Hazaar main ne diye, hazaar Bilal ne. Plan pakka."},
+  {"who": "H", "mode": "vo", "scene": "dummy", "dev": "گھر آ کر ڈبہ کھولا… سارے فون نقلی۔ پلاسٹک کے کھلونے۔", "rom": "Ghar aa kar dabba khola… saare phone naqli. Plastic ke khilone."},
+  {"who": "L", "mode": "talk", "scene": "dummy", "dev": "[nervous] یار… دکان پہ تو چل رہے تھے!", "rom": "Yaar… dukaan pe toh chal rahe the!"},
+  {"who": "H", "mode": "vo", "scene": "rooftop", "dev": "غصہ آیا… پھر ہم دونوں چھت پہ بیٹھ کے بہت ہنسے۔", "rom": "Gussa aaya… phir hum dono chhat pe baith ke bohat hanse."},
+  {"who": "H", "mode": "vo", "scene": "end_diary", "dev": "جیب میں دو سو بچے… آج بھی بچ گئے۔ کل؟ تین نوکریاں۔", "rom": "Jeb mein 200 bache… aaj bhi bach gaye. Kal? Teen naukriyan."}
+]

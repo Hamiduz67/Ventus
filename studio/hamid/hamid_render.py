@@ -173,8 +173,10 @@ def speaking(who, t):
     return float(e[k]) if e is not None and k < len(e) else 0.0
 def blink(t, seed): return (t + seed) % 3.6 < 0.11
 
-def draw_char(img, who, x, y, t, mood="n", sc=1.0, arms=(-15, 15), hold=None):
-    amp = speaking(who, t); talking = amp > 0.08
+def draw_char(img, who, x, y, t, mood="n", sc=1.0, arms=(-15, 15), hold=None, laugh=False):
+    amp = speaking(who, t)
+    if laugh: amp = max(amp, 0.35 + 0.5 * abs(math.sin(t * 11 + x)))
+    talking = amp > 0.08
     breathe = math.sin(t * 2.1 + hash(who) % 3) * 4 * sc
     bob = math.sin(t * 9) * 5 * min(1, amp * 1.5) * sc if talking else 0
     ga = (math.sin(t * 4.2) * 0.5 + 0.5) * 40 if talking else 0
@@ -182,7 +184,7 @@ def draw_char(img, who, x, y, t, mood="n", sc=1.0, arms=(-15, 15), hold=None):
     rot_arm(img, who, x + 150 * sc, y + 110 * sc + breathe, arms[1] + ga, sc)
     paste_c(img, torso(who), x, y + 190 * sc + breathe, sc)
     if hold: hold(img, x, y, sc)
-    eyes = {"sad": "down", "happy": "happy" if not talking else "open", "shock": "wide", "det": "open"}.get(mood, "open")
+    eyes = {"sad": "down", "happy": "happy" if (not talking or laugh) else "open", "shock": "wide", "det": "open"}.get(mood, "open")
     if blink(t, hash(who) % 5 * 0.7) and eyes in ("open", "down"): eyes = "closed"
     brows = {"sad": "sad", "shock": "up", "det": "angry", "happy": "up"}.get(mood, "n")
     if talking: mouth = 1 if amp < 0.3 else (2 if amp < 0.6 else 3)
@@ -313,7 +315,7 @@ def hud(img, t):
     if t < SCENES[1]["vstart"] + 1.6: return
     paste_c(img, pill(f"DAY {META['day']}", 40, YEL), 140, 110, 1.0)
     m = META["money"]
-    pay = next((l for l in LINES if l["scene"] == "pay"), None)
+    pay = ([l for l in LINES if l["scene"] == META.get("money_scene", "pay")] or [None])[-1]
     if "money_start" in META and pay:
         k = eo((t - pay["end"] + 0.6) / 1.0); m = int(lerp(META["money_start"], META["money"], k))
     paste_c(img, pill(f"Rs {m}", 40, WHITE, GRN), W - 150, 110, 1.0)
@@ -594,15 +596,142 @@ def sc_end_diary(img, t, lt):
     diary = Image.new("RGBA", (620, 380), (0, 0, 0, 0)); dd = ImageDraw.Draw(diary)
     dd.rounded_rectangle([0, 0, 619, 379], radius=16, fill=(250, 245, 225), outline=INK, width=6)
     for j in range(7): dd.line([(30, 60 + j * 44), (590, 60 + j * 44)], fill=(180, 200, 230), width=3)
-    rows = [(f"DAY {META['day']}: +Rs 450", (40, 60, 170)), ("AAJ BHI BACH GAYE", GRN), ("KAL: BILAL KI SCHEME?!", RED)]
+    rows = [(r[0], tuple(r[1])) for r in META["diary"]] if "diary" in META else [(f"DAY {META['day']}: +Rs 450", (40, 60, 170)), ("AAJ BHI BACH GAYE", GRN), ("KAL: BILAL KI SCHEME?!", RED)]
     for j, (txt, col) in enumerate(rows):
         ti = text_img(txt, "Anton-Regular.ttf", 62, col); rev = eo((lt - 0.6 - j * 1.2) / 0.9); cw = int(ti.width * rev)
         if cw > 2: diary.alpha_composite(ti.crop((0, 0, cw, ti.height)), (36, 30 + j * 110))
     paste_c(img, diary, W / 2, 460, eob(lt / 0.35), rot=-2)
     paste_c(img, pill(f"DAY {META['day'] + 1} KAL • FOLLOW +", 50, RED, WHITE), W / 2, 1180, eob((lt - 4.0) / 0.35) * (1 + 0.04 * math.sin(t * 8)))
 
+
+# ======================= DAY 3+: BAZAAR, PHONES, ROOFTOP (reusable)
+@lru_cache(None)
+def bg_bazaar():
+    s = SS; im = Image.new("RGBA", (W * s, H * s)); d = ImageDraw.Draw(im)
+    for y in range(0, 900 * s, 4): d.rectangle([0, y, W * s, y + 4], fill=mixc((250, 170, 100), (255, 225, 170), y / (900 * s)))
+    r = np.random.default_rng(7); x = -30
+    while x < W:   # back buildings
+        w = r.uniform(140, 220); h = r.uniform(380, 640); col = mixc((190, 120, 90), (120, 100, 140), r.random())
+        d.rectangle([x * s, (900 - h) * s, (x + w) * s, 1250 * s], fill=col, outline=INK, width=4 * s)
+        for wy in range(int(900 - h + 40), 820, 110):
+            for wx in range(int(x + 25), int(x + w - 40), 70): d.rectangle([wx * s, wy * s, (wx + 36) * s, (wy + 50) * s], fill=(255, 225, 150), outline=INK, width=3 * s)
+        x += w
+    # wires
+    for k in range(3): d.line([(0, (230 + k * 40) * s), (W * s, (300 + k * 30) * s)], fill=INK, width=3 * s)
+    # stall awnings (striped)
+    cols = [(230, 60, 70), (60, 150, 255), (40, 190, 110), (255, 200, 40)]
+    for i, ax in enumerate((-40, 360, 760)):
+        c1 = cols[i]; 
+        for k in range(6):
+            d.polygon([((ax + k * 60) * s, 760 * s), ((ax + k * 60 + 60) * s, 760 * s), ((ax + k * 60 + 70) * s, 860 * s), ((ax + k * 60 + 10) * s, 860 * s)], fill=c1 if k % 2 == 0 else (250, 245, 235), outline=INK)
+        d.rectangle([ax * s, 860 * s, (ax + 370) * s, 1250 * s], fill=mixc(c1, (60, 40, 40), 0.55), outline=INK, width=4 * s)
+    # string lights
+    for x in range(20, W, 70):
+        yy = 700 + 30 * math.sin(x / 90)
+        d.ellipse([(x - 10) * s, (yy - 10) * s, (x + 10) * s, (yy + 10) * s], fill=cols[(x // 70) % 4], outline=INK, width=2 * s)
+    d.rectangle([0, 1250 * s, W * s, H * s], fill=(130, 115, 105))
+    for x in range(0, W, 120): d.line([(x * s, 1250 * s), ((x - 80) * s, H * s)], fill=(115, 100, 92), width=4 * s)
+    # phone stall table with phones + sign (original, no brands)
+    d.rectangle([520 * s, 1120 * s, 1060 * s, 1170 * s], fill=(150, 100, 60), outline=INK, width=5 * s)
+    d.rectangle([540 * s, 1170 * s, 1040 * s, 1330 * s], fill=(120, 80, 50), outline=INK, width=5 * s)
+    for k in range(6): d.rounded_rectangle([(550 + k * 82) * s, 1050 * s, (610 + k * 82) * s, 1120 * s], radius=10 * s, fill=(30, 30, 40), outline=INK, width=3 * s)
+    d.rounded_rectangle([340 * s, 560 * s, 740 * s, 650 * s], radius=14 * s, fill=(255, 235, 120), outline=INK, width=5 * s)
+    for x in (360, 720): d.line([(x * s, 500 * s), (x * s, 560 * s)], fill=INK, width=5 * s)
+    d.text((540 * s, 605 * s), "SASTA MOBILE", font=fnt("Anton-Regular.ttf", 58 * s), fill=RED, anchor="mm")
+    return ssf(im)
+
+@lru_cache(None)
+def phone_img(lit=False):
+    s = SS; w, h = 120, 220; im = Image.new("RGBA", (w * s, h * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, w * s - 1, h * s - 1], radius=20 * s, fill=(35, 35, 45), outline=INK, width=5 * s)
+    d.rounded_rectangle([10 * s, 22 * s, (w - 10) * s, (h - 26) * s], radius=8 * s, fill=(90, 160, 230) if lit else (20, 22, 30))
+    if lit:   # printed sticker "screen" of a dummy phone
+        for r_ in range(3):
+            for c in range(3):
+                d.rounded_rectangle([(20 + c * 30) * s, (40 + r_ * 34) * s, (42 + c * 30) * s, (62 + r_ * 34) * s], radius=5 * s, fill=[(255, 200, 40), (230, 60, 70), (40, 190, 110)][(r_ + c) % 3])
+    d.ellipse([(w / 2 - 8) * s, (h - 20) * s, (w / 2 + 8) * s, (h - 6) * s], fill=(70, 70, 80))
+    return ssf(im)
+
+@lru_cache(None)
+def box_img(open_=False):
+    im = Image.new("RGBA", (420, 300), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rectangle([20, 110, 400, 290], fill=(200, 150, 95), outline=INK, width=6)
+    d.line([(20, 160), (400, 160)], fill=(170, 120, 75), width=4)
+    if open_:
+        d.polygon([(20, 110), (-0, 40), (150, 30), (180, 110)], fill=(215, 165, 110), outline=INK)
+        d.polygon([(400, 110), (420, 40), (270, 30), (240, 110)], fill=(215, 165, 110), outline=INK)
+    else:
+        d.rectangle([20, 90, 400, 120], fill=(215, 165, 110), outline=INK, width=6)
+    d.text((210, 225), "10 PCS", font=fnt("Anton-Regular.ttf", 56), fill=INK, anchor="mm")
+    return im
+
+def hold_phone(img, x, y, sc): paste_c(img, phone_img(True), x + 140 * sc, y + 150 * sc, sc * 0.9, rot=-10)
+
+def sc_hook_scheme(img, t, lt):
+    img.alpha_composite(bg_room("night")); fan(img, 360, 210, t, (90, 100, 130))
+    lamp = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(lamp).ellipse([300, 600, 900, 1300], fill=(255, 200, 120, 70))
+    img.alpha_composite(lamp.filter(ImageFilter.GaussianBlur(80)))
+    paste_c(img, box_img(True), 250, 1290, 0.9)
+    for k, (px, rr) in enumerate([(820, 20), (900, -35), (760, 60)]): paste_c(img, phone_img(True), px, 1300 + k * 20, 0.8, rot=rr)
+    draw_char(img, "H", W / 2, 960, t, "shock", 1.15, arms=(-10, 40), hold=hold_phone)
+    paste_c(img, glow_text("Rs 2000 KE PHONE…", "Anton-Regular.ttf", 108, WHITE, (90, 160, 255)), W / 2, 380, eob((lt - 0.2) / 0.35))
+    paste_c(img, glow_text("EK BHI ON NAHI!", "Anton-Regular.ttf", 120, YEL, (255, 120, 40)), W / 2, 510, eob((lt - 2.0) / 0.35))
+
+def sc_market(img, t, lt):
+    img.alpha_composite(bg_bazaar())
+    ls = L("market"); ht = ls[1]["start"] if len(ls) > 1 else 1e9
+    jump = abs(math.sin(t * 6)) * 22 if t < ht else 0
+    draw_char(img, "L", 290, 1000 - jump, t, "happy", 0.95, arms=(-140, 140) if t < ht else (-20, 60))
+    draw_char(img, "H", 780, 1000, t, "n" if t < ht else "det", 0.95, arms=(-15, 15) if t < ht else (-60, 15))
+    if t > ls[0]["start"] + 0.3 and t < ht:
+        k = t - ls[0]["start"] - 0.3
+        paste_c(img, pill("10 PHONE = Rs 2000!", 54, YEL), W / 2, 330, eob(k / 0.3) * (1 + 0.04 * math.sin(t * 9)), rot=-4)
+        paste_c(img, emoji("🤑", 110), 880, 300, eob((k - 0.3) / 0.3))
+    if t >= ht:
+        k = t - ht
+        for j, (sx, d0) in enumerate([(780, 0.2), (290, 1.4)]):
+            q = eio((k - d0) / 0.8)
+            if k > d0: paste_c(img, notes_img(1000, 200), lerp(sx, W / 2, q), lerp(1120, 760, q) - 160 * math.sin(q * math.pi), 0.8 * (1 - 0.3 * q), rot=(1 - q) * 20)
+        if k > 2.4: paste_c(img, pill("PLAN PAKKA!", 56, GRN, WHITE), W / 2, 330, eob((k - 2.4) / 0.3), rot=3)
+
+def sc_dummy(img, t, lt):
+    img.alpha_composite(bg_room("day")); fan(img, 540, 200, t)
+    ls = L("dummy"); lt_ = ls[1]["start"] if len(ls) > 1 else 1e9
+    ln = ls[0]; tn = word_t(ln, "naqli", ln["start"] + 2.4)
+    d = ImageDraw.Draw(img); d.rectangle([140, 1180, 940, 1230], fill=(120, 80, 50), outline=INK, width=5)
+    draw_char(img, "H", 760, 900, t, "shock" if t > tn - 0.2 else "n", 0.95, arms=(-15, -70))
+    draw_char(img, "L", 280, 940, t, "sad" if t >= lt_ else "n", 0.9, arms=(-20, 20) if t < lt_ else (-150, -30))
+    opened = lt > 0.8
+    paste_c(img, box_img(opened), W / 2, 1100, 0.85)
+    if opened:
+        for j in range(4):
+            q = eo((lt - 0.8 - j * 0.15) / 0.5)
+            paste_c(img, phone_img(True), W / 2 + (j - 1.5) * 85 * q, 1060 - 110 * q + 25 * abs(j - 1.5), 0.62, rot=(j - 1.5) * 22 * q)
+    if t > tn - 0.2:
+        k = t - tn + 0.2
+        paste_c(img, glow_text("NAQLI!", "Anton-Regular.ttf", 150, WHITE, (230, 60, 70)), W / 2, 440, eob(k / 0.3), rot=-6)
+        paste_c(img, pill("PLASTIC KE KHILONE!", 50, RED, WHITE), W / 2, 590, eob((k - 0.6) / 0.3))
+    if t >= lt_ + 0.2: paste_c(img, emoji("😅", 110), 150, 700, eob((t - lt_ - 0.2) / 0.3))
+
+def sc_rooftop(img, t, lt):
+    img.alpha_composite(skyline("golden")); kites(img, t)
+    ln = L("rooftop")[0]; th = word_t(ln, "phir", ln["start"] + 1.4)
+    d = ImageDraw.Draw(img); d.rectangle([0, 1250, W, 1300], fill=(170, 120, 90), outline=INK, width=5); d.rectangle([0, 1300, W, 1420], fill=(120, 85, 70))
+    angry = t < th
+    sh = abs(math.sin(t * 9)) * 18 if not angry else 0
+    draw_char(img, "H", 720, 980 - sh, t, "det" if angry else "happy", 1.0, arms=(-20, 20) if angry else (-60, 140), laugh=not angry)
+    draw_char(img, "L", 330, 980 - sh * 0.8, t, "sad" if angry else "happy", 1.0, arms=(-15, 15) if angry else (-140, 60), laugh=not angry)
+    if angry: paste_c(img, emoji("😤", 120), 720, 640, eob((lt - 0.2) / 0.3))
+    else:
+        k = t - th
+        paste_c(img, emoji("😂", 130), 520, 560, eob(k / 0.3) * (1 + 0.08 * math.sin(t * 10)))
+        paste_c(img, glow_text("HAHAHA!", "Anton-Regular.ttf", 120, WHITE, (255, 140, 40)), W / 2, 380, eob((k - 0.3) / 0.3), rot=-4)
+        q = (k * 0.9) % 1.6   # a dummy phone flips in the air
+        paste_c(img, phone_img(True), 540 + q * 80, 860 - 380 * math.sin(min(q, 1) * math.pi), 0.7, rot=q * 400)
+
 SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, "abbu": sc_abbu, "night": sc_night, "end": sc_end,
-      "hook_dhaba": sc_hook_dhaba, "dhaba": sc_dhaba, "burn": sc_burn, "pay": sc_pay, "bilal": sc_bilal, "end_diary": sc_end_diary}
+      "hook_dhaba": sc_hook_dhaba, "dhaba": sc_dhaba, "burn": sc_burn, "pay": sc_pay, "bilal": sc_bilal, "end_diary": sc_end_diary,
+      "hook_scheme": sc_hook_scheme, "market": sc_market, "dummy": sc_dummy, "rooftop": sc_rooftop}
 
 def frame(t):
     s = next((x for x in SCENES if x["vstart"] <= t < x["vend"]), SCENES[-1])

@@ -135,6 +135,12 @@ for l in tl:
         add(sfx, sz, l["start"] + 0.5, 0.8)
         cw = [w for w in l["words"] if w["w"].lower().startswith("cup")]
         if cw: add(sfx, noise(0.5, 0.08), cw[0]["t"] + 0.1, 0.9); add(sfx, CHIME, cw[0]["t"] + 0.15, 0.25)
+    if l["scene"] == "market" and l["who"] == "H":   # notes handed over
+        for k in range(3): add(sfx, TICK, l["start"] + 0.4 + k * 1.2, 0.3)
+    if l["scene"] == "dummy" and l["who"] == "H":   # box opens, phones tumble
+        add(sfx, noise(0.25, 0.05), l["start"] + 0.8, 0.5)
+        nw = [w for w in l["words"] if w["w"].lower().startswith("naqli")]
+        if nw: add(sfx, kick(), nw[0]["t"], 0.7)
     if l["scene"] == "pay":   # coins counted
         for k in range(5): add(sfx, TICK, l["start"] + 0.3 + k * 0.22, 0.35)
 night = next((s for s in scenes if s["scene"] == "night"), None)
