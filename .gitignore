@@ -1,0 +1,8 @@
+hamid/**/*.wav
+hamid/**/*.f32
+hamid/**/el*.mp3
+hamid/**/still_*.png
+hamid/**/video*.mp4
+hamid/**/out*.mp4
+hamid/**/timeline.json
+hamid/**/lipsync.npz

@@ -1,0 +1,12 @@
+[
+  {"who": "H", "mode": "vo", "scene": "hook", "dev": "[sad] بیاسی فیصد نمبر آئے… پھر بھی میں کالج نہیں جا سکتا۔", "rom": "82% number aaye… phir bhi main college nahi ja sakta."},
+  {"who": "H", "mode": "vo", "scene": "daycard", "dev": "میرا نام حامد ہے۔ لاہور۔ اور یہ ہے میری کہانی۔", "rom": "Mera naam Hamid hai. Lahore. Aur ye hai meri kahani."},
+  {"who": "A", "mode": "talk", "scene": "home", "dev": "[excited] حامد! رزلٹ کیا آیا بیٹا؟", "rom": "Hamid! Result kya aaya beta?"},
+  {"who": "H", "mode": "talk", "scene": "home", "dev": "[happy] امی… بیاسی پرسنٹ!", "rom": "Ammi… 82 percent!"},
+  {"who": "A", "mode": "talk", "scene": "home", "dev": "[joyful] ماشاءاللہ! میرا بیٹا انجینئر بنے گا!", "rom": "MashaAllah! Mera beta engineer banega!"},
+  {"who": "H", "mode": "vo", "scene": "fees", "dev": "پھر میں نے یونیورسٹی کی فیس دیکھی۔ ایک سال کے دو لاکھ روپے۔", "rom": "Phir maine university ki fees dekhi. Ek saal ke 2 lakh rupay."},
+  {"who": "B", "mode": "talk", "scene": "abbu", "dev": "[quietly] مبارک ہو بیٹا…", "rom": "Mubarak ho beta…"},
+  {"who": "H", "mode": "vo", "scene": "abbu", "dev": "ابو نے مبارک تو دی… پر ان کی آنکھوں میں گھر کا کرایہ تھا۔", "rom": "Abbu ne mubarak toh di… par unki aankhon mein ghar ka kiraya tha."},
+  {"who": "H", "mode": "vo", "scene": "night", "dev": "اس رات میں نے ایڈمیشن فارم پھاڑ دیا… اور ڈائری میں لکھا: پلان بی۔", "rom": "Us raat maine admission form phaad diya… aur diary mein likha: PLAN B."},
+  {"who": "H", "mode": "vo", "scene": "end", "dev": "[determined] کل سے… زیرو سے شروع۔ فالو کرو، دیکھتے ہیں حامد کہاں تک جاتا ہے۔", "rom": "Kal se… ZERO SE SHURU. Follow karo, dekhte hain Hamid kahan tak jaata hai."}
+]

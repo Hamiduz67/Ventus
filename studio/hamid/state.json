@@ -1,0 +1,11 @@
+{
+  "series": "Hamid: Zero Se Shuru",
+  "last_day": 1,
+  "money": 750,
+  "city": "Lahore",
+  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; Ammi was overjoyed, Abbu quietly said mubarak (rent is due). That night Hamid tore the admission form and wrote PLAN B in his diary. Ended: 'Kal se... zero se shuru.'",
+  "episodes": [
+    {"day": 1, "title": "Result Wala Din", "file": "hamid/ep001/Hamid_Day01.mp4", "posted_at": "2026-11-13 11:48 Asia/Dubai", "money_end": 750}
+  ],
+  "weekly": []
+}
