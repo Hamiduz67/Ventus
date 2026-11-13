@@ -1,11 +1,26 @@
 {
   "series": "Hamid: Zero Se Shuru",
-  "last_day": 1,
-  "money": 750,
+  "last_day": 2,
+  "money": 1200,
   "city": "Lahore",
-  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; Ammi was overjoyed, Abbu quietly said mubarak (rent is due). That night Hamid tore the admission form and wrote PLAN B in his diary. Ended: 'Kal se... zero se shuru.'",
+  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; Abbu quietly said mubarak (rent is due). He tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 6 AM to 6 PM; burned his hand on the kettle and broke a cup, so Ustad ji paid Rs 450 instead of 500 (Rs 1,200 now). Bilal arrived with a 'paise double' scheme; Hamid doubts it. Diary: 'Aaj bhi bach gaye. Kal: Bilal ki scheme?!'",
   "episodes": [
-    {"day": 1, "title": "Result Wala Din", "file": "hamid/ep001/Hamid_Day01.mp4", "posted_at": "2026-11-13 11:48 Asia/Dubai", "money_end": 750}
+    {
+      "day": 1,
+      "title": "Result Wala Din",
+      "file": "hamid/ep001/Hamid_Day01.mp4",
+      "posted_at": "2026-11-13 11:48 Asia/Dubai",
+      "money_end": 750
+    },
+    {
+      "day": 2,
+      "title": "Pehli Naukri",
+      "file": "hamid/ep002/Hamid_Day02.mp4",
+      "posted_at": "2026-11-13 13:00 Asia/Dubai",
+      "money_end": 1200,
+      "metricool_id": 426642195,
+      "elevenlabs_chars": 391
+    }
   ],
   "weekly": []
 }
