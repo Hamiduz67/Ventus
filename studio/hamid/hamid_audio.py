@@ -85,7 +85,7 @@ def kick():
 
 # ---- score: A minor, 72 BPM; last scene lifts to C major with a soft beat
 BPM = 72; beat = 60 / BPM; music = np.zeros(N, np.float32)
-end_scene = next((s for s in scenes if s["scene"] == "end"), None)
+end_scene = next((s for s in scenes if s["scene"].startswith("end")), None)
 lift_t = end_scene["vstart"] if end_scene else TOTAL
 sad = [[57, 60, 64], [53, 57, 60], [48, 52, 55], [55, 59, 62]]       # Am F C G
 hope = [[48, 52, 55], [55, 59, 62], [57, 60, 64], [53, 57, 60]]      # C G Am F
@@ -130,6 +130,13 @@ for l in tl:
         if pw: add(sfx, CHIME, pw[0]["t"], 0.6)
     if l["scene"] == "fees":
         for k in range(6): add(sfx, TICK, l["start"] + k * 0.5, 0.25)
+    if l["scene"] == "burn":   # kettle sizzle + cup smash
+        sz = rng.standard_normal(int(1.2 * SR)).astype(np.float32); sz = np.diff(sz, prepend=0) * env(len(sz), 0.02, 0.6) * 0.35
+        add(sfx, sz, l["start"] + 0.5, 0.8)
+        cw = [w for w in l["words"] if w["w"].lower().startswith("cup")]
+        if cw: add(sfx, noise(0.5, 0.08), cw[0]["t"] + 0.1, 0.9); add(sfx, CHIME, cw[0]["t"] + 0.15, 0.25)
+    if l["scene"] == "pay":   # coins counted
+        for k in range(5): add(sfx, TICK, l["start"] + 0.3 + k * 0.22, 0.35)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 

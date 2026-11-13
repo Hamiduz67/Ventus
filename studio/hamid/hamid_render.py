@@ -13,7 +13,7 @@ LS = np.load(f"{D}/lipsync.npz"); ENV = {k: LS[k] for k in LS.files}
 import os
 F = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fonts") + "/"; EMOJI = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
 YEL = (255, 210, 60); WHITE = (255, 255, 255); RED = (230, 60, 70); GRN = (40, 190, 110); INK = (34, 28, 40)
-NAMES = {"H": ("HAMID", (60, 150, 255)), "A": ("AMMI", (230, 90, 140)), "B": ("ABBU", (150, 120, 90))}
+NAMES = {"H": ("HAMID", (60, 150, 255)), "A": ("AMMI", (230, 90, 140)), "B": ("ABBU", (150, 120, 90)), "L": ("BILAL", (255, 130, 40))}
 
 @lru_cache(None)
 def fnt(name, size): return ImageFont.truetype(F + name, size)
@@ -58,7 +58,7 @@ def pill(txt, size, bg, fg=INK, name="Poppins-Black.ttf"):
 def ssf(im): return im.resize((im.width // SS, im.height // SS), Image.LANCZOS)
 
 # ======================= CHARACTERS
-SKIN = {"H": (200, 146, 106), "A": (214, 160, 122), "B": (182, 128, 92)}
+SKIN = {"H": (200, 146, 106), "A": (214, 160, 122), "B": (182, 128, 92), "L": (176, 122, 84)}
 HW = 300
 @lru_cache(None)
 def head(who, eyes, mouth, brows):
@@ -79,6 +79,13 @@ def head(who, eyes, mouth, brows):
         d.chord([cx - r - 14 * s, cy - r - 30 * s, cx + r + 14 * s, cy + 2 * s], 180, 360, fill=(48, 160, 125), outline=INK, width=6 * s)
         d.line([(cx, cy - r + 8 * s), (cx, cy - r + 30 * s)], fill=(30, 22, 25), width=8 * s)
         d.ellipse([cx + 22 * s, cy + 22 * s, cx + 30 * s, cy + 30 * s], fill=(255, 220, 90))  # nose pin
+    elif who == "L":  # Bilal: curly hair puffs + backwards red cap
+        for k in range(6):
+            x = cx - r + 10 * s + k * 42 * s
+            d.ellipse([x - 30 * s, cy - r - 10 * s, x + 30 * s, cy - r + 46 * s], fill=(45, 30, 25), outline=INK, width=4 * s)
+        d.chord([cx - r + 6 * s, cy - r - 30 * s, cx + r - 6 * s, cy - 10 * s], 180, 360, fill=(220, 50, 60), outline=INK, width=6 * s)
+        d.rounded_rectangle([cx - r - 40 * s, cy - 44 * s, cx - r + 40 * s, cy - 22 * s], radius=10 * s, fill=(190, 35, 45), outline=INK, width=5 * s)
+        d.ellipse([cx - 10 * s, cy - r - 38 * s, cx + 10 * s, cy - r - 18 * s], fill=(255, 210, 60), outline=INK, width=3 * s)
     else:
         for sx in (-1, 1):
             d.chord([cx + sx * (r - 8 * s) - 38 * s, cy - 70 * s, cx + sx * (r - 8 * s) + 38 * s, cy + 24 * s], 90 if sx < 0 else -90, 270 if sx < 0 else 90, fill=(170, 170, 175))
@@ -99,6 +106,7 @@ def head(who, eyes, mouth, brows):
             d.ellipse([ex - 3 * s, ey - 8 * s + dy, ex + 4 * s, ey - 1 * s + dy], fill=WHITE)
         by = ey - 42 * s; bw = 10 * s if who != "A" else 7 * s
         bcol = (25, 22, 28) if who != "B" else (150, 150, 155)
+        if who == "L": bw = 12 * s
         if brows == "sad":
             d.line([(ex - 22 * s, by + (0 if sx > 0 else 10 * s)), (ex + 22 * s, by + (10 * s if sx > 0 else 0))], fill=bcol, width=bw)
         elif brows == "angry":
@@ -138,6 +146,10 @@ def torso(who):
     elif who == "A":
         d.rounded_rectangle([60 * s, 50 * s, w - 60 * s, h + 80 * s], radius=130 * s, fill=(150, 40, 70), outline=INK, width=7 * s)
         d.polygon([(40 * s, 70 * s), (w - 40 * s, 70 * s), (w - 120 * s, 230 * s), (140 * s, 240 * s)], fill=(48, 160, 125), outline=INK)
+    elif who == "L":
+        d.rounded_rectangle([60 * s, 50 * s, w - 60 * s, h + 80 * s], radius=130 * s, fill=(255, 190, 50), outline=INK, width=7 * s)
+        d.chord([w / 2 - 60 * s, 20 * s, w / 2 + 60 * s, 100 * s], 0, 180, fill=SKIN["L"], outline=INK, width=5 * s)
+        d.rectangle([90 * s, 200 * s, w - 90 * s, 240 * s], fill=(230, 60, 70))
     else:
         d.rounded_rectangle([60 * s, 50 * s, w - 60 * s, h + 80 * s], radius=130 * s, fill=(200, 200, 195), outline=INK, width=7 * s)
         d.polygon([(85 * s, 110 * s), (w / 2 - 30 * s, 70 * s), (w / 2 - 30 * s, h), (75 * s, h)], fill=(120, 80, 50), outline=INK)
@@ -147,7 +159,7 @@ def torso(who):
 @lru_cache(None)
 def arm(who):
     s = SS; L = 220; im = Image.new("RGBA", (66 * s, (L + 66) * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
-    sleeve = {"H": (245, 245, 240), "A": (150, 40, 70), "B": (200, 200, 195)}[who]
+    sleeve = {"H": (245, 245, 240), "A": (150, 40, 70), "B": (200, 200, 195), "L": (255, 190, 50)}[who]
     d.rounded_rectangle([6 * s, 6 * s, 60 * s, (L - 40) * s], radius=26 * s, fill=sleeve, outline=INK, width=6 * s)
     d.ellipse([4 * s, (L - 58) * s, 62 * s, L * s], fill=SKIN[who], outline=INK, width=6 * s)
     return ssf(im)
@@ -300,7 +312,11 @@ def form_paper():
 def hud(img, t):
     if t < SCENES[1]["vstart"] + 1.6: return
     paste_c(img, pill(f"DAY {META['day']}", 40, YEL), 140, 110, 1.0)
-    paste_c(img, pill(f"Rs {META['money']}", 40, WHITE, GRN), W - 150, 110, 1.0)
+    m = META["money"]
+    pay = next((l for l in LINES if l["scene"] == "pay"), None)
+    if "money_start" in META and pay:
+        k = eo((t - pay["end"] + 0.6) / 1.0); m = int(lerp(META["money_start"], META["money"], k))
+    paste_c(img, pill(f"Rs {m}", 40, WHITE, GRN), W - 150, 110, 1.0)
 
 def caption(img, t):
     cur = next((l for l in LINES if l["start"] - 0.05 <= t < l["end"] + 0.2), None)
@@ -338,7 +354,7 @@ def sc_daycard(img, t, lt):
     img.alpha_composite(skyline("golden")); kites(img, t)
     paste_c(img, glow_text(f"DAY {META['day']}", "Anton-Regular.ttf", 230, WHITE, (255, 120, 40)), W / 2, 560, eob((lt - 0.2) / 0.4))
     paste_c(img, text_img(META["city"].upper(), "Anton-Regular.ttf", 110, YEL, 7, INK), W / 2, 760, eob((lt - 0.7) / 0.35))
-    paste_c(img, pill(f"JEB MEIN: Rs {META['money']}", 52, WHITE, GRN), W / 2, 900, eob((lt - 1.4) / 0.35))
+    paste_c(img, pill(f"JEB MEIN: Rs {META.get('money_start', META['money'])}", 52, WHITE, GRN), W / 2, 900, eob((lt - 1.4) / 0.35))
 
 def sc_home(img, t, lt):
     img.alpha_composite(bg_room("day")); fan(img, 540, 200, t)
@@ -419,9 +435,174 @@ def sc_end(img, t, lt):
     img.alpha_composite(skyline("dawn")); kites(img, t, 3)
     draw_char(img, "H", W / 2, 1000, t, "det", 1.15, arms=(-20, 20))
     paste_c(img, glow_text("ZERO SE SHURU", "Anton-Regular.ttf", 140, WHITE, (255, 140, 40)), W / 2, 330, eob((lt - 0.4) / 0.4))
-    paste_c(img, pill("DAY 2 KAL • FOLLOW +", 50, RED, WHITE), W / 2, 480, eob((lt - 2.2) / 0.35) * (1 + 0.04 * math.sin(t * 8)))
+    paste_c(img, pill(f"DAY {META['day'] + 1} KAL • FOLLOW +", 50, RED, WHITE), W / 2, 480, eob((lt - 2.2) / 0.35) * (1 + 0.04 * math.sin(t * 8)))
 
-SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, "abbu": sc_abbu, "night": sc_night, "end": sc_end}
+# ======================= DAY 2+: DHABA WORLD (reusable)
+@lru_cache(None)
+def bg_dhaba(mode):
+    s = SS; im = Image.new("RGBA", (W * s, H * s)); d = ImageDraw.Draw(im)
+    sky = {"day": ((255, 200, 120), (250, 230, 180)), "night": ((25, 30, 60), (60, 50, 80))}[mode]
+    for y in range(0, 700 * s, 4): d.rectangle([0, y, W * s, y + 4], fill=mixc(sky[0], sky[1], y / (700 * s)))
+    wall = (200, 120, 70) if mode == "day" else (110, 70, 55); dark = mixc(wall, (0, 0, 0), 0.25)
+    d.rectangle([0, 520 * s, W * s, 1250 * s], fill=wall)
+    for y in range(540, 1250, 50): d.line([(0, y * s), (W * s, y * s)], fill=dark, width=2 * s)
+    # tin roof awning
+    d.polygon([(-20 * s, 420 * s), (W * s + 20 * s, 420 * s), (W * s + 20 * s, 540 * s), (-20 * s, 540 * s)], fill=(150, 160, 170), outline=INK)
+    for x in range(0, W, 60): d.line([(x * s, 420 * s), (x * s, 540 * s)], fill=(110, 120, 130), width=4 * s)
+    # sign board (original, no brand)
+    d.rounded_rectangle([290 * s, 250 * s, 790 * s, 400 * s], radius=20 * s, fill=(40, 120, 80), outline=INK, width=8 * s)
+    d.text((540 * s, 325 * s), "CHAI DHABA", font=fnt("Anton-Regular.ttf", 90 * s), fill=(255, 230, 120), anchor="mm")
+    for x in (310, 770): d.line([(x * s, 180 * s), (x * s, 250 * s)], fill=INK, width=5 * s)
+    # shelf with cups
+    d.rectangle([60 * s, 640 * s, 460 * s, 660 * s], fill=(120, 80, 50), outline=INK, width=4 * s)
+    for k in range(6):
+        x = 80 + k * 64; d.rounded_rectangle([x * s, 590 * s, (x + 44) * s, 640 * s], radius=6 * s, fill=(245, 245, 240, 220), outline=INK, width=3 * s)
+    # counter + stove
+    d.rectangle([0, 1180 * s, W * s, H * s], fill=(90, 70, 60) if mode == "day" else (50, 40, 45))
+    d.rectangle([600 * s, 960 * s, 1060 * s, 1180 * s], fill=(160, 110, 70), outline=INK, width=6 * s)
+    d.rectangle([660 * s, 900 * s, 980 * s, 960 * s], fill=(70, 70, 80), outline=INK, width=5 * s)
+    # bulb
+    d.line([(540 * s, 420 * s), (540 * s, 560 * s)], fill=INK, width=4 * s)
+    d.ellipse([515 * s, 555 * s, 565 * s, 610 * s], fill=(255, 235, 150), outline=INK, width=3 * s)
+    return ssf(im)
+
+def bulb_glow(img, a=60):
+    g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(g).ellipse([340, 380, 740, 780], fill=(255, 220, 120, a))
+    img.alpha_composite(g.filter(ImageFilter.GaussianBlur(70)))
+
+@lru_cache(None)
+def kettle_img():
+    im = Image.new("RGBA", (300, 260), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.arc([180, 60, 290, 190], 270, 90, fill=INK, width=14)
+    d.polygon([(40, 120), (0, 60), (14, 54), (70, 110)], fill=(190, 190, 200), outline=INK)
+    d.ellipse([40, 70, 230, 250], fill=(190, 190, 200), outline=INK, width=7)
+    d.rectangle([90, 50, 180, 90], fill=(170, 170, 180), outline=INK, width=6)
+    d.ellipse([120, 30, 150, 58], fill=INK)
+    return im
+
+def steam(img, x, y, t, n=3, sc=1.0):
+    d = ImageDraw.Draw(img)
+    for k in range(n):
+        q = (t * 0.7 + k / n) % 1
+        cx = x + math.sin(t * 3 + k * 2) * 20 * sc; cy = y - q * 220 * sc; r = (18 + q * 30) * sc
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(255, 255, 255, int(150 * (1 - q))))
+
+@lru_cache(None)
+def cup_img(broken=False):
+    im = Image.new("RGBA", (90, 100), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.polygon([(8, 10), (82, 10), (70, 95), (20, 95)], fill=(245, 240, 230, 235), outline=INK)
+    d.rectangle([14, 26, 76, 50], fill=(180, 120, 70))
+    return im
+
+@lru_cache(None)
+def notes_img(amount, w=260):
+    im = Image.new("RGBA", (w + 30, 150), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    for k in range(3):
+        d.rounded_rectangle([k * 12, 30 - k * 12, w + k * 12, 140 - k * 12], radius=10, fill=(120, 190, 130) if k < 2 else (150, 210, 150), outline=INK, width=4)
+    d.text((w // 2 + 24, 76), f"Rs {amount}", font=fnt("Anton-Regular.ttf", 56), fill=INK, anchor="mm")
+    return im
+def hold_notes(img, x, y, sc): paste_c(img, notes_img(450, 200), x + 130 * sc, y + 200 * sc, sc * 0.9, rot=-8)
+def hold_tray(img, x, y, sc):
+    d = ImageDraw.Draw(img); tx, ty = x + 150 * sc, y + 170 * sc
+    d.ellipse([tx - 120 * sc, ty - 18 * sc, tx + 120 * sc, ty + 22 * sc], fill=(200, 200, 210), outline=INK, width=5)
+    for k in (-1, 0, 1): paste_c(img, cup_img(), tx + k * 70 * sc, ty - 40 * sc, sc * 0.75)
+
+def clock(img, cx, cy, hours):
+    d = ImageDraw.Draw(img); r = 90
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(250, 250, 245), outline=INK, width=8)
+    for k in range(12):
+        a = k / 12 * 2 * math.pi; d.line([(cx + math.sin(a) * 70, cy - math.cos(a) * 70), (cx + math.sin(a) * 80, cy - math.cos(a) * 80)], fill=INK, width=4)
+    ah = hours / 12 * 2 * math.pi; am = (hours % 1) * 2 * math.pi
+    d.line([(cx, cy), (cx + math.sin(ah) * 45, cy - math.cos(ah) * 45)], fill=INK, width=10)
+    d.line([(cx, cy), (cx + math.sin(am) * 68, cy - math.cos(am) * 68)], fill=RED, width=6)
+    d.ellipse([cx - 9, cy - 9, cx + 9, cy + 9], fill=INK)
+
+def word_t(line, prefix, default=None, exact=False):
+    w = [x for x in line["words"] if (x["w"].lower().strip(".,…!?") == prefix.lower() if exact else x["w"].lower().strip(".,…!?").startswith(prefix.lower()))]
+    return w[0]["t"] if w else default
+
+def sc_hook_dhaba(img, t, lt):
+    img.alpha_composite(bg_dhaba("night")); bulb_glow(img, 90)
+    draw_char(img, "H", W / 2, 1040, t, "sad", 1.15, arms=(-10, 40), hold=hold_notes)
+    paste_c(img, glow_text("12 GHANTE KAAM…", "Anton-Regular.ttf", 110, WHITE, (90, 160, 255)), W / 2, 560, eob((lt - 0.2) / 0.35))
+    paste_c(img, glow_text("SIRF Rs 450?", "Anton-Regular.ttf", 120, YEL, (255, 120, 40)), W / 2, 690, eob((lt - 1.8) / 0.35))
+
+def sc_dhaba(img, t, lt):
+    img.alpha_composite(bg_dhaba("day"))
+    paste_c(img, kettle_img(), 820, 830, 0.8); steam(img, 760, 760, t)
+    ln = L("dhaba")[0]; k = eio((t - ln["start"]) / max(1, ln["end"] - ln["start"]))
+    clock(img, 170, 300, 6 + 12 * k)
+    paste_c(img, pill("6 AM" if k < 0.5 else "6 PM", 40, YEL), 170, 430, 1.0)
+    hx = 360 + math.sin(t * 2.2) * 120
+    draw_char(img, "H", hx, 960, t, "n", 1.0, arms=(-10, -60), hold=hold_tray)
+    for i, (wd, col, y) in enumerate([("chai", YEL, 600), ("bartan", WHITE, 700), ("table", (120, 200, 255), 800)]):
+        wt = word_t(ln, wd)
+        if wt and t > wt - 0.1:
+            paste_c(img, pill(wd.upper() + ("!" if i == 2 else ""), 54, col), 800 - i * 10, y - 120, eob((t - wt + 0.1) / 0.3), rot=(-6, 4, -3)[i])
+
+def sc_burn(img, t, lt):
+    img.alpha_composite(bg_dhaba("day"))
+    shake = math.sin(t * 60) * 10 * max(0, 1 - (lt - 1.0) / 0.6) if lt > 1.0 else 0
+    ln = L("burn")[0]; ct = word_t(ln, "cup", ln["end"] - 0.6)
+    draw_char(img, "H", 380 + shake, 900, t, "shock" if lt > 1.0 else "n", 1.15, arms=(-10, -95))
+    paste_c(img, kettle_img(), 720 + shake, 900, 1.15, rot=-15 if lt < 1.0 else 10); steam(img, 640, 820, t, 4, 1.2)
+    if lt > 1.0:
+        paste_c(img, emoji("🔥", 110), 600, 760, eob((lt - 1.0) / 0.25))
+        paste_c(img, glow_text("AAAH!", "Anton-Regular.ttf", 130, WHITE, (255, 80, 40)), W / 2, 560, eob((lt - 1.0) / 0.3), rot=-5)
+    if t < ct:
+        q = max(0, (t - (ct - 0.7)) / 0.7); paste_c(img, cup_img(), 760, 1060 + q * q * 160, 1.1, rot=q * 120)
+    else:
+        k = t - ct; d = ImageDraw.Draw(img)
+        for j in range(7):
+            r = np.random.default_rng(j + 40); vx = r.uniform(-260, 260); vy = r.uniform(-380, -120)
+            px = 760 + vx * k; py = min(1300, 1220 + vy * k + 900 * k * k)
+            d.polygon([(px, py), (px + 22, py + 8), (px + 6, py + 26)], fill=(245, 240, 230), outline=INK)
+        paste_c(img, pill("CRASH!", 60, RED, WHITE), 760, 1000, eob(k / 0.25), rot=8)
+
+def sc_pay(img, t, lt):
+    img.alpha_composite(bg_dhaba("night")); bulb_glow(img, 70)
+    draw_char(img, "H", 820, 960, t, "sad", 0.95)
+    ln = L("pay")[0]; t450 = word_t(ln, "450", ln["start"] + 1.8); t50 = word_t(ln, "50", ln["end"] - 1.0, exact=True)
+    paste_c(img, notes_img(500), 360, 620, eob((lt - 0.3) / 0.35), rot=-4)
+    if t > t450 - 0.2:
+        k = t - t450 + 0.2; d = ImageDraw.Draw(img)
+        d.line([(200, 680), (200 + 330 * eo(k / 0.3), 560)], fill=RED, width=16)
+        paste_c(img, notes_img(450), 360, 850, eob((k - 0.3) / 0.35), rot=3)
+    if t > t50 - 0.1:
+        k = t - t50 + 0.1
+        paste_c(img, pill("-50 CUP KE", 56, RED, WHITE), 360, 1060, eob(k / 0.3), rot=-5)
+        paste_c(img, cup_img(), 600, 1060, eob(k / 0.3) * 0.8, rot=20)
+
+def sc_bilal(img, t, lt):
+    img.alpha_composite(bg_room("eve"))
+    ls = L("bilal"); ht = ls[1]["start"] if len(ls) > 1 else 1e9
+    jump = abs(math.sin(t * 6)) * 25 if t < ht else 0
+    draw_char(img, "L", 300, 930 - jump, t, "happy", 1.0, arms=(-150, 150) if t < ht else (-20, 20))
+    draw_char(img, "H", 790, 930, t, "n" if t < ht else "sad", 1.0, arms=(-15, 15))
+    if t > ls[0]["start"] + 0.4:
+        k = t - ls[0]["start"] - 0.4
+        paste_c(img, pill("PAISE DOUBLE!", 58, YEL), 330, 470, eob(k / 0.3) * (1 + 0.04 * math.sin(t * 9)), rot=-6)
+        paste_c(img, emoji("🤑", 110), 600, 400, eob((k - 0.3) / 0.3))
+    if t > ht + 0.3: paste_c(img, emoji("🙄", 120), 900, 560, eob((t - ht - 0.3) / 0.3))
+
+def sc_end_diary(img, t, lt):
+    img.alpha_composite(bg_room("night"))
+    lamp = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(lamp).ellipse([200, 700, 1000, 1500], fill=(255, 200, 110, 110))
+    img.alpha_composite(lamp.filter(ImageFilter.GaussianBlur(90)))
+    draw_char(img, "H", W / 2, 900, t, "det", 1.05, arms=(-30, 30))
+    d = ImageDraw.Draw(img); d.rectangle([0, 1250, W, 1290], fill=(120, 80, 50), outline=INK, width=4); d.rectangle([0, 1290, W, 1420], fill=(90, 60, 40))
+    diary = Image.new("RGBA", (620, 380), (0, 0, 0, 0)); dd = ImageDraw.Draw(diary)
+    dd.rounded_rectangle([0, 0, 619, 379], radius=16, fill=(250, 245, 225), outline=INK, width=6)
+    for j in range(7): dd.line([(30, 60 + j * 44), (590, 60 + j * 44)], fill=(180, 200, 230), width=3)
+    rows = [(f"DAY {META['day']}: +Rs 450", (40, 60, 170)), ("AAJ BHI BACH GAYE", GRN), ("KAL: BILAL KI SCHEME?!", RED)]
+    for j, (txt, col) in enumerate(rows):
+        ti = text_img(txt, "Anton-Regular.ttf", 62, col); rev = eo((lt - 0.6 - j * 1.2) / 0.9); cw = int(ti.width * rev)
+        if cw > 2: diary.alpha_composite(ti.crop((0, 0, cw, ti.height)), (36, 30 + j * 110))
+    paste_c(img, diary, W / 2, 460, eob(lt / 0.35), rot=-2)
+    paste_c(img, pill(f"DAY {META['day'] + 1} KAL • FOLLOW +", 50, RED, WHITE), W / 2, 1180, eob((lt - 4.0) / 0.35) * (1 + 0.04 * math.sin(t * 8)))
+
+SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, "abbu": sc_abbu, "night": sc_night, "end": sc_end,
+      "hook_dhaba": sc_hook_dhaba, "dhaba": sc_dhaba, "burn": sc_burn, "pay": sc_pay, "bilal": sc_bilal, "end_diary": sc_end_diary}
 
 def frame(t):
     s = next((x for x in SCENES if x["vstart"] <= t < x["vend"]), SCENES[-1])

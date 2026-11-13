@@ -1,0 +1,10 @@
+[
+  {"who": "H", "mode": "vo", "scene": "hook_dhaba", "dev": "بارہ گھنٹے کام کیا… اور ملے صرف چار سو پچاس روپے۔", "rom": "12 ghante kaam kiya… aur mile sirf 450 rupay."},
+  {"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن دو۔ پہلی نوکری… چائے کا ڈھابہ۔", "rom": "Day 2. Pehli naukri… chai ka dhaba."},
+  {"who": "H", "mode": "vo", "scene": "dhaba", "dev": "صبح چھ سے شام چھ تک… چائے، برتن، ٹیبل۔ بس یہی۔", "rom": "Subah 6 se shaam 6 tak… chai, bartan, table. Bas yahi."},
+  {"who": "H", "mode": "vo", "scene": "burn", "dev": "پھر گرم کیتلی سے ہاتھ جل گیا… اور ایک کپ ٹوٹ گیا۔", "rom": "Phir garam ketli se haath jal gaya… aur ek cup toot gaya."},
+  {"who": "H", "mode": "vo", "scene": "pay", "dev": "استاد جی نے پانچ سو کا بولا تھا… دیے چار سو پچاس۔ پچاس، کپ کے۔", "rom": "Ustad ji ne 500 ka bola tha… diye 450. 50, cup ke."},
+  {"who": "L", "mode": "talk", "scene": "bilal", "dev": "[excited] حامد یار! میرے پاس ایک زبردست سکیم ہے… پیسے ڈبل!", "rom": "Hamid yaar! Mere paas ek zabardast scheme hai… paise double!"},
+  {"who": "H", "mode": "talk", "scene": "bilal", "dev": "بلال… تیری سکیمیں ہمیشہ الٹی پڑتی ہیں۔", "rom": "Bilal… teri schemein hamesha ulti padti hain."},
+  {"who": "H", "mode": "vo", "scene": "end_diary", "dev": "پر جیب میں بارہ سو تھے… آج بھی بچ گئے۔ کل؟ بلال کی سکیم۔", "rom": "Par jeb mein 1200 the… aaj bhi bach gaye. Kal? Bilal ki scheme."}
+]
