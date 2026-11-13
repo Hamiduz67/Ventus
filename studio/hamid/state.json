@@ -1,9 +1,9 @@
 {
   "series": "Hamid: Zero Se Shuru",
-  "last_day": 2,
-  "money": 1200,
+  "last_day": 3,
+  "money": 200,
   "city": "Lahore",
-  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; Abbu quietly said mubarak (rent is due). He tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 6 AM to 6 PM; burned his hand on the kettle and broke a cup, so Ustad ji paid Rs 450 instead of 500 (Rs 1,200 now). Bilal arrived with a 'paise double' scheme; Hamid doubts it. Diary: 'Aaj bhi bach gaye. Kal: Bilal ki scheme?!'",
+  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!'",
   "episodes": [
     {
       "day": 1,
@@ -20,6 +20,15 @@
       "money_end": 1200,
       "metricool_id": 426642195,
       "elevenlabs_chars": 391
+    },
+    {
+      "day": 3,
+      "title": "Bilal Ka Scheme",
+      "file": "hamid/ep003/Hamid_Day03.mp4",
+      "posted_at": "2026-11-13 20:00 Asia/Dubai",
+      "money_end": 200,
+      "metricool_id": 426914717,
+      "elevenlabs_chars": 350
     }
   ],
   "weekly": []
