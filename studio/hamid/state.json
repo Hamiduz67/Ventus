@@ -31,5 +31,11 @@
       "elevenlabs_chars": 350
     }
   ],
-  "weekly": []
+  "weekly": [],
+  "metricool": {
+    "month": "2026-11",
+    "used": 18,
+    "limit": 20,
+    "note": "Free plan: 20 posts/month, resets monthly. Only weekly LONG videos use it."
+  }
 }

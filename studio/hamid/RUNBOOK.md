@@ -35,11 +35,24 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 8. If anything fails and the reel can't meet the bar, do NOT post; report what failed.
 
 ## B. Weekly long episode (Wednesday + Sunday, posts 19:00 Asia/Dubai)
-- Build a ~3 minute episode from the reels posted since the last weekly episode: a new opening narration by Hamid (H), the reels' scenes in order
-  (re-render from their script.json/timeline without per-reel hooks/"follow" endings, or cut the mp4s), short bridging narration, and a closing cliffhanger.
-  New voice text ≤ 1,000 characters. Title "Hafta N: <title> | Hamid: Zero Se Shuru". Save under `hamid/weekly/wNN/`.
-- Keep it vertical and ≤ 3:00 so it counts as a YouTube Short. Post with `buffer_post.py schedule` (YouTube Shorts + TikTok + Instagram Reel; Facebook via Instagram auto-share). Report any platform that rejects it.
-- Append to state.json "weekly".
+Content: built from the daily reels posted since the last weekly episode (state.json "episodes" after the last "weekly" entry; if fewer than 3, skip and report).
+New opening narration by Hamid (H), the reels' scenes in order (re-rendered from their script.json/timeline, without per-reel hooks and "follow" endings),
+short bridging narration between days, and a closing cliffhanger. New ElevenLabs text <= 1,000 characters (reuse existing v##.wav lines; never re-generate them).
+Title "Hafta N: <title> | Hamid: Zero Se Shuru". Save under `hamid/weekly/wNN/`.
+
+Pick the format from the Metricool free-post budget in state.json "metricool" {month, used, limit}:
+- If "month" is not the current month (Asia/Dubai), reset: month = current, used = 0 (Metricool's free plan resets monthly).
+- **LONG mode** (used < limit): a full YouTube VIDEO, landscape 1920x1080, 30 fps, 5:00-7:00 long. Post ONLY to YouTube through Metricool
+  (createScheduledPost, blogId 7980574, Asia/Dubai, YouTube as a normal video, not a Short: check the tool's schema for the YouTube type/title/privacy
+  fields; privacy public, not made for kids; a good description with the story so far + #hamidzerosesshuru). Use a commit-SHA raw GitHub URL (HTTP 200).
+  Then used += 1 and save. If Metricool answers with a plan/limit error, set used = limit and fall back to SHORT mode in the same run.
+  Landscape look: same 2D style. Preferred: add a landscape mode to the renderer in a SEPARATE file (studio/hamid/hamid_render_wide.py) so the daily
+  vertical renderer is never broken; draw scenes on a 1920x1080 canvas with the same characters, HUD (day, money, city) and Roman captions at the bottom.
+  Acceptable fallback if that can't reach the bar: a designed 16:9 layout with the vertical episode at 1080 high on the left/centre and a styled side panel
+  (series title, "Din N", money counter, city, a one-line diary note) - never plain black bars or a blurred copy. Add a 5 s title card at the start and an
+  end card ("Agla hafta..."). Make a 1280x720 thumbnail (Hamid's face + 3-4 big Roman words) and commit it next to the video; attach it if Metricool's tool allows.
+- **SHORT mode** (used >= limit): vertical 1080x1920, <= 3:00, posted with `buffer_post.py schedule` (YouTube Shorts + TikTok + Instagram Reel).
+- Append to state.json "weekly": {n, title, days, mode, file, posted_at, platform ids, elevenlabs_chars}.
 
 ## Report (every run)
 SendUserMessage to the owner: what was posted (title, time, platforms) or what failed, characters of ElevenLabs used, next planned day.
