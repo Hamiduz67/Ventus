@@ -10,7 +10,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 - If downloads fail with TLS errors, use the proxy CA bundle (~/.ccr/ca-bundle.crt).
 
 ## A. Daily reel run (2 per day: posts at 13:00 and 20:00 Asia/Dubai)
-1. Read `studio/hamid/state.json`. Next day = last_day + 1. Check Metricool (brand 7980574) getScheduledPosts for today/tomorrow so you never double-post a day.
+1. Read `studio/hamid/state.json`. Next day = last_day + 1. Check `python3 studio/hamid/buffer_post.py status` so you never double-post a day.
 2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money"}).
    - Follow the format and language rules in SERIES.md and the planned day list; continue from `story_so_far`.
    - Line fields: who (H/A/B/L/R/G/S…), mode ("vo" narration or "talk" on-screen dialogue), scene (a key in hamid_render.py `SC`), dev (Urdu script), rom (Roman caption, same words).
@@ -20,13 +20,17 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 5. Audio + render:
    `python3 studio/hamid/hamid_audio.py hamid/epNNN` then `python3 studio/hamid/hamid_render.py hamid/epNNN still:<4–8 times>` and LOOK at the frames (contact sheet). Fix overlaps/cut-off text. Then full render and mux:
    `python3 studio/hamid/hamid_render.py hamid/epNNN && ffmpeg -i video.tmp.mp4 -i mix.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k -shortest -movflags +faststart Hamid_DayNN.mp4`
-6. Publish: commit only the final mp4 + script.json + meta.json (not wav/mp3/f32/stills) to `hamid/epNNN/`, push, then use the COMMIT-SHA raw URL
+6. Publish (Buffer free plan — Metricool's free plan is used up; do NOT post through Metricool):
+   commit only the final mp4 + script.json + meta.json (not wav/mp3/f32/stills) to `hamid/epNNN/`, push, then use the COMMIT-SHA raw URL
    (https://raw.githubusercontent.com/Hamiduz67/Ventus/<sha>/hamid/epNNN/Hamid_DayNN.mp4) and confirm HTTP 200.
-   Metricool createScheduledPost, brand 7980574, autoPublish true, providers youtube + tiktok + instagram + facebook:
-   youtubeData {type "short", privacy "public", category "FILM_ANIMATION", madeForKids false, title "Day N: <hook> | Hamid: Zero Se Shuru #shorts"},
-   tiktokData {privacyOption "PUBLIC_TO_EVERYONE", isAigc true}, instagramData {type "REEL", showReelOnFeed true, isAiGenerated true},
-   facebookData {type "REEL", title}. Caption: hook line + "Day N+1 kal… follow karo" + #HamidZeroSeShuru #struggle #pakistan #motivation #story #urdu.
-   Post time = the run's slot (13:00 or 20:00 Asia/Dubai, today).
+   Save the Buffer key from the task prompt to `~/.secrets/buffer_key` (chmod 600), then:
+   `python3 studio/hamid/buffer_post.py schedule --url <raw url> --caption "<caption>" --title "Day N: <hook> | Hamid: Zero Se Shuru #shorts" --tiktok-title "Hamid: Zero Se Shuru — Day N" --at "YYYY-MM-DD HH:MM"`
+   (time is Asia/Dubai: today 13:00 or 20:00 = the run's slot). This posts to YouTube Shorts + TikTok + Instagram Reel.
+   Facebook gets the Reel automatically through Instagram's "share Reels to Facebook" setting — nothing to do.
+   Caption: hook line + "Day N+1 kal… follow karo" + #HamidZeroSeShuru #struggle #pakistan #motivation #story #urdu.
+   Before scheduling, run `buffer_post.py status` and make sure this day isn't already queued/sent (never double-post).
+   After the post time has passed (if the run is still going) or at the start of the NEXT run, check `buffer_post.py status`
+   for the previous episode; if a channel shows an error, report it (and for TikTok only, a Metricool post is an emergency fallback).
 7. Update state.json (last_day, money, city, story_so_far in 2–4 sentences, append episode) and push.
 8. If anything fails and the reel can't meet the bar, do NOT post; report what failed.
 
@@ -34,7 +38,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 - Build a ~3 minute episode from the reels posted since the last weekly episode: a new opening narration by Hamid (H), the reels' scenes in order
   (re-render from their script.json/timeline without per-reel hooks/"follow" endings, or cut the mp4s), short bridging narration, and a closing cliffhanger.
   New voice text ≤ 1,000 characters. Title "Hafta N: <title> | Hamid: Zero Se Shuru". Save under `hamid/weekly/wNN/`.
-- Post to YouTube as type "video" (public), plus TikTok, Instagram (REEL), Facebook (REEL) if the platform accepts the length; report any platform that rejects it.
+- Keep it vertical and ≤ 3:00 so it counts as a YouTube Short. Post with `buffer_post.py schedule` (YouTube Shorts + TikTok + Instagram Reel; Facebook via Instagram auto-share). Report any platform that rejects it.
 - Append to state.json "weekly".
 
 ## Report (every run)
