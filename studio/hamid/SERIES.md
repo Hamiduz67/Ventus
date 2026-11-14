@@ -35,14 +35,18 @@ New characters may be added (draw them in hamid_render.py `head()/torso()/arm()`
 · 8 Barish (monsoon soaks an order; retired teacher tips him, asks why he isn't studying) · 9 Khana Nahi (no food; shares last biscuits with a street kid; a dhaba owner hires him)
 · 10 Ammi Ki Call (Abbu needs Rs 3,000 medicine; double shift; Rs 40 left). After day 10, continue the arc yourself.
 
-## Reel format (30–45 s, 1080x1920)
-1. Hook (0–2 s): the problem first, on screen + in voice.  2. Day card: "DAY n · CITY · JEB MEIN: Rs x".
-3. Struggle.  4. Turn (jugaad / stranger's help / funny accident).  5. Small win or cliffhanger, then
-"Day n+1 kal… follow karo". Recurring: day counter + money counter (top corners), Ammi's voice notes,
-Hamid's diary, his winning line "Aaj bhi bach gaye."
+## Reel format (75–90 s, 1080x1920) — a complete mini-story, not just a moment
+Owner feedback: 40 s reels ended just as they got engaging. Each reel must now tell a whole small story:
+1. Hook (0–3 s): the problem first, on screen + in voice.  2. Day card: "DAY n · CITY · JEB MEIN: Rs x".
+3. Setup (who/where/what he needs today).  4. Struggle that ESCALATES — at least two obstacles, the second worse than the first.
+5. Turn (jugaad / stranger's help / funny accident / a choice he has to make).  6. Payoff (small win or loss, money counter moves).
+7. Cliffhanger hook for the next day, then "Day n+1 kal… follow karo".
+Keep momentum: something changes every 3–5 s (cut, new scene, money counter, SFX, on-screen text). Use 2–4 wordless beats
+(action + music + SFX + on-screen text like diary lines, phone messages, price tags) to carry the story without paid voice.
+Recurring: day counter + money counter (top corners), Ammi's voice notes, Hamid's diary, his winning line "Aaj bhi bach gaye."
 
 ## Language + cost rules (owner's standing instructions)
 - Simple everyday Urdu–Hindi–English mix, the way young people talk. No difficult/formal words. Write voice text in Urdu script; captions in Roman (Hinglish/Urdu) script.
-- ElevenLabs ONLY for speech. Music + SFX are generated in code (free). Target ≤ 500 characters of voice per reel (Starter plan: 40,000/month).
+- ElevenLabs ONLY for speech. Music + SFX are generated in code (free). Max 600 characters of voice per reel and ≤ 300 new characters per weekly episode (Starter plan: 40,000/month; 60 reels × 600 = 36,000). Make reels longer with visuals, not more voice.
 - Hamid's voice is locked: Raghav on eleven_v4 (no [tags] in his text; use "…" for pauses).
 - 2D cartoon style (same characters/look as Day 1). Fully original: no real brands/logos, no real people, no copyrighted music.

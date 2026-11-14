@@ -14,7 +14,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money"}).
    - Follow the format and language rules in SERIES.md and the planned day list; continue from `story_so_far`.
    - Line fields: who (H/A/B/L/R/G/S…), mode ("vo" narration or "talk" on-screen dialogue), scene (a key in hamid_render.py `SC`), dev (Urdu script), rom (Roman caption, same words).
-   - Keep total `dev` text ≤ 500 characters. Hamid lines: no [tags].
+   - Reel length 75–90 s with the full story structure in SERIES.md "Reel format". Keep total `dev` text ≤ 600 characters (length comes from wordless visual beats, not more voice). Hamid lines: no [tags].
 3. Voices: `python3 studio/hamid/tts.py hamid/epNNN`. Optional check: transcribe with faster-whisper small (language "ur") and redo garbled lines (delete that v##.wav and rerun).
 4. Scenes: reuse existing scene functions in `studio/hamid/hamid_render.py`; add new ones (dhaba, street, bus station, Karachi room, rain, etc.) in the same flat 2D style, and new characters/props as needed. Commit renderer changes so later runs reuse them. Keep Hamid/Ammi/Abbu exactly as drawn.
 5. Audio + render:
@@ -37,7 +37,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 ## B. Weekly long episode (Wednesday + Sunday, posts 19:00 Asia/Dubai)
 Content: built from the daily reels posted since the last weekly episode (state.json "episodes" after the last "weekly" entry; if fewer than 3, skip and report).
 New opening narration by Hamid (H), the reels' scenes in order (re-rendered from their script.json/timeline, without per-reel hooks and "follow" endings),
-short bridging narration between days, and a closing cliffhanger. New ElevenLabs text <= 1,000 characters (reuse existing v##.wav lines; never re-generate them).
+short bridging narration between days, and a closing cliffhanger. New ElevenLabs text <= 300 characters (reuse existing v##.wav lines; never re-generate them).
 Title "Hafta N: <title> | Hamid: Zero Se Shuru". Save under `hamid/weekly/wNN/`.
 
 Pick the format from the Metricool free-post budget in state.json "metricool" {month, used, limit}:
