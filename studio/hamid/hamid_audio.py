@@ -24,11 +24,14 @@ INTRO = 0.35
 t = INTRO; tl = []; clips = []
 prev_scene = None
 for i, l in enumerate(lines):
-    v = trim(load(f"{D}/v{i:02d}.wav")); v = v / (np.abs(v).max() + 1e-9) * 0.9
+    if l.get("mode") == "beat":   # wordless visual beat: silence of fixed length (music + SFX carry it)
+        v = np.zeros(int(float(l.get("dur", 2.0)) * SR), np.float32)
+    else:
+        v = trim(load(f"{D}/v{i:02d}.wav")); v = v / (np.abs(v).max() + 1e-9) * 0.9
     if prev_scene is not None and l["scene"] != prev_scene: t += 0.45   # breath between scenes
     d = len(v) / SR
-    words = l["rom"].split()
-    wts = np.array([max(2, len(w.strip(".,!?…\""))) + 1.5 for w in words], float)
+    words = l["rom"].split() if l.get("mode") != "beat" else []
+    wts = np.array([max(2, len(w.strip(".,!?…\""))) + 1.5 for w in words] or [1.0], float)
     cum = np.concatenate([[0], np.cumsum(wts)]) / wts.sum()
     rw = [{"w": w, "t": t + 0.03 + cum[k] * (d - 0.12)} for k, w in enumerate(words)]
     tl.append({**l, "start": t, "end": t + d, "words": rw})
@@ -143,6 +146,57 @@ for l in tl:
         if nw: add(sfx, kick(), nw[0]["t"], 0.7)
     if l["scene"] == "pay":   # coins counted
         for k in range(5): add(sfx, TICK, l["start"] + 0.3 + k * 0.22, 0.35)
+def beep(f, n_s, g=1.0):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return (np.sin(2 * np.pi * f * x) * np.minimum(1, (n_s - x) / 0.01) * np.minimum(1, x / 0.005) * g).astype(np.float32)
+def bark():
+    n = int(0.22 * SR); x = np.arange(n) / SR; f = 520 - 900 * x
+    s_ = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.5 + rng.standard_normal(n) * 0.3
+    return (s_ * env(n, 0.004, 0.08)).astype(np.float32)
+def bell():
+    n = int(0.9 * SR); x = np.arange(n) / SR
+    return ((np.sin(2 * np.pi * 2350 * x) + 0.6 * np.sin(2 * np.pi * 3530 * x)) * np.exp(-x * 5)).astype(np.float32) * 0.5
+def buzz(n_s):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return (np.sign(np.sin(2 * np.pi * 150 * x)) * ((x % 0.8) < 0.45) * 0.25).astype(np.float32)
+def snore(n_s):
+    n = int(n_s * SR); x = np.arange(n) / SR; s_ = rng.standard_normal(n).astype(np.float32)
+    s_ = np.convolve(s_, np.ones(60) / 60, mode="same") * 4
+    return (s_ * np.clip(np.sin(2 * np.pi * x / 2.2), 0, 1) ** 2 * 0.5).astype(np.float32)
+SPN = {x["scene"]: x for x in scenes}
+if "alarm" in SPN:
+    a0 = SPN["alarm"]["vstart"]
+    for k in range(10): add(sfx, beep(1900, 0.09, 0.5), a0 + 0.2 + k * 0.17)
+    add(sfx, kick(), a0 + 2.0, 0.6)          # hand slaps the alarm
+if "paper" in SPN:
+    p0 = SPN["paper"]["vstart"]; add(sfx, bell(), p0 + 0.3, 0.7)
+    for k in range(7): add(sfx, noise(0.12, 0.03), p0 + 0.9 + k * 0.55, 0.5)   # papers land
+if "chain" in SPN:
+    c0 = SPN["chain"]["vstart"]; add(sfx, noise(0.3, 0.06), c0 + 0.5, 0.9); add(sfx, kick(), c0 + 0.5, 0.8)
+    run = [l for l in tl if l["scene"] == "chain"][-1]
+    for k in range(5): add(sfx, bark(), run["start"] + 0.5 + k * 0.45, 0.6)
+    add(sfx, CHIME, run["end"] - 0.9, 0.5)
+if "late" in SPN:
+    l0 = SPN["late"]["vstart"]
+    for k in range(4): add(sfx, TICK, l0 + 0.2 + k * 0.35, 0.4)
+    add(sfx, kick(), l0 + 1.4, 0.6)
+    mont = [l for l in tl if l["scene"] == "late"][-1]
+    for k in range(12): add(sfx, TICK, mont["start"] + k * 0.25, 0.3)
+    add(sfx, CHIME, mont["end"] - 1.0, 0.5)
+if "asleep" in SPN:
+    s0 = SPN["asleep"]; add(sfx, snore(2.6), s0["vstart"] + 0.1, 0.7)
+    sl = [l for l in tl if l["scene"] == "asleep"]
+    add(sfx, kick(), sl[1]["start"] + 0.3, 0.8)
+if "tuition" in SPN:
+    tb = [l for l in tl if l["scene"] == "tuition"][-1]; add(sfx, snore(1.8), tb["start"] + 2.0, 0.4)
+if "wake" in SPN:
+    wb = [l for l in tl if l["scene"] == "wake"][-1]
+    add(sfx, CHIME, wb["start"] + 0.3, 0.6)
+    for k in range(3): add(sfx, TICK, wb["start"] + 1.6 + k * 0.2, 0.4)
+if "end_call" in SPN:
+    e0 = SPN["end_call"]["vstart"]; add(sfx, buzz(2.4), e0 + 0.3, 0.6)
+    vl = [l for l in tl if l["scene"] == "end_call" and l.get("mode") != "beat"][0]
+    add(sfx, beep(880, 0.12, 0.4), vl["end"] - 0.3); add(sfx, beep(440, 0.5, 0.4), vl["end"] - 0.1)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 

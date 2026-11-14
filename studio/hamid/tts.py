@@ -19,7 +19,7 @@ VOICES = {
 
 lines = json.load(open(f"{D}/script.json")); used = 0
 for i, l in enumerate(lines):
-    if os.path.exists(f"{D}/v{i:02d}.wav"): continue
+    if l.get("mode") == "beat" or os.path.exists(f"{D}/v{i:02d}.wav"): continue   # wordless beats: no voice
     vid, model, stab, tags = VOICES[l["who"]]
     txt = l["dev"] if tags else re.sub(r"\[[^\]]*\]\s*", "", l["dev"]).strip()
     body = {"text": txt, "model_id": model, "language_code": "ur", "voice_settings": {"stability": stab}}
