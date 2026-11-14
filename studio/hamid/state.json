@@ -1,9 +1,9 @@
 {
   "series": "Hamid: Zero Se Shuru",
-  "last_day": 3,
-  "money": 200,
+  "last_day": 4,
+  "money": 1000,
   "city": "Lahore",
-  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!'",
+  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies.",
   "episodes": [
     {
       "day": 1,
@@ -29,6 +29,20 @@
       "money_end": 200,
       "metricool_id": 426914717,
       "elevenlabs_chars": 350
+    },
+    {
+      "day": 4,
+      "title": "Teen Naukriyan",
+      "file": "hamid/ep004/Hamid_Day04.mp4",
+      "posted_at": "2026-11-14 13:00 Asia/Dubai",
+      "money_end": 1000,
+      "buffer_ids": {
+        "youtube": "6af8138f78196a0a974bb9f5",
+        "tiktok": "6af81390bb36d00909f6efec",
+        "instagram": "6af8139078196a0a974bba2b"
+      },
+      "elevenlabs_chars": 444,
+      "length_s": 87.9
     }
   ],
   "weekly": [],
