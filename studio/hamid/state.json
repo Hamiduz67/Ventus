@@ -1,9 +1,9 @@
 {
   "series": "Hamid: Zero Se Shuru",
-  "last_day": 4,
-  "money": 1000,
+  "last_day": 5,
+  "money": 950,
   "city": "Lahore",
-  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies.",
+  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies. Day 5 (Phone Mar Gaya): phone dead; charger plugged in - loadshedding; Bilal had sold his charger (scheme #2); paid Rs 50 at a generator mobile shop, but balance zero; a kind stranger (Chacha, white topi + beard) lent his phone. Job confirmed: delivery rider, Rs 25,000/month - in KARACHI, day after tomorrow 9 AM. Bus ticket Rs 1,500 vs Rs 950 in pocket (Rs 550 short). Cliffhanger: Ammi overheard - 'Karachi? Tum Karachi ja rahe ho?'",
   "episodes": [
     {
       "day": 1,
@@ -43,6 +43,20 @@
       },
       "elevenlabs_chars": 444,
       "length_s": 87.9
+    },
+    {
+      "day": 5,
+      "title": "Phone Mar Gaya",
+      "file": "hamid/ep005/Hamid_Day05.mp4",
+      "posted_at": "2026-11-14 22:05 Asia/Dubai (20:00 slot missed: run started late)",
+      "money_end": 950,
+      "buffer_ids": {
+        "youtube": "6af8a03576c23bf1c72fcc71",
+        "tiktok": "6af8a036c5b364e062091c6a",
+        "instagram": "6af8a036c5b364e062091cc2"
+      },
+      "elevenlabs_chars": 437,
+      "length_s": 86.3
     }
   ],
   "weekly": [],
