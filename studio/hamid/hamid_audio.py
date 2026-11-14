@@ -197,6 +197,49 @@ if "end_call" in SPN:
     e0 = SPN["end_call"]["vstart"]; add(sfx, buzz(2.4), e0 + 0.3, 0.6)
     vl = [l for l in tl if l["scene"] == "end_call" and l.get("mode") != "beat"][0]
     add(sfx, beep(880, 0.12, 0.4), vl["end"] - 0.3); add(sfx, beep(440, 0.5, 0.4), vl["end"] - 0.1)
+# ---- Day 5+: dead phone, loadshedding, run, shop generator, no balance, offer, Ammi
+def hum(n_s, f=55):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return ((np.sin(2 * np.pi * f * x) + 0.5 * np.sin(2 * np.pi * 2 * f * x)) * (1 + 0.3 * np.sin(2 * np.pi * 7 * x)) * 0.25).astype(np.float32)
+def sad_trombone():
+    out = [beep(f, 0.32, 0.5) for f in (392, 370, 349)] + [beep(330, 0.9, 0.5)]
+    return np.concatenate(out)
+if "hook_dead" in SPN:
+    h0 = SPN["hook_dead"]["vstart"]; add(sfx, buzz(1.4), h0 + 0.1, 0.5); add(sfx, beep(440, 0.5, 0.4), h0 + 1.6)
+if "bijli" in SPN:
+    bl = [l for l in tl if l["scene"] == "bijli"]; v = [l for l in bl if l.get("mode") != "beat"][0]
+    add(sfx, kick(), bl[0]["start"] + 0.4, 0.4); add(sfx, CHIME, bl[0]["start"] + 0.7, 0.4)
+    w = [x for x in v["words"] if x["w"].lower().startswith("bijli")]; off = w[0]["t"] if w else v["start"] + 1.2
+    add(sfx, hum(off - bl[0]["start"] + 0.0, 50) * 0.6, bl[0]["start"], 0.5); add(sfx, kick(), off, 0.9); add(sfx, noise(0.2, 0.04), off, 0.6)
+if "run" in SPN:
+    r0 = SPN["run"]["vstart"]
+    for k in range(int((SPN["run"]["vend"] - r0) / 0.3)): add(sfx, noise(0.05, 0.01), r0 + 0.1 + k * 0.3, 0.5)
+if "bilal_door" in SPN:
+    bd = [l for l in tl if l["scene"] == "bilal_door"]; add(sfx, kick(), SPN["bilal_door"]["vstart"] + 0.3, 0.5)
+    add(sfx, sad_trombone(), bd[-1]["start"] + 0.1, 0.5)
+if "shop" in SPN:
+    s0 = SPN["shop"]; add(sfx, hum(s0["vend"] - s0["vstart"], 70), s0["vstart"], 0.35)
+    mont = [l for l in tl if l["scene"] == "shop"][-1]
+    for k in range(3): add(sfx, TICK, mont["start"] + 0.2 + k * 0.2, 0.4)
+    for k in range(10): add(sfx, TICK, mont["start"] + 1.0 + k * 0.22, 0.25)
+if "balance" in SPN:
+    bv = [l for l in tl if l["scene"] == "balance"][0]
+    add(sfx, CHIME, bv["start"] + 0.6, 0.5)
+    for k in range(3): add(sfx, beep(425, 0.35, 0.35), bv["start"] + 1.2 + k * 0.6)
+    w = [x for x in bv["words"] if x["w"].lower().startswith("balance")]; nb = w[0]["t"] if w else bv["end"] - 0.8
+    add(sfx, sad_trombone(), nb + 0.2, 0.55)
+if "stranger" in SPN:
+    st = [l for l in tl if l["scene"] == "stranger"]; add(sfx, hum(SPN["stranger"]["vend"] - SPN["stranger"]["vstart"], 70), SPN["stranger"]["vstart"], 0.3)
+    for k in range(2): add(sfx, TICK, st[0]["start"] + 0.6 + k * 0.25, 0.5)
+    add(sfx, CHIME, st[1]["start"] + 1.0, 0.5)
+if "callback" in SPN:
+    cv = [l for l in tl if l["scene"] == "callback"][0]; add(sfx, CHIME, cv["start"] + 0.1, 0.7)
+    w = [x for x in cv["words"] if x["w"].lower().startswith("karachi")]
+    if w: add(sfx, kick(), w[0]["t"], 0.8); add(sfx, noise(0.4, 0.1), w[0]["t"], 0.4)
+if "ticket" in SPN:
+    tk = [l for l in tl if l["scene"] == "ticket"]
+    for k in range(4): add(sfx, TICK, tk[0]["start"] + 0.3 + k * 0.3, 0.4)
+    add(sfx, kick(), tk[2]["start"] - 0.2, 0.8); add(sfx, kick(), tk[3]["start"] + 0.1, 0.6)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
