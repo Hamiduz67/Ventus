@@ -35,13 +35,16 @@ New characters may be added (draw them in hamid_render.py `head()/torso()/arm()`
 · 8 Barish (monsoon soaks an order; retired teacher tips him, asks why he isn't studying) · 9 Khana Nahi (no food; shares last biscuits with a street kid; a dhaba owner hires him)
 · 10 Ammi Ki Call (Abbu needs Rs 3,000 medicine; double shift; Rs 40 left). After day 10, continue the arc yourself.
 
-## Reel format (75–90 s, 1080x1920) — a complete mini-story, not just a moment
+## Reel format (65–85 s, 1080x1920) — a complete mini-story, not just a moment
+**Pacing (owner, 2026-11-14): pauses were breaking viewer attention. No dead air.** Lines follow each other with ~0.1 s gaps
+(0.15 s extra at a scene cut); every wordless beat is ≤ 1.6 s (hamid_audio.py caps it) and must have motion + SFX + on-screen text.
+A few seconds shorter is fine — never pad with pauses.
 Owner feedback: 40 s reels ended just as they got engaging. Each reel must now tell a whole small story:
 1. Hook (0–3 s): the problem first, on screen + in voice.  2. Day card: "DAY n · CITY · JEB MEIN: Rs x".
 3. Setup (who/where/what he needs today).  4. Struggle that ESCALATES — at least two obstacles, the second worse than the first.
 5. Turn (jugaad / stranger's help / funny accident / a choice he has to make).  6. Payoff (small win or loss, money counter moves).
 7. Cliffhanger hook for the next day, then "Day n+1 kal… follow karo".
-Keep momentum: something changes every 3–5 s (cut, new scene, money counter, SFX, on-screen text). Use 2–4 wordless beats
+Keep momentum: something changes every 3–5 s (cut, new scene, money counter, SFX, on-screen text). Use short wordless beats (≤ 1.6 s each)
 (action + music + SFX + on-screen text like diary lines, phone messages, price tags) to carry the story without paid voice.
 Recurring: day counter + money counter (top corners), Ammi's voice notes, Hamid's diary, his winning line "Aaj bhi bach gaye."
 

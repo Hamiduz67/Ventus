@@ -14,7 +14,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money"}).
    - Follow the format and language rules in SERIES.md and the planned day list; continue from `story_so_far`.
    - Line fields: who (H/A/B/L/R/G/S…), mode ("vo" narration or "talk" on-screen dialogue), scene (a key in hamid_render.py `SC`), dev (Urdu script), rom (Roman caption, same words).
-   - Reel length 75–90 s with the full story structure in SERIES.md "Reel format". Keep total `dev` text ≤ 600 characters (length comes from wordless visual beats, not more voice). Hamid lines: no [tags].
+   - Reel length 65–85 s with the full story structure in SERIES.md "Reel format". Tight pacing: no pauses; beats ≤ 1.6 s (auto-capped in hamid_audio.py) — fill time with story, not silence. Keep total `dev` text ≤ 600 characters (length comes from wordless visual beats, not more voice). Hamid lines: no [tags].
 3. Voices: `python3 studio/hamid/tts.py hamid/epNNN`. Optional check: transcribe with faster-whisper small (language "ur") and redo garbled lines (delete that v##.wav and rerun).
 4. Scenes: reuse existing scene functions in `studio/hamid/hamid_render.py`; add new ones (dhaba, street, bus station, Karachi room, rain, etc.) in the same flat 2D style, and new characters/props as needed. Commit renderer changes so later runs reuse them. Keep Hamid/Ammi/Abbu exactly as drawn.
 5. Audio + render:

@@ -20,15 +20,19 @@ def trim(x, th=0.02):
     if len(idx) == 0: return x
     return x[max(0, idx[0] - int(0.03 * SR)): min(len(x), idx[-1] + int(0.08 * SR))]
 
-INTRO = 0.35
+INTRO = 0.2
+# Pacing (owner, 2026-11-14): pauses broke viewer attention. Keep gaps tight; wordless beats are capped.
+GAP = 0.1          # silence after every line
+SCENE_GAP = 0.15   # extra breath at a scene cut
+BEAT_MAX = 1.6     # longest wordless beat (s); script "dur" above this is cut down
 t = INTRO; tl = []; clips = []
 prev_scene = None
 for i, l in enumerate(lines):
     if l.get("mode") == "beat":   # wordless visual beat: silence of fixed length (music + SFX carry it)
-        v = np.zeros(int(float(l.get("dur", 2.0)) * SR), np.float32)
+        v = np.zeros(int(min(float(l.get("dur", 1.2)), BEAT_MAX) * SR), np.float32)
     else:
         v = trim(load(f"{D}/v{i:02d}.wav")); v = v / (np.abs(v).max() + 1e-9) * 0.9
-    if prev_scene is not None and l["scene"] != prev_scene: t += 0.45   # breath between scenes
+    if prev_scene is not None and l["scene"] != prev_scene: t += SCENE_GAP   # breath between scenes
     d = len(v) / SR
     words = l["rom"].split() if l.get("mode") != "beat" else []
     wts = np.array([max(2, len(w.strip(".,!?…\""))) + 1.5 for w in words] or [1.0], float)
@@ -36,8 +40,8 @@ for i, l in enumerate(lines):
     rw = [{"w": w, "t": t + 0.03 + cum[k] * (d - 0.12)} for k, w in enumerate(words)]
     tl.append({**l, "start": t, "end": t + d, "words": rw})
     clips.append((t, v, l["who"], l.get("mode")))
-    t += d + 0.28; prev_scene = l["scene"]
-TOTAL = t + 1.6
+    t += d + GAP; prev_scene = l["scene"]
+TOTAL = t + 1.2
 # scene spans
 scenes = []
 for l in tl:
