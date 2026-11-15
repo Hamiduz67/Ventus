@@ -65,12 +65,13 @@
       "posted_at": "2026-11-15 13:00 Asia/Dubai",
       "money_end": 120,
       "buffer_ids": {
-        "youtube": "6af96550e86a5789a6f89245",
-        "tiktok": "6af96551b9a106584c94d34e",
-        "instagram": "6af9655176c23bf1c766da2d"
+        "youtube": "6af967c8b9a106584c95b9fe",
+        "tiktok": "6af967c8918fe79d2ecdaa65",
+        "instagram": "6af967c9c5b364e062412c36"
       },
-      "elevenlabs_chars": 497,
-      "length_s": 79.7
+      "elevenlabs_chars": 546,
+      "length_s": 70.8,
+      "note": "Re-cut before posting per owner feedback: faster pace + outro hook; first Buffer posts deleted."
     }
   ],
   "weekly": [],
