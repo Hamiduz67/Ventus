@@ -287,6 +287,57 @@ if "morning" in SPN:
     ml = [l for l in tl if l["scene"] == "morning"]
     for k in range(4): add(sfx, kick(), ml[-2]["start"] + k * 0.35, 0.5)
     add(sfx, kick(), ml[-1]["start"], 0.8)
+# ---- Day 7+: rickshaw, kick-start, bike engine, traffic horns, buffalo, brake fail, crash, stairs, door, rating, dent
+def moo():
+    n = int(1.1 * SR); x = np.arange(n) / SR; f = 125 - 35 * x
+    s_ = np.sign(np.sin(2 * np.pi * np.cumsum(f) / SR)) * 0.3 + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.5
+    return (s_ * np.minimum(1, x / 0.15) * np.minimum(1, (1.1 - x) / 0.3) * 0.5).astype(np.float32)
+def scrape(n_s):
+    n = int(n_s * SR); s_ = rng.standard_normal(n).astype(np.float32); s_ = np.diff(s_, prepend=0)
+    return (s_ * (0.5 + 0.5 * np.abs(np.sin(np.arange(n) / SR * 40))) * 0.25).astype(np.float32)
+def LS_(nm): return [l for l in tl if l["scene"] == nm]
+for nm, g in (("hook_bike", 0.8), ("traffic", 0.4), ("gali", 0.5), ("downhill", 0.9), ("delivery", 0.7)):
+    if nm in SPN: add(sfx, engine(SPN[nm]["vend"] - SPN[nm]["vstart"]), SPN[nm]["vstart"], g)
+if "hook_bike" in SPN: add(sfx, beep(2600, 0.3, 0.3), SPN["hook_bike"]["vstart"] + 1.7)
+if "rickshaw" in SPN:
+    rk = LS_("rickshaw"); add(sfx, beep(520, 0.18, 0.4), rk[0]["start"] + 0.5); add(sfx, beep(520, 0.18, 0.4), rk[0]["start"] + 0.75)
+    add(sfx, engine(1.4), rk[-1]["start"] + 0.2, 0.6); add(sfx, sad_trombone(), rk[-1]["start"] + 0.5, 0.35)
+if "ghafoor" in SPN:
+    gf = LS_("ghafoor")
+    for k in range(3): add(sfx, TICK, gf[-1]["start"] + 0.1 + k * 0.2, 0.4)
+    for k in range(2): add(sfx, kick(), gf[-1]["start"] + 0.6 + k * 0.35, 0.7)
+    add(sfx, engine(1.0), gf[-1]["start"] + 1.3, 0.6)
+if "traffic" in SPN:
+    tr = SPN["traffic"]
+    for k in range(int((tr["vend"] - tr["vstart"]) / 0.43)): add(sfx, beep([440, 520, 380][k % 3], 0.2, 0.35), tr["vstart"] + 0.2 + k * 0.43)
+if "gali" in SPN:
+    gl = LS_("gali"); add(sfx, moo(), gl[0]["start"] + 1.3, 0.8); add(sfx, moo(), gl[1]["start"] + 0.3, 0.6)
+if "downhill" in SPN:
+    dh = LS_("downhill"); dv = [l for l in dh if l.get("mode") != "beat"][0]
+    w = [x for x in dv["words"] if x["w"].lower().startswith("brake")]; bt = w[0]["t"] if w else dv["start"] + 1.0
+    add(sfx, beep(2400, 0.15, 0.25), bt); add(sfx, TICK, bt + 0.3, 0.5); add(sfx, TICK, bt + 0.5, 0.5)
+    add(sfx, noise(1.6, 0.9) * 0.4, dh[-1]["start"], 0.6)
+if "crash" in SPN:
+    cr = LS_("crash"); hit = cr[0]["start"] + 0.75
+    add(sfx, kick(), hit, 1.0); add(sfx, noise(0.6, 0.15), hit, 0.9)
+    for k in range(5): add(sfx, TICK, hit + 0.2 + k * 0.12, 0.5)
+    add(sfx, CHIME, cr[1]["start"] + 1.4, 0.5)
+if "manager" in SPN:
+    mg = LS_("manager"); add(sfx, CHIME, mg[-1]["start"], 0.5)
+if "delivery" in SPN:
+    dl = SPN["delivery"]; add(sfx, scrape(dl["vend"] - dl["vstart"]), dl["vstart"], 0.5)
+    av = [l for l in LS_("delivery") if l.get("mode") != "beat"][0]; add(sfx, beep(1200, 0.08, 0.4), av["start"] - 0.25); add(sfx, beep(1600, 0.08, 0.4), av["start"] - 0.12)
+if "stairs" in SPN:
+    st2 = SPN["stairs"]
+    for k in range(int((st2["vend"] - st2["vstart"]) / 0.19)): add(sfx, TICK, st2["vstart"] + 0.1 + k * 0.19, 0.45)
+if "door" in SPN:
+    dr = LS_("door")
+    for k in range(3): add(sfx, kick(), dr[0]["start"] + k * 0.15, 0.35)
+    add(sfx, CHIME, dr[0]["start"] + 0.9, 0.6)
+    for k in range(5): add(sfx, TICK, dr[1]["start"] - 0.2 + k * 0.22, 0.5)
+    add(sfx, CHIME, dr[-1]["start"], 0.7)
+if "dent" in SPN:
+    dn = LS_("dent"); add(sfx, kick(), dn[1]["start"] + 0.5, 0.8); add(sfx, sad_trombone(), dn[2]["start"] + 0.1, 0.5)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 

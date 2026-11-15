@@ -1,0 +1,299 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook_bike",
+  "dev": "کرائے کی بائیک… اور بریک ہی نہیں!",
+  "rom": "Kiraye ki bike… aur brake hi nahi!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook_bike",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن سات۔ صبح آٹھ چالیس… انٹرویو نو بجے۔",
+  "rom": "Din saat. Subah aath chaalees… interview nau baje."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rickshaw",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "rickshaw",
+  "dev": "رکشے والا چار سو مانگ رہا ہے… جیب میں ایک سو بیس۔",
+  "rom": "Rickshaw wala chaar sau maang raha hai… jeb mein ek sau bees."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rickshaw",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "G",
+  "mode": "talk",
+  "scene": "ghafoor",
+  "dev": "[gruff] سو روپے دن کا… اور بریک کی کوئی گارنٹی نہیں!",
+  "rom": "Sau rupay din ka… aur brake ki koi guarantee nahi!"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "ghafoor",
+  "dev": "چلے گا چاچا! بس چلنی چاہیے۔",
+  "rom": "Chalega Chacha! Bas chalni chahiye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor",
+  "dur": 1.5,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "traffic",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "traffic",
+  "dev": "آگے ٹریفک جام… آٹھ پچاس ہو گئے!",
+  "rom": "Aage traffic jam… aath pachaas ho gaye!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "traffic",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "gali",
+  "dev": "شارٹ کٹ لیا… تو آگے بھینس!",
+  "rom": "Shortcut liya… to aage bhains!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "gali",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "gali",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "downhill",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "downhill",
+  "dev": "ڈھلوان آئی… بریک دبائی… کچھ نہیں ہوا!",
+  "rom": "Dhalwaan aayi… brake dabaayi… kuch nahi hua!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "downhill",
+  "dur": 1.5,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "crash",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "crash",
+  "dev": "سیدھا آفس کے گیٹ پر رکا… ٹھیک نو بجے!",
+  "rom": "Seedha office ke gate par ruka… theek nau baje!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "crash",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "manager",
+  "dev": "سر… وہ… بریک نہیں تھی!",
+  "rom": "Sir… woh… brake nahi thi!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "manager",
+  "dur": 1.5,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "manager",
+  "dev": "پہلا آرڈر… تیس منٹ میں… بغیر بریک کے۔",
+  "rom": "Pehla order… tees minute mein… baghair brake ke."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "delivery",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "delivery",
+  "dev": "[worried] حامد، پہنچ گئے بیٹا؟ ناشتہ کیا؟",
+  "rom": "Hamid, pohanch gaye beta? Nashta kiya?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "delivery",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "stairs",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "stairs",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "door",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "door",
+  "dev": "پہلا فائیو اسٹار… اور پچاس روپے ٹپ!",
+  "rom": "Pehla five star… aur pachaas rupay tip!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "door",
+  "dur": 1.5,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "end_diary",
+  "dev": "چپل گھس گئی… پر آج بھی بچ گئے۔",
+  "rom": "Chappal ghis gayi… par aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_diary",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "dent",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "G",
+  "mode": "talk",
+  "scene": "dent",
+  "dev": "[angry] یہ ڈینٹ کس نے ڈالا؟ پانچ سو نکالو!",
+  "rom": "Yeh dent kis ne daala? Paanch sau nikaalo!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "dent",
+  "dur": 1.5,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "dent",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]
