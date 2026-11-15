@@ -74,10 +74,32 @@
       "note": "Re-cut before posting per owner feedback: faster pace + outro hook; first Buffer posts deleted."
     }
   ],
-  "weekly": [],
+  "weekly": [
+    {
+      "n": 1,
+      "title": "Hafta 1: Lahore Se Karachi",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mode": "long",
+      "file": "hamid/weekly/w01/Hamid_Hafta01.mp4",
+      "thumbnail": "hamid/weekly/w01/thumbnail.jpg",
+      "length_s": 388.1,
+      "posted_at": "2026-11-15 19:00 Asia/Dubai",
+      "platform": "youtube (video) via Metricool",
+      "metricool_id": 428736944,
+      "elevenlabs_chars": 288,
+      "note": "Landscape layout: each day's reel (cut before its follow ending) at 1080 high + styled side panel; new title/opening/bridge/closing/end cards (studio/hamid/hamid_render_wide.py)."
+    }
+  ],
   "metricool": {
     "month": "2026-11",
-    "used": 18,
+    "used": 19,
     "limit": 20,
     "note": "Free plan: 20 posts/month, resets monthly. Only weekly LONG videos use it."
   }
