@@ -1,33 +1,238 @@
 [
-  {"who": "H", "mode": "vo", "scene": "hook_station", "dev": "کراچی کی پہلی رات… بس اسٹیشن پر۔ جیب میں ایک سو بیس روپے۔", "rom": "Karachi ki pehli raat… bus station par. Jeb mein ek sau bees rupay."},
-  {"who": "H", "mode": "beat", "scene": "hook_station", "dur": 1.2, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن چھ۔ پر اس سے پہلے… امی۔", "rom": "Day 6. Par us se pehle… Ammi."},
-  {"who": "A", "mode": "talk", "scene": "ammi", "dev": "[angry] کوئی کراچی نہیں جائے گا! وہاں کون ہے تمہارا؟", "rom": "Koi Karachi nahi jayega! Wahan kaun hai tumhara?"},
-  {"who": "H", "mode": "talk", "scene": "ammi", "dev": "امی، پچیس ہزار مہینہ… ابو کی دوائی بھی آ جائے گی۔", "rom": "Ammi, pachees hazaar mahina… Abbu ki dawai bhi aa jayegi."},
-  {"who": "H", "mode": "beat", "scene": "ammi", "dur": 1.5, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "kabadi", "dur": 1.4, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "kabadi", "dev": "ٹکٹ کے لیے پرانی سائیکل بیچ دی… صرف تین سو ملے۔", "rom": "Ticket ke liye purani cycle bech di… sirf teen sau mile."},
-  {"who": "H", "mode": "beat", "scene": "kabadi", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "potli", "dur": 1.4, "dev": "", "rom": ""},
-  {"who": "A", "mode": "talk", "scene": "potli", "dev": "[softly] یہ رکھ لو… اور روز فون کرنا۔", "rom": "Yeh rakh lo… aur roz phone karna."},
-  {"who": "H", "mode": "beat", "scene": "potli", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "abbu_door", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "bus", "dur": 1.4, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "bus", "dev": "اٹھارہ گھنٹے کا سفر… لاہور پیچھے رہ گیا۔", "rom": "Atharah ghante ka safar… Lahore peechay reh gaya."},
-  {"who": "H", "mode": "beat", "scene": "bus", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "station", "dur": 1.4, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "station", "dev": "رات کے دو بجے… چائے بھی تیس روپے کی۔", "rom": "Raat ke do baje… chai bhi tees rupay ki."},
-  {"who": "H", "mode": "beat", "scene": "station", "dur": 1.4, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "guard", "dur": 1.2, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "guard", "dev": "بینچ پر لیٹا ہی تھا… کہ گارڈ نے اٹھا دیا۔", "rom": "Bench par leta hi tha… ke guard ne utha diya."},
-  {"who": "H", "mode": "beat", "scene": "guard", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "floor", "dur": 1.4, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "floor", "dev": "بیگ سینے سے لگایا… اور امی کی پوٹلی کھولی۔", "rom": "Bag seene se lagaya… aur Ammi ki potli kholi."},
-  {"who": "H", "mode": "beat", "scene": "floor", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "end_diary", "dev": "ٹھنڈے پراٹھے… پر آج بھی بچ گئے۔", "rom": "Thanday parathay… par aaj bhi bach gaye."},
-  {"who": "H", "mode": "beat", "scene": "end_diary", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "morning", "dur": 1.0, "dev": "", "rom": ""},
-  {"who": "H", "mode": "vo", "scene": "morning", "dev": "آنکھ کھلی… آٹھ چالیس! نو بجے پہنچنا ہے۔", "rom": "Aankh khuli… aath chaalees! Nau baje pohanchna hai."},
-  {"who": "H", "mode": "beat", "scene": "morning", "dur": 1.6, "dev": "", "rom": ""},
-  {"who": "H", "mode": "beat", "scene": "morning", "dur": 1.6, "dev": "", "rom": ""}
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook_station",
+  "dev": "کراچی کی پہلی رات… بس اسٹیشن پر۔ جیب میں ایک سو بیس روپے۔",
+  "rom": "Karachi ki pehli raat… bus station par. Jeb mein ek sau bees rupay."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook_station",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن چھ۔ پر اس سے پہلے… امی۔",
+  "rom": "Day 6. Par us se pehle… Ammi."
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "ammi",
+  "dev": "[angry] کوئی کراچی نہیں جائے گا! وہاں کون ہے تمہارا؟",
+  "rom": "Koi Karachi nahi jayega! Wahan kaun hai tumhara?"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "ammi",
+  "dev": "امی، پچیس ہزار مہینہ… ابو کی دوائی بھی آ جائے گی۔",
+  "rom": "Ammi, pachees hazaar mahina… Abbu ki dawai bhi aa jayegi."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ammi",
+  "dur": 1.5,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kabadi",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "kabadi",
+  "dev": "ٹکٹ کے لیے پرانی سائیکل بیچ دی… صرف تین سو ملے۔",
+  "rom": "Ticket ke liye purani cycle bech di… sirf teen sau mile."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kabadi",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "potli",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "potli",
+  "dev": "[softly] یہ رکھ لو… اور روز فون کرنا۔",
+  "rom": "Yeh rakh lo… aur roz phone karna."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "potli",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "abbu_door",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bus",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "bus",
+  "dev": "اٹھارہ گھنٹے کا سفر… لاہور پیچھے رہ گیا۔",
+  "rom": "Atharah ghante ka safar… Lahore peechay reh gaya."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bus",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "station",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "station",
+  "dev": "رات کے دو بجے… چائے بھی تیس روپے کی۔",
+  "rom": "Raat ke do baje… chai bhi tees rupay ki."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "station",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "guard",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "guard",
+  "dev": "بینچ پر لیٹا ہی تھا… کہ گارڈ نے اٹھا دیا۔",
+  "rom": "Bench par leta hi tha… ke guard ne utha diya."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "guard",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "floor",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "floor",
+  "dev": "بیگ سینے سے لگایا… اور امی کی پوٹلی کھولی۔",
+  "rom": "Bag seene se lagaya… aur Ammi ki potli kholi."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "floor",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "end_diary",
+  "dev": "ٹھنڈے پراٹھے… پر آج بھی بچ گئے۔",
+  "rom": "Thanday parathay… par aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_diary",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "morning",
+  "dur": 1.0,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "morning",
+  "dev": "آنکھ کھلی… آٹھ چالیس! نو بجے پہنچنا ہے۔",
+  "rom": "Aankh khuli… aath chaalees! Nau baje pohanchna hai."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "morning",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "morning",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
 ]

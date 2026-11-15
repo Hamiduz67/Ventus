@@ -10,8 +10,9 @@ rng = np.random.default_rng(11)
 import os
 EARTH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sfx") + "/"  # free reusable SFX
 
-def load(p):
-    raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", p, "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"])
+def load(p, tempo=1.0):
+    af = ["-af", f"atempo={tempo}"] if abs(tempo - 1) > 1e-3 else []
+    raw = subprocess.check_output(["ffmpeg", "-v", "error", "-i", p] + af + ["-f", "f32le", "-ac", "1", "-ar", str(SR), "-"])
     return np.frombuffer(raw, dtype=np.float32).copy()
 
 def trim(x, th=0.02):
@@ -21,17 +22,20 @@ def trim(x, th=0.02):
     return x[max(0, idx[0] - int(0.03 * SR)): min(len(x), idx[-1] + int(0.08 * SR))]
 
 INTRO = 0.2
-# Pacing (owner, 2026-11-14): pauses broke viewer attention. Keep gaps tight; wordless beats are capped.
-GAP = 0.1          # silence after every line
-SCENE_GAP = 0.15   # extra breath at a scene cut
-BEAT_MAX = 1.6     # longest wordless beat (s); script "dur" above this is cut down
+# Pacing (owner, 2026-11-14 + 2026-11-15 "reel sounds a bit slow, make it a little bit fast"):
+# voices are sped up a little, gaps are tight and wordless beats are shortened + capped.
+VOICE_TEMPO = 1.12 # speech speed-up (pitch kept) - applied to every voice line
+GAP = 0.06         # silence after every line
+SCENE_GAP = 0.1    # extra breath at a scene cut
+BEAT_SCALE = 0.85  # every wordless beat is shortened by this factor ...
+BEAT_MAX = 1.3     # ... and capped (s)
 t = INTRO; tl = []; clips = []
 prev_scene = None
 for i, l in enumerate(lines):
     if l.get("mode") == "beat":   # wordless visual beat: silence of fixed length (music + SFX carry it)
-        v = np.zeros(int(min(float(l.get("dur", 1.2)), BEAT_MAX) * SR), np.float32)
+        v = np.zeros(int(min(float(l.get("dur", 1.2)) * BEAT_SCALE, BEAT_MAX) * SR), np.float32)
     else:
-        v = trim(load(f"{D}/v{i:02d}.wav")); v = v / (np.abs(v).max() + 1e-9) * 0.9
+        v = trim(load(f"{D}/v{i:02d}.wav", VOICE_TEMPO)); v = v / (np.abs(v).max() + 1e-9) * 0.9
     if prev_scene is not None and l["scene"] != prev_scene: t += SCENE_GAP   # breath between scenes
     d = len(v) / SR
     words = l["rom"].split() if l.get("mode") != "beat" else []

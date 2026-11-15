@@ -5,6 +5,7 @@ Usage:
   buffer_post.py schedule --url <public mp4 url> --caption "<text>" --title "<YouTube title>" \
                           --tiktok-title "<short title>" --at "2026-11-15 13:00" [--channels youtube,tiktok,instagram]
   buffer_post.py status   [--since-hours 24]      # list recent posts and their status
+  buffer_post.py delete   --ids <id1,id2,...>     # remove queued posts (e.g. to replace a re-cut episode)
 Key: env BUFFER_API_KEY, else ~/.secrets/buffer_key. Never commit the key (the repo is public)."""
 import argparse, datetime as dt, json, os, subprocess, sys
 
@@ -54,9 +55,15 @@ def status(a):
         n = e["node"]; err = (n.get("error") or {}).get("message", "")
         print(inv.get(n["channelId"], n["channelId"]), n["status"], n.get("dueAt"), n.get("sentAt"), (n.get("text") or "")[:50].replace("\n", " "), err)
 
+def delete(a):
+    q = """mutation D($input: DeletePostInput!) { deletePost(input: $input) { __typename ... on MutationError { message } } }"""
+    for pid in a.ids.split(","):
+        r = gql(q, {"input": {"id": pid}})["deletePost"]; print(pid, r.get("__typename"), r.get("message", ""))
+
 p = argparse.ArgumentParser(); sub = p.add_subparsers(dest="cmd", required=True)
 s = sub.add_parser("schedule"); s.add_argument("--url", required=True); s.add_argument("--caption", required=True)
 s.add_argument("--title", required=True); s.add_argument("--tiktok-title"); s.add_argument("--at", required=True)
 s.add_argument("--channels", default="youtube,tiktok,instagram")
 st = sub.add_parser("status"); st.add_argument("--since-hours", type=int, default=24)
-a = p.parse_args(); schedule(a) if a.cmd == "schedule" else status(a)
+dl = sub.add_parser("delete"); dl.add_argument("--ids", required=True)
+a = p.parse_args(); {"schedule": schedule, "status": status, "delete": delete}[a.cmd](a)

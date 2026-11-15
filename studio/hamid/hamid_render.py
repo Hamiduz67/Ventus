@@ -1501,7 +1501,7 @@ def sc_floor(img, t, lt):
 
 def sc_morning(img, t, lt):
     img.alpha_composite(bg_station("dawn"))
-    b0, b1, b2 = LB("morning"); v = LV("morning")[0]
+    bs = LB("morning"); b0, b1 = bs[0], bs[1]; v = LV("morning")[0]
     awake = t > v["start"]
     draw_char(img, "H", 330, 1060, t, "shock" if awake else "sleep", 0.9, arms=(-60, -40) if not awake else (-110, -150), hold=hold_bag if not awake else None)
     if not awake: zzz(img, 360, 820, t)
@@ -1510,17 +1510,28 @@ def sc_morning(img, t, lt):
     if awake:
         k = t - v["start"]; shake = math.sin(t * 50) * 4 if k < 0.8 else 0
         paste_c(img, glow_text("8:40!", "Anton-Regular.ttf", 160, YEL, (230, 60, 70)), 800 + shake, 1010, eob(k / 0.3))
-    if t > b1["start"]:
+    ol = next((l for l in LINES if l.get("outro")), None)
+    if t > b1["start"] and not (ol and t > ol["start"] - 0.15):
         k = t - b1["start"]
-        paste_c(img, pill("INTERVIEW: 9 AM", 50, WHITE, INK), W / 2, 260, eob(k / 0.3), rot=-3)
-        paste_c(img, pill("ADDRESS: 25 KM DOOR", 50, YEL), W / 2, 370, eob((k - 0.35) / 0.3), rot=2)
-        paste_c(img, pill("RICKSHAW: Rs 400", 50, RED, WHITE), W / 2, 480, eob((k - 0.7) / 0.3), rot=-2)
-        paste_c(img, pill("JEB: Rs 120", 50, WHITE, GRN), W / 2, 590, eob((k - 1.05) / 0.3), rot=3)
-    if t > b2["start"]:
-        k = t - b2["start"]
+        paste_c(img, pill("INTERVIEW: 9 AM", 50, WHITE, INK), W / 2, 260, eob(k / 0.25), rot=-3)
+        paste_c(img, pill("ADDRESS: 25 KM DOOR", 50, YEL), W / 2, 370, eob((k - 0.25) / 0.25), rot=2)
+        paste_c(img, pill("RICKSHAW: Rs 400", 50, RED, WHITE), W / 2, 480, eob((k - 0.5) / 0.25), rot=-2)
+        paste_c(img, pill("JEB: Rs 120", 50, WHITE, GRN), W / 2, 590, eob((k - 0.75) / 0.25), rot=3)
+    if len(bs) > 2 and t > bs[2]["start"]:
+        k = t - bs[2]["start"]
         paste_c(img, glow_text("AB KYA?!", "Anton-Regular.ttf", 130, WHITE, (230, 60, 70)), 760, 1250, eob(k / 0.3), rot=-4)
-        paste_c(img, pill(f"DAY {META['day'] + 1} KAL • FOLLOW +", 50, RED, WHITE), W / 2, 1380, eob((k - 0.5) / 0.35) * (1 + 0.04 * math.sin(t * 8)))
 
+# ======================= OUTRO HOOK (owner, 2026-11-15): every reel ends with "Agay Hamid kya karega? Follow karein…"
+# Mark the last line of the script with "outro": true (Hamid vo). It plays over the cliffhanger frame.
+def outro(img, t):
+    ol = next((l for l in LINES if l.get("outro")), None)
+    if not ol or t < ol["start"] - 0.15: return
+    k = t - ol["start"] + 0.15
+    img.alpha_composite(Image.new("RGBA", (W, H), (8, 6, 20, int(200 * eo(k / 0.3)))))
+    paste_c(img, glow_text("AGAY HAMID", "Anton-Regular.ttf", 140, WHITE, (90, 160, 255)), W / 2, 560, eob(k / 0.3), rot=-3)
+    paste_c(img, glow_text("KYA KAREGA?", "Anton-Regular.ttf", 150, YEL, (255, 120, 40)), W / 2, 720, eob((k - 0.25) / 0.3), rot=-3)
+    paste_c(img, pill(f"FOLLOW KAREIN • DAY {META['day'] + 1} NEXT PART", 46, RED, WHITE), W / 2, 920, eob((k - 0.6) / 0.35) * (1 + 0.05 * math.sin(t * 8)))
+    paste_c(img, emoji("👉", 110), W / 2, 1080, eob((k - 0.9) / 0.3) * (1 + 0.08 * math.sin(t * 10)))
 
 SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, "abbu": sc_abbu, "night": sc_night, "end": sc_end,
       "hook_dhaba": sc_hook_dhaba, "dhaba": sc_dhaba, "burn": sc_burn, "pay": sc_pay, "bilal": sc_bilal, "end_diary": sc_end_diary,
@@ -1545,7 +1556,7 @@ def frame(t):
     # scene fade from black
     if lt < 0.25 and s is not SCENES[0]:
         img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * (1 - lt / 0.25)))))
-    hud(img, t); caption(img, t)
+    outro(img, t); hud(img, t); caption(img, t)
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([80, 1868, W - 80, 1878], radius=5, fill=(70, 70, 90)); d.rounded_rectangle([80, 1868, 80 + (W - 160) * t / TOTAL, 1878], radius=5, fill=YEL)
     return img.convert("RGB")

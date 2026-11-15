@@ -18,8 +18,11 @@ VOICES = {
 }
 
 lines = json.load(open(f"{D}/script.json")); used = 0
+OUTRO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "voice", "outro_hamid.wav")   # shared, already-paid outro hook
 for i, l in enumerate(lines):
     if l.get("mode") == "beat" or os.path.exists(f"{D}/v{i:02d}.wav"): continue   # wordless beats: no voice
+    if l.get("outro") and os.path.exists(OUTRO):   # "Agay Hamid kya karega?…" is reused, never re-generated
+        subprocess.run(["cp", OUTRO, f"{D}/v{i:02d}.wav"], check=True); print("line", i, "outro reused (0 chars)"); continue
     vid, model, stab, tags = VOICES[l["who"]]
     txt = l["dev"] if tags else re.sub(r"\[[^\]]*\]\s*", "", l["dev"]).strip()
     body = {"text": txt, "model_id": model, "language_code": "ur", "voice_settings": {"stability": stab}}
