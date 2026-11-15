@@ -244,6 +244,45 @@ if "ticket" in SPN:
     tk = [l for l in tl if l["scene"] == "ticket"]
     for k in range(4): add(sfx, TICK, tk[0]["start"] + 0.3 + k * 0.3, 0.4)
     add(sfx, kick(), tk[2]["start"] - 0.2, 0.8); add(sfx, kick(), tk[3]["start"] + 0.1, 0.6)
+# ---- Day 6+: Ammi, kabadi, potli, bus, station, guard whistle, mosquitoes, 8:40 alarm
+def whistle(n_s=0.8):
+    n = int(n_s * SR); x = np.arange(n) / SR; f = 2800 + 120 * np.sin(2 * np.pi * 30 * x)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.minimum(1, (n_s - x) / 0.05) * np.minimum(1, x / 0.01) * 0.4).astype(np.float32)
+def mozzie(n_s):
+    n = int(n_s * SR); x = np.arange(n) / SR; f = 600 + 40 * np.sin(2 * np.pi * 3 * x)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * (0.5 + 0.5 * np.sin(2 * np.pi * 0.7 * x)) * 0.06).astype(np.float32)
+def engine(n_s):
+    n = int(n_s * SR); x = np.arange(n) / SR; s_ = rng.standard_normal(n).astype(np.float32)
+    s_ = np.convolve(s_, np.ones(200) / 200, mode="same") * 6
+    return ((s_ + 0.4 * np.sin(2 * np.pi * 42 * x)) * 0.3).astype(np.float32)
+for nm in ("hook_station", "floor"):
+    if nm in SPN: add(sfx, mozzie(SPN[nm]["vend"] - SPN[nm]["vstart"]), SPN[nm]["vstart"], 0.8)
+if "ammi" in SPN:
+    am = [l for l in tl if l["scene"] == "ammi"]; add(sfx, kick(), am[0]["start"] + 0.1, 0.7); add(sfx, noise(0.3, 0.08), am[-1]["start"] + 0.6, 0.5)
+if "kabadi" in SPN:
+    kb = [l for l in tl if l["scene"] == "kabadi"]
+    for k in range(4): add(sfx, TICK, kb[0]["start"] + 0.2 + k * 0.3, 0.35)
+    add(sfx, sad_trombone(), kb[-1]["start"] + 0.2, 0.4)
+if "potli" in SPN:
+    pt = [l for l in tl if l["scene"] == "potli"]; add(sfx, noise(0.3, 0.1), pt[0]["start"] + 0.3, 0.4); add(sfx, CHIME, pt[-1]["start"] + 0.05, 0.7)
+if "abbu_door" in SPN: add(sfx, CHIME, SPN["abbu_door"]["vstart"] + 1.0, 0.4)
+if "bus" in SPN:
+    b_ = SPN["bus"]; add(sfx, engine(b_["vend"] - b_["vstart"]), b_["vstart"], 0.7)
+    for k in range(3): add(sfx, beep(330, 0.25, 0.4), b_["vstart"] + 0.3 + k * 0.32)
+if "station" in SPN:
+    st_ = [l for l in tl if l["scene"] == "station"]
+    for k in range(5): add(sfx, TICK, st_[1]["start"] + 1.4 + k * 0.15, 0.4)
+if "guard" in SPN:
+    gv = [l for l in tl if l["scene"] == "guard" and l.get("mode") != "beat"][0]
+    add(sfx, snore(1.6), SPN["guard"]["vstart"] + 0.1, 0.5); add(sfx, whistle(), gv["start"] + 0.1, 0.7); add(sfx, kick(), gv["end"] - 0.6, 0.7)
+if "floor" in SPN:
+    fl = [l for l in tl if l["scene"] == "floor"]; add(sfx, CHIME, fl[-1]["start"] + 0.1, 0.5)
+if "morning" in SPN:
+    mv = [l for l in tl if l["scene"] == "morning" and l.get("mode") != "beat"][0]
+    for k in range(8): add(sfx, beep(1900, 0.09, 0.5), mv["start"] - 0.2 + k * 0.17)
+    ml = [l for l in tl if l["scene"] == "morning"]
+    for k in range(4): add(sfx, kick(), ml[-2]["start"] + k * 0.35, 0.5)
+    add(sfx, kick(), ml[-1]["start"], 0.8)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
