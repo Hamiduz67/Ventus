@@ -1,0 +1,11 @@
+{
+ "n": 1, "title": "Lahore Se Karachi", "out": "Hamid_Hafta01.mp4",
+ "days": [
+  {"day": 1, "title": "Result Wala Din", "file": "hamid/ep001/Hamid_Day01.mp4", "city": "Lahore", "money_start": 750, "money_end": 750, "diary": "82%… par fees 2 lakh. PLAN B!", "cut": 37.3, "key": 11.3},
+  {"day": 2, "title": "Pehli Naukri", "file": "hamid/ep002/Hamid_Day02.mp4", "city": "Lahore", "money_start": 750, "money_end": 1200, "diary": "12 ghante, jala haath: +Rs 450", "cut": 39.8, "key": 16.6},
+  {"day": 3, "title": "Bilal Ka Scheme", "file": "hamid/ep003/Hamid_Day03.mp4", "city": "Lahore", "money_start": 1200, "money_end": 200, "diary": "10 phone… sab naqli! Phir bhi hanse.", "cut": 33.8, "key": 19.2},
+  {"day": 4, "title": "Teen Naukriyan", "file": "hamid/ep004/Hamid_Day04.mp4", "city": "Lahore", "money_start": 200, "money_end": 1000, "diary": "Teen naukriyan, ek din: Rs 1,000", "cut": 83.5, "key": 22.3},
+  {"day": 5, "title": "Phone Mar Gaya", "file": "hamid/ep005/Hamid_Day05.mp4", "city": "Lahore", "money_start": 1000, "money_end": 950, "diary": "Naukri mil gayi… par Karachi mein!", "cut": 82.4, "key": 54.2},
+  {"day": 6, "title": "Station Ki Raat", "file": "hamid/ep006/Hamid_Day06.mp4", "city": "Lahore se Karachi", "money_start": 950, "money_end": 120, "diary": "18 ghante bus. Jeb: Rs 120", "cut": 65.7, "key": 35.6}
+ ]
+}

@@ -7,3 +7,4 @@ hamid/**/out*.mp4
 hamid/**/timeline.json
 hamid/**/lipsync.npz
 hamid/**/*.log
+hamid/**/build/
