@@ -1,9 +1,9 @@
 {
   "series": "Hamid: Zero Se Shuru",
-  "last_day": 6,
-  "money": 120,
+  "last_day": 7,
+  "money": 70,
   "city": "Karachi",
-  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies. Day 5 (Phone Mar Gaya): phone dead; charger plugged in - loadshedding; Bilal had sold his charger (scheme #2); paid Rs 50 at a generator mobile shop, but balance zero; a kind stranger (Chacha, white topi + beard) lent his phone. Job confirmed: delivery rider, Rs 25,000/month - in KARACHI, day after tomorrow 9 AM. Bus ticket Rs 1,500 vs Rs 950 in pocket (Rs 550 short). Cliffhanger: Ammi overheard - 'Karachi? Tum Karachi ja rahe ho?' Day 6 (Station Ki Raat): Ammi said 'Koi Karachi nahi jayega!'; Hamid: Rs 25,000/month, Abbu ki dawai. Sold his old broken cycle to a kabadi for only Rs 300 (still Rs 250 short). At 1 AM Ammi gave him a potli: her savings Rs 400 + 6 parathay ('roz phone karna'); Abbu said nothing, just put a hand on his head. 18-hour bus (-Rs 1,500). Karachi bus adda 2 AM: chai Rs 30 -> Rs 120 left; a guard (blue cap, moustache) woke him off the bench ('Yahan sona mana hai!'); slept on the floor hugging his bag while a shady man eyed it; ate Ammi's cold parathay. Cliffhanger: wakes at 8:40 AM - interview at 9 AM, address 25 km away, rickshaw Rs 400, jeb Rs 120.",
+  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies. Day 5 (Phone Mar Gaya): phone dead; charger plugged in - loadshedding; Bilal had sold his charger (scheme #2); paid Rs 50 at a generator mobile shop, but balance zero; a kind stranger (Chacha, white topi + beard) lent his phone. Job confirmed: delivery rider, Rs 25,000/month - in KARACHI, day after tomorrow 9 AM. Bus ticket Rs 1,500 vs Rs 950 in pocket (Rs 550 short). Cliffhanger: Ammi overheard - 'Karachi? Tum Karachi ja rahe ho?' Day 6 (Station Ki Raat): Ammi said 'Koi Karachi nahi jayega!'; Hamid: Rs 25,000/month, Abbu ki dawai. Sold his old broken cycle to a kabadi for only Rs 300 (still Rs 250 short). At 1 AM Ammi gave him a potli: her savings Rs 400 + 6 parathay ('roz phone karna'); Abbu said nothing, just put a hand on his head. 18-hour bus (-Rs 1,500). Karachi bus adda 2 AM: chai Rs 30 -> Rs 120 left; a guard (blue cap, moustache) woke him off the bench ('Yahan sona mana hai!'); slept on the floor hugging his bag while a shady man eyed it; ate Ammi's cold parathay. Cliffhanger: wakes at 8:40 AM - interview at 9 AM, address 25 km away, rickshaw Rs 400, jeb Rs 120. Day 7 (Kiraye Ki Bike): rickshaw wanted Rs 400 (kam nahi hoga); rented a 70cc bike from Chacha Ghafoor (GHAFOOR BIKE CENTER, Rs 100/din, 'brake ki koi guarantee nahi') -> Rs 20. Traffic jam at 8:50, gali shortcut blocked by a bhains ('Sorry bhains ji'), downhill the brakes failed - crashed into cardboard boxes at the TEZ DELIVERY head office gate exactly at 9:00. The manager (blue shirt, red tie, clipboard) laughed: 'bike toh chala lete ho, test do' - first order in 30 min without brakes (chappal as brake). Ammi's voice note mid-ride ('pohanch gaye beta? nashta kiya?'). Lift kharab, 5 floors on foot; delivered with 01:12 left: first 5-star rating + Rs 50 tip -> Rs 70. NAUKRI PAKKI. Cliffhanger: back at Ghafoor's at night, he finds the dent - 'Yeh dent kis ne daala? Paanch sau nikaalo!' Jurmana Rs 500 vs jeb Rs 70.",
   "episodes": [
     {
       "day": 1,
@@ -72,6 +72,21 @@
       "elevenlabs_chars": 546,
       "length_s": 70.8,
       "note": "Re-cut before posting per owner feedback: faster pace + outro hook; first Buffer posts deleted."
+    },
+    {
+      "day": 7,
+      "title": "Kiraye Ki Bike",
+      "file": "hamid/ep007/Hamid_Day07.mp4",
+      "posted_at": "2026-11-15 20:00 Asia/Dubai",
+      "money_end": 70,
+      "buffer_ids": {
+        "youtube": "6af9a970e86a5789a60e113e",
+        "tiktok": "6af9a971c5b364e06256a9e0",
+        "instagram": "6af9a972918fe79d2ee26415"
+      },
+      "elevenlabs_chars": 537,
+      "length_s": 81.2,
+      "note": "New characters: Chacha Ghafoor (G) drawn, delivery manager (M, no voice). New reusable scenes: bike ride, rickshaw, traffic, gali, downhill, office crash, delivery, stairs, door, dent."
     }
   ],
   "weekly": [
