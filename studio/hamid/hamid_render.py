@@ -16,8 +16,12 @@ YEL = (255, 210, 60); WHITE = (255, 255, 255); RED = (230, 60, 70); GRN = (40, 1
 NAMES = {"H": ("HAMID", (60, 150, 255)), "A": ("AMMI", (230, 90, 140)), "B": ("ABBU", (150, 120, 90)), "L": ("BILAL", (255, 130, 40)), "C": ("CHACHA", (110, 140, 170)),
          "G": ("CHACHA GHAFOOR", (120, 150, 80)), "M": ("MANAGER", (80, 110, 170)), "T": ("MASTER SALEEM", (150, 50, 70))}
 
+# COMIC STYLE (owner, 2026-11-16: "make all my reels from now on in comic style"): meta.json "style": "comic"
+COMIC = META.get("style") == "comic"
 @lru_cache(None)
-def fnt(name, size): return ImageFont.truetype(F + name, size)
+def fnt(name, size):
+    if COMIC and name in ("Anton-Regular.ttf", "Poppins-Black.ttf"): name, size = "Bangers-Regular.ttf", int(size * (1.08 if name[0] == "A" else 1.15))
+    return ImageFont.truetype(F + name, size)
 @lru_cache(None)
 def emoji(ch, size):
     f = ImageFont.truetype(EMOJI, 109); im = Image.new("RGBA", (170, 170), (0, 0, 0, 0))
@@ -2271,6 +2275,61 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook_rain": sc_hook_rain, "deal": sc_deal, "order": sc_order, "rain": sc_rain, "flood": sc_flood, "cake": sc_cake,
       "tdoor": sc_tdoor, "troom": sc_troom, "cliff": sc_cliff, "vnote": sc_vnote}
 
+
+# ======================= COMIC STYLE: halftone shading, ink panel border, narration boxes + speech balloons
+_yy, _xx = np.mgrid[0:H, 0:W]
+_CELL = 11
+_DIST = np.hypot((_xx % _CELL) - _CELL / 2 + 0.5, ((_yy + (_xx // _CELL % 2) * _CELL // 2) % _CELL) - _CELL / 2 + 0.5).astype(np.float32)
+del _yy, _xx
+def comic_post(img):
+    from PIL import ImageEnhance
+    img = ImageEnhance.Color(img).enhance(1.3); img = ImageEnhance.Contrast(img).enhance(1.08)
+    a = np.asarray(img).astype(np.float32)
+    lum = np.asarray(img.convert("L").resize((W // 8, H // 8), Image.BILINEAR).resize((W, H), Image.BILINEAR)).astype(np.float32) / 255
+    dark = np.clip((0.82 - lum) / 0.82, 0, 1)                       # halftone dots grow in the shadows
+    dots = _DIST < (_CELL * 0.62) * np.sqrt(dark)
+    a[dots] *= 0.72
+    light = (lum > 0.86) & (_DIST < 1.6)                             # faint ben-day dots in bright skies/walls
+    a[light] *= 0.9
+    out = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+    d = ImageDraw.Draw(out)                                          # comic panel: white gutter + ink border
+    d.rectangle([0, 0, W - 1, H - 1], outline=(250, 248, 240), width=16)
+    d.rectangle([16, 16, W - 17, H - 17], outline=INK, width=8)
+    return out
+
+def caption_comic(img, t):
+    cur = next((l for l in LINES if l.get("mode") != "beat" and l["start"] - 0.05 <= t < l["end"] + 0.2), None)
+    if not cur: return
+    ws = cur["words"]; hl = max([i for i, w in enumerate(ws) if w["t"] <= t] or [0])
+    talk = cur["mode"] == "talk"
+    parts = [text_img(w["w"].replace('"', "").upper(), "Bangers-Regular.ttf", 66, (220, 40, 50) if i == hl else INK) for i, w in enumerate(ws)]
+    sp = 16; rows, row, rw = [], [], 0
+    for p in parts:
+        if row and rw + p.width > 860: rows.append(row); row, rw = [], 0
+        row.append(p); rw += p.width + sp
+    if row: rows.append(row)
+    rows = rows[:3]; lh = 74
+    bw = max(sum(p.width + sp for p in r) - sp for r in rows) + 90; bh = len(rows) * lh + 56
+    k = eob((t - cur["start"]) / 0.18)
+    box = Image.new("RGBA", (bw + 40, bh + 90), (0, 0, 0, 0)); bd = ImageDraw.Draw(box)
+    if talk:   # white speech balloon with a tail pointing up toward the speaker
+        bd.polygon([(bw * 0.5 - 30, 64), (bw * 0.5 + 40, 64), (bw * 0.5 + 70, 0)], fill=WHITE, outline=INK)
+        bd.rounded_rectangle([10, 50, bw + 10, bh + 50], radius=min(70, bh // 2), fill=WHITE, outline=INK, width=7)
+        bd.polygon([(bw * 0.5 - 22, 58), (bw * 0.5 + 34, 58), (bw * 0.5 + 62, 12)], fill=WHITE)
+        bd.line([(bw * 0.5 - 30, 52), (bw * 0.5 + 70, 0), (bw * 0.5 + 40, 52)], fill=INK, width=7)
+    else:      # yellow narration box
+        bd.rectangle([18, 58, bw + 18, bh + 58], fill=INK)
+        bd.rectangle([10, 50, bw + 10, bh + 50], fill=(255, 226, 80), outline=INK, width=7)
+    y = 50 + 28
+    for r in rows:
+        x = 10 + (bw - (sum(p.width + sp for p in r) - sp)) / 2
+        for p in r: box.alpha_composite(p, (int(x), int(y))); x += p.width + sp
+        y += lh
+    cy = 1640 if len(rows) < 3 else 1610
+    paste_c(img, box, W / 2, cy, k, rot=-1.2 if not talk else 0.8)
+    if talk:
+        nm, col = NAMES[cur["who"]]; paste_c(img, pill(nm, 34, col, WHITE, "Bangers-Regular.ttf"), W / 2 - bw / 2 + 120, cy - bh / 2 - 20, k, rot=-4)
+
 def frame(t):
     s = next((x for x in SCENES if x["vstart"] <= t < x["vend"]), SCENES[-1])
     lt = t - s["vstart"]
@@ -2284,7 +2343,9 @@ def frame(t):
     # scene fade from black
     if lt < 0.25 and s is not SCENES[0]:
         img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * (1 - lt / 0.25)))))
-    outro(img, t); hud(img, t); caption(img, t)
+    outro(img, t)
+    if COMIC: img = comic_post(img.convert("RGB")).convert("RGBA")
+    hud(img, t); (caption_comic if COMIC else caption)(img, t)
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([80, 1868, W - 80, 1878], radius=5, fill=(70, 70, 90)); d.rounded_rectangle([80, 1868, 80 + (W - 160) * t / TOTAL, 1878], radius=5, fill=YEL)
     return img.convert("RGB")
