@@ -20,7 +20,7 @@ NAMES = {"H": ("HAMID", (60, 150, 255)), "A": ("AMMI", (230, 90, 140)), "B": ("A
 COMIC = META.get("style") == "comic"
 @lru_cache(None)
 def fnt(name, size):
-    if COMIC and name == "Anton-Regular.ttf": name, size = "Bangers-Regular.ttf", int(size * 1.08)
+    if COMIC and name in ("Anton-Regular.ttf", "Poppins-Black.ttf"): name, size = "Bangers-Regular.ttf", int(size * (1.08 if name[0] == "A" else 1.15))
     return ImageFont.truetype(F + name, size)
 @lru_cache(None)
 def emoji(ch, size):
@@ -65,33 +65,6 @@ def ssf(im): return im.resize((im.width // SS, im.height // SS), Image.LANCZOS)
 # ======================= CHARACTERS
 SKIN = {"H": (200, 146, 106), "A": (214, 160, 122), "B": (182, 128, 92), "L": (176, 122, 84), "K": (190, 136, 98), "C": (176, 124, 90), "X": (170, 118, 82), "G": (186, 132, 96), "M": (196, 142, 104), "T": (192, 138, 100)}
 HW = 300
-def cel(im, lx, ly, rx, ry, hatch=None, hair=False):
-    """COMIC-ART draft: hard cel shadow on everything outside a lit ellipse (light from upper left), ink lines kept."""
-    a = np.asarray(im).astype(np.float32); hh, ww = a.shape[:2]
-    yy, xx = np.mgrid[0:hh, 0:ww]
-    lum = a[..., :3].mean(-1)
-    sh = (((xx - lx) / rx) ** 2 + ((yy - ly) / ry) ** 2 > 1) & (a[..., 3] > 0) & (lum > 60)
-    a[..., :3][sh] = a[..., :3][sh] * np.array([0.70, 0.68, 0.80], np.float32)
-    out = Image.fromarray(a.astype(np.uint8)); d = ImageDraw.Draw(out)
-    if hatch:   # three ink hatch strokes on the shadow cheek
-        hx, hy = hatch; u = SS
-        for k in range(3): d.line([(hx - 14 * u + k * 13 * u, hy + 10 * u), (hx - 4 * u + k * 13 * u, hy - 12 * u)], fill=INK, width=3 * u)
-    if hair:    # glossy highlight streaks on Hamid's hair
-        u = SS
-        d.arc([lx - 60 * u, ly - 150 * u, lx + 90 * u, ly - 50 * u], 200, 280, fill=(100, 110, 150), width=8 * u)
-        d.arc([lx - 20 * u, ly - 140 * u, lx + 120 * u, ly - 60 * u], 215, 275, fill=(100, 110, 150), width=6 * u)
-    return out
-
-def ink_outline(lay, wpx=7):
-    """COMIC-ART draft: heavy outer ink silhouette around a character layer."""
-    bb = lay.getbbox()
-    if not bb: return lay
-    x0, y0 = max(0, bb[0] - wpx - 2), max(0, bb[1] - wpx - 2); x1, y1 = min(W, bb[2] + wpx + 2), min(H, bb[3] + wpx + 2)
-    crop = lay.crop((x0, y0, x1, y1)); al = crop.getchannel("A").point(lambda v: 255 if v > 40 else 0).filter(ImageFilter.MaxFilter(wpx * 2 - 1 if wpx % 2 else wpx * 2 + 1))
-    ink = Image.new("RGBA", crop.size, INK + (255,)); ink.putalpha(al)
-    out = Image.new("RGBA", lay.size, (0, 0, 0, 0)); out.alpha_composite(ink, (x0, y0)); out.alpha_composite(lay)
-    return out
-
 @lru_cache(None)
 def head(who, eyes, mouth, brows):
     s = SS; c = HW * s; im = Image.new("RGBA", (c, c), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
@@ -204,7 +177,6 @@ def head(who, eyes, mouth, brows):
     if who == "B":
         for sx in (-1, 1):
             d.ellipse([cx + sx * 4 * s - (56 * s if sx < 0 else 0), my - 30 * s, cx + sx * 4 * s + (56 * s if sx > 0 else 0), my - 6 * s], fill=(160, 160, 165))
-    if COMIC: im = cel(im, cx - 0.42 * r, cy - 0.36 * r, 1.0 * r, 1.25 * r, hatch=(cx + 0.62 * r, cy + 0.28 * r), hair=(who == 'H'))
     return ssf(im)
 
 @lru_cache(None)
@@ -255,7 +227,6 @@ def torso(who):
         d.rounded_rectangle([60 * s, 50 * s, w - 60 * s, h + 80 * s], radius=130 * s, fill=(200, 200, 195), outline=INK, width=7 * s)
         d.polygon([(85 * s, 110 * s), (w / 2 - 30 * s, 70 * s), (w / 2 - 30 * s, h), (75 * s, h)], fill=(120, 80, 50), outline=INK)
         d.polygon([(w - 85 * s, 110 * s), (w / 2 + 30 * s, 70 * s), (w / 2 + 30 * s, h), (w - 75 * s, h)], fill=(120, 80, 50), outline=INK)
-    if COMIC: im = cel(im, w * 0.36, h * 0.15, w * 0.42, h * 1.0)
     return ssf(im)
 
 @lru_cache(None)
@@ -264,7 +235,6 @@ def arm(who):
     sleeve = {"H": (245, 245, 240), "A": (150, 40, 70), "B": (200, 200, 195), "L": (255, 190, 50), "K": (150, 200, 240), "C": (110, 140, 170), "X": (190, 170, 120), "G": SKIN["G"], "M": (170, 205, 240), "T": (240, 240, 235)}[who]
     d.rounded_rectangle([6 * s, 6 * s, 60 * s, (L - 40) * s], radius=26 * s, fill=sleeve, outline=INK, width=6 * s)
     d.ellipse([4 * s, (L - 58) * s, 62 * s, L * s], fill=SKIN[who], outline=INK, width=6 * s)
-    if COMIC: im = cel(im, 0.2 * 66 * s, (L + 66) * s * 0.5, 0.42 * 66 * s, (L + 66) * s * 2)
     return ssf(im)
 def rot_arm(img, who, sx, sy, angle, sc=1.0):
     a = arm(who); big = Image.new("RGBA", (a.height * 2, a.height * 2), (0, 0, 0, 0))
@@ -277,10 +247,6 @@ def speaking(who, t):
 def blink(t, seed): return (t + seed) % 3.6 < 0.11
 
 def draw_char(img, who, x, y, t, mood="n", sc=1.0, arms=(-15, 15), hold=None, laugh=False):
-    if COMIC and not getattr(img, "_comic_lay", False):
-        lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); lay._comic_lay = True
-        draw_char(lay, who, x, y, t, mood, sc, arms, hold, laugh)
-        img.alpha_composite(ink_outline(lay, max(4, int(8 * sc)))); return
     amp = speaking(who, t)
     if laugh: amp = max(amp, 0.35 + 0.5 * abs(math.sin(t * 11 + x)))
     talking = amp > 0.08
@@ -2320,12 +2286,15 @@ def comic_post(img):
     img = ImageEnhance.Color(img).enhance(1.3); img = ImageEnhance.Contrast(img).enhance(1.08)
     a = np.asarray(img).astype(np.float32)
     lum = np.asarray(img.convert("L").resize((W // 8, H // 8), Image.BILINEAR).resize((W, H), Image.BILINEAR)).astype(np.float32) / 255
-    dark = np.clip((0.55 - lum) / 0.55, 0, 1)                       # halftone dots only in the real shadows
-    dots = _DIST < (_CELL * 0.55) * np.sqrt(dark)
-    a[dots] *= 0.7
+    dark = np.clip((0.82 - lum) / 0.82, 0, 1)                       # halftone dots grow in the shadows
+    dots = _DIST < (_CELL * 0.62) * np.sqrt(dark)
+    a[dots] *= 0.72
     light = (lum > 0.86) & (_DIST < 1.6)                             # faint ben-day dots in bright skies/walls
     a[light] *= 0.9
     out = Image.fromarray(np.clip(a, 0, 255).astype(np.uint8))
+    d = ImageDraw.Draw(out)                                          # comic panel: white gutter + ink border
+    d.rectangle([0, 0, W - 1, H - 1], outline=(250, 248, 240), width=16)
+    d.rectangle([16, 16, W - 17, H - 17], outline=INK, width=8)
     return out
 
 def caption_comic(img, t):
@@ -2376,7 +2345,7 @@ def frame(t):
         img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * (1 - lt / 0.25)))))
     outro(img, t)
     if COMIC: img = comic_post(img.convert("RGB")).convert("RGBA")
-    hud(img, t); caption(img, t)
+    hud(img, t); (caption_comic if COMIC else caption)(img, t)
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([80, 1868, W - 80, 1878], radius=5, fill=(70, 70, 90)); d.rounded_rectangle([80, 1868, 80 + (W - 160) * t / TOTAL, 1878], radius=5, fill=YEL)
     return img.convert("RGB")
