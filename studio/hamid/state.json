@@ -1,121 +1,136 @@
 {
-  "series": "Hamid: Zero Se Shuru",
-  "last_day": 7,
-  "money": 70,
-  "city": "Karachi",
-  "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies. Day 5 (Phone Mar Gaya): phone dead; charger plugged in - loadshedding; Bilal had sold his charger (scheme #2); paid Rs 50 at a generator mobile shop, but balance zero; a kind stranger (Chacha, white topi + beard) lent his phone. Job confirmed: delivery rider, Rs 25,000/month - in KARACHI, day after tomorrow 9 AM. Bus ticket Rs 1,500 vs Rs 950 in pocket (Rs 550 short). Cliffhanger: Ammi overheard - 'Karachi? Tum Karachi ja rahe ho?' Day 6 (Station Ki Raat): Ammi said 'Koi Karachi nahi jayega!'; Hamid: Rs 25,000/month, Abbu ki dawai. Sold his old broken cycle to a kabadi for only Rs 300 (still Rs 250 short). At 1 AM Ammi gave him a potli: her savings Rs 400 + 6 parathay ('roz phone karna'); Abbu said nothing, just put a hand on his head. 18-hour bus (-Rs 1,500). Karachi bus adda 2 AM: chai Rs 30 -> Rs 120 left; a guard (blue cap, moustache) woke him off the bench ('Yahan sona mana hai!'); slept on the floor hugging his bag while a shady man eyed it; ate Ammi's cold parathay. Cliffhanger: wakes at 8:40 AM - interview at 9 AM, address 25 km away, rickshaw Rs 400, jeb Rs 120. Day 7 (Kiraye Ki Bike): rickshaw wanted Rs 400 (kam nahi hoga); rented a 70cc bike from Chacha Ghafoor (GHAFOOR BIKE CENTER, Rs 100/din, 'brake ki koi guarantee nahi') -> Rs 20. Traffic jam at 8:50, gali shortcut blocked by a bhains ('Sorry bhains ji'), downhill the brakes failed - crashed into cardboard boxes at the TEZ DELIVERY head office gate exactly at 9:00. The manager (blue shirt, red tie, clipboard) laughed: 'bike toh chala lete ho, test do' - first order in 30 min without brakes (chappal as brake). Ammi's voice note mid-ride ('pohanch gaye beta? nashta kiya?'). Lift kharab, 5 floors on foot; delivered with 01:12 left: first 5-star rating + Rs 50 tip -> Rs 70. NAUKRI PAKKI. Cliffhanger: back at Ghafoor's at night, he finds the dent - 'Yeh dent kis ne daala? Paanch sau nikaalo!' Jurmana Rs 500 vs jeb Rs 70.",
-  "episodes": [
-    {
-      "day": 1,
-      "title": "Result Wala Din",
-      "file": "hamid/ep001/Hamid_Day01.mp4",
-      "posted_at": "2026-11-13 11:48 Asia/Dubai",
-      "money_end": 750
-    },
-    {
-      "day": 2,
-      "title": "Pehli Naukri",
-      "file": "hamid/ep002/Hamid_Day02.mp4",
-      "posted_at": "2026-11-13 13:00 Asia/Dubai",
-      "money_end": 1200,
-      "metricool_id": 426642195,
-      "elevenlabs_chars": 391
-    },
-    {
-      "day": 3,
-      "title": "Bilal Ka Scheme",
-      "file": "hamid/ep003/Hamid_Day03.mp4",
-      "posted_at": "2026-11-13 20:00 Asia/Dubai",
-      "money_end": 200,
-      "metricool_id": 426914717,
-      "elevenlabs_chars": 350
-    },
-    {
-      "day": 4,
-      "title": "Teen Naukriyan",
-      "file": "hamid/ep004/Hamid_Day04.mp4",
-      "posted_at": "2026-11-14 13:00 Asia/Dubai",
-      "money_end": 1000,
-      "buffer_ids": {
-        "youtube": "6af8138f78196a0a974bb9f5",
-        "tiktok": "6af81390bb36d00909f6efec",
-        "instagram": "6af8139078196a0a974bba2b"
-      },
-      "elevenlabs_chars": 444,
-      "length_s": 87.9
-    },
-    {
-      "day": 5,
-      "title": "Phone Mar Gaya",
-      "file": "hamid/ep005/Hamid_Day05.mp4",
-      "posted_at": "2026-11-14 22:05 Asia/Dubai (20:00 slot missed: run started late)",
-      "money_end": 950,
-      "buffer_ids": {
-        "youtube": "6af8a03576c23bf1c72fcc71",
-        "tiktok": "6af8a036c5b364e062091c6a",
-        "instagram": "6af8a036c5b364e062091cc2"
-      },
-      "elevenlabs_chars": 437,
-      "length_s": 86.3
-    },
-    {
-      "day": 6,
-      "title": "Station Ki Raat",
-      "file": "hamid/ep006/Hamid_Day06.mp4",
-      "posted_at": "2026-11-15 13:00 Asia/Dubai",
-      "money_end": 120,
-      "buffer_ids": {
-        "youtube": "6af967c8b9a106584c95b9fe",
-        "tiktok": "6af967c8918fe79d2ecdaa65",
-        "instagram": "6af967c9c5b364e062412c36"
-      },
-      "elevenlabs_chars": 546,
-      "length_s": 70.8,
-      "note": "Re-cut before posting per owner feedback: faster pace + outro hook; first Buffer posts deleted."
-    },
-    {
-      "day": 7,
-      "title": "Kiraye Ki Bike",
-      "file": "hamid/ep007/Hamid_Day07.mp4",
-      "posted_at": "2026-11-15 20:00 Asia/Dubai",
-      "money_end": 70,
-      "buffer_ids": {
-        "youtube": "6af9a970e86a5789a60e113e",
-        "tiktok": "6af9a971c5b364e06256a9e0",
-        "instagram": "6af9a972918fe79d2ee26415"
-      },
-      "elevenlabs_chars": 537,
-      "length_s": 81.2,
-      "note": "New characters: Chacha Ghafoor (G) drawn, delivery manager (M, no voice). New reusable scenes: bike ride, rickshaw, traffic, gali, downhill, office crash, delivery, stairs, door, dent."
-    }
-  ],
-  "weekly": [
-    {
-      "n": 1,
-      "title": "Hafta 1: Lahore Se Karachi",
-      "days": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ],
-      "mode": "long",
-      "file": "hamid/weekly/w01/Hamid_Hafta01.mp4",
-      "thumbnail": "hamid/weekly/w01/thumbnail.jpg",
-      "length_s": 388.1,
-      "posted_at": "2026-11-15 19:00 Asia/Dubai",
-      "platform": "youtube (video) via Metricool",
-      "metricool_id": 428736944,
-      "elevenlabs_chars": 288,
-      "note": "Landscape layout: each day's reel (cut before its follow ending) at 1080 high + styled side panel; new title/opening/bridge/closing/end cards (studio/hamid/hamid_render_wide.py)."
-    }
-  ],
-  "metricool": {
-    "month": "2026-11",
-    "used": 19,
-    "limit": 20,
-    "note": "Free plan: 20 posts/month, resets monthly. Only weekly LONG videos use it."
+ "series": "Hamid: Zero Se Shuru",
+ "last_day": 8,
+ "money": 120,
+ "city": "Karachi",
+ "story_so_far": "Day 1: Hamid (Lahore) got 82% in 12th but the university fee is Rs 2,00,000 a year; he tore the admission form and wrote PLAN B. Day 2: first job at a chai dhaba, 12 hours; burned hand, broke a cup, paid Rs 450 (Rs 1,200). Bilal arrived with a 'paise double' scheme. Day 3: Bilal's scheme - they each put Rs 1,000 into 10 'cheap' phones at the bazaar; at home all were plastic dummies. Angry at first, then they laughed together on the rooftop. Rs 200 left. Diary: 'Aaj bhi bach gaye. Kal: teen naukriyan!' Day 4 (Teen Naukriyan): 5 AM newspaper round on an old cycle - chain broke, finished 40 houses on foot chased by a dog (+Rs 150); late to the dhaba, Rs 100 cut (+Rs 350); night tuition for Ali (Class 5) - fell asleep, Ali's ammi caught him, but Ali said 'sir taught best today', she paid Rs 300 and said 'kal bhi aana'. Rs 1,000. Cliffhanger: an unknown number calls about a delivery job - battery 1%, phone dies. Day 5 (Phone Mar Gaya): phone dead; charger plugged in - loadshedding; Bilal had sold his charger (scheme #2); paid Rs 50 at a generator mobile shop, but balance zero; a kind stranger (Chacha, white topi + beard) lent his phone. Job confirmed: delivery rider, Rs 25,000/month - in KARACHI, day after tomorrow 9 AM. Bus ticket Rs 1,500 vs Rs 950 in pocket (Rs 550 short). Cliffhanger: Ammi overheard - 'Karachi? Tum Karachi ja rahe ho?' Day 6 (Station Ki Raat): Ammi said 'Koi Karachi nahi jayega!'; Hamid: Rs 25,000/month, Abbu ki dawai. Sold his old broken cycle to a kabadi for only Rs 300 (still Rs 250 short). At 1 AM Ammi gave him a potli: her savings Rs 400 + 6 parathay ('roz phone karna'); Abbu said nothing, just put a hand on his head. 18-hour bus (-Rs 1,500). Karachi bus adda 2 AM: chai Rs 30 -> Rs 120 left; a guard (blue cap, moustache) woke him off the bench ('Yahan sona mana hai!'); slept on the floor hugging his bag while a shady man eyed it; ate Ammi's cold parathay. Cliffhanger: wakes at 8:40 AM - interview at 9 AM, address 25 km away, rickshaw Rs 400, jeb Rs 120. Day 7 (Kiraye Ki Bike): rickshaw wanted Rs 400 (kam nahi hoga); rented a 70cc bike from Chacha Ghafoor (GHAFOOR BIKE CENTER, Rs 100/din, 'brake ki koi guarantee nahi') -> Rs 20. Traffic jam at 8:50, gali shortcut blocked by a bhains ('Sorry bhains ji'), downhill the brakes failed - crashed into cardboard boxes at the TEZ DELIVERY head office gate exactly at 9:00. The manager (blue shirt, red tie, clipboard) laughed: 'bike toh chala lete ho, test do' - first order in 30 min without brakes (chappal as brake). Ammi's voice note mid-ride ('pohanch gaye beta? nashta kiya?'). Lift kharab, 5 floors on foot; delivered with 01:12 left: first 5-star rating + Rs 50 tip -> Rs 70. NAUKRI PAKKI. Cliffhanger: back at Ghafoor's at night, he finds the dent - 'Yeh dent kis ne daala? Paanch sau nikaalo!' Jurmana Rs 500 vs jeb Rs 70. Day 8 (Barish): Ghafoor deal - dent fine paid as Rs 50/day qist + Rs 100 daily kiraya. Big order: 3 kg birthday cake, 25 min. Karachi monsoon: thunder, road became a river, engine died, his chappal floated away (funny), pushed the bike 2 km; Ammi's voice note 'bahar mat nikalna!'. Opened the box under an awning - cake melted (Rs 1,200, 'paise katenge?'). At FLAT 2-A, Master Saleem (retired teacher, white curly hair, gold glasses, maroon vest; 'Best Teacher 1998') said 'cake chhoro, tum bheeg gaye ho', gave chai + towel, asked 'parhte kyun nahi?' - '82% thay sir, fees nahi thi.' Said 'mithaas wohi hai', gave 5 stars + Rs 200 tip and a chit. Paid Ghafoor Rs 150 -> Rs 120; jurmana baaki Rs 450. Cliffhanger: chit says 'Kal subah 8 baje aana, ek imtihaan hai - M. Saleem', and the manager texts 'Kal 8 baje duty. Late = naukri khatam.' Dono 8 baje!",
+ "episodes": [
+  {
+   "day": 1,
+   "title": "Result Wala Din",
+   "file": "hamid/ep001/Hamid_Day01.mp4",
+   "posted_at": "2026-11-13 11:48 Asia/Dubai",
+   "money_end": 750
+  },
+  {
+   "day": 2,
+   "title": "Pehli Naukri",
+   "file": "hamid/ep002/Hamid_Day02.mp4",
+   "posted_at": "2026-11-13 13:00 Asia/Dubai",
+   "money_end": 1200,
+   "metricool_id": 426642195,
+   "elevenlabs_chars": 391
+  },
+  {
+   "day": 3,
+   "title": "Bilal Ka Scheme",
+   "file": "hamid/ep003/Hamid_Day03.mp4",
+   "posted_at": "2026-11-13 20:00 Asia/Dubai",
+   "money_end": 200,
+   "metricool_id": 426914717,
+   "elevenlabs_chars": 350
+  },
+  {
+   "day": 4,
+   "title": "Teen Naukriyan",
+   "file": "hamid/ep004/Hamid_Day04.mp4",
+   "posted_at": "2026-11-14 13:00 Asia/Dubai",
+   "money_end": 1000,
+   "buffer_ids": {
+    "youtube": "6af8138f78196a0a974bb9f5",
+    "tiktok": "6af81390bb36d00909f6efec",
+    "instagram": "6af8139078196a0a974bba2b"
+   },
+   "elevenlabs_chars": 444,
+   "length_s": 87.9
+  },
+  {
+   "day": 5,
+   "title": "Phone Mar Gaya",
+   "file": "hamid/ep005/Hamid_Day05.mp4",
+   "posted_at": "2026-11-14 22:05 Asia/Dubai (20:00 slot missed: run started late)",
+   "money_end": 950,
+   "buffer_ids": {
+    "youtube": "6af8a03576c23bf1c72fcc71",
+    "tiktok": "6af8a036c5b364e062091c6a",
+    "instagram": "6af8a036c5b364e062091cc2"
+   },
+   "elevenlabs_chars": 437,
+   "length_s": 86.3
+  },
+  {
+   "day": 6,
+   "title": "Station Ki Raat",
+   "file": "hamid/ep006/Hamid_Day06.mp4",
+   "posted_at": "2026-11-15 13:00 Asia/Dubai",
+   "money_end": 120,
+   "buffer_ids": {
+    "youtube": "6af967c8b9a106584c95b9fe",
+    "tiktok": "6af967c8918fe79d2ecdaa65",
+    "instagram": "6af967c9c5b364e062412c36"
+   },
+   "elevenlabs_chars": 546,
+   "length_s": 70.8,
+   "note": "Re-cut before posting per owner feedback: faster pace + outro hook; first Buffer posts deleted."
+  },
+  {
+   "day": 7,
+   "title": "Kiraye Ki Bike",
+   "file": "hamid/ep007/Hamid_Day07.mp4",
+   "posted_at": "2026-11-15 20:00 Asia/Dubai",
+   "money_end": 70,
+   "buffer_ids": {
+    "youtube": "6af9a970e86a5789a60e113e",
+    "tiktok": "6af9a971c5b364e06256a9e0",
+    "instagram": "6af9a972918fe79d2ee26415"
+   },
+   "elevenlabs_chars": 537,
+   "length_s": 81.2,
+   "note": "New characters: Chacha Ghafoor (G) drawn, delivery manager (M, no voice). New reusable scenes: bike ride, rickshaw, traffic, gali, downhill, office crash, delivery, stairs, door, dent."
+  },
+  {
+   "day": 8,
+   "title": "Barish",
+   "file": "hamid/ep008/Hamid_Day08.mp4",
+   "posted_at": "2026-11-16 13:00 Asia/Dubai",
+   "money_end": 120,
+   "buffer_ids": {
+    "youtube": "6afab77b06e1675856d675f5",
+    "tiktok": "6afab77c60a910801c7a0013",
+    "instagram": "6afab77ca869c35e5bc8d24e"
+   },
+   "elevenlabs_chars": 559,
+   "length_s": 78.0,
+   "note": "New character: Master Saleem (T, voice 'Raju' eleven_v3). New reusable scenes: hook_rain, deal, order, rain, flood, vnote, cake, tdoor, troom, cliff; rain()/clouds()/water()/drips() overlays."
   }
+ ],
+ "weekly": [
+  {
+   "n": 1,
+   "title": "Hafta 1: Lahore Se Karachi",
+   "days": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "mode": "long",
+   "file": "hamid/weekly/w01/Hamid_Hafta01.mp4",
+   "thumbnail": "hamid/weekly/w01/thumbnail.jpg",
+   "length_s": 388.1,
+   "posted_at": "2026-11-15 19:00 Asia/Dubai",
+   "platform": "youtube (video) via Metricool",
+   "metricool_id": 428736944,
+   "elevenlabs_chars": 288,
+   "note": "Landscape layout: each day's reel (cut before its follow ending) at 1080 high + styled side panel; new title/opening/bridge/closing/end cards (studio/hamid/hamid_render_wide.py)."
+  }
+ ],
+ "metricool": {
+  "month": "2026-11",
+  "used": 19,
+  "limit": 20,
+  "note": "Free plan: 20 posts/month, resets monthly. Only weekly LONG videos use it."
+ }
 }
