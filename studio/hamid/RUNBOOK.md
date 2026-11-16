@@ -11,7 +11,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 
 ## A. Daily reel run (2 per day: posts at 13:00 and 20:00 Asia/Dubai)
 1. Read `studio/hamid/state.json`. Next day = last_day + 1. Check `python3 studio/hamid/buffer_post.py status` so you never double-post a day.
-2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money", "style": "comic"}) — comic style is the owner's standing rule from Day 9 on (SERIES.md).
+2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money"}).
    - Follow the format and language rules in SERIES.md and the planned day list; continue from `story_so_far`.
    - Line fields: who (H/A/B/L/R/G/S…), mode ("vo" narration or "talk" on-screen dialogue), scene (a key in hamid_render.py `SC`), dev (Urdu script), rom (Roman caption, same words).
    - Reel length 65–85 s with the full story structure in SERIES.md "Reel format". Fast pacing (owner): voices 1.12x, beats x0.85 capped at 1.3 s (all automatic in hamid_audio.py) — fill time with story, not silence. Keep total `dev` text ≤ 600 characters (length comes from wordless visual beats, not more voice). Hamid lines: no [tags].
@@ -47,7 +47,7 @@ Pick the format from the Metricool free-post budget in state.json "metricool" {m
   (createScheduledPost, blogId 7980574, Asia/Dubai, YouTube as a normal video, not a Short: check the tool's schema for the YouTube type/title/privacy
   fields; privacy public, not made for kids; a good description with the story so far + #hamidzerosesshuru). Use a commit-SHA raw GitHub URL (HTTP 200).
   Then used += 1 and save. If Metricool answers with a plan/limit error, set used = limit and fall back to SHORT mode in the same run.
-  Landscape look: same 2D style (comic style for episodes from Day 9 on: reuse comic_post()/caption_comic() ideas from hamid_render.py). Preferred: add a landscape mode to the renderer in a SEPARATE file (studio/hamid/hamid_render_wide.py) so the daily
+  Landscape look: same 2D style. Preferred: add a landscape mode to the renderer in a SEPARATE file (studio/hamid/hamid_render_wide.py) so the daily
   vertical renderer is never broken; draw scenes on a 1920x1080 canvas with the same characters, HUD (day, money, city) and Roman captions at the bottom.
   Acceptable fallback if that can't reach the bar: a designed 16:9 layout with the vertical episode at 1080 high on the left/centre and a styled side panel
   (series title, "Din N", money counter, city, a one-line diary note) - never plain black bars or a blurred copy. Add a 5 s title card at the start and an
