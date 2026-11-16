@@ -14,6 +14,7 @@ VOICES = {
     "L": ("7b9mYhmnp0y2qSH1FnBL", "eleven_v3", 0.5, True),   # Bilal - "Bunty", funny best friend
     "R": ("7eRpHPIAaX3Z8JIv8xfg", "eleven_v3", 0.5, True),   # Seth Rauf - "Yatin", loud boss
     "G": ("qsz5tTEjPvsiIJZIpM8S", "eleven_v3", 0.5, True),   # Chacha Ghafoor - "Kamal", landlord
+    "T": ("zT03pEAEi0VHKciJODfn", "eleven_v3", 0.5, True),   # Master Saleem (retired teacher, Karachi) - "Raju"
     "S": ("gHu9GtaHOXcSqFTK06ux", "eleven_v3", 0.5, True),   # Sadia - "Anjali", cheerful (Season 2, Karachi)
 }
 

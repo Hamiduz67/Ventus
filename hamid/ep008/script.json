@@ -1,0 +1,290 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook_rain",
+  "dev": "بارش میں کیک کا آرڈر… اور ڈبہ گیلا!",
+  "rom": "Barish mein cake ka order… aur dabba geela!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook_rain",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن آٹھ۔ جیب میں ستر… جرمانہ پانچ سو۔",
+  "rom": "Din aath. Jeb mein sattar… jurmana paanch sau."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "deal",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "G",
+  "mode": "talk",
+  "scene": "deal",
+  "dev": "[gruff] روز پچاس قسط… اور شام کو کرایہ بھی!",
+  "rom": "Roz pachaas qist… aur shaam ko kiraya bhi!"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "deal",
+  "dev": "پکا چاچا! شام تک کما لوں گا۔",
+  "rom": "Pakka Chacha! Shaam tak kama loonga."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "deal",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "order",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "order",
+  "dev": "آج کا بڑا آرڈر… سالگرہ کا کیک!",
+  "rom": "Aaj ka bara order… saalgirah ka cake!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "order",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rain",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "rain",
+  "dev": "اور پھر… کراچی کی بارش!",
+  "rom": "Aur phir… Karachi ki barish!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rain",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "flood",
+  "dev": "سڑک دریا بن گئی… انجن بند!",
+  "rom": "Sadak darya ban gayi… engine band!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "flood",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "flood",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "vnote",
+  "dev": "[worried] بیٹا، کراچی میں بڑی بارش ہے… باہر مت نکلنا!",
+  "rom": "Beta, Karachi mein bari barish hai… bahar mat nikalna!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "vnote",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cake",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cake",
+  "dev": "ڈبہ کھولا… کیک کا حال دیکھو!",
+  "rom": "Dabba khola… cake ka haal dekho!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cake",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "tdoor",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "tdoor",
+  "dev": "سر، معاف کرنا… کیک خراب ہو گیا۔",
+  "rom": "Sir, maaf karna… cake kharaab ho gaya."
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "tdoor",
+  "dev": "[warm] کیک چھوڑو… تم بھیگ گئے ہو! اندر آؤ۔",
+  "rom": "Cake chhoro… tum bheeg gaye ho! Andar aao."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "troom",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "troom",
+  "dev": "[curious] تمہاری عمر پڑھنے کی ہے… پڑھتے کیوں نہیں؟",
+  "rom": "Tumhari umar parhne ki hai… parhte kyun nahi?"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "troom",
+  "dev": "بیاسی فیصد تھے سر… فیس نہیں تھی۔",
+  "rom": "Bayaasi percent thay sir… fees nahi thi."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "troom",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "troom",
+  "dev": "پانچ اسٹار… اور دو سو ٹپ!",
+  "rom": "Paanch star… aur do sau tip!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "troom",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_diary",
+  "dur": 1.0,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "end_diary",
+  "dev": "کرایہ اور قسط دی… آج بھی بچ گئے۔",
+  "rom": "Kiraya aur qist di… aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_diary",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_diary",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff",
+  "dev": "کل صبح آٹھ بجے امتحان… اور ڈیوٹی بھی آٹھ بجے!",
+  "rom": "Kal subah aath baje imtihaan… aur duty bhi aath baje!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff",
+  "dur": 1.4,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff",
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!",
+  "outro": true
+ }
+]

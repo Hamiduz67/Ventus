@@ -338,6 +338,47 @@ if "door" in SPN:
     add(sfx, CHIME, dr[-1]["start"], 0.7)
 if "dent" in SPN:
     dn = LS_("dent"); add(sfx, kick(), dn[1]["start"] + 0.5, 0.8); add(sfx, sad_trombone(), dn[2]["start"] + 0.1, 0.5)
+# ---- Day 8+: rain, thunder, flood splash, doorbell, tip, deal handshake
+def rainfx(n_s):
+    n = int(n_s * SR); s_ = rng.standard_normal(n).astype(np.float32)
+    s_ = np.convolve(s_, np.ones(6) / 6, mode="same"); a = np.minimum(1, np.arange(n) / SR / 0.4) * np.minimum(1, (n_s - np.arange(n) / SR) / 0.4)
+    return (s_ * a * 0.35).astype(np.float32)
+def thunder():
+    n = int(2.2 * SR); x = np.arange(n) / SR; s_ = rng.standard_normal(n).astype(np.float32)
+    s_ = np.convolve(s_, np.ones(60) / 60, mode="same")
+    return (s_ * np.exp(-x * 1.6) * 6 * (0.6 + 0.4 * np.sin(x * 9) ** 2)).astype(np.float32)
+for nm, g in (("hook_rain", 0.8), ("rain", 0.9), ("flood", 0.9), ("vnote", 0.6), ("cake", 0.45), ("tdoor", 0.25)):
+    if nm in SPN: add(sfx, rainfx(SPN[nm]["vend"] - SPN[nm]["vstart"]), SPN[nm]["vstart"], g)
+if "hook_rain" in SPN:
+    add(sfx, engine(SPN["hook_rain"]["vend"] - SPN["hook_rain"]["vstart"]), SPN["hook_rain"]["vstart"], 0.5); add(sfx, thunder(), SPN["hook_rain"]["vstart"] + 0.05, 0.9)
+if "deal" in SPN:
+    dl_ = LS_("deal"); add(sfx, CHIME, dl_[-1]["start"] + 0.3, 0.6); add(sfx, kick(), dl_[-1]["start"] + 0.1, 0.4)
+if "order" in SPN:
+    od = LS_("order"); add(sfx, beep(1200, 0.08, 0.5), od[0]["start"] + 0.1); add(sfx, beep(1600, 0.1, 0.5), od[0]["start"] + 0.25)
+    add(sfx, thunder(), od[-1]["start"] + 0.3, 0.5)
+if "rain" in SPN:
+    rn = LS_("rain"); add(sfx, engine(SPN["rain"]["vend"] - SPN["rain"]["vstart"]), SPN["rain"]["vstart"], 0.5)
+    add(sfx, kick(), rn[0]["start"] + 0.5, 1.0); add(sfx, thunder(), rn[0]["start"] + 0.5, 1.0)
+if "flood" in SPN:
+    fd = LS_("flood"); fv = fd[0]; w = [x for x in fv["words"] if x["w"].lower().startswith("engine")]
+    et = w[0]["t"] if w else fv["start"] + 1.4
+    add(sfx, engine(max(0.3, et - SPN["flood"]["vstart"])), SPN["flood"]["vstart"], 0.6)
+    for k in range(3): add(sfx, kick(), et + 0.2 + k * 0.35, 0.5)
+    add(sfx, sad_trombone(), fd[1]["start"] + 0.2, 0.5)
+    for k in range(int((fd[-1]["end"] - fd[-1]["start"]) / 0.4)): add(sfx, noise(0.15, 0.04), fd[-1]["start"] + k * 0.4, 0.45)
+if "vnote" in SPN:
+    vq = LS_("vnote"); add(sfx, beep(1200, 0.08, 0.4), vq[0]["start"] - 0.25); add(sfx, beep(1600, 0.08, 0.4), vq[0]["start"] - 0.12)
+if "cake" in SPN:
+    ck = LS_("cake"); add(sfx, noise(0.3, 0.06), ck[0]["start"] + 0.6, 0.6); add(sfx, sad_trombone(), ck[-1]["start"] + 0.1, 0.4)
+if "tdoor" in SPN:
+    td = LS_("tdoor"); add(sfx, beep(880, 0.35, 0.5), td[0]["start"] + 0.05); add(sfx, beep(700, 0.45, 0.5), td[0]["start"] + 0.4)
+if "troom" in SPN:
+    trm = LS_("troom"); tv = [l for l in trm if l.get("mode") != "beat"][-1]
+    for k in range(5): add(sfx, TICK, tv["start"] - 0.1 + k * 0.2, 0.5)
+    add(sfx, CHIME, tv["start"] + 1.0, 0.7)
+if "cliff" in SPN:
+    cf = LS_("cliff"); add(sfx, kick(), cf[2]["start"] + 0.05, 0.8)
+    for k in range(6): add(sfx, TICK, cf[2]["start"] + 0.2 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
