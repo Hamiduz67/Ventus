@@ -1,0 +1,331 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook_fork",
+  "dev": "ایک طرف نوکری… ایک طرف امتحان!",
+  "rom": "Ek taraf naukri… ek taraf imtihaan!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook_fork",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن نو۔ جیب میں ایک سو بیس… پیٹ خالی۔",
+  "rom": "Din nau. Jeb mein ek sau bees… pet khaali."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kick",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kick",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "G",
+  "mode": "talk",
+  "scene": "kick",
+  "dev": "[laughs] پیٹرول ختم ہے بیٹا… اپنا ڈالو!",
+  "rom": "Petrol khatam hai beta… apna daalo!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "kick",
+  "dev": "سو کا پیٹرول… جیب میں بچے بیس!",
+  "rom": "Sau ka petrol… jeb mein bache bees!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kick",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "fork",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "fork",
+  "dev": "نوکری گئی تو ابو کی دوائی بھی گئی… پہلے ڈیوٹی!",
+  "rom": "Naukri gayi toh Abbu ki dawai bhi gayi… pehle duty!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "fork",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "briefing",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "briefing",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "briefing",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "briefing",
+  "dev": "سر… یہ میرا پیٹ تھا۔",
+  "rom": "Sir… yeh mera pet tha."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "briefing",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "montage",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "montage",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "order3",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "order3",
+  "dev": "تیسرا آرڈر… فلیٹ ٹو اے؟ ماسٹر صاحب کا گھر!",
+  "rom": "Teesra order… Flat 2-A? Master sahab ka ghar!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "exam",
+  "dur": 1.1,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "exam",
+  "dev": "[surprised] دیر سے آئے… پر آئے تو! پانچ سوال، پانچ منٹ۔",
+  "rom": "Der se aaye… par aaye toh! Paanch sawaal, paanch minute."
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "exam",
+  "dev": "سر، آرڈر لیٹ ہو جائے گا!",
+  "rom": "Sir, order late ho jayega!"
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "exam",
+  "dev": "[firm] تو جلدی کرو!",
+  "rom": "Toh jaldi karo!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "paper",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "paper",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "paper",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "paper",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "result",
+  "dev": "[proud] پانچ میں پانچ! تم سکالرشپ کے لائق ہو۔",
+  "rom": "Paanch mein paanch! Tum scholarship ke laayak ho."
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "result",
+  "dev": "سکالرشپ؟ سر… کالج؟",
+  "rom": "Scholarship? Sir… college?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "result",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rush",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "rush",
+  "dev": "باقی سات آرڈر… خالی پیٹ، فل اسپیڈ!",
+  "rom": "Baaqi saat order… khaali pet, full speed!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rush",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rush",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_kid",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_kid",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "end_kid",
+  "dev": "آخری بیس کے بسکٹ… آدھے اس کے۔ آج بھی بچ گئے۔",
+  "rom": "Aakhri bees ke biscuit… aadhe uske. Aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end_kid",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff9",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff9",
+  "dev": "سکالرشپ فارم کی فیس ہزار روپے… آخری دن کل!",
+  "rom": "Scholarship form ki fees hazaar rupay… aakhri din kal!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff9",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff9",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]

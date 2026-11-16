@@ -379,6 +379,58 @@ if "troom" in SPN:
 if "cliff" in SPN:
     cf = LS_("cliff"); add(sfx, kick(), cf[2]["start"] + 0.05, 0.8)
     for k in range(6): add(sfx, TICK, cf[2]["start"] + 0.2 + k * 0.2, 0.4)
+# ---- Day 9+: kick-start, signpost tick, stomach growl, doorbell, pen scratch, stamp, dizzy, biscuit crinkle, message
+def growl(n_s=0.9):
+    n = int(n_s * SR); x = np.arange(n) / SR; f = 70 + 25 * np.sin(x * 23) + 15 * np.sin(x * 7)
+    s_ = np.sin(2 * np.pi * np.cumsum(f) / SR) * (0.6 + 0.4 * np.sin(x * 31) ** 2)
+    return (s_ * np.minimum(1, x / 0.1) * np.minimum(1, (n_s - x) / 0.25) * 0.8).astype(np.float32)
+def scratch(n_s):
+    n = int(n_s * SR); s_ = np.diff(rng.standard_normal(n).astype(np.float32), prepend=0)
+    return (s_ * (np.sin(np.arange(n) / SR * 2 * np.pi * 6) > 0) * 0.18).astype(np.float32)
+if "hook_fork" in SPN:
+    hf = SPN["hook_fork"]
+    for k in range(int((hf["vend"] - hf["vstart"]) / 0.5)): add(sfx, TICK, hf["vstart"] + 0.1 + k * 0.5, 0.45)
+    add(sfx, kick(), LS_("hook_fork")[0]["start"] + 1.5, 0.6)
+if "kick" in SPN:
+    kk = LS_("kick")
+    for k in range(5): add(sfx, kick(), kk[0]["start"] + k * 0.42, 0.7); add(sfx, noise(0.15, 0.04), kk[0]["start"] + 0.08 + k * 0.42, 0.4)
+    add(sfx, sad_trombone(), kk[1]["start"] + 0.3, 0.45)
+    add(sfx, noise(0.8, 0.5) * 0.4, kk[3]["start"] + 0.6, 0.5)   # petrol glug
+    add(sfx, engine(SPN["kick"]["vend"] - kk[4]["start"]), kk[4]["start"], 0.7)
+if "fork" in SPN:
+    fk = LS_("fork")
+    for k in range(4): add(sfx, TICK, fk[0]["start"] + 0.1 + k * 0.3, 0.45)
+    add(sfx, engine(SPN["fork"]["vend"] - fk[-1]["start"]), fk[-1]["start"], 0.7); add(sfx, CHIME, fk[-1]["start"] + 0.1, 0.5)
+if "briefing" in SPN:
+    bf = LS_("briefing"); add(sfx, kick(), bf[0]["start"] + 0.1, 0.4); add(sfx, beep(330, 0.3, 0.4), bf[1]["start"] + 0.05)
+    add(sfx, growl(1.0), bf[2]["start"] + 0.05, 1.0); add(sfx, CHIME, bf[-1]["start"] + 0.1, 0.4)
+for nm, g in (("montage", 0.7), ("rush", 0.7)):
+    if nm in SPN: add(sfx, engine(SPN[nm]["vend"] - SPN[nm]["vstart"]), SPN[nm]["vstart"], g)
+if "montage" in SPN:
+    for b_ in LS_("montage"): add(sfx, CHIME, b_["start"] + 0.45, 0.5)
+if "order3" in SPN:
+    o3 = LS_("order3"); add(sfx, beep(1200, 0.08, 0.5), o3[0]["start"] + 0.1); add(sfx, beep(1600, 0.1, 0.5), o3[0]["start"] + 0.25)
+    add(sfx, kick(), o3[1]["start"] + 1.6, 0.6)
+if "exam" in SPN:
+    ex = LS_("exam"); add(sfx, beep(880, 0.35, 0.5), ex[0]["start"] + 0.02); add(sfx, beep(700, 0.45, 0.5), ex[0]["start"] + 0.37)
+    add(sfx, kick(), ex[-1]["start"] + 0.05, 0.6)
+if "paper" in SPN:
+    pp = LS_("paper"); sp_ = SPN["paper"]
+    for k in range(int((sp_["vend"] - sp_["vstart"]) / 0.5)): add(sfx, TICK, sp_["vstart"] + k * 0.5, 0.35)
+    add(sfx, scratch(0.8), pp[0]["start"] + 0.1, 0.8); add(sfx, sad_trombone(), pp[1]["start"] + 0.2, 0.4)
+    add(sfx, scratch(0.9), pp[2]["start"] + 0.3, 0.8); add(sfx, kick(), pp[3]["start"] + 0.1, 1.0); add(sfx, CHIME, pp[3]["start"] + 0.2, 0.7)
+if "result" in SPN:
+    rs = LS_("result"); add(sfx, CHIME, rs[0]["start"] + 1.2, 0.5)
+    for k in range(3): add(sfx, beep(1500, 0.1, 0.45), rs[-1]["start"] + k * 0.2)
+if "rush" in SPN:
+    ru = LS_("rush"); add(sfx, growl(0.9), ru[2]["start"] + 0.05, 0.8); add(sfx, CHIME, ru[3]["start"] + 0.3, 0.7)
+if "end_kid" in SPN:
+    ek = LS_("end_kid"); add(sfx, TICK, ek[0]["start"] + 0.2, 0.5); add(sfx, TICK, ek[0]["start"] + 0.4, 0.5)
+    add(sfx, noise(0.35, 0.08), ek[2]["start"] + 1.0, 0.4); add(sfx, CHIME, ek[3]["start"] - 0.3, 0.6)
+if "cliff9" in SPN:
+    c9 = LS_("cliff9"); add(sfx, beep(1200, 0.08, 0.5), c9[0]["start"] + 0.05); add(sfx, beep(1600, 0.1, 0.5), c9[0]["start"] + 0.2)
+    add(sfx, kick(), c9[2]["start"] + 0.05, 0.8)
+    for k in range(6): add(sfx, TICK, c9[2]["start"] + 0.2 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
