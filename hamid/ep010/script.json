@@ -1,0 +1,300 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook10",
+  "dev": "ایک ہزار روپے… اور دو جگہ چاہئیں!",
+  "rom": "Ek hazaar rupay… aur do jagah chahiye!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن دس۔ جیب خالی… فارم کا آخری دن۔",
+  "rom": "Din das. Jeb khaali… form ka aakhri din."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "advance10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "advance10",
+  "dev": "سر… ہزار روپے ایڈوانس مل سکتے ہیں؟",
+  "rom": "Sir… hazaar rupay advance mil sakte hain?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "advance10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "advance10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bilal10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "bilal10",
+  "dev": "[excited] ہزار؟ آسان! میرے پاس ایک نئی اسکیم ہے…",
+  "rom": "Hazaar? Aasaan! Mere paas ek nayi scheme hai…"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "bilal10",
+  "dev": "بس! کوئی اسکیم نہیں!",
+  "rom": "Bas! Koi scheme nahi!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bilal10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "tips10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "tips10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "tips10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "call10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "call10",
+  "dev": "[worried] بیٹا… ابو کی دوائی ختم ہو گئی۔ ہزار کی آئے گی… تم پریشان مت ہونا۔",
+  "rom": "Beta… Abbu ki dawai khatam ho gayi. Hazaar ki aayegi… tum pareshan mat hona."
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "call10",
+  "dev": "آپ فکر نہ کریں امی… آج ہی بھیجتا ہوں۔",
+  "rom": "Aap fikar na karein Ammi… aaj hi bhejta hoon."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "call10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "call10",
+  "dev": "ایک ہزار نہیں… اب دو ہزار چاہئیں!",
+  "rom": "Ek hazaar nahi… ab do hazaar chahiye!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rauf10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "R",
+  "mode": "talk",
+  "scene": "rauf10",
+  "dev": "[shouting] رات کی شفٹ، پانچ سو! ایک کپ ٹوٹا تو پیسے کٹیں گے!",
+  "rom": "Raat ki shift, paanch sau! Ek cup toota toh paise katenge!"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "rauf10",
+  "dev": "منظور، سیٹھ جی!",
+  "rom": "Manzoor, Seth ji!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shift10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shift10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shift10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shift10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shift10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "R",
+  "mode": "talk",
+  "scene": "shift10",
+  "dev": "[surprised] واہ! یہ سو اوپر سے… کپ بچانے کا!",
+  "rom": "Waah! Yeh sau oopar se… cup bachane ka!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "choice10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "choice10",
+  "dev": "فارم یا ابو کی دوائی… ایک ہی ہزار ہے۔",
+  "rom": "Form ya Abbu ki dawai… ek hi hazaar hai."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "choice10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "choice10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "end10",
+  "dev": "فارم گیا… دوائی پہنچ گئی۔ آج بھی بچ گئے۔",
+  "rom": "Form gaya… dawai pohanch gayi. Aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end10",
+  "dur": 1.3,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff10",
+  "dev": "فارم بھر دیا؟ پر… شرط کیا ہے؟",
+  "rom": "Form bhar diya? Par… shart kya hai?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff10",
+  "dur": 1.2,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff10",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]

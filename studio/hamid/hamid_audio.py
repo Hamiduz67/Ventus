@@ -431,6 +431,46 @@ if "cliff9" in SPN:
     c9 = LS_("cliff9"); add(sfx, beep(1200, 0.08, 0.5), c9[0]["start"] + 0.05); add(sfx, beep(1600, 0.1, 0.5), c9[0]["start"] + 0.2)
     add(sfx, kick(), c9[2]["start"] + 0.05, 0.8)
     for k in range(6): add(sfx, TICK, c9[2]["start"] + 0.2 + k * 0.2, 0.4)
+# ---- Day 10+: phone rings, NO stamp, call cut, tips, Seth Rauf's hotel, cup flip, payment sent, form closed
+def ring(n_s):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return ((np.sin(2 * np.pi * 1300 * x) + np.sin(2 * np.pi * 1650 * x)) * ((x % 0.5) < 0.3) * 0.25).astype(np.float32)
+if "hook10" in SPN:
+    h10 = LS_("hook10"); add(sfx, kick(), h10[0]["start"] + 0.1, 0.6)
+    for k in range(4): add(sfx, TICK, h10[1]["start"] + k * 0.25, 0.4)
+if "advance10" in SPN:
+    a10 = LS_("advance10"); add(sfx, sad_trombone(), a10[2]["start"] + 0.2, 0.4); add(sfx, kick(), a10[3]["start"] + 0.2, 1.0)
+if "bilal10" in SPN:
+    b10 = LS_("bilal10"); add(sfx, ring(1.0), b10[0]["start"], 0.6)
+    add(sfx, beep(500, 0.12, 0.5), b10[3]["start"] + 0.15); add(sfx, beep(400, 0.18, 0.5), b10[3]["start"] + 0.3)
+if "tips10" in SPN:
+    add(sfx, engine(SPN["tips10"]["vend"] - SPN["tips10"]["vstart"]), SPN["tips10"]["vstart"], 0.6)
+    for b_ in LS_("tips10"): add(sfx, CHIME, b_["start"] + 0.2, 0.5)
+if "call10" in SPN:
+    c10 = LS_("call10"); add(sfx, ring(1.0), c10[0]["start"], 0.6)
+    for k in range(3): add(sfx, TICK, c10[3]["start"] + 0.1 + k * 0.25, 0.45)
+    add(sfx, kick(), c10[4]["start"] + 1.2, 0.6)
+if "rauf10" in SPN:
+    r10 = LS_("rauf10"); add(sfx, kick(), r10[1]["start"] + 0.05, 0.5); add(sfx, CHIME, r10[2]["start"] + 0.4, 0.5)
+if "shift10" in SPN:
+    s10 = LS_("shift10")
+    for k in range(6): add(sfx, TICK, s10[0]["start"] + k * 0.4, 0.35)
+    add(sfx, WHOOSH, s10[2]["start"], 0.8); add(sfx, sad_trombone(), s10[2]["start"] + 0.3, 0.3)
+    add(sfx, bell(), s10[3]["start"] + 0.35, 0.6); add(sfx, CHIME, s10[3]["start"] + 0.4, 0.6)
+    for k in range(6): add(sfx, noise(0.08, 0.02), s10[4]["start"] + k * 0.15, 0.4)   # claps
+    for k in range(4): add(sfx, TICK, s10[5]["start"] + 1.0 + k * 0.2, 0.4)
+if "choice10" in SPN:
+    ch10 = LS_("choice10")
+    for k in range(int((SPN["choice10"]["vend"] - SPN["choice10"]["vstart"]) / 0.5)): add(sfx, TICK, SPN["choice10"]["vstart"] + k * 0.5, 0.3)
+    add(sfx, beep(1200, 0.08, 0.5), ch10[2]["start"] + 0.45); add(sfx, CHIME, ch10[2]["start"] + 0.55, 0.6)
+    add(sfx, kick(), ch10[3]["start"] + 0.4, 1.0); add(sfx, sad_trombone(), ch10[3]["start"] + 0.5, 0.35)
+if "end10" in SPN:
+    e10 = LS_("end10"); add(sfx, beep(1200, 0.08, 0.4), e10[0]["start"] + 0.9); add(sfx, beep(1600, 0.08, 0.4), e10[0]["start"] + 1.0)
+    add(sfx, CHIME, e10[1]["start"] - 0.4, 0.6)
+if "cliff10" in SPN:
+    cl10 = LS_("cliff10"); add(sfx, beep(1200, 0.08, 0.5), cl10[0]["start"] + 0.05); add(sfx, beep(1600, 0.1, 0.5), cl10[0]["start"] + 0.2)
+    add(sfx, kick(), cl10[2]["start"] + 0.05, 0.8)
+    for k in range(5): add(sfx, TICK, cl10[2]["start"] + 0.2 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
