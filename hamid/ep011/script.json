@@ -1,0 +1,340 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook11",
+  "dev": "نوے سے کم آئے… تو ہزار کا قرضہ!",
+  "rom": "Nabbe se kam aaye… toh hazaar ka qarza!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن گیارہ۔ جیب میں چالیس… اور ایک شرط۔",
+  "rom": "Din gyarah. Jeb mein chaalees… aur ek shart."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shart11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shart11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "shart11",
+  "dev": "منظور ہے سر… نوے سے اوپر لاؤں گا!",
+  "rom": "Manzoor hai sir… nabbe se oopar laoonga!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "shart11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "sleep11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "sleep11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "R",
+  "mode": "talk",
+  "scene": "sleep11",
+  "dev": "[shouting] او حامد! آٹھ بج گئے… تیرا امتحان!",
+  "rom": "O Hamid! Aath baj gaye… tera imtihaan!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "sleep11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "G",
+  "mode": "talk",
+  "scene": "ghafoor11",
+  "dev": "[angry] پہلے ساڑھے چار سو جرمانہ… پھر بائیک!",
+  "rom": "Pehle saadhe chaar sau jurmana… phir bike!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bus11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bus11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "bus11",
+  "dev": "[warm] بیٹا، امتحان اچھا دینا… دعا کر رہی ہوں۔",
+  "rom": "Beta, imtihaan achha dena… dua kar rahi hoon."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bus11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "bus11",
+  "dev": "بس رینگ رہی تھی… میں بھاگا!",
+  "rom": "Bus reng rahi thi… main bhaaga!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "bus11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "gate11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "gate11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "gate11",
+  "dev": "پرنٹ؟ میرے پاس صرف دس روپے ہیں!",
+  "rom": "Print? Mere paas sirf das rupay hain!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "gate11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kid11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kid11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "kid11",
+  "dev": "وہی بچہ… جسے آدھا بسکٹ دیا تھا!",
+  "rom": "Wohi bacha… jise aadha biscuit diya tha!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "kid11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hall11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hall11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hall11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hall11",
+  "dev": "بجلی گئی… پر قلم نہیں رکا۔",
+  "rom": "Bijli gayi… par qalam nahi ruka."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hall11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hall11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "end11",
+  "dev": "[warm] کیسا گیا بیٹا؟",
+  "rom": "Kaisa gaya beta?"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "end11",
+  "dev": "سر… پوری جان لگا دی!",
+  "rom": "Sir… poori jaan laga di!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "end11",
+  "dev": "آج بھی بچ گئے۔",
+  "rom": "Aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "end11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff11",
+  "dev": "ایک نمبر کم… اب ہزار کا قرضہ؟",
+  "rom": "Ek number kam… ab hazaar ka qarza?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff11",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff11",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]

@@ -471,6 +471,49 @@ if "cliff10" in SPN:
     cl10 = LS_("cliff10"); add(sfx, beep(1200, 0.08, 0.5), cl10[0]["start"] + 0.05); add(sfx, beep(1600, 0.1, 0.5), cl10[0]["start"] + 0.2)
     add(sfx, kick(), cl10[2]["start"] + 0.05, 0.8)
     for k in range(5): add(sfx, TICK, cl10[2]["start"] + 0.2 + k * 0.2, 0.4)
+# ---- Day 11+: shart text, snooze + shout, no bike, city bus + jam honks, run, gate whistle, coin, exam hall blackout, bell, result
+def honk(n_s=0.35):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return (np.sign(np.sin(2 * np.pi * 420 * x)) * 0.18 * np.exp(-x * 2)).astype(np.float32)
+if "hook11" in SPN:
+    h11 = LS_("hook11"); add(sfx, kick(), h11[0]["start"] + 0.1, 0.6); add(sfx, kick(), h11[1]["start"] + 0.05, 1.0)
+if "shart11" in SPN:
+    s11 = LS_("shart11"); add(sfx, beep(1200, 0.08, 0.5), s11[0]["start"] + 0.05); add(sfx, beep(1600, 0.1, 0.5), s11[0]["start"] + 0.2)
+    add(sfx, kick(), s11[1]["start"] + 0.05, 0.7); add(sfx, CHIME, s11[2]["end"] - 0.2, 0.5)
+if "sleep11" in SPN:
+    z11 = LS_("sleep11"); add(sfx, snore(2.4), z11[0]["start"] + 0.1, 0.6)
+    for k in range(10): add(sfx, TICK, z11[1]["start"] + k * 0.11, 0.4)
+    add(sfx, kick(), z11[2]["start"], 0.8); add(sfx, WHOOSH, z11[3]["start"] + 0.5, 0.7)
+if "ghafoor11" in SPN:
+    g11 = LS_("ghafoor11")
+    for k in range(4): add(sfx, noise(0.05, 0.01), g11[0]["start"] + k * 0.15, 0.5)
+    add(sfx, kick(), g11[2]["start"] + 0.45, 1.0); add(sfx, sad_trombone(), g11[2]["start"] + 0.55, 0.35)
+if "bus11" in SPN:
+    u11 = LS_("bus11"); sp_ = SPN["bus11"]
+    add(sfx, engine(u11[3]["start"] - sp_["vstart"]), sp_["vstart"], 0.6)
+    for k in range(3): add(sfx, TICK, u11[0]["start"] + 0.5 + k * 0.15, 0.45)
+    add(sfx, beep(1200, 0.08, 0.4), u11[2]["start"] - 0.2)
+    for k in range(3): add(sfx, honk(), u11[3]["start"] + k * 0.35, 0.8)
+    for k in range(int((sp_["vend"] - u11[5]["start"]) / 0.18)): add(sfx, noise(0.04, 0.01), u11[5]["start"] + k * 0.18, 0.45)
+if "gate11" in SPN:
+    q11 = LS_("gate11"); add(sfx, whistle(0.6), q11[0]["start"] + 0.2, 0.6)
+    for k in range(6): add(sfx, TICK, q11[3]["start"] + k * 0.2, 0.45)
+if "kid11" in SPN:
+    k11 = LS_("kid11"); add(sfx, bell(), k11[1]["start"] + 0.5, 0.5); add(sfx, CHIME, k11[2]["start"] + 1.2, 0.5)
+    add(sfx, kick(), k11[3]["start"] + 0.3, 0.6); add(sfx, CHIME, k11[3]["start"] + 0.35, 0.6)
+if "hall11" in SPN:
+    l11 = LS_("hall11"); sp_ = SPN["hall11"]
+    add(sfx, hum(l11[2]["start"] - sp_["vstart"], 60) * 0.5, sp_["vstart"], 0.4)
+    for k in range(int((sp_["vend"] - sp_["vstart"]) / 0.5)): add(sfx, TICK, sp_["vstart"] + k * 0.5, 0.25)
+    for k in range(5): add(sfx, scratch(0.2), l11[1]["start"] + k * 0.25, 0.4)
+    add(sfx, kick(), l11[2]["start"], 1.0); add(sfx, sad_trombone(), l11[2]["start"] + 0.15, 0.35)
+    add(sfx, bell(), l11[5]["start"] + 0.05, 0.8)
+if "end11" in SPN:
+    e11 = LS_("end11"); add(sfx, CHIME, e11[3]["start"] - 0.2, 0.6)
+if "cliff11" in SPN:
+    c11 = LS_("cliff11"); add(sfx, noise(0.25, 0.06), c11[0]["start"] + 0.1, 0.4)
+    add(sfx, kick(), c11[1]["start"] + 0.05, 1.0)
+    for k in range(5): add(sfx, TICK, c11[1]["start"] + 0.2 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
