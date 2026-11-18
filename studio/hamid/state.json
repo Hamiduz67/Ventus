@@ -185,11 +185,32 @@
    "metricool_id": 428736944,
    "elevenlabs_chars": 288,
    "note": "Landscape layout: each day's reel (cut before its follow ending) at 1080 high + styled side panel; new title/opening/bridge/closing/end cards (studio/hamid/hamid_render_wide.py)."
+  },
+  {
+   "n": 2,
+   "title": "Hafta 2: Karachi Ka Imtihaan",
+   "days": [
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "mode": "long",
+   "file": "hamid/weekly/w02/Hamid_Hafta02.mp4",
+   "thumbnail": "hamid/weekly/w02/thumbnail.jpg",
+   "length_s": 417.7,
+   "posted_at": "2026-11-18 19:00 Asia/Dubai",
+   "platform": "youtube (video) via Metricool",
+   "metricool_id": 432599811,
+   "elevenlabs_chars": 289,
+   "note": "Each reel cut from after its day card to before the outro, played at 1.08x to fit 7:00; hamid_render_wide.py now reads week text/days/start/speed from week.json. Custom thumbnail attached via videoThumbnailUrl."
   }
  ],
  "metricool": {
   "month": "2026-11",
-  "used": 19,
+  "used": 20,
   "limit": 20,
   "note": "Free plan: 20 posts/month, resets monthly. Only weekly LONG videos use it."
  }
