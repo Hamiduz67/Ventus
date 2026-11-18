@@ -1,0 +1,309 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook12",
+  "dev": "ایک نمبر کم… اور ہزار کا قرضہ!",
+  "rom": "Ek number kam… aur hazaar ka qarza!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "hook12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن بارہ۔ جیب خالی… قرضہ ہزار۔",
+  "rom": "Din baarah. Jeb khaali… qarza hazaar."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "msg12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "msg12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "msg12",
+  "dev": "ایک طرف قرضہ… ایک طرف نوکری!",
+  "rom": "Ek taraf qarza… ek taraf naukri!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "msg12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rauf12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "R",
+  "mode": "talk",
+  "scene": "rauf12",
+  "dev": "[gruff] دن کی شفٹ، پانچ سو۔ کچھ ٹوٹا تو پیسے کٹیں گے!",
+  "rom": "Din ki shift, paanch sau. Kuch toota toh paise katenge!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rauf12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rauf12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "rauf12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "chase12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "R",
+  "mode": "talk",
+  "scene": "chase12",
+  "dev": "[shouting] تیری میز تھی! تین سو تیرے کٹیں گے!",
+  "rom": "Teri mez thi! Teen sau tere katenge!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "chase12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "chase12",
+  "dev": "تین سو کے لیے… پورا بازار بھاگا!",
+  "rom": "Teen sau ke liye… poora bazaar bhaaga!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "chase12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "chase12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "chase12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "chase12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "paid12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "paid12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "saleem12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "saleem12",
+  "dev": "سر، ابھی ساڑھے پانچ سو… باقی جلد دوں گا۔",
+  "rom": "Sir, abhi saadhe paanch sau… baaki jald doonga."
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "saleem12",
+  "dev": "[warm] پیسے رکھو۔ قرضہ ایسے اتارو… محلے کے بچوں کو پڑھاؤ۔",
+  "rom": "Paise rakho. Qarza aise utaaro… mohalle ke bachon ko parhao."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "saleem12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "saleem12",
+  "dev": "قرضہ… کام سے اترے گا!",
+  "rom": "Qarza… kaam se utrega!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "saleem12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "G",
+  "mode": "talk",
+  "scene": "ghafoor12",
+  "dev": "[grumpy] چلو… لے جاؤ بائیک! پر کرایہ روز!",
+  "rom": "Chalo… le jao bike! Par kiraya roz!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "ghafoor12",
+  "dev": "آج بھی بچ گئے۔",
+  "rom": "Aaj bhi bach gaye."
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "ghafoor12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "cliff12",
+  "dev": "[warm] بیٹا، رزلٹ کیا آیا؟",
+  "rom": "Beta, result kya aaya?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff12",
+  "dev": "نتیجہ بدل گیا… پر کس طرف؟",
+  "rom": "Natija badal gaya… par kis taraf?"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff12",
+  "dur": 1.6,
+  "dev": "",
+  "rom": ""
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff12",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]

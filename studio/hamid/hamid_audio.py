@@ -514,6 +514,35 @@ if "cliff11" in SPN:
     c11 = LS_("cliff11"); add(sfx, noise(0.25, 0.06), c11[0]["start"] + 0.1, 0.4)
     add(sfx, kick(), c11[1]["start"] + 0.05, 1.0)
     for k in range(5): add(sfx, TICK, c11[1]["start"] + 0.2 + k * 0.2, 0.4)
+# ---- Day 12: result shock, two texts, lunch rush, runaway customer + chase (goat, chappal), paid, deal, keys, recheck call
+if "hook12" in SPN:
+    h12 = LS_("hook12"); add(sfx, kick(), h12[0]["start"] + 0.1, 0.6); add(sfx, kick(), h12[1]["start"] + 0.05, 1.0)
+if "msg12" in SPN:
+    m12 = LS_("msg12")
+    for j in (0, 1): add(sfx, beep(1200, 0.08, 0.5), m12[j]["start"] + 0.05); add(sfx, beep(1600, 0.1, 0.5), m12[j]["start"] + 0.2)
+    for k in range(3): add(sfx, TICK, m12[3]["start"] + 0.1 + k * 0.25, 0.45)
+    add(sfx, kick(), m12[3]["start"] + 0.55, 0.7)
+if "rauf12" in SPN:
+    r12 = LS_("rauf12"); add(sfx, kick(), r12[2]["start"], 0.6)
+    for k in range(6): add(sfx, noise(0.04, 0.01), r12[3]["start"] + k * 0.18, 0.4)
+    add(sfx, CHIME, r12[4]["start"] + 0.1, 0.4)
+if "chase12" in SPN:
+    c12 = LS_("chase12"); sp_ = SPN["chase12"]
+    add(sfx, WHOOSH, c12[0]["start"] + 0.5, 0.7); add(sfx, kick(), c12[2]["start"], 0.8)
+    for k in range(int((c12[6]["start"] - c12[2]["start"]) / 0.18)): add(sfx, noise(0.04, 0.01), c12[2]["start"] + k * 0.18, 0.45)
+    add(sfx, WHOOSH, c12[4]["start"] + 0.35, 0.8); add(sfx, WHOOSH, c12[5]["start"], 0.6); add(sfx, sad_trombone(), c12[5]["start"] + 0.3, 0.3)
+    add(sfx, CHIME, c12[7]["start"] + 0.3, 0.6)
+if "paid12" in SPN:
+    p12 = LS_("paid12"); add(sfx, CHIME, p12[0]["start"] + 0.1, 0.5)
+if "saleem12" in SPN:
+    s12 = LS_("saleem12"); add(sfx, kick(), s12[3]["start"], 0.6); add(sfx, CHIME, s12[3]["start"] + 0.3, 0.6)
+if "ghafoor12" in SPN:
+    g12 = LS_("ghafoor12"); add(sfx, kick(), g12[0]["start"] + 0.9, 0.7); add(sfx, bell(), g12[1]["start"] + 0.3, 0.4)
+    add(sfx, engine(g12[3]["start"] - g12[2]["start"]), g12[2]["start"], 0.5); add(sfx, CHIME, g12[3]["start"] - 0.2, 0.6)
+if "cliff12" in SPN:
+    q12 = LS_("cliff12"); add(sfx, beep(1200, 0.08, 0.4), q12[1]["start"] - 0.2); add(sfx, kick(), q12[2]["start"] + 0.6, 0.5)
+    add(sfx, ring(1.2), q12[3]["start"], 0.6); add(sfx, kick(), q12[4]["start"] + 0.05, 1.0)
+    for k in range(5): add(sfx, TICK, q12[4]["start"] + 0.2 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
