@@ -7,7 +7,8 @@ Usage:
                           [--thumb-url <public thumb.jpg url>] [--thumb-ms 20]
   Cover/thumbnail (owner, 2026-11-18): hamid_render.py puts the designed thumbnail in the video's first frames, and
   --thumb-ms (default 20 ms) points Buffer's thumbnailOffset there (Instagram Reel cover + TikTok cover).
-  --thumb-url is also sent as the video's thumbnailUrl; if Buffer rejects it, the post is retried without it.
+  --thumb-url is also sent as thumbnailUrl; Buffer rejects it (2026-11-18), so the retry drops it but KEEPS thumbnailOffset
+  (YouTube: retried with no thumbnail fields). Passing --thumb-url is optional.
   buffer_post.py status   [--since-hours 24]      # list recent posts and their status
   buffer_post.py delete   --ids <id1,id2,...>     # remove queued posts (e.g. to replace a re-cut episode)
 Key: env BUFFER_API_KEY, else ~/.secrets/buffer_key. Never commit the key (the repo is public)."""
@@ -52,8 +53,10 @@ def schedule(a):
         res = d["createPost"] if d else {"message": "GraphQL error"}
         if "post" not in res and (a.thumb_url or "metadata" in video):   # retry without the thumbnail fields
             print(svc, "thumbnail fields rejected (", res.get("message"), ") - retrying without them")
-            inp["assets"] = [{"video": {"url": a.url}}]
-            res = gql(CREATE, {"input": inp})["createPost"]
+            inp["assets"] = [{"video": {k: v for k, v in video.items() if k != "thumbnailUrl"}}]   # keep thumbnailOffset
+            d = gql(CREATE, {"input": inp}, soft=True); res = d["createPost"] if d else {"message": "GraphQL error"}
+            if "post" not in res and svc == "youtube":   # YouTube takes no thumbnail fields at all
+                inp["assets"] = [{"video": {"url": a.url}}]; res = gql(CREATE, {"input": inp})["createPost"]
         if "post" in res: print(svc, "scheduled", res["post"]["id"], res["post"]["status"], res["post"]["dueAt"])
         else: print(svc, "FAILED:", res.get("message")); ok = False
     sys.exit(0 if ok else 2)

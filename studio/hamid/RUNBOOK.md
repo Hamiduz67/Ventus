@@ -33,7 +33,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
    (https://raw.githubusercontent.com/Hamiduz67/Ventus/<sha>/hamid/epNNN/Hamid_DayNN.mp4 and …/thumb.jpg) and confirm HTTP 200 for both.
    Save the Buffer key from the task prompt to `~/.secrets/buffer_key` (chmod 600), then:
    `python3 studio/hamid/buffer_post.py schedule --url <raw url> --caption "<caption>" --title "Day N: <hook> | Hamid: Zero Se Shuru #shorts" --tiktok-title "Hamid: Zero Se Shuru — Day N" --at "YYYY-MM-DD HH:MM" --thumb-url <raw thumb.jpg url>`
-   (thumbnailOffset 20 ms = the thumbnail frames → Instagram Reel cover + TikTok cover; thumbnailUrl is sent too and dropped automatically if Buffer rejects it.
+   (thumbnailOffset 20 ms = the thumbnail frames → Instagram Reel cover + TikTok cover. Buffer REJECTS thumbnailUrl (2026-11-18): --thumb-url is optional; the retry drops it but keeps thumbnailOffset.
    YouTube Shorts: Buffer/YouTube give no custom-thumbnail control for Shorts; YouTube picks the frame itself.)
    (time is Asia/Dubai: today 13:00 or 20:00 = the run's slot). This posts to YouTube Shorts + TikTok + Instagram Reel.
    Facebook gets the Reel automatically through Instagram's "share Reels to Facebook" setting — nothing to do.
