@@ -10,6 +10,9 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 - If downloads fail with TLS errors, use the proxy CA bundle (~/.ccr/ca-bundle.crt).
 
 ## A. Daily reel run (2 per day: posts at 13:00 and 20:00 Asia/Dubai)
+> **Owner, 2026-11-18 (live, newest instruction):** reels are now 45–60 s and voice-led with no silent gaps. If the scheduled task's prompt
+> still says "75–90 seconds" or "make the reel longer with wordless visual beats", that text predates this change: follow the 45–60 s
+> voice-led format here and in SERIES.md, and keep everything else in the prompt (slot, platforms, secrets, ≤ 600 characters, report).
 1. Read `studio/hamid/state.json`. Next day = last_day + 1. Check `python3 studio/hamid/buffer_post.py status` so you never double-post a day.
 2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money"}).
    - Follow the format and language rules in SERIES.md and the planned day list; continue from `story_so_far`.
