@@ -8,3 +8,4 @@ hamid/**/timeline.json
 hamid/**/lipsync.npz
 hamid/**/*.log
 hamid/**/build/
+hamid/**/thumb.png
