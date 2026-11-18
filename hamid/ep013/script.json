@@ -1,0 +1,147 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook13",
+  "dev": "نوے پرسنٹ! اسکالرشپ پکی… بس ایک کاغذ کم!",
+  "rom": "Nabbe percent! Scholarship pakki… bas ek kaghaz kam!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن تیرہ۔ جیب میں سو روپے۔",
+  "rom": "Din terah. Jeb mein sau rupay."
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "office13",
+  "dev": "[happy] مبارک ہو! کل پانچ بجے تک اصل سرٹیفکیٹ لاؤ۔",
+  "rom": "Mubarak ho! Kal paanch baje tak asal certificate lao."
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "office13",
+  "dev": "اصل سرٹیفکیٹ؟ وہ تو لاہور میں ہے!",
+  "rom": "Asal certificate? Woh toh Lahore mein hai!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "office13",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "tuition13",
+  "dev": "شام کو پہلی ٹیوشن… دس بچے، اتنا شور!",
+  "rom": "Shaam ko pehli tuition… das bachay, itna shor!"
+ },
+ {
+  "who": "A",
+  "mode": "talk",
+  "scene": "tuition13",
+  "dev": "[worried] بیٹا، کوریئر تو تین دن لے گا!",
+  "rom": "Beta, courier toh teen din lega!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "tuition13",
+  "dev": "تین دن؟ میرے پاس ایک دن ہے!",
+  "rom": "Teen din? Mere paas ek din hai!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "tuition13",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "bilal13",
+  "dev": "[excited] سکیم ہے! میرا کزن رات والی بس کا کنڈکٹر ہے!",
+  "rom": "Scheme hai! Mera cousin raat wali bus ka conductor hai!"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "bilal13",
+  "dev": "تیری سکیم؟ پچھلی بار ڈمی فون نکلے تھے!",
+  "rom": "Teri scheme? Pichli baar dummy phone niklay thay!"
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "bilal13",
+  "dev": "[laughs] اس بار پکا! بس سو روپے چائے پانی۔",
+  "rom": "Is baar pakka! Bas sau rupay chai-paani."
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "adda13",
+  "dev": "اگلے دن… بس ایک گھنٹہ لیٹ!",
+  "rom": "Agle din… bus ek ghanta late!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "adda13",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "adda13",
+  "dev": "لفافہ ملا! اب فل سپیڈ!",
+  "rom": "Lifafa mila! Ab full speed!"
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "cliff13",
+  "dev": "[surprised] چار بج کر انسٹھ! بالکل وقت پر!",
+  "rom": "Chaar baj kar unsath! Bilkul waqt par!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff13",
+  "dev": "لفافہ کھولا… اندر سرٹیفکیٹ نہیں!",
+  "rom": "Lifafa khola… andar certificate nahi!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "cliff13",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff13",
+  "dev": "یہ تو… بلال کا ڈمی فون ہے!",
+  "rom": "Yeh toh… Bilal ka dummy phone hai!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff13",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]

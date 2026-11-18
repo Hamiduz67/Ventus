@@ -557,6 +557,31 @@ if "cliff12" in SPN:
     q12 = LS_("cliff12"); add(sfx, beep(1200, 0.08, 0.4), q12[1]["start"] - 0.2); add(sfx, kick(), q12[2]["start"] + 0.6, 0.5)
     add(sfx, ring(1.2), q12[3]["start"], 0.6); add(sfx, kick(), q12[4]["start"] + 0.05, 1.0)
     for k in range(5): add(sfx, TICK, q12[4]["start"] + 0.2 + k * 0.2, 0.4)
+# ---- Day 13: 90% chime, deadline stamp + ticks, tuition chaos + paper plane, video call, bus horn, ride, dummy phone reveal
+if "hook13" in SPN:
+    h13 = LS_("hook13"); add(sfx, beep(1200, 0.08, 0.5), h13[0]["start"] + 0.02); add(sfx, CHIME, h13[0]["start"] + 0.3, 0.6)
+    add(sfx, kick(), h13[0]["start"] + 2.3, 0.9)
+if "office13" in SPN:
+    o13 = LS_("office13"); add(sfx, CHIME, o13[0]["start"] + 0.1, 0.4); add(sfx, kick(), o13[1]["start"] + 0.05, 0.7)
+    add(sfx, kick(), o13[2]["start"], 1.0)
+    for k in range(4): add(sfx, TICK, o13[2]["start"] + 0.1 + k * 0.15, 0.45)
+if "tuition13" in SPN:
+    u13 = LS_("tuition13"); sp_ = SPN["tuition13"]
+    for k in range(int((u13[1]["start"] - sp_["vstart"]) / 0.22)): add(sfx, noise(0.05, 0.015), sp_["vstart"] + k * 0.22, 0.35)
+    add(sfx, ring(0.6), u13[1]["start"] - 0.3, 0.4)
+    add(sfx, WHOOSH, u13[3]["start"], 0.6); add(sfx, kick(), u13[3]["start"] + 0.35, 0.8)
+if "bilal13" in SPN:
+    b13 = LS_("bilal13"); add(sfx, beep(1000, 0.1, 0.4), b13[0]["start"] - 0.15); add(sfx, kick(), b13[1]["start"] + 1.0, 0.6)
+    add(sfx, CHIME, b13[2]["start"] + 1.3, 0.4)
+if "adda13" in SPN:
+    a13 = LS_("adda13")
+    for k in range(6): add(sfx, TICK, a13[0]["start"] + 0.2 + k * 0.35, 0.35)
+    add(sfx, honk(0.5), a13[1]["start"], 0.9); add(sfx, honk(0.3), a13[1]["start"] + 0.35, 0.8)
+    add(sfx, CHIME, a13[2]["start"] + 0.1, 0.5); add(sfx, engine(a13[2]["end"] - a13[2]["start"] + 0.2), a13[2]["start"] + 0.6, 0.6)
+if "cliff13" in SPN:
+    c13 = LS_("cliff13"); add(sfx, bell(), c13[0]["start"] + 0.1, 0.5); add(sfx, noise(0.3, 0.08), c13[1]["start"] + 0.5, 0.5)
+    add(sfx, kick(), c13[2]["start"], 1.0); add(sfx, sad_trombone(), c13[2]["start"] + 0.15, 0.35)
+    for k in range(5): add(sfx, TICK, c13[3]["end"] - 0.2 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
