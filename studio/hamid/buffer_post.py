@@ -4,6 +4,10 @@
 Usage:
   buffer_post.py schedule --url <public mp4 url> --caption "<text>" --title "<YouTube title>" \
                           --tiktok-title "<short title>" --at "2026-11-15 13:00" [--channels youtube,tiktok,instagram]
+                          [--thumb-url <public thumb.jpg url>] [--thumb-ms 20]
+  Cover/thumbnail (owner, 2026-11-18): hamid_render.py puts the designed thumbnail in the video's first frames, and
+  --thumb-ms (default 20 ms) points Buffer's thumbnailOffset there (Instagram Reel cover + TikTok cover).
+  --thumb-url is also sent as the video's thumbnailUrl; if Buffer rejects it, the post is retried without it.
   buffer_post.py status   [--since-hours 24]      # list recent posts and their status
   buffer_post.py delete   --ids <id1,id2,...>     # remove queued posts (e.g. to replace a re-cut episode)
 Key: env BUFFER_API_KEY, else ~/.secrets/buffer_key. Never commit the key (the repo is public)."""
@@ -14,12 +18,15 @@ ORG = "6af7ea36a17764d6a490fc9f"
 CHANNELS = {"tiktok": "6af7eb8162b70b94b0276170", "youtube": "6af7eb0862b70b94b0274f19", "instagram": "6af7ead262b70b94b027458d"}
 DUBAI = dt.timezone(dt.timedelta(hours=4))
 
-def gql(query, variables=None):
+def gql(query, variables=None, soft=False):
     r = subprocess.run(["curl", "-sS", "-m", "180", "https://api.buffer.com", "-H", "Authorization: Bearer " + KEY,
                         "-H", "Content-Type: application/json", "-d", json.dumps({"query": query, "variables": variables or {}})],
                        capture_output=True, text=True)
     out = json.loads(r.stdout)
-    if out.get("errors"): print("GraphQL errors:", json.dumps(out["errors"])[:800]); sys.exit(1)
+    if out.get("errors"):
+        print("GraphQL errors:", json.dumps(out["errors"])[:800])
+        if soft: return None
+        sys.exit(1)
     return out["data"]
 
 CREATE = """mutation C($input: CreatePostInput!) { createPost(input: $input) {
@@ -35,10 +42,18 @@ def schedule(a):
             "instagram": {"instagram": {"type": "reel", "shouldShareToFeed": True, "isAiGenerated": True}}}
     ok = True
     for svc in a.channels.split(","):
-        inp = {"channelId": CHANNELS[svc], "text": a.caption, "assets": [{"video": {"url": a.url}}], "metadata": meta[svc],
+        video = {"url": a.url}
+        if a.thumb_ms is not None and a.thumb_ms >= 0: video["metadata"] = {"thumbnailOffset": a.thumb_ms}
+        if a.thumb_url: video["thumbnailUrl"] = a.thumb_url
+        inp = {"channelId": CHANNELS[svc], "text": a.caption, "assets": [{"video": video}], "metadata": meta[svc],
                "schedulingType": "automatic", "mode": "customScheduled", "dueAt": due.strftime("%Y-%m-%dT%H:%M:%SZ"),
                "needsApproval": False}
-        res = gql(CREATE, {"input": inp})["createPost"]
+        d = gql(CREATE, {"input": inp}, soft=True)
+        res = d["createPost"] if d else {"message": "GraphQL error"}
+        if "post" not in res and (a.thumb_url or "metadata" in video):   # retry without the thumbnail fields
+            print(svc, "thumbnail fields rejected (", res.get("message"), ") - retrying without them")
+            inp["assets"] = [{"video": {"url": a.url}}]
+            res = gql(CREATE, {"input": inp})["createPost"]
         if "post" in res: print(svc, "scheduled", res["post"]["id"], res["post"]["status"], res["post"]["dueAt"])
         else: print(svc, "FAILED:", res.get("message")); ok = False
     sys.exit(0 if ok else 2)
@@ -64,6 +79,7 @@ p = argparse.ArgumentParser(); sub = p.add_subparsers(dest="cmd", required=True)
 s = sub.add_parser("schedule"); s.add_argument("--url", required=True); s.add_argument("--caption", required=True)
 s.add_argument("--title", required=True); s.add_argument("--tiktok-title"); s.add_argument("--at", required=True)
 s.add_argument("--channels", default="youtube,tiktok,instagram")
+s.add_argument("--thumb-url"); s.add_argument("--thumb-ms", type=int, default=20)
 st = sub.add_parser("status"); st.add_argument("--since-hours", type=int, default=24)
 dl = sub.add_parser("delete"); dl.add_argument("--ids", required=True)
 a = p.parse_args(); {"schedule": schedule, "status": status, "delete": delete}[a.cmd](a)

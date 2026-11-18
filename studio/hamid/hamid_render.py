@@ -3200,7 +3200,7 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook11": sc_hook11, "shart11": sc_shart11, "sleep11": sc_sleep11, "ghafoor11": sc_ghafoor11, "bus11": sc_bus11, "gate11": sc_gate11,
       "kid11": sc_kid11, "hall11": sc_hall11, "end11": sc_end11, "cliff11": sc_cliff11}
 
-def frame(t):
+def frame(t, plain=False):
     s = next((x for x in SCENES if x["vstart"] <= t < x["vend"]), SCENES[-1])
     lt = t - s["vstart"]
     img = Image.new("RGBA", (W, H), (0, 0, 0, 255))
@@ -3213,17 +3213,76 @@ def frame(t):
     # scene fade from black
     if lt < 0.25 and s is not SCENES[0]:
         img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * (1 - lt / 0.25)))))
+    if plain: return img.convert("RGB")
     outro(img, t); hud(img, t); caption(img, t)
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([80, 1868, W - 80, 1878], radius=5, fill=(70, 70, 90)); d.rounded_rectangle([80, 1868, 80 + (W - 160) * t / TOTAL, 1878], radius=5, fill=YEL)
     return img.convert("RGB")
 
+# ======================= THUMBNAIL / COVER (owner, 2026-11-18: an eye-catching suspense thumbnail on every reel)
+# meta.json "thumb": {"t": <seconds: the scene behind it>, "l1": "<white line>", "l2": "<big yellow line>",
+#                     "emoji": "<the object of the suspense>", "tag": "<short red label, e.g. Rs 1,000>", "mood": "shock"}
+# Writes thumb.png (1080x1920) + thumb.jpg, and the full render starts with THUMB_FRAMES frames of it, so the
+# platforms' cover frame (Buffer thumbnailOffset ~0 ms on Instagram + TikTok) shows the thumbnail.
+THUMB_FRAMES = 2
+def fit_text(txt, size, color, glow, maxw=1000):
+    while size > 60:
+        im = glow_text(txt, "Anton-Regular.ttf", size, color, glow)
+        if im.width - 80 <= maxw: return im
+        size -= 8
+    return glow_text(txt, "Anton-Regular.ttf", size, color, glow)
+def make_thumb():
+    th = META.get("thumb", {})
+    t = float(th.get("t", LINES[0]["start"] + 0.8))
+    bg = frame(t, plain=True).convert("RGBA").filter(ImageFilter.GaussianBlur(4))
+    img = Image.new("RGBA", (W, H)); img.alpha_composite(bg)
+    img.alpha_composite(Image.new("RGBA", (W, H), (10, 6, 20, 120)))
+    vg = Image.new("L", (W, H), 0); ImageDraw.Draw(vg).ellipse([-260, 140, W + 260, H - 140], fill=255)
+    vg = vg.filter(ImageFilter.GaussianBlur(160)); red = Image.new("RGBA", (W, H), (150, 10, 30, 230)); red.putalpha(vg.point(lambda v: 230 - int(v * 0.9)))
+    img.alpha_composite(red)
+    # series + day badge (inside the 4:5 / 3:4 grid-crop safe zone)
+    paste_c(img, pill(f"DAY {META['day']}", 64, YEL), W / 2, 330, 1.0, rot=-3)
+    paste_c(img, text_img("HAMID: ZERO SE SHURU", "Poppins-Black.ttf", 40, WHITE, 5, INK), W / 2, 430, 1.0)
+    # the object of the suspense, ringed in red
+    ex, ey = 790, 790
+    ring = Image.new("RGBA", (420, 420), (0, 0, 0, 0)); rd = ImageDraw.Draw(ring)
+    rd.ellipse([10, 10, 410, 410], fill=(255, 255, 255, 40), outline=RED, width=18)
+    paste_c(img, ring, ex, ey, 1.0)
+    if th.get("emoji"): paste_c(img, emoji(th["emoji"], 230), ex, ey, 1.0, rot=-8)
+    if th.get("tag"): paste_c(img, pill(th["tag"], 58, RED, WHITE), ex, ey + 250, 1.0, rot=4)
+    paste_c(img, glow_text("?", "Anton-Regular.ttf", 200, YEL, (230, 60, 70)), ex + 200, ey - 190, 1.0, rot=12)
+    # Hamid's big shocked face with a white rim
+    mood = th.get("mood", "shock")
+    hd = head("H", {"shock": "wide", "sad": "down", "happy": "happy", "det": "open"}.get(mood, "wide"),
+              {"shock": 3, "sad": "sad", "happy": 0, "det": 1}.get(mood, 3), {"shock": "up", "sad": "sad", "happy": "up", "det": "angry"}.get(mood, "up"))
+    hd = hd.resize((hd.width * 2, hd.height * 2), Image.LANCZOS)
+    rim = Image.new("RGBA", (hd.width + 60, hd.height + 60), (0, 0, 0, 0)); a = hd.getchannel("A").point(lambda v: 255 if v > 20 else 0)
+    big = Image.new("L", rim.size, 0); big.paste(a, (30, 30)); big = big.filter(ImageFilter.MaxFilter(25)).filter(ImageFilter.GaussianBlur(3))
+    rim.paste(Image.new("RGBA", rim.size, WHITE), (0, 0), big)
+    sk = Image.new("RGBA", hd.size, SKIN["H"] + (255,)); sk.putalpha(hd.getchannel("A").point(lambda v: 255 if v > 100 else 0))
+    rim.alpha_composite(sk, (30, 30)); rim.alpha_composite(hd, (30, 30))   # opaque skin under the semi-transparent stubble
+    paste_c(img, rim, 330, 900, 1.0, rot=6)
+    # sweat drops / shock lines
+    d = ImageDraw.Draw(img)
+    for k, (x1, y1, x2, y2) in enumerate(((90, 560, 150, 620), (60, 700, 140, 720), (560, 560, 510, 620))):
+        d.line([(x1, y1), (x2, y2)], fill=YEL, width=14)
+    # headline
+    if th.get("l1"): paste_c(img, fit_text(th["l1"], 150, WHITE, (90, 160, 255)), W / 2, 1300, 1.0, rot=-3)
+    paste_c(img, fit_text(th.get("l2", META.get("title", "").upper() + "?"), 200, YEL, (230, 60, 70)), W / 2, 1480, 1.0, rot=-3)
+    paste_c(img, pill("POORI KAHANI DEKHO", 44, WHITE, INK), W / 2, 1690, 1.0)
+    out = img.convert("RGB"); out.save(f"{D}/thumb.png"); out.save(f"{D}/thumb.jpg", quality=92)
+    return out
+
+if ONLY == "thumb":
+    make_thumb(); print("thumb written:", f"{D}/thumb.png"); sys.exit()
 if ONLY and ONLY.startswith("still:"):
     for tt in ONLY[6:].split(","): frame(float(tt)).save(f"{D}/still_{tt}.png")
     sys.exit()
+THUMB = make_thumb()
 n = int(TOTAL * FPS)
 p = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
                       "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", f"{D}/video.tmp.mp4"], stdin=subprocess.PIPE)
+for k in range(THUMB_FRAMES): p.stdin.write(THUMB.tobytes())   # cover frames (audio is delayed to match at mux)
 for k in range(n):
     p.stdin.write(frame(k / FPS).tobytes())
     if k % 300 == 0: print("frame", k, "/", n, flush=True)

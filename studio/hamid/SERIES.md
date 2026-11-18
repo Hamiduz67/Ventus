@@ -51,6 +51,9 @@ Owner feedback: 40 s reels ended just as they got engaging. Each reel must now t
    Don't also show the old "DAY n+1 KAL • FOLLOW" pill in the same scene.
 Keep momentum: something changes every 3–5 s (cut, new scene, money counter, SFX, on-screen text). Use short wordless beats (≤ 1.6 s each)
 (action + music + SFX + on-screen text like diary lines, phone messages, price tags) to carry the story without paid voice.
+**Thumbnail on every reel (owner, 2026-11-18):** an eye-catching suspense cover — the episode's key moment blurred behind, red vignette,
+Hamid's big shocked face, the object at stake ringed in red with a "?", a red tag (amount/score) and a 2-line Roman headline that asks the
+episode's question without spoiling it (e.g. "FORM YA / ABBU KI DAWAI?"). Set in meta.json "thumb" (see RUNBOOK A.2); it is also the video's first 2 frames.
 Recurring: day counter + money counter (top corners), Ammi's voice notes, Hamid's diary, his winning line "Aaj bhi bach gaye."
 
 ## Language + cost rules (owner's standing instructions)
