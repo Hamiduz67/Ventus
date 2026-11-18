@@ -27,6 +27,10 @@ W, H, FPS, SR = 1920, 1080, 30, 48000
 VX, VW = 170, 608           # reel position/size on the canvas
 PX = 880                    # panel left edge
 TEMPO = 1.12
+NW = WEEK.get("n", 1); ND = len(WEEK["days"])
+def dnum(k): return WEEK["days"][k - 1].get("day", k)      # k = 1-based index in the week
+def dcity(k): return "Karachi" if "Karachi" in WEEK["days"][k - 1]["city"] else "Lahore"
+TX = WEEK.get("text", {})
 
 def rs(n): return f"Rs {n:,}"
 
@@ -78,7 +82,7 @@ def diary_card(txt, w=600):
     return im
 
 TRACK_Y = 960; TRACK_X0 = PX + 70; TRACK_DX = 132
-def tracker(img, cur, days=6):
+def tracker(img, cur, days=ND):
     d = ImageDraw.Draw(img)
     d.line([(TRACK_X0, TRACK_Y), (TRACK_X0 + TRACK_DX * days, TRACK_Y)], fill=(90, 90, 130), width=8)
     if cur > 1: d.line([(TRACK_X0, TRACK_Y), (TRACK_X0 + TRACK_DX * (cur - 1), TRACK_Y)], fill=YEL, width=8)
@@ -87,19 +91,19 @@ def tracker(img, cur, days=6):
         done = k < cur; now = k == cur
         r = 30 if now else 24
         d.ellipse([x - r, TRACK_Y - r, x + r, TRACK_Y + r], fill=YEL if (done or now) else (60, 60, 96), outline=INK, width=5)
-        d.text((x, TRACK_Y + 1), "?" if last else str(k), font=fnt("Poppins-Black.ttf", 28 if now else 24), fill=INK if (done or now) else WHITE, anchor="mm")
-    d.text((TRACK_X0 - 30, TRACK_Y - 70), "HAFTA 1 KA SAFAR", font=fnt("Poppins-Black.ttf", 26), fill=(180, 180, 220))
+        d.text((x, TRACK_Y + 1), "?" if last else str(dnum(k)), font=fnt("Poppins-Black.ttf", (28 if now else 24) - (4 if dnum(min(k, days)) > 9 else 0)), fill=INK if (done or now) else WHITE, anchor="mm")
+    d.text((TRACK_X0 - 30, TRACK_Y - 70), f"HAFTA {NW} KA SAFAR", font=fnt("Poppins-Black.ttf", 26), fill=(180, 180, 220))
 
 def marker():
     h = head("H", "open", 0, "n"); return h.resize((h.width * 2 // 5 // 2 * 2, h.height * 2 // 5 // 2 * 2), Image.LANCZOS)  # SS=2 head -> ~120 px
 
 def panel(day):
-    c = WEEK["days"][day - 1]; img = night_bg("Karachi" if day == 6 else "Lahore")
+    c = WEEK["days"][day - 1]; img = night_bg(dcity(day))
     shadow_box(img, VX, 0, VW, H, 0, 30, 200)
     d = ImageDraw.Draw(img)
     img.alpha_composite(text_img("HAMID: ZERO SE SHURU", "Anton-Regular.ttf", 50, YEL, 5, INK), (PX, 46))
-    paste_c(img, pill("HAFTA 1", 30, WHITE, INK), PX + 640, 82, 1.0)
-    img.alpha_composite(text_img(f"DIN {day}", "Anton-Regular.ttf", 170, WHITE, 8, INK), (PX - 4, 120))
+    paste_c(img, pill(f"HAFTA {NW}", 30, WHITE, INK), PX + 640, 82, 1.0)
+    img.alpha_composite(text_img(f"DIN {dnum(day)}", "Anton-Regular.ttf", 170, WHITE, 8, INK), (PX - 4, 120))
     t = text_img(c["title"].upper(), "Anton-Regular.ttf", 84, YEL, 7, INK)
     if t.width > 900: t = t.resize((900, int(t.height * 900 / t.width)), Image.LANCZOS)
     img.alpha_composite(t, (PX, 340))
@@ -153,44 +157,45 @@ def set_lip(env):   # drive Hamid's mouth from the new narration
     if env is not None: _ENV["H"] = env
 
 def card_title(img, t, D):
-    img.alpha_composite(night_bg("Lahore"), (0, 0)); d = ImageDraw.Draw(img)
+    img.alpha_composite(night_bg(TX.get("title_city", "Lahore")), (0, 0)); d = ImageDraw.Draw(img)
     for k, (kx, ky, kc) in enumerate(((980, 180, (230, 70, 80)), (1240, 120, (255, 200, 60)), (1400, 250, (70, 140, 230)))):
         kx += math.sin(t * 1.5 + k) * 14; ky += math.cos(t * 1.2 + k) * 10
         d.polygon([(kx, ky - 28), (kx + 22, ky), (kx, ky + 28), (kx - 22, ky)], fill=kc, outline=INK)
     k = eob((t - 0.2) / 0.5); paste_c(img, text_img("HAMID", "Anton-Regular.ttf", 210, YEL, 10, INK), 560, 300, k)
     paste_c(img, text_img("ZERO SE SHURU", "Anton-Regular.ttf", 150, WHITE, 9, INK), 560, 500, eob((t - 0.5) / 0.5))
-    paste_c(img, pill("HAFTA 1 • LAHORE SE KARACHI", 46, RED, WHITE), 560, 680, eob((t - 0.9) / 0.4))
-    paste_c(img, pill("DIN 1 – 6 • POORI KAHANI", 34, WHITE, INK), 560, 770, eob((t - 1.2) / 0.4))
+    paste_c(img, pill(TX.get("title_pill", "HAFTA 1 • LAHORE SE KARACHI"), 46, RED, WHITE), 560, 680, eob((t - 0.9) / 0.4))
+    paste_c(img, pill(TX.get("title_sub", "DIN 1 – 6 • POORI KAHANI"), 34, WHITE, INK), 560, 770, eob((t - 1.2) / 0.4))
     x = lerp(2300, 1440, eo((t - 0.1) / 0.8)); draw_char(img, "H", x, 600, t, "det", 1.25, arms=(-20, 40))
 
 def card_open(img, t, D, vt):
-    img.alpha_composite(night_bg("Lahore"), (0, 0))
+    img.alpha_composite(night_bg(TX.get("title_city", "Lahore")), (0, 0))
     paste_c(img, text_img("IS HAFTE…", "Anton-Regular.ttf", 90, YEL, 7, INK), W / 2, 90, eob(t / 0.4))
-    for k in range(6):
+    for k in range(ND):
         tk = 0.3 + k * 0.35; x = 190 + k * 308; y = lerp(1300, 420, eo((t - tk) / 0.6)) + math.sin(t * 1.6 + k) * 6
         paste_c(img, thumb(k + 1, 270), x, y, 1.0, rot=(-3 if k % 2 else 3))
-        paste_c(img, pill(f"DIN {k + 1}", 30, YEL), x, y - 200, eob((t - tk - 0.3) / 0.3))
+        paste_c(img, pill(f"DIN {dnum(k + 1)}", 30, YEL), x, y - 200, eob((t - tk - 0.3) / 0.3))
         paste_c(img, pill(WEEK["days"][k]["title"].upper(), 22, WHITE, INK), x, y + 220, eob((t - tk - 0.4) / 0.3))
     caption(img, VO[0]["rom"], t, vt[0], vt[1])
 
 def card_bridge(img, t, D, vt, day):
-    c = WEEK["days"][day - 1]; img.alpha_composite(night_bg("Karachi" if day == 6 else "Lahore"), (0, 0))
+    c = WEEK["days"][day - 1]; img.alpha_composite(night_bg(dcity(day)), (0, 0))
     x0 = lerp(-400, 470, eo(t / 0.5)); paste_c(img, thumb(day, 420), x0, 470, 1.0, rot=-3)
-    paste_c(img, text_img(f"DIN {day}", "Anton-Regular.ttf", 200, WHITE, 9, INK), 1240, 300, eob((t - 0.15) / 0.4))
+    paste_c(img, text_img(f"DIN {dnum(day)}", "Anton-Regular.ttf", 200, WHITE, 9, INK), 1240, 300, eob((t - 0.15) / 0.4))
     tt = text_img(c["title"].upper(), "Anton-Regular.ttf", 110, YEL, 8, INK)
     paste_c(img, tt, 1240, 480, eob((t - 0.35) / 0.4) * min(1, 900 / tt.width))
     paste_c(img, pill(f"JEB: {rs(c['money_start'])}", 40, WHITE, GRN), 1240, 620, eob((t - 0.55) / 0.3))
     caption(img, VO[day - 1]["rom"], t, vt[0], vt[1])
 
 def card_close(img, t, D, vt):
-    base = Image.open(f"{OUT}/last6.png").convert("RGBA")
+    base = Image.open(f"{OUT}/last.png").convert("RGBA")
     img.alpha_composite(panel_close(), (0, 0))
     img.alpha_composite(base.resize((VW, H), Image.LANCZOS), (VX, 0))
     dk = Image.new("RGBA", (VW, H), (0, 0, 0, int(120 * eio(t / 0.8)))); img.alpha_composite(dk, (VX, 0))
-    items = [("INTERVIEW: 9 AM", WHITE, INK), ("ADDRESS: 25 KM DOOR", YEL, INK), ("RICKSHAW: Rs 400", RED, WHITE), ("JEB: Rs 120", GRN, WHITE)]
+    items = [tuple(x) for x in TX["close_items"]] if "close_items" in TX else [("INTERVIEW: 9 AM", WHITE, INK), ("ADDRESS: 25 KM DOOR", YEL, INK), ("RICKSHAW: Rs 400", RED, WHITE), ("JEB: Rs 120", GRN, WHITE)]
+    items = [(s, tuple(b), tuple(f)) for s, b, f in items]
     for k, (s, bg, fg) in enumerate(items):
-        paste_c(img, pill(s, 50, bg, fg), PX + 400, 470 + k * 92, eob((t - 0.6 - k * 0.9) / 0.35), rot=(-2 if k % 2 else 2))
-    caption(img, VO[6]["rom"], t, vt[0], vt[1])
+        paste_c(img, pill(s, 50, bg, fg), PX + 400, 500 + k * 92, eob((t - 0.6 - k * 0.9) / 0.35), rot=(-2 if k % 2 else 2))
+    caption(img, VO[ND]["rom"], t, vt[0], vt[1])
 
 _pc = None
 def panel_close():
@@ -198,15 +203,15 @@ def panel_close():
     if _pc is None:
         img = night_bg("Karachi"); shadow_box(img, VX, 0, VW, H, 0, 30, 200)
         img.alpha_composite(text_img("HAMID: ZERO SE SHURU", "Anton-Regular.ttf", 50, YEL, 5, INK), (PX, 46))
-        img.alpha_composite(text_img("SUBAH 8:40…", "Anton-Regular.ttf", 150, WHITE, 8, INK), (PX - 4, 130))
-        img.alpha_composite(text_img("AB KYA HOGA?", "Anton-Regular.ttf", 90, YEL, 7, INK), (PX, 320))
+        img.alpha_composite(text_img(TX.get("close_l1", "SUBAH 8:40…"), "Anton-Regular.ttf", 150, WHITE, 8, INK), (PX - 4, 130))
+        img.alpha_composite(text_img(TX.get("close_l2", "AB KYA HOGA?"), "Anton-Regular.ttf", 90, YEL, 7, INK), (PX, 320))
         _pc = img
     return _pc
 
 def card_end(img, t, D):
     img.alpha_composite(night_bg("Karachi"), (0, 0))
     paste_c(img, text_img("AGLA HAFTA…", "Anton-Regular.ttf", 120, YEL, 8, INK), 640, 260, eob((t - 0.1) / 0.4))
-    paste_c(img, text_img("KARACHI KA PEHLA DIN", "Anton-Regular.ttf", 110, WHITE, 8, INK), 640, 420, eob((t - 0.4) / 0.4))
+    paste_c(img, text_img(TX.get("end_l2", "KARACHI KA PEHLA DIN"), "Anton-Regular.ttf", 110, WHITE, 8, INK), 640, 420, eob((t - 0.4) / 0.4))
     paste_c(img, pill("SUBSCRIBE KAREIN • ROZ NAYI REEL", 44, RED, WHITE), 640, 590, eob((t - 0.8) / 0.4) * (1 + 0.04 * math.sin(t * 6)))
     paste_c(img, text_img("AAJ BHI BACH GAYE.", "Anton-Regular.ttf", 60, (200, 200, 240), 5, INK), 640, 720, eob((t - 1.3) / 0.4))
     draw_char(img, "H", 1450, 620, t, "happy", 1.2, arms=(-20, 130 + 25 * math.sin(t * 8)))
@@ -278,12 +283,12 @@ def write_card(name, fn, D, vo_idx=None, hopeful=False, sfx=(), lip=False):
 def vo_len(i): return len(trim(load(f"{WD}/vo/v{i:02d}.wav", TEMPO))) / SR
 
 def write_day(day):
-    c = WEEK["days"][day - 1]; src = f"{ROOT}/{c['file']}"; D = c["cut"]
+    c = WEEK["days"][day - 1]; src = f"{ROOT}/{c['file']}"; S0 = c.get("start", 0.0); SP = WEEK.get("speed", 1.0); D = round((c["cut"] - S0) / SP, 3)
     panel(day).convert("RGB").save(f"{OUT}/panel{day}.png"); marker().save(f"{OUT}/marker.png")
     x0 = TRACK_X0 + TRACK_DX * (day - 1) - 60; x1 = x0 + TRACK_DX; my = TRACK_Y - 62
-    fc = (f"[0:v]trim=0:{D},setpts=PTS-STARTPTS,scale={VW}:{H}:flags=lanczos[v];[1:v][v]overlay={VX}:0[b];"
+    fc = (f"[0:v]trim={S0}:{c['cut']},setpts=(PTS-STARTPTS)/{SP},scale={VW}:{H}:flags=lanczos[v];[1:v][v]overlay={VX}:0[b];"
           f"[b][2:v]overlay=x='{x0}+{x1 - x0}*t/{D}':y='{my}+4*sin(t*6)'[c];[c]fade=in:st=0:d=0.3,fade=out:st={D - 0.3}:d=0.3,format=yuv420p[o];"
-          f"[0:a]atrim=0:{D},asetpts=PTS-STARTPTS,aresample={SR},afade=in:st=0:d=0.15,afade=out:st={D - 0.35}:d=0.35[a]")
+          f"[0:a]atrim={S0}:{c['cut']},asetpts=PTS-STARTPTS,atempo={SP},aresample={SR},afade=in:st=0:d=0.15,afade=out:st={D - 0.35}:d=0.35[a]")
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", src, "-loop", "1", "-framerate", str(FPS), "-i", f"{OUT}/panel{day}.png",
                     "-loop", "1", "-framerate", str(FPS), "-i", f"{OUT}/marker.png", "-filter_complex", fc, "-map", "[o]", "-map", "[a]",
                     "-t", str(D), "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-c:a", "aac", "-b:a", "192k", "-ac", "2",
@@ -297,21 +302,22 @@ def thumbnail():
     img = night_bg("Karachi").resize((W, H)); d = ImageDraw.Draw(img)
     g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(g).ellipse([1050, 150, 1850, 1050], fill=(255, 200, 80, 90)); img.alpha_composite(g.filter(ImageFilter.GaussianBlur(80)))
     set_lip(None); draw_char(img, "H", 1440, 560, 0.5, "shock", 1.9, arms=(-30, 40))
-    paste_c(img, text_img("Rs 120", "Anton-Regular.ttf", 260, GRN, 12, INK), 520, 300, 1.0, rot=4)
-    paste_c(img, text_img("MEIN", "Anton-Regular.ttf", 170, WHITE, 10, INK), 470, 520, 1.0, rot=-2)
-    paste_c(img, text_img("KARACHI?!", "Anton-Regular.ttf", 230, YEL, 12, INK), 560, 760, 1.0, rot=-3)
-    paste_c(img, pill("HAFTA 1", 60, RED, WHITE), 300, 960, 1.0)
+    th = TX.get("thumb", [["Rs 120", 260, "GRN", 4], ["MEIN", 170, "WHITE", -2], ["KARACHI?!", 230, "YEL", -3]])
+    for (s, sz, col, rot), y in zip(th, (300, 520, 760)):
+        tt = text_img(s, "Anton-Regular.ttf", sz, {"GRN": GRN, "WHITE": WHITE, "YEL": YEL, "RED": RED}[col], 12, INK)
+        paste_c(img, tt, 540, y, min(1.0, 1000 / tt.width), rot=rot)
+    paste_c(img, pill(f"HAFTA {NW}", 60, RED, WHITE), 300, 960, 1.0)
     img.convert("RGB").resize((1280, 720), Image.LANCZOS).save(f"{WD}/thumbnail.jpg", quality=92)
 
 if __name__ == "__main__":
     for k, dd in enumerate(WEEK["days"]): grab(k + 1, dd["key"], f"{OUT}/key{k + 1}.png")
-    grab(6, WEEK["days"][5]["cut"] - 0.05, f"{OUT}/last6.png")
+    grab(ND, WEEK["days"][-1]["cut"] - 0.05, f"{OUT}/last.png")
     if MODE == "still":
         thumbnail()
-        for k in range(1, 7): panel(k).convert("RGB").save(f"{OUT}/panel{k}.png")
+        for k in range(1, ND + 1): panel(k).convert("RGB").save(f"{OUT}/panel{k}.png")
         for name, fn, ts, vi in (("title", card_title, (0.4, 1.2, 3.0), None), ("open", card_open, (1.0, 3.0, 6.0), 0),
                                  ("bridge3", lambda i, t, D, vt: card_bridge(i, t, D, vt, 3), (0.6, 1.5), 2),
-                                 ("close", card_close, (1.5, 5.0), 6), ("end", card_end, (0.5, 2.5), None)):
+                                 ("close", card_close, (1.5, 5.0), ND), ("end", card_end, (0.5, 2.5), None)):
             for t in ts:
                 img = Image.new("RGBA", (W, H), (0, 0, 0, 255)); vt = (0.45, 0.45 + vo_len(vi)) if vi is not None else None
                 fn(img, t, 5, vt) if vi is not None else fn(img, t, 5); img.convert("RGB").save(f"{OUT}/still_{name}_{t}.png")
@@ -319,12 +325,12 @@ if __name__ == "__main__":
     segs = []
     write_card("s00_title", card_title, 5.0, sfx=((0.15, "whoosh", 0.5), (1.0, "chime", 0.4))); segs.append("s00_title")
     write_card("s01_open", card_open, vo_len(0) + 1.4, 0, sfx=((0.3, "whoosh", 0.35),)); segs.append("s01_open")
-    for day in range(1, 7):
+    for day in range(1, ND + 1):
         if day > 1:
             write_card(f"s{day:02d}a_bridge", lambda i, t, D, vt, dd=day: card_bridge(i, t, D, vt, dd), vo_len(day - 1) + 1.15, day - 1,
                        sfx=((0.05, "whoosh", 0.45),)); segs.append(f"s{day:02d}a_bridge")
         write_day(day); segs.append(f"day{day}")
-    write_card("s07_close", card_close, vo_len(6) + 1.3, 6, sfx=((0.4, "chime", 0.35),)); segs.append("s07_close")
+    write_card("s07_close", card_close, vo_len(ND) + 1.3, ND, sfx=((0.4, "chime", 0.35),)); segs.append("s07_close")
     write_card("s08_end", card_end, 5.5, hopeful=True, sfx=((0.1, "whoosh", 0.4),)); segs.append("s08_end")
     n = len(segs); ins = sum([["-i", f"{OUT}/{s}.mp4"] for s in segs], [])
     fc = "".join(f"[{i}:v][{i}:a]" for i in range(n)) + f"concat=n={n}:v=1:a=1[v][a0];[a0]loudnorm=I=-14:TP=-1.5:LRA=11,aresample={SR}[a]"

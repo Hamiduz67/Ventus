@@ -1,0 +1,162 @@
+{
+ "n": 2,
+ "title": "Karachi Ka Imtihaan",
+ "out": "Hamid_Hafta02.mp4",
+ "speed": 1.08,
+ "text": {
+  "title_city": "Karachi",
+  "title_pill": "HAFTA 2 • KARACHI KA IMTIHAAN",
+  "title_sub": "DIN 7 – 12 • POORI KAHANI",
+  "close_l1": "NAYA RESULT…",
+  "close_l2": "KIS TARAF?",
+  "close_items": [
+   [
+    "SAWAAL 37: GHALTI",
+    [
+     255,
+     255,
+     255
+    ],
+    [
+     20,
+     20,
+     30
+    ]
+   ],
+   [
+    "PURANA: 89%",
+    [
+     255,
+     214,
+     0
+    ],
+    [
+     20,
+     20,
+     30
+    ]
+   ],
+   [
+    "NAYA RESULT: ??%",
+    [
+     230,
+     57,
+     70
+    ],
+    [
+     255,
+     255,
+     255
+    ]
+   ],
+   [
+    "JEB: Rs 100",
+    [
+     46,
+     170,
+     90
+    ],
+    [
+     255,
+     255,
+     255
+    ]
+   ]
+  ],
+  "end_l2": "89% YA 90%?",
+  "thumb": [
+   [
+    "89%",
+    260,
+    "RED",
+    4
+   ],
+   [
+    "EK NUMBER",
+    170,
+    "WHITE",
+    -2
+   ],
+   [
+    "KAM?!",
+    230,
+    "YEL",
+    -3
+   ]
+  ]
+ },
+ "days": [
+  {
+   "day": 7,
+   "title": "Kiraye Ki Bike",
+   "file": "hamid/ep007/Hamid_Day07.mp4",
+   "city": "Karachi",
+   "money_start": 120,
+   "money_end": 70,
+   "diary": "Bina brake… par NAUKRI PAKKI!",
+   "start": 8.2,
+   "cut": 76.05,
+   "key": 40
+  },
+  {
+   "day": 8,
+   "title": "Barish",
+   "file": "hamid/ep008/Hamid_Day08.mp4",
+   "city": "Karachi",
+   "money_start": 70,
+   "money_end": 120,
+   "diary": "Cake pighla… par Saleem sir mile",
+   "start": 8.9,
+   "cut": 72.78,
+   "key": 40
+  },
+  {
+   "day": 9,
+   "title": "Imtihaan Ya Naukri",
+   "file": "hamid/ep009/Hamid_Day09.mp4",
+   "city": "Karachi",
+   "money_start": 120,
+   "money_end": 0,
+   "diary": "Test 5/5, order 10/10… jeb Rs 0",
+   "start": 8.767,
+   "cut": 78.92,
+   "key": 40
+  },
+  {
+   "day": 10,
+   "title": "Ammi Ki Call",
+   "file": "hamid/ep010/Hamid_Day10.mp4",
+   "city": "Karachi",
+   "money_start": 0,
+   "money_end": 40,
+   "diary": "Form gaya… Abbu ki dawai aa gayi",
+   "start": 8.467,
+   "cut": 73.57,
+   "key": 40
+  },
+  {
+   "day": 11,
+   "title": "Ek Shart",
+   "file": "hamid/ep011/Hamid_Day11.mp4",
+   "city": "Karachi",
+   "money_start": 40,
+   "money_end": 0,
+   "diary": "Andhere mein 50/50… result 89%",
+   "start": 8.567,
+   "cut": 76.5,
+   "key": 40
+  },
+  {
+   "day": 12,
+   "title": "Ek Number Kam",
+   "file": "hamid/ep012/Hamid_Day12.mp4",
+   "city": "Karachi",
+   "money_start": 0,
+   "money_end": 100,
+   "diary": "Qarza = 10 din tuition. Bike wapas!",
+   "start": 8.567,
+   "cut": 72.43,
+   "key": 40
+  }
+ ]
+}
