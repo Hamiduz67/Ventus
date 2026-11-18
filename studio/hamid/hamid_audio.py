@@ -29,6 +29,13 @@ GAP = 0.06         # silence after every line
 SCENE_GAP = 0.1    # extra breath at a scene cut
 BEAT_SCALE = 0.85  # every wordless beat is shortened by this factor ...
 BEAT_MAX = 1.3     # ... and capped (s)
+# Owner, 2026-11-18: "reels are getting slow and sloppy, some things are left without a voice - make it shorter but
+# entertaining, no gaps". From Day 13 on: voice-led reels, 45-60 s, at most 4 wordless beats (never two in a row),
+# each capped at 0.6 s, tighter scene cuts. The checks below stop the run if a script breaks these rules.
+_DAY = json.load(open(f"{D}/meta.json")).get("day", 0) if os.path.exists(f"{D}/meta.json") else 0
+VOICE_LED = _DAY >= 13
+if VOICE_LED:
+    BEAT_MAX = 0.6; SCENE_GAP = 0.04
 t = INTRO; tl = []; clips = []
 prev_scene = None
 for i, l in enumerate(lines):
@@ -45,7 +52,14 @@ for i, l in enumerate(lines):
     tl.append({**l, "start": t, "end": t + d, "words": rw})
     clips.append((t, v, l["who"], l.get("mode")))
     t += d + GAP; prev_scene = l["scene"]
-TOTAL = t + 1.2
+TOTAL = t + (0.8 if VOICE_LED else 1.2)
+if VOICE_LED:
+    _beats = [i for i, l in enumerate(lines) if l.get("mode") == "beat"]
+    _errs = []
+    if len(_beats) > 4: _errs.append(f"{len(_beats)} wordless beats (max 4)")
+    if any(b + 1 in _beats for b in _beats): _errs.append("two wordless beats in a row")
+    if not 45 <= TOTAL <= 62: _errs.append(f"length {TOTAL:.1f} s (want 45-60 s)")
+    if _errs: print("REEL RULES BROKEN (owner 2026-11-18):", "; ".join(_errs), "- rewrite script.json"); sys.exit(3)
 # scene spans
 scenes = []
 for l in tl:

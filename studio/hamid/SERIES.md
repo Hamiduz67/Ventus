@@ -35,13 +35,18 @@ New characters may be added (draw them in hamid_render.py `head()/torso()/arm()`
 · 8 Barish (monsoon soaks an order; retired teacher tips him, asks why he isn't studying) · 9 Khana Nahi (no food; shares last biscuits with a street kid; a dhaba owner hires him)
 · 10 Ammi Ki Call (Abbu needs Rs 3,000 medicine; double shift; Rs 40 left). After day 10, continue the arc yourself.
 
-## Reel format (65–85 s, 1080x1920; ~70 s is typical at the faster pace) — a complete mini-story, not just a moment
-**Pacing (owner, 2026-11-14, then 2026-11-15 "reel sounds a bit slow, make it a little bit fast"): no dead air, brisk delivery.**
-hamid_audio.py speeds every voice line up 1.12x (VOICE_TEMPO, pitch kept), uses 0.06 s gaps (+0.1 s at a scene cut), and shortens
-every wordless beat x0.85, capped at 1.3 s. Beats must have motion + SFX + on-screen text; time on-screen reveals for ~1.2 s beats.
-Write more story (an extra beat or obstacle) rather than slowing anything down to reach length.
-A few seconds shorter is fine — never pad with pauses.
-Owner feedback: 40 s reels ended just as they got engaging. Each reel must now tell a whole small story:
+## Reel format (45–60 s, 1080x1920, VOICE-LED) — a complete mini-story, told fast
+**Owner, 2026-11-18 (latest, overrides the older pacing notes): "reels are getting slow and sloppy as some things are left without a voice —
+make the reel shorter but entertaining, don't keep a lot of gaps."** So, from Day 13 on:
+- **45–60 s total.** Cut a scene rather than stretch one. ~14–20 short spoken lines (each 3–8 words), one after another.
+- **Something is always being said.** Every story beat is carried by a voice line (Hamid's narration or a character talking).
+  Put the action, SFX, on-screen text, phone messages and price tags ON TOP of voice lines, not in silent gaps.
+- **Wordless beats: at most 4 per reel, never two in a row,** only for a quick punch (a crash, a stamp, a reveal). hamid_audio.py caps them
+  at 0.6 s, scene cuts get 0.04 s, voices run 1.12x — and it STOPS the run (exit 3) if a Day 13+ script has >4 beats, two beats in a row,
+  or a length outside 45–62 s. Fix the script, don't work around the check.
+- Fewer scenes (5–7), each with a clear reason; something changes every 2–3 s. Cut setup talk; open in the middle of the problem.
+- Funny line or visual gag at least once; the cliffhanger lands in the last ~6 s before the outro.
+Earlier owner feedback (still applies, just told faster): reels must not end just as they get engaging — each reel tells a whole small story:
 1. Hook (0–3 s): the problem first, on screen + in voice.  2. Day card: "DAY n · CITY · JEB MEIN: Rs x".
 3. Setup (who/where/what he needs today).  4. Struggle that ESCALATES — at least two obstacles, the second worse than the first.
 5. Turn (jugaad / stranger's help / funny accident / a choice he has to make).  6. Payoff (small win or loss, money counter moves).
@@ -49,8 +54,7 @@ Owner feedback: 40 s reels ended just as they got engaging. Each reel must now t
    with `"outro": true`: "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!" / "Agay Hamid kya karega? Follow karein, agle part ke liye!".
    The renderer darkens the cliffhanger frame and shows "AGAY HAMID KYA KAREGA?" + "FOLLOW KAREIN • DAY n+1 NEXT PART" (outro() in hamid_render.py).
    Don't also show the old "DAY n+1 KAL • FOLLOW" pill in the same scene.
-Keep momentum: something changes every 3–5 s (cut, new scene, money counter, SFX, on-screen text). Use short wordless beats (≤ 1.6 s each)
-(action + music + SFX + on-screen text like diary lines, phone messages, price tags) to carry the story without paid voice.
+Keep momentum: something changes every 2–3 s (cut, new scene, money counter, SFX, on-screen text) — always under a voice line.
 **Thumbnail on every reel (owner, 2026-11-18):** an eye-catching suspense cover — the episode's key moment blurred behind, red vignette,
 Hamid's big shocked face, the object at stake ringed in red with a "?", a red tag (amount/score) and a 2-line Roman headline that asks the
 episode's question without spoiling it (e.g. "FORM YA / ABBU KI DAWAI?"). Set in meta.json "thumb" (see RUNBOOK A.2); it is also the video's first 2 frames.
@@ -58,6 +62,6 @@ Recurring: day counter + money counter (top corners), Ammi's voice notes, Hamid'
 
 ## Language + cost rules (owner's standing instructions)
 - Simple everyday Urdu–Hindi–English mix, the way young people talk. No difficult/formal words. Write voice text in Urdu script; captions in Roman (Hinglish/Urdu) script.
-- ElevenLabs ONLY for speech. Music + SFX are generated in code (free). Max 600 characters of voice per reel and ≤ 300 new characters per weekly episode (Starter plan: 40,000/month; 60 reels × 600 = 36,000). Make reels longer with visuals, not more voice.
+- ElevenLabs ONLY for speech. Music + SFX are generated in code (free). Max 600 characters of voice per reel and ≤ 300 new characters per weekly episode (Starter plan: 40,000/month; 60 reels × 600 = 36,000). A 45–60 s voice-led reel needs ~450–600 characters (≈12 chars per second of speech); stay ≤ 600 by keeping lines short, not by adding silent beats. The outro line is free (reused recording).
 - Hamid's voice is locked: Raghav on eleven_v4 (no [tags] in his text; use "…" for pauses).
 - 2D cartoon style (same characters/look as Day 1). Fully original: no real brands/logos, no real people, no copyrighted music.

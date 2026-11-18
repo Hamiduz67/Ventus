@@ -14,7 +14,10 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 2. Write `hamid/epNNN/script.json` (NNN = day, 3 digits) + `meta.json` ({"day", "city", "money"}).
    - Follow the format and language rules in SERIES.md and the planned day list; continue from `story_so_far`.
    - Line fields: who (H/A/B/L/R/G/S…), mode ("vo" narration or "talk" on-screen dialogue), scene (a key in hamid_render.py `SC`), dev (Urdu script), rom (Roman caption, same words).
-   - Reel length 65–85 s with the full story structure in SERIES.md "Reel format". Fast pacing (owner): voices 1.12x, beats x0.85 capped at 1.3 s (all automatic in hamid_audio.py) — fill time with story, not silence. Keep total `dev` text ≤ 600 characters (length comes from wordless visual beats, not more voice). Hamid lines: no [tags].
+   - **Reel length 45–60 s, VOICE-LED (owner, 2026-11-18: "shorter but entertaining, no gaps, nothing left without a voice").** See SERIES.md "Reel format":
+     ~14–20 short spoken lines back to back; at most 4 wordless "beat" lines (never two in a row, auto-capped at 0.6 s) for quick punches only;
+     put action/SFX/on-screen text on top of voice lines. hamid_audio.py exits with code 3 if these rules are broken — rewrite the script.
+     Keep total `dev` text ≤ 600 characters by keeping lines short. Hamid lines: no [tags].
    - ALWAYS end with the outro hook line (owner's standing rule): last line = {"who": "H", "mode": "vo", "scene": <last scene>, "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}. Check a still during it. tts.py reuses studio/hamid/voice/outro_hamid.wav for it (0 new characters).
    - THUMBNAIL (owner, 2026-11-18 — every reel): add to meta.json `"thumb": {"t": <seconds of the most suspenseful scene, from timeline.json>,
      "l1": "<2-3 word white line>", "l2": "<2-3 word big yellow question/shock line>", "emoji": "<the object at stake: 💊 📝 💸 🏍️ …>",
