@@ -1,0 +1,161 @@
+[
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "hook14",
+  "dev": "سرٹیفکیٹ کی جگہ… ڈمی فون! ایک منٹ باقی!",
+  "rom": "Certificate ki jagah… dummy phone! Ek minute baaki!"
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "hook14",
+  "dev": "[worried] بیٹا، دفتر پانچ بجے بند!",
+  "rom": "Beta, daftar paanch baje band!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "daycard",
+  "dev": "دن چودہ۔ جیب خالی۔",
+  "rom": "Din chaudah. Jeb khaali."
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "call14",
+  "dev": "[nervous] اوہ! لفافے بدل گئے! سرٹیفکیٹ میرے پاس ہے!",
+  "rom": "Oh! Lifafay badal gaye! Certificate mere paas hai!"
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "call14",
+  "dev": "تیرے پاس؟ تو ہے کہاں؟",
+  "rom": "Tere paas? Tu hai kahan?"
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "call14",
+  "dev": "[laughs] کراچی! سرپرائز! بس اڈے پر ہوں!",
+  "rom": "Karachi! Surprise! Bus adde par hoon!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "call14",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "call14",
+  "dev": "[whispers] میں افسر کو چائے پلاتا ہوں… جاؤ، بھاگو!",
+  "rom": "Main afsar ko chai pilata hoon… jao, bhaago!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "race14",
+  "dev": "اڈا پانچ کلومیٹر… فل سپیڈ!",
+  "rom": "Adda paanch kilometer… full speed!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "race14",
+  "dev": "سگنل لال… اور پیٹرول بھی ختم!",
+  "rom": "Signal laal… aur petrol bhi khatam!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "race14",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "adda14",
+  "dev": "بھاگ کر اڈے پہنچا… اور بلال سموسے کھا رہا تھا!",
+  "rom": "Bhaag kar adde pohncha… aur Bilal samosay kha raha tha!"
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "adda14",
+  "dev": "[laughs] لے یار! بس تھوڑا سا تیل لگ گیا!",
+  "rom": "Le yaar! Bas thoda sa tel lag gaya!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "adda14",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "adda14",
+  "dev": "رکشہ! اور کرایہ بلال دے گا!",
+  "rom": "Rickshaw! Aur kiraya Bilal dega!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "back14",
+  "dev": "پانچ بج کر بیس… افسر کی تیسری چائے!",
+  "rom": "Paanch baj kar bees… afsar ki teesri chai!"
+ },
+ {
+  "who": "T",
+  "mode": "talk",
+  "scene": "back14",
+  "dev": "[happy] جمع ہو گیا! اسکالرشپ پکی!",
+  "rom": "Jama ho gaya! Scholarship pakki!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "back14",
+  "dev": "",
+  "rom": "",
+  "dur": 0.7
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "back14",
+  "dev": "آج بھی بچ گئے۔",
+  "rom": "Aaj bhi bach gaye."
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "cliff14",
+  "dev": "[excited] اور اب میں بھی کراچی میں رہوں گا!",
+  "rom": "Aur ab main bhi Karachi mein rahunga!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff14",
+  "dev": "پر کلاس صبح آٹھ بجے… اور ڈیوٹی بھی آٹھ بجے!",
+  "rom": "Par class subah aath baje… aur duty bhi aath baje!"
+ },
+ {
+  "who": "H",
+  "mode": "vo",
+  "scene": "cliff14",
+  "outro": true,
+  "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+  "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+ }
+]

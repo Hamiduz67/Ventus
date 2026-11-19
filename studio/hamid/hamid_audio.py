@@ -582,6 +582,28 @@ if "cliff13" in SPN:
     c13 = LS_("cliff13"); add(sfx, bell(), c13[0]["start"] + 0.1, 0.5); add(sfx, noise(0.3, 0.08), c13[1]["start"] + 0.5, 0.5)
     add(sfx, kick(), c13[2]["start"], 1.0); add(sfx, sad_trombone(), c13[2]["start"] + 0.15, 0.35)
     for k in range(5): add(sfx, TICK, c13[3]["end"] - 0.2 + k * 0.2, 0.4)
+# ---- Day 14: dummy phone sting, ticking deadline, video call, facepalm, ride + red light + engine dies, samosa laugh, rickshaw, stamp, two clocks
+if "hook14" in SPN:
+    h14 = LS_("hook14"); add(sfx, kick(), h14[0]["start"] + 1.3, 0.9); add(sfx, sad_trombone(), h14[0]["start"] + 1.5, 0.3)
+    for k in range(8): add(sfx, TICK, h14[1]["start"] + k * 0.25, 0.4)
+if "call14" in SPN:
+    c14 = LS_("call14"); add(sfx, ring(0.6), c14[0]["start"] - 0.3, 0.4); add(sfx, kick(), c14[3]["start"], 0.9)
+    add(sfx, WHOOSH, c14[4]["start"] + 1.6, 0.7)
+if "race14" in SPN:
+    r14 = LS_("race14"); add(sfx, engine(r14[1]["start"] + 1.4 - SPN["race14"]["vstart"]), SPN["race14"]["vstart"], 0.6)
+    add(sfx, honk(0.4), r14[1]["start"] + 0.2, 0.7); add(sfx, kick(), r14[2]["start"], 0.8); add(sfx, sad_trombone(), r14[2]["start"] + 0.1, 0.35)
+if "adda14" in SPN:
+    a14 = LS_("adda14")
+    for k in range(5): add(sfx, noise(0.04, 0.01), a14[0]["start"] + k * 0.18, 0.45)
+    add(sfx, kick(), a14[2]["start"], 0.7); add(sfx, honk(0.3), a14[3]["start"] + 0.1, 0.8); add(sfx, honk(0.3), a14[3]["start"] + 0.45, 0.7)
+if "back14" in SPN:
+    b14 = LS_("back14")
+    for k in range(4): add(sfx, TICK, b14[0]["start"] + k * 0.3, 0.4)
+    add(sfx, CHIME, b14[1]["start"] + 0.1, 0.6); add(sfx, kick(), b14[2]["start"], 1.0); add(sfx, CHIME, b14[2]["start"] + 0.1, 0.6)
+if "cliff14" in SPN:
+    q14 = LS_("cliff14"); add(sfx, beep(1200, 0.08, 0.5), q14[1]["start"] + 0.02); add(sfx, beep(1600, 0.1, 0.5), q14[1]["start"] + 0.17)
+    add(sfx, kick(), q14[1]["end"] - 1.2, 1.0)
+    for k in range(5): add(sfx, TICK, q14[1]["end"] - 1.0 + k * 0.2, 0.4)
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
