@@ -2,7 +2,22 @@
  "series": "Aap Kya Karte?",
  "platform": "YouTube Shorts only (Buffer --channels youtube)",
  "slot": "22:00 Asia/Dubai daily",
- "last_n": 0,
+ "last_n": 1,
  "el_warned_for_reset": null,
- "episodes": []
+ "episodes": [
+  {
+   "n": 1,
+   "title": "Highway Pe Aurat",
+   "premise": "2 AM empty highway: a woman by a broken car begs for help for her sick child; the radio warns of a gang using a woman to stop cars; two shapes in the dark (or trees?); a baby really cries.",
+   "question": {
+    "a": "Ruk kar madad karte",
+    "b": "Aage ja kar police ko call"
+   },
+   "file": "thriller/ep001/AapKyaKarte_001.mp4",
+   "posted_at": "2026-11-19 22:00 Asia/Dubai",
+   "buffer_id": "6afed0d77fbb7ebdc1b4c744",
+   "elevenlabs_chars": 583,
+   "length_s": 48.1
+  }
+ ]
 }
