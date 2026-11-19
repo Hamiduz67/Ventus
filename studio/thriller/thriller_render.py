@@ -298,8 +298,9 @@ def vignette(img, col=(0, 0, 0), strength=230):
 def vignette_mask():
     m = Image.new("L", (W, H), 255); ImageDraw.Draw(m).ellipse([-200, 150, W + 200, H - 150], fill=0); return m.filter(ImageFilter.GaussianBlur(180))
 def grain(img, t):
-    r = np.random.default_rng(int(t * 30)); n = (r.random((H // 4, W // 4)) * 40).astype(np.uint8)
-    g = Image.fromarray(n, "L").resize((W, H)); lay = Image.new("RGBA", (W, H), (255, 255, 255, 0)); lay.putalpha(g.point(lambda v: v // 3)); img.alpha_composite(lay)
+    # light, slow film grain (changes 6x a second, coarse) - fine per-frame noise made the mp4 ~6x bigger
+    r = np.random.default_rng(int(t * 6)); n = (r.random((H // 8, W // 8)) * 40).astype(np.uint8)
+    g = Image.fromarray(n, "L").resize((W, H), Image.BILINEAR); lay = Image.new("RGBA", (W, H), (255, 255, 255, 0)); lay.putalpha(g.point(lambda v: v // 4)); img.alpha_composite(lay)
 
 # ======================= CAPTIONS + HUD
 def caption(img, t):
@@ -461,7 +462,7 @@ if ONLY and ONLY.startswith("still:"):
     sys.exit()
 THUMB = make_thumb(); n = int(TOTAL * FPS)
 p = subprocess.Popen(["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
-                      "-c:v", "libx264", "-preset", "veryfast", "-crf", "19", "-pix_fmt", "yuv420p", f"{D}/video.tmp.mp4"], stdin=subprocess.PIPE)
+                      "-c:v", "libx264", "-preset", "veryfast", "-crf", "21", "-pix_fmt", "yuv420p", f"{D}/video.tmp.mp4"], stdin=subprocess.PIPE)
 for k in range(THUMB_FRAMES): p.stdin.write(THUMB.tobytes())
 for k in range(n):
     p.stdin.write(frame(k / FPS).tobytes())
