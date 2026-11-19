@@ -79,6 +79,11 @@ Pick the format from the Metricool free-post budget in state.json "metricool" {m
 SendUserMessage to the owner: what was posted (title, time, platforms) or what failed, characters of ElevenLabs used, next planned day.
 
 ## C. Daily thriller reel "Aap Kya Karte?" (YouTube Shorts only, posts 22:00 Asia/Dubai)
+> **Owner, 2026-11-19:** Buffer's free plan allows only 2 YouTube posts a day, and the two Hamid reels (18:00 + 20:00) use both.
+> The thriller is PAUSED for the rest of November 2026 (Kahani #1 on 2026-11-19 22:00 was the last Buffer post). From December 2026 it posts
+> to YouTube through **Metricool** (not Buffer), only while the monthly free posts last: the Hamid weekly long video (Wed + Sun) has priority,
+> so skip the thriller when metricool.used + remaining Wed/Sun this month + 1 > limit. Step 6's buffer_post.py command is replaced by
+> Metricool createScheduledPost (blogId 7980574, YouTube only, public Short, 22:00 Asia/Dubai), then metricool.used += 1 in studio/hamid/state.json.
 Series rules: studio/thriller/SERIES.md. State: studio/thriller/state.json (last_n, episodes with premise + question). Episodes: thriller/epNNN/.
 1. `python3 studio/elevenlabs_budget.py` — if remaining < 4,000 characters (about one more day of all three reels + a weekly) and
    state "el_warned_for_reset" != that reset_unix, send a PushNotification reminding the owner to upgrade ElevenLabs before it runs out
