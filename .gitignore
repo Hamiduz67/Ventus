@@ -9,3 +9,11 @@ hamid/**/lipsync.npz
 hamid/**/*.log
 hamid/**/build/
 hamid/**/thumb.png
+thriller/**/*.wav
+thriller/**/*.f32
+thriller/**/el*.mp3
+thriller/**/still_*.png
+thriller/**/video*.mp4
+thriller/**/timeline.json
+thriller/**/*.log
+thriller/**/thumb.png
