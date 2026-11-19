@@ -56,6 +56,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 8. If anything fails and the reel can't meet the bar, do NOT post; report what failed.
 
 ## B. Weekly long episode (Wednesday + Sunday, posts 19:00 Asia/Dubai)
+> **STOPPED (owner, 2026-11-19):** no more weekly long episodes; the scheduled task is turned off. Kept here only in case it is turned back on.
 Content: built from the daily reels posted since the last weekly episode (state.json "episodes" after the last "weekly" entry; if fewer than 3, skip and report).
 New opening narration by Hamid (H), the reels' scenes in order (re-rendered from their script.json/timeline, without per-reel hooks and "follow" endings),
 short bridging narration between days, and a closing cliffhanger. New ElevenLabs text <= 300 characters (reuse existing v##.wav lines; never re-generate them).
@@ -81,8 +82,8 @@ SendUserMessage to the owner: what was posted (title, time, platforms) or what f
 ## C. Daily thriller reel "Aap Kya Karte?" (YouTube Shorts only, posts 22:00 Asia/Dubai)
 > **Owner, 2026-11-19:** Buffer's free plan allows only 2 YouTube posts a day, and the two Hamid reels (18:00 + 20:00) use both.
 > The thriller is PAUSED for the rest of November 2026 (Kahani #1 on 2026-11-19 22:00 was the last Buffer post). From December 2026 it posts
-> to YouTube through **Metricool** (not Buffer), only while the monthly free posts last: the Hamid weekly long video (Wed + Sun) has priority,
-> so skip the thriller when metricool.used + remaining Wed/Sun this month + 1 > limit. Step 6's buffer_post.py command is replaced by
+> to YouTube through **Metricool** (not Buffer), only while the monthly free posts last (the weekly long video is stopped, so the thriller
+> may use all of them: skip when metricool.used >= limit). Step 6's buffer_post.py command is replaced by
 > Metricool createScheduledPost (blogId 7980574, YouTube only, public Short, 22:00 Asia/Dubai), then metricool.used += 1 in studio/hamid/state.json.
 Series rules: studio/thriller/SERIES.md. State: studio/thriller/state.json (last_n, episodes with premise + question). Episodes: thriller/epNNN/.
 1. `python3 studio/elevenlabs_budget.py` — if remaining < 4,000 characters (about one more day of all three reels + a weekly) and
