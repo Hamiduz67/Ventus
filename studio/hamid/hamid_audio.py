@@ -59,6 +59,9 @@ if VOICE_LED:
     if len(_beats) > 4: _errs.append(f"{len(_beats)} wordless beats (max 4)")
     if any(b + 1 in _beats for b in _beats): _errs.append("two wordless beats in a row")
     if not 45 <= TOTAL <= 62: _errs.append(f"length {TOTAL:.1f} s (want 45-60 s)")
+    _meta = json.load(open(f"{D}/meta.json"))
+    if _DAY >= 15 and not (_meta.get("hook") or {}).get("text"):
+        _errs.append('meta.json needs "hook": {"text", "emoji"} (cold-open hook, owner 2026-11-19)')
     if _errs: print("REEL RULES BROKEN (owner 2026-11-18):", "; ".join(_errs), "- rewrite script.json"); sys.exit(3)
 # scene spans
 scenes = []
@@ -604,12 +607,26 @@ if "cliff14" in SPN:
     q14 = LS_("cliff14"); add(sfx, beep(1200, 0.08, 0.5), q14[1]["start"] + 0.02); add(sfx, beep(1600, 0.1, 0.5), q14[1]["start"] + 0.17)
     add(sfx, kick(), q14[1]["end"] - 1.2, 1.0)
     for k in range(5): add(sfx, TICK, q14[1]["end"] - 1.0 + k * 0.2, 0.4)
+# ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
+HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
+if HOOK:
+    n_ = int(0.9 * SR); x_ = np.arange(n_) / SR
+    boom = (np.sin(2 * np.pi * (48 + 60 * np.exp(-x_ * 18)) * x_) * np.exp(-x_ * 4.5)).astype(np.float32)
+    crack = (rng.standard_normal(int(0.12 * SR)) * np.exp(-np.arange(int(0.12 * SR)) / SR * 40)).astype(np.float32)
+    def stab(f0, n_s=0.32):
+        m = int(n_s * SR); xx = np.arange(m) / SR
+        return (sum(((xx * f) % 1 * 2 - 1) for f in (f0, f0 * 1.26, f0 * 1.5, f0 * 2)) * 0.18 * np.minimum(1, xx / 0.006) * np.exp(-xx * 7)).astype(np.float32)
+    add(sfx, boom, 0.0, 1.0); add(sfx, kick(), 0.0, 1.0); add(sfx, crack, 0.0, 0.7)
+    add(sfx, stab(220), 0.02, 0.9); add(sfx, stab(277), 0.55, 0.8)
+    add(sfx, WHOOSH, 1.15, 0.6)   # out of the cold open into the story
 night = next((s for s in scenes if s["scene"] == "night"), None)
 if night: add(sfx, crickets(night["vend"] - night["vstart"]), night["vstart"])
 
 venv = np.convolve(np.abs(voice), np.ones(int(0.12 * SR)) / int(0.12 * SR), mode="same")
 duck = 1 - 0.5 * np.clip(venv / (venv.max() * 0.25 + 1e-9), 0, 1)
-fade = np.ones(N, np.float32); fade[:int(0.4 * SR)] = np.linspace(0, 1, int(0.4 * SR)); fade[-int(1.4 * SR):] = np.linspace(1, 0, int(1.4 * SR))
+fade = np.ones(N, np.float32)
+if not HOOK: fade[:int(0.4 * SR)] = np.linspace(0, 1, int(0.4 * SR))
+fade[-int(1.4 * SR):] = np.linspace(1, 0, int(1.4 * SR)); 
 mix = voice + music * 0.55 * duck * fade + sfx * 0.6
 mix = mix / (np.abs(mix).max() + 1e-9) * 0.95
 mix.astype(np.float32).tofile(f"{D}/mix.f32")

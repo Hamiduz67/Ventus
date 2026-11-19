@@ -3835,6 +3835,34 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook13": sc_hook13, "office13": sc_office13, "tuition13": sc_tuition13, "bilal13": sc_bilal13, "adda13": sc_adda13, "cliff13": sc_cliff13,
       "hook14": sc_hook14, "call14": sc_call14, "race14": sc_race14, "adda14": sc_adda14, "back14": sc_back14, "cliff14": sc_cliff14}
 
+
+# ======================= COLD-OPEN HOOK (owner, 2026-11-19: "add an eye / ear catching hook in the start so people won't skip")
+# Day 15+: meta.json "hook": {"text": "<2-4 BIG Roman words: the problem>", "emoji": "<object at stake>", "sub": "<optional small red line>"}.
+# First ~1.5 s: white flash, screen shake, rotating burst behind a slammed-in headline (+ boom/whoosh sting in hamid_audio.py).
+HOOK_LEN = 1.5
+def hook_on(): return META.get("day", 0) >= 15 or "hook" in META
+def hook_fx(img, t):
+    hk = META.get("hook")
+    if not hk or t >= HOOK_LEN: return img
+    out = 1 - eio((t - (HOOK_LEN - 0.3)) / 0.3)
+    if t < 0.55:   # shake
+        a = 26 * (1 - t / 0.55); dx, dy = int(a * math.sin(t * 95)), int(a * math.cos(t * 71))
+        sh = Image.new("RGBA", (W, H), (0, 0, 0, 255)); sh.alpha_composite(img, (max(dx, 0), max(dy, 0)), (max(-dx, 0), max(-dy, 0))); img = sh
+    img.alpha_composite(Image.new("RGBA", (W, H), (10, 6, 20, int(110 * out))))   # dim the scene so the headline pops
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
+    cx, cy = W / 2, 820
+    for k in range(16):   # rotating burst
+        a0 = k / 16 * 2 * math.pi + t * 0.9; a1 = a0 + math.pi / 16
+        col = (255, 210, 40, int(150 * out)) if k % 2 else (230, 50, 60, int(150 * out))
+        d.polygon([(cx, cy), (cx + math.cos(a0) * 1500, cy + math.sin(a0) * 1500), (cx + math.cos(a1) * 1500, cy + math.sin(a1) * 1500)], fill=col)
+    img.alpha_composite(lay)
+    k = min(1, t / 0.18); sc = (2.4 - 1.4 * eo(k)) * (1 + 0.03 * math.sin(t * 14))
+    if hk.get("emoji"): paste_c(img, emoji(hk["emoji"], 220), W / 2, 560, eob((t - 0.1) / 0.2) * out, rot=-10 + 6 * math.sin(t * 9))
+    paste_c(img, fit_text(hk["text"], 190, YEL, (230, 60, 70), 980), cx, cy, sc * out, rot=-4, alpha=max(0.0, min(1.0, out)))
+    if hk.get("sub"): paste_c(img, pill(hk["sub"], 58, RED, WHITE), cx, cy + 190, eob((t - 0.3) / 0.2) * out, rot=3)
+    if t < 0.09: img.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(255 * (1 - t / 0.09)))))
+    return img
+
 def frame(t, plain=False):
     s = next((x for x in SCENES if x["vstart"] <= t < x["vend"]), SCENES[-1])
     lt = t - s["vstart"]
@@ -3849,6 +3877,7 @@ def frame(t, plain=False):
     if lt < 0.25 and s is not SCENES[0]:
         img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(255 * (1 - lt / 0.25)))))
     if plain: return img.convert("RGB")
+    if hook_on(): img = hook_fx(img, t)
     outro(img, t); hud(img, t); caption(img, t)
     d = ImageDraw.Draw(img)
     d.rounded_rectangle([80, 1868, W - 80, 1878], radius=5, fill=(70, 70, 90)); d.rounded_rectangle([80, 1868, 80 + (W - 160) * t / TOTAL, 1878], radius=5, fill=YEL)

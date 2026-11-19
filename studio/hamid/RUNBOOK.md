@@ -9,7 +9,10 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 - Python needs numpy + pillow + ffmpeg (usually present). The Noto Color Emoji font must exist at /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf.
 - If downloads fail with TLS errors, use the proxy CA bundle (~/.ccr/ca-bundle.crt).
 
-## A. Daily reel run (2 per day: posts at 13:00 and 20:00 Asia/Dubai)
+## A. Daily reel run (2 per day: posts at 18:00 and 20:00 Asia/Dubai)
+> **Owner, 2026-11-19:** the 13:00 slot is gone (13:00 reels got ~80% fewer views than 20:00 ones on Instagram since Day 6). The early slot now posts at
+> **18:00** Asia/Dubai (19:00 Pakistan). If an older task prompt still says 13:00, use 18:00. Every reel from Day 15 also needs the cold-open hook
+> (SERIES.md "Cold-open hook": problem in the first words + meta.json "hook").
 > **Owner, 2026-11-18 (live, newest instruction):** reels are now 45–60 s and voice-led with no silent gaps. If the scheduled task's prompt
 > still says "75–90 seconds" or "make the reel longer with wordless visual beats", that text predates this change: follow the 45–60 s
 > voice-led format here and in SERIES.md, and keep everything else in the prompt (slot, platforms, secrets, ≤ 600 characters, report).
@@ -24,7 +27,9 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
    - ALWAYS end with the outro hook line (owner's standing rule): last line = {"who": "H", "mode": "vo", "scene": <last scene>, "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}. Check a still during it. tts.py reuses studio/hamid/voice/outro_hamid.wav for it (0 new characters).
    - THUMBNAIL (owner, 2026-11-18 — every reel): add to meta.json `"thumb": {"t": <seconds of the most suspenseful scene, from timeline.json>,
      "l1": "<2-3 word white line>", "l2": "<2-3 word big yellow question/shock line>", "emoji": "<the object at stake: 💊 📝 💸 🏍️ …>",
-     "tag": "<short red label, e.g. Rs 1,000 / 90%?>", "mood": "shock"|"sad"|"det"}`. It must tease the episode's central question
+     "tag": "<short red label, e.g. Rs 1,000 / 90%?>", "mood": "shock"|"sad"|"det"}`.
+   - COLD-OPEN HOOK (owner, 2026-11-19 — Day 15+): line 1 opens on the problem/shock (conflict word in the first ~1 s), and meta.json has
+     `"hook": {"text": "<2-4 BIG Roman words>", "emoji": "<object at stake>", "sub": "<optional small red line>"}`. Check stills at 0.1, 0.4 and 1.2 s. It must tease the episode's central question
      without giving away the ending (curiosity gap), in simple Roman Urdu, max ~4 words per line.
 3. Voices: `python3 studio/hamid/tts.py hamid/epNNN`. Optional check: transcribe with faster-whisper small (language "ur") and redo garbled lines (delete that v##.wav and rerun).
 4. Scenes: reuse existing scene functions in `studio/hamid/hamid_render.py`; add new ones (dhaba, street, bus station, Karachi room, rain, etc.) in the same flat 2D style, and new characters/props as needed. Commit renderer changes so later runs reuse them. Keep Hamid/Ammi/Abbu exactly as drawn.
@@ -41,7 +46,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
    `python3 studio/hamid/buffer_post.py schedule --url <raw url> --caption "<caption>" --title "Day N: <hook> | Hamid: Zero Se Shuru #shorts" --tiktok-title "Hamid: Zero Se Shuru — Day N" --at "YYYY-MM-DD HH:MM" --thumb-url <raw thumb.jpg url>`
    (thumbnailOffset 20 ms = the thumbnail frames → Instagram Reel cover + TikTok cover. Buffer REJECTS thumbnailUrl (2026-11-18): --thumb-url is optional; the retry drops it but keeps thumbnailOffset.
    YouTube Shorts: Buffer/YouTube give no custom-thumbnail control for Shorts; YouTube picks the frame itself.)
-   (time is Asia/Dubai: today 13:00 or 20:00 = the run's slot). This posts to YouTube Shorts + TikTok + Instagram Reel.
+   (time is Asia/Dubai: today 18:00 or 20:00 = the run's slot). This posts to YouTube Shorts + TikTok + Instagram Reel.
    Facebook gets the Reel automatically through Instagram's "share Reels to Facebook" setting — nothing to do.
    Caption: hook line + "Day N+1 kal… follow karo" + #HamidZeroSeShuru #struggle #pakistan #motivation #story #urdu.
    Before scheduling, run `buffer_post.py status` and make sure this day isn't already queued/sent (never double-post).

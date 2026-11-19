@@ -8,7 +8,7 @@ A Lahore boy, Hamid, scores 82% in 12th but can't go to college (no money). He t
 moves to Karachi, faces a new obstacle every day (phone dies, rented bike breaks, no work, no food, rent due...),
 and after years of struggle makes it. Tone: mixed — suspense + one funny moment + hope or a cliffhanger.
 
-## Seasons (story days; 2 reels a day = the story moves 2 days per calendar day; day counter may jump)
+## Seasons (story days; 2 reels a day at 18:00 + 20:00 Asia/Dubai = the story moves 2 days per calendar day; day counter may jump)
 | Season | Story days | Arc |
 | --- | --- | --- |
 | 1 Lahore | 1–60 | no money for college, three jobs a day, Bilal's schemes |
@@ -54,6 +54,12 @@ Earlier owner feedback (still applies, just told faster): reels must not end jus
    with `"outro": true`: "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!" / "Agay Hamid kya karega? Follow karein, agle part ke liye!".
    The renderer darkens the cliffhanger frame and shows "AGAY HAMID KYA KAREGA?" + "FOLLOW KAREIN • DAY n+1 NEXT PART" (outro() in hamid_render.py).
    Don't also show the old "DAY n+1 KAL • FOLLOW" pill in the same scene.
+**Cold-open hook (owner, 2026-11-19 — "add an eye / ear catching hook in the start so people won't skip"; Day 15+):**
+Instagram showed 50% of viewers swiping away in the first 3 s on Day 13, which opened on good news. So every reel now:
+- opens on the PROBLEM / danger / shock in the very first words of line 1 (never good news, never a recap first) — the conflict word lands in the first ~1 s;
+- sets meta.json `"hook": {"text": "<2-4 BIG Roman words: the problem, e.g. DUMMY PHONE?!>", "emoji": "<object at stake>", "sub": "<optional small red line, e.g. 1 MINUTE BAAKI>"}`.
+  The renderer plays a 1.5 s cold open over line 1 (white flash, screen shake, rotating red/yellow burst, slammed-in headline) and hamid_audio.py
+  starts with a boom + crack + brass-stab sting at 0 s with no music fade-in. hamid_audio.py exits 3 if a Day 15+ meta.json has no "hook".
 Keep momentum: something changes every 2–3 s (cut, new scene, money counter, SFX, on-screen text) — always under a voice line.
 **Thumbnail on every reel (owner, 2026-11-18):** an eye-catching suspense cover — the episode's key moment blurred behind, red vignette,
 Hamid's big shocked face, the object at stake ringed in red with a "?", a red tag (amount/score) and a 2-line Roman headline that asks the
