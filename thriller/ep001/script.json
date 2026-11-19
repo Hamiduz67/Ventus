@@ -1,0 +1,305 @@
+{
+ "shots": {
+  "s1": {
+   "bg": "highway_night",
+   "fx": [
+    "rain",
+    "headlights"
+   ],
+   "props": [
+    {
+     "k": "car_broken",
+     "x": 640,
+     "y": 1150,
+     "s": 0.45,
+     "hazard": true
+    }
+   ],
+   "chars": [
+    {
+     "k": "woman",
+     "x": 520,
+     "y": 1150,
+     "s": 0.42,
+     "wave": true
+    }
+   ],
+   "clock": "2:00 AM"
+  },
+  "s2": {
+   "bg": "highway_night",
+   "fx": [
+    "rain",
+    "headlights"
+   ],
+   "props": [
+    {
+     "k": "car_broken",
+     "x": 760,
+     "y": 1290,
+     "s": 0.95,
+     "hazard": true
+    }
+   ],
+   "chars": [
+    {
+     "k": "woman",
+     "x": 380,
+     "y": 1330,
+     "s": 0.8,
+     "wave": true
+    }
+   ],
+   "pill": "AKELI AURAT • KHARAB GAADI"
+  },
+  "s3": {
+   "bg": "car_inside",
+   "fx": [
+    "rain_glass"
+   ],
+   "chars": [
+    {
+     "k": "woman",
+     "x": 760,
+     "y": 1380,
+     "s": 1.0,
+     "wave": true,
+     "window": true
+    }
+   ],
+   "props": [
+    {
+     "k": "radio",
+     "x": 540,
+     "y": 1290,
+     "s": 1.0
+    }
+   ]
+  },
+  "s4": {
+   "bg": "car_inside",
+   "fx": [
+    "rain_glass",
+    "red",
+    "flicker"
+   ],
+   "chars": [
+    {
+     "k": "woman",
+     "x": 760,
+     "y": 1380,
+     "s": 1.0,
+     "window": true
+    }
+   ],
+   "props": [
+    {
+     "k": "radio",
+     "x": 540,
+     "y": 1290,
+     "s": 1.0,
+     "on": true
+    }
+   ]
+  },
+  "s5": {
+   "bg": "car_inside",
+   "fx": [
+    "rain_glass",
+    "heartbeat"
+   ],
+   "chars": [
+    {
+     "k": "woman",
+     "x": 700,
+     "y": 1700,
+     "s": 1.4,
+     "window": true,
+     "close": true
+    }
+   ],
+   "props": [
+    {
+     "k": "radio",
+     "x": 540,
+     "y": 1290,
+     "s": 1.0
+    }
+   ]
+  },
+  "s6": {
+   "bg": "highway_night",
+   "fx": [
+    "rain",
+    "fog"
+   ],
+   "props": [
+    {
+     "k": "trees",
+     "x": 260,
+     "y": 1200,
+     "s": 1.0
+    },
+    {
+     "k": "car_broken",
+     "x": 800,
+     "y": 1290,
+     "s": 0.8,
+     "hazard": true
+    }
+   ],
+   "chars": [
+    {
+     "k": "hood",
+     "x": 190,
+     "y": 1230,
+     "s": 0.62,
+     "eyes": true
+    },
+    {
+     "k": "hood",
+     "x": 360,
+     "y": 1240,
+     "s": 0.58,
+     "eyes": true
+    }
+   ]
+  },
+  "s7": {
+   "bg": "highway_night",
+   "fx": [
+    "rain",
+    "heartbeat"
+   ],
+   "props": [
+    {
+     "k": "car_broken",
+     "x": 560,
+     "y": 1300,
+     "s": 1.5,
+     "hazard": true,
+     "baby": true
+    }
+   ]
+  },
+  "s8": {
+   "bg": "split",
+   "fx": [
+    "heartbeat"
+   ],
+   "left": {
+    "e": "👶",
+    "t": "KISI KI JAAN"
+   },
+   "right": {
+    "e": "🚗",
+    "t": "AAPKI JAAN"
+   }
+  },
+  "s9": {
+   "bg": "choice",
+   "choice": {
+    "a": "RUK KAR MADAD KARTE",
+    "b": "AAGE JA KAR POLICE KO CALL"
+   }
+  }
+ },
+ "lines": [
+  {
+   "who": "N",
+   "shot": "s1",
+   "dev": "[whispers] رات کے دو بجے… سنسان ہائی وے… اور سامنے کوئی ہاتھ ہلا رہا ہے!",
+   "rom": "Raat ke do baje… sunsaan highway… aur saamne koi haath hila raha hai!"
+  },
+  {
+   "who": "N",
+   "shot": "s2",
+   "dev": "ایک عورت… خراب گاڑی کے پاس… بالکل اکیلی۔",
+   "rom": "Ek aurat… kharab gaadi ke paas… bilkul akeli."
+  },
+  {
+   "who": "F",
+   "shot": "s3",
+   "dev": "[crying] رکیے! میرا بچہ بیمار ہے… پلیز مدد کریں!",
+   "rom": "Rukiye! Mera bacha beemar hai… please madad karein!"
+  },
+  {
+   "who": "N",
+   "shot": "s3",
+   "dev": "آپ نے بریک لگائی… تبھی ریڈیو بولا۔",
+   "rom": "Aap ne brake lagayi… tabhi radio bola.",
+   "sfx": [
+    "brake"
+   ]
+  },
+  {
+   "who": "X",
+   "shot": "s4",
+   "dev": "[serious] خبردار! ہائی وے پر ایک گینگ… عورت کو آگے کر کے گاڑیاں روکتا ہے!",
+   "rom": "Khabardar! Highway par ek gang… aurat ko aage kar ke gaariyan rokta hai!",
+   "pop": "KHABARDAR: HIGHWAY GANG!",
+   "radio": true
+  },
+  {
+   "who": "N",
+   "shot": "s5",
+   "dev": "دل زور سے دھڑکا…",
+   "rom": "Dil zor se dhadka…"
+  },
+  {
+   "who": "N",
+   "shot": "s5",
+   "mode": "beat",
+   "dur": 0.6,
+   "dev": "",
+   "rom": "",
+   "pop": "THAK! THAK!",
+   "sfx": [
+    "knock"
+   ],
+   "shake": true
+  },
+  {
+   "who": "F",
+   "shot": "s5",
+   "dev": "[desperate] دروازہ کھولو! بچہ سانس نہیں لے رہا!",
+   "rom": "Darwaza kholo! Bacha saans nahi le raha!"
+  },
+  {
+   "who": "N",
+   "shot": "s6",
+   "dev": "[whispers] پیچھے اندھیرے میں… دو اور سائے۔",
+   "rom": "Peeche andhere mein… do aur saaye.",
+   "sfx": [
+    "sting"
+   ]
+  },
+  {
+   "who": "N",
+   "shot": "s6",
+   "dev": "یا شاید… وہ صرف درخت تھے؟",
+   "rom": "Ya shayad… woh sirf darakht thay?",
+   "fade_chars": true
+  },
+  {
+   "who": "N",
+   "shot": "s7",
+   "dev": "اور اُس گاڑی سے… سچ میں بچے کے رونے کی آواز آئی۔",
+   "rom": "Aur us gaadi se… sach mein bache ke rone ki awaaz aayi.",
+   "pop": "UAAA… UAAA…"
+  },
+  {
+   "who": "N",
+   "shot": "s8",
+   "dev": "ایک طرف کسی کی جان… دوسری طرف آپ کی۔",
+   "rom": "Ek taraf kisi ki jaan… doosri taraf aapki."
+  },
+  {
+   "who": "N",
+   "shot": "s9",
+   "final": true,
+   "dev": "آپ ہوتے تو کیا کرتے؟ اے: رک کر مدد۔ بی: آگے جا کر پولیس کو کال۔ کمنٹ میں لکھو… کل نئی کہانی، نیا سوال!",
+   "rom": "Aap hote toh kya karte? A: ruk kar madad. B: aage ja kar police ko call. Comment mein likho… kal nayi kahani, naya sawaal!"
+  }
+ ]
+}

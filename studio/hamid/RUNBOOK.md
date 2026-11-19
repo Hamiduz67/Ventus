@@ -77,3 +77,23 @@ Pick the format from the Metricool free-post budget in state.json "metricool" {m
 
 ## Report (every run)
 SendUserMessage to the owner: what was posted (title, time, platforms) or what failed, characters of ElevenLabs used, next planned day.
+
+## C. Daily thriller reel "Aap Kya Karte?" (YouTube Shorts only, posts 22:00 Asia/Dubai)
+Series rules: studio/thriller/SERIES.md. State: studio/thriller/state.json (last_n, episodes with premise + question). Episodes: thriller/epNNN/.
+1. `python3 studio/elevenlabs_budget.py` — if remaining < 4,000 characters (about one more day of all three reels + a weekly) and
+   state "el_warned_for_reset" != that reset_unix, send a PushNotification reminding the owner to upgrade ElevenLabs before it runs out
+   (remaining, reset date), then set el_warned_for_reset = reset_unix. If remaining < 700, do not generate; report instead.
+2. `buffer_post.py status` — never post the same n twice.
+3. Write thriller/epNNN/script.json ({"shots": {...}, "lines": [...]}) + meta.json ({"n", "title", "hook", "thumb": {"l1", "l2", "emoji"}}); follow ep001 as the template.
+   Shot spec: bg (thriller_render.py BG), chars [{k: woman|man|hood|old|guard, x, y (feet), s, wave, eyes, window}], props
+   [{k: car_broken|radio|trees|phone|emoji, ...}], fx [rain, rain_glass, headlights, fog, flicker, red, heartbeat], pill, big, clock,
+   left/right (split dilemma), choice {a, b}. Line fields: who, shot, dev, rom, optional pop, sfx [heartbeat, sting, knock, brake, baby,
+   thunder, phone, whoosh, tick], radio, shake, fade_chars, mode "beat" + dur, final. Add new backgrounds/props in the same style when a story needs them.
+4. `python3 studio/thriller/tts.py thriller/epNNN` (optionally transcribe with faster-whisper small, language ur), then
+   `python3 studio/thriller/thriller_audio.py thriller/epNNN` (exit 3 = rules broken: rewrite the script).
+5. `thriller_render.py thriller/epNNN still:<0.1,0.4,1.2 + one per shot>` and `... thumb` → LOOK at them (figures visible, nothing cut off, text readable),
+   then full render + mux (same 67 ms adelay as the Hamid reels) to thriller/epNNN/AapKyaKarte_NNN.mp4.
+6. Commit only the mp4 + thumb.jpg + script.json + meta.json, push, check the commit-SHA raw URL is HTTP 200, then
+   `buffer_post.py schedule --channels youtube --url <raw mp4> --caption "<hook line> Aap hote toh kya karte? A ya B — comment karo! 👇 #AapKyaKarte #thriller #urdu #suspense #story #shorts"
+   --title "<hook, ≤ 70 chars> | Aap Kya Karte? #shorts" --at "<today> 22:00"`.
+7. Update studio/thriller/state.json (last_n, episodes += {n, title, premise, question a/b, file, posted_at, buffer_id, elevenlabs_chars, length_s}) and push.
