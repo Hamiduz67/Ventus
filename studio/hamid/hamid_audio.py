@@ -607,6 +607,27 @@ if "cliff14" in SPN:
     q14 = LS_("cliff14"); add(sfx, beep(1200, 0.08, 0.5), q14[1]["start"] + 0.02); add(sfx, beep(1600, 0.1, 0.5), q14[1]["start"] + 0.17)
     add(sfx, kick(), q14[1]["end"] - 1.2, 1.0)
     for k in range(5): add(sfx, TICK, q14[1]["end"] - 1.0 + k * 0.2, 0.4)
+# ---- Day 15: two clocks tick, helmet drop, bike zooms off, class bell, phone buzz, confiscation stamp, missed-call beeps, office stamp, Ammi ring
+if "hook15" in SPN:
+    h15 = LS_("hook15")
+    for k in range(6): add(sfx, TICK, h15[0]["start"] + 1.4 + k * 0.22, 0.4)
+if "plan15" in SPN:
+    p15 = LS_("plan15"); add(sfx, kick(), p15[2]["start"] + 0.75, 0.6); add(sfx, sad_trombone(), p15[3]["start"] - 0.3, 0.0)
+    add(sfx, engine(0.8), p15[3]["start"], 0.7); add(sfx, honk(0.3), p15[3]["start"] + 0.1, 0.6)
+if "class15" in SPN:
+    c15 = LS_("class15"); add(sfx, bell(), c15[0]["start"], 0.5); add(sfx, buzz(1.2), c15[1]["start"] - 0.4, 0.5)
+    add(sfx, kick(), c15[3]["start"] + 0.4, 0.9); add(sfx, kick(), c15[4]["start"], 0.6)
+if "msg15" in SPN:
+    m15 = LS_("msg15")
+    for k in range(4): add(sfx, beep(1200, 0.07, 0.4), m15[0]["start"] + 0.2 + k * 0.18)
+    add(sfx, beep(1600, 0.1, 0.5), m15[1]["start"] + 0.05); add(sfx, kick(), m15[2]["start"], 1.0); add(sfx, sad_trombone(), m15[2]["start"] + 0.1, 0.3)
+if "office15" in SPN:
+    o15 = LS_("office15")
+    for k in range(5): add(sfx, noise(0.04, 0.01), o15[0]["start"] + k * 0.15, 0.45)
+    add(sfx, CHIME, o15[3]["start"] + 0.1, 0.5); add(sfx, kick(), o15[4]["start"], 1.0); add(sfx, CHIME, o15[4]["start"] + 0.1, 0.6)
+if "cliff15" in SPN:
+    q15 = LS_("cliff15"); add(sfx, ring(0.8), q15[0]["start"] - 0.5, 0.5); add(sfx, kick(), q15[0]["start"] + 1.0, 0.8)
+    for k in range(5): add(sfx, TICK, q15[1]["start"] + 0.5 + k * 0.25, 0.4)
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:

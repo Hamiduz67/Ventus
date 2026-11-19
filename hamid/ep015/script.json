@@ -1,0 +1,168 @@
+[
+{
+"who": "H",
+"mode": "vo",
+"scene": "hook15",
+"dev": "کلاس آٹھ بجے… ڈیوٹی بھی آٹھ بجے!",
+"rom": "Class aath baje… duty bhi aath baje!"
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "daycard",
+"dev": "دن پندرہ۔ جیب خالی۔",
+"rom": "Din pandrah. Jeb khaali."
+},
+{
+"who": "L",
+"mode": "talk",
+"scene": "plan15",
+"dev": "[excited] ٹینشن نہ لے! تیری ڈیوٹی میں کروں گا!",
+"rom": "Tension na le! Teri duty main karunga!"
+},
+{
+"who": "H",
+"mode": "talk",
+"scene": "plan15",
+"dev": "تو؟ تجھے تو راستہ بھی نہیں پتا!",
+"rom": "Tu? Tujhe toh raasta bhi nahi pata!"
+},
+{
+"who": "L",
+"mode": "talk",
+"scene": "plan15",
+"dev": "[laughs] ہیلمٹ ہے نا! کوئی نہیں پہچانے گا!",
+"rom": "Helmet hai na! Koi nahi pehchanega!"
+},
+{
+"who": "H",
+"mode": "beat",
+"scene": "plan15",
+"dev": "",
+"rom": "",
+"dur": 0.7
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "class15",
+"dev": "پہلی کلاس… پہلا دن… سپنا سچ!",
+"rom": "Pehli class… pehla din… sapna sach!"
+},
+{
+"who": "L",
+"mode": "talk",
+"scene": "class15",
+"dev": "[panicking] حامد! کسٹمر کا گھر نہیں مل رہا!",
+"rom": "Hamid! Customer ka ghar nahi mil raha!"
+},
+{
+"who": "H",
+"mode": "talk",
+"scene": "class15",
+"dev": "لوکیشن بھیجی ہے… اب فون بند کر!",
+"rom": "Location bheji hai… ab phone band kar!"
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "class15",
+"dev": "اور سر نے فون ہی لے لیا!",
+"rom": "Aur sir ne phone hi le liya!"
+},
+{
+"who": "H",
+"mode": "beat",
+"scene": "class15",
+"dev": "",
+"rom": "",
+"dur": 0.7
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "msg15",
+"dev": "بریک میں فون ملا… نو مسڈ کالز!",
+"rom": "Break mein phone mila… nau missed calls!"
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "msg15",
+"dev": "شکایت: رائیڈر نے سموسے کھا لیے!",
+"rom": "Shikayat: rider ne samosay kha liye!"
+},
+{
+"who": "H",
+"mode": "beat",
+"scene": "msg15",
+"dev": "",
+"rom": "",
+"dur": 0.7
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "office15",
+"dev": "آفس میں… بلال ہیلمٹ پہنے کھڑا تھا!",
+"rom": "Office mein… Bilal helmet pehne khara tha!"
+},
+{
+"who": "L",
+"mode": "talk",
+"scene": "office15",
+"dev": "[nervous] سر… سموسے گرم تھے، چیک کر رہا تھا!",
+"rom": "Sir… samosay garam thay, check kar raha tha!"
+},
+{
+"who": "H",
+"mode": "talk",
+"scene": "office15",
+"dev": "سر، غلطی میری۔ صبح کلاس، شام ڈبل ڈیوٹی!",
+"rom": "Sir, ghalti meri. Subah class, shaam double duty!"
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "office15",
+"dev": "مینیجر مان گیا… پر سموسوں کے پیسے کٹیں گے!",
+"rom": "Manager maan gaya… par samoson ke paise katenge!"
+},
+{
+"who": "H",
+"mode": "beat",
+"scene": "office15",
+"dev": "",
+"rom": "",
+"dur": 0.7
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "office15",
+"dev": "آج بھی بچ گئے۔",
+"rom": "Aaj bhi bach gaye."
+},
+{
+"who": "A",
+"mode": "talk",
+"scene": "cliff15",
+"dev": "[worried] بیٹا… ابو ہسپتال میں ہیں…",
+"rom": "Beta… Abbu hospital mein hain…"
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "cliff15",
+"dev": "اور جیب میں… ایک روپیہ بھی نہیں۔",
+"rom": "Aur jeb mein… ek rupaya bhi nahi."
+},
+{
+"who": "H",
+"mode": "vo",
+"scene": "cliff15",
+"outro": true,
+"dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!",
+"rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"
+}
+]
