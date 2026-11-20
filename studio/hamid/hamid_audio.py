@@ -628,6 +628,30 @@ if "office15" in SPN:
 if "cliff15" in SPN:
     q15 = LS_("cliff15"); add(sfx, ring(0.8), q15[0]["start"] - 0.5, 0.5); add(sfx, kick(), q15[0]["start"] + 1.0, 0.8)
     for k in range(5): add(sfx, TICK, q15[1]["start"] + 0.5 + k * 0.25, 0.4)
+# ---- Day 16: hospital beeps, Ammi ring, message pings + REJECTED stamp, dummy-phone toss + trombone, Rauf's table slam, notes, payment chime, packet whisper ticks
+if "hook16" in SPN:
+    h16 = LS_("hook16")
+    for k in range(4): add(sfx, beep(1000, 0.08, 0.35), h16[0]["start"] + 1.4 + k * 0.45)
+    add(sfx, kick(), h16[0]["end"] - 0.6, 0.8)
+if "call16" in SPN:
+    c16 = LS_("call16"); add(sfx, ring(0.8), c16[0]["start"] - 0.5, 0.5); add(sfx, kick(), c16[0]["start"] + 1.6, 0.7)
+if "office16" in SPN:
+    o16 = LS_("office16"); add(sfx, beep(1600, 0.1, 0.5), o16[0]["start"] + 0.3); add(sfx, beep(1200, 0.08, 0.5), o16[1]["start"] + 0.2)
+    add(sfx, kick(), o16[2]["start"], 1.0); add(sfx, sad_trombone(), o16[2]["start"] + 0.1, 0.3)
+if "bilal16" in SPN:
+    b16 = LS_("bilal16"); add(sfx, CHIME, b16[0]["start"] + 1.0, 0.4); add(sfx, WHOOSH, b16[1]["start"], 0.7)
+    add(sfx, kick(), b16[1]["start"] + 0.5, 0.8); add(sfx, sad_trombone(), b16[1]["start"] + 0.7, 0.35)
+if "rauf16" in SPN:
+    r16 = LS_("rauf16"); add(sfx, kick(), r16[1]["start"] + 0.05, 0.9); add(sfx, kick(), r16[1]["start"] + 1.0, 0.6)
+    for k in range(3): add(sfx, TICK, r16[3]["start"] + k * 0.18, 0.45)
+    for k in range(5): add(sfx, noise(0.05, 0.012), r16[4]["start"] + 0.2 + k * 0.12, 0.45)
+    add(sfx, CHIME, r16[4]["start"] + 0.5, 0.6)
+if "send16" in SPN:
+    s16 = LS_("send16"); add(sfx, beep(1400, 0.08, 0.5), s16[0]["start"] + 0.4); add(sfx, CHIME, s16[0]["start"] + 1.2, 0.7)
+    add(sfx, ring(0.6), s16[1]["start"] - 0.4, 0.4); add(sfx, kick(), s16[2]["start"], 0.8); add(sfx, CHIME, s16[2]["start"] + 0.1, 0.6)
+if "cliff16" in SPN:
+    q16 = LS_("cliff16"); add(sfx, kick(), q16[0]["start"] + 0.3, 0.7); add(sfx, kick(), q16[1]["start"] + 0.1, 1.0)
+    for k in range(6): add(sfx, TICK, q16[2]["start"] + 0.2 + k * 0.25, 0.4)
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:

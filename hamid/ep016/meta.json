@@ -1,0 +1,4 @@
+{"day": 16, "city": "Karachi", "money": 0, "money_start": 0, "title": "Paanch Hazaar", "diary_follow": false,
+ "money_steps": [[13, 5000, 0.8], [14, 0, 1.0]],
+ "hook": {"text": "ABBU HOSPITAL MEIN!", "emoji": "🏥", "sub": "JEB: Rs 0"},
+ "thumb": {"t": 8.5, "l1": "SUBAH TAK", "l2": "Rs 5,000 KAHAN SE?!", "emoji": "🏥", "tag": "Rs 5,000", "mood": "shock"}}
