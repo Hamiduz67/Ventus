@@ -1,0 +1,4 @@
+{"day": 18, "city": "Karachi", "money": 0, "money_start": 500, "title": "Kaghaz Dikhao", "diary_follow": false,
+ "money_steps": [[19, 0, 1.6]],
+ "hook": {"text": "KAGHAZ DIKHAO!", "emoji": "🏍️", "sub": "POLICE NAKA • 2:45 AM"},
+ "thumb": {"t": 9.5, "l1": "KAGHAZ NAHI", "l2": "BIKE GAYI?!", "emoji": "🏍️", "tag": "POLICE NAKA", "mood": "shock"}}
