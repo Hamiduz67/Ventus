@@ -13,7 +13,7 @@ Every day 10 pm." Language: simple Urdu–Hindi–English mix (like Hamid). Voic
   suits a simple, relatable story for a Pakistani/Indian audience. Make it ORIGINAL — never copy or repost anyone's video, no real people,
   brands or logos. If the topic is a rumour or hoax, say it clearly in one line ("asal mein yeh afwah hai…"). Facts must be true or clearly
   hypothetical ("shayad", "ho sakta hai"); check facts with a web search. Never repeat a topic in state.json "episodes".
-- **50–80 s, 1080x1920, SLOWER with pauses** (owner, 2026-11-21: "the video seems too fast, make it slow with pauses so it gets interesting"):
+- **55–75 s, 1080x1920, storytelling pace with pauses** (owner, 2026-11-21: "the video seems too fast, make it slow with pauses so it gets interesting"):
   natural voice speed (no speed-up), 0.3 s between lines, 0.45 s at scene cuts, and `"pause": <0.3–0.7>` after suspense lines
   (the hook, the title question, each time-jump reveal, the twist). Up to 6 wordless beats of ≤ 1.3 s (never two in a row) for reveals.
   Still never boring: every scene changes something on screen; whatif_audio.py exits 3 if the rules are broken — rewrite the script.
@@ -21,7 +21,11 @@ Every day 10 pm." Language: simple Urdu–Hindi–English mix (like Hamid). Voic
   "emoji", "sub"}` → flash, shake, burst headline + boom sting. Then a title line "Kya hoga agar…?". Check stills at 0.1, 0.4, 1.2 s.
 - **Ending (always)**: last line has `"final": true` and asks the viewer: "Aap … kya karoge? Comment karo, aur follow karo!" (meta.json "question"
   is shown on the ending card). A funny line or visual gag at least once.
-- ≤ ~600 ElevenLabs characters per reel (voices in studio/whatif/tts.py: N narrator "Kamran M", H Hamid "Raghav" eleven_v4 LOCKED no [tags],
+- **Narration style (owner, 2026-11-21):** narrator voice = "Sunny Singh – Curious, Serious" (fixed). Tell it like a story, VERY curiously,
+  with turns that keep people hooked: open loops and turn words ("socho…", "lekin…", "aur phir…", "par asli twist toh ab aaya…",
+  "kuch aisa hua… jo kisi ne nahi socha tha"), a question in almost every narrator line, [curious] / [whispers] / [excited] tags.
+  Not slow: voices at 1.15x, short gaps, pauses only after the turns.
+- ≤ ~700 ElevenLabs characters per reel (voices in studio/whatif/tts.py: N narrator "Sunny Singh", H Hamid "Raghav" eleven_v4 LOCKED no [tags],
   L Bilal, F young woman, O older man, W older woman).
 
 ## Files
