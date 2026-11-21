@@ -4387,9 +4387,9 @@ def sc_inside17(img, t, lt):
     elif t < v4["start"]:
         k = t - v3["start"]
         call_inset(img, "R", 540, 560, t, "det", ((60, 120, 90), (30, 80, 60)), "SETH RAUF", eob(k / 0.3) * 0.85)
-        paste_c(img, pill("SAKHT 😠", 50, RED, WHITE), 220, 330, eob((k - 0.2) / 0.3), rot=-6)
+        paste_c(img, pill("SAKHT", 50, RED, WHITE), 200, 330, eob((k - 0.2) / 0.3), rot=-6); paste_c(img, emoji("😠", 80), 200, 440, eob((k - 0.3) / 0.3))
         nt = word_t(v3, "naram", v3["start"] + 1.6)
-        if t > nt - 0.1: paste_c(img, pill("ANDAR SE NARAM 🥹", 50, GRN, WHITE), 800, 860, eob((t - nt + 0.1) / 0.3), rot=5)
+        if t > nt - 0.1: paste_c(img, pill("ANDAR SE NARAM", 50, GRN, WHITE), 800, 860, eob((t - nt + 0.1) / 0.3), rot=5); paste_c(img, emoji("🥹", 80), 960, 760, eob((t - nt) / 0.3))
     elif t < v5["start"]:
         k = t - v4["start"]
         paste_c(img, emoji("🤲", 120), 560, 400, eob(k / 0.3))
