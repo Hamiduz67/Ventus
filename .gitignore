@@ -17,3 +17,5 @@ thriller/**/video*.mp4
 thriller/**/timeline.json
 thriller/**/*.log
 thriller/**/thumb.png
+__pycache__/
+*.pyc
