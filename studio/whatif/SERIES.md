@@ -13,8 +13,10 @@ Every day 10 pm." Language: simple Urdu–Hindi–English mix (like Hamid). Voic
   suits a simple, relatable story for a Pakistani/Indian audience. Make it ORIGINAL — never copy or repost anyone's video, no real people,
   brands or logos. If the topic is a rumour or hoax, say it clearly in one line ("asal mein yeh afwah hai…"). Facts must be true or clearly
   hypothetical ("shayad", "ho sakta hai"); check facts with a web search. Never repeat a topic in state.json "episodes".
-- **45–60 s, 1080x1920, voice-led** (same rules as the Hamid engine: something is always being said; at most 4 wordless beats ≤ 0.6 s,
-  never two in a row; whatif_audio.py exits 3 otherwise — rewrite the script).
+- **50–80 s, 1080x1920, SLOWER with pauses** (owner, 2026-11-21: "the video seems too fast, make it slow with pauses so it gets interesting"):
+  natural voice speed (no speed-up), 0.3 s between lines, 0.45 s at scene cuts, and `"pause": <0.3–0.7>` after suspense lines
+  (the hook, the title question, each time-jump reveal, the twist). Up to 6 wordless beats of ≤ 1.3 s (never two in a row) for reveals.
+  Still never boring: every scene changes something on screen; whatif_audio.py exits 3 if the rules are broken — rewrite the script.
 - **2-second cold-open hook**: line 1 starts on the shock itself (never a slow intro). meta.json `"hook": {"text": "<2-4 BIG Roman words>",
   "emoji", "sub"}` → flash, shake, burst headline + boom sting. Then a title line "Kya hoga agar…?". Check stills at 0.1, 0.4, 1.2 s.
 - **Ending (always)**: last line has `"final": true` and asks the viewer: "Aap … kya karoge? Comment karo, aur follow karo!" (meta.json "question"
