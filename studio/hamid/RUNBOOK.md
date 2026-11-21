@@ -10,6 +10,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
 - If downloads fail with TLS errors, use the proxy CA bundle (~/.ccr/ca-bundle.crt).
 
 ## A. Daily reel run (2 per day: posts at 18:00 and 20:00 Asia/Dubai)
+> **2026-11-21 one-off:** the 18:00 slot today is already filled by Day 17 (catch-up of the missed 2026-11-20 20:00 reel, approved by the owner). If you are the 2026-11-21 18:00 run: do NOT make or post a reel; check `buffer_post.py status` for Day 16/17 and report only. The 20:00 run makes Day 18 normally. Also see state.json "slot_override".
 > **Owner, 2026-11-19:** the 13:00 slot is gone (13:00 reels got ~80% fewer views than 20:00 ones on Instagram since Day 6). The early slot now posts at
 > **18:00** Asia/Dubai (19:00 Pakistan). If an older task prompt still says 13:00, use 18:00. Every reel from Day 15 also needs the cold-open hook
 > (SERIES.md "Cold-open hook": problem in the first words + meta.json "hook").
