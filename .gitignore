@@ -19,3 +19,12 @@ thriller/**/*.log
 thriller/**/thumb.png
 __pycache__/
 *.pyc
+whatif/**/*.wav
+whatif/**/*.f32
+whatif/**/el*.mp3
+whatif/**/still_*.png
+whatif/**/video*.mp4
+whatif/**/timeline.json
+whatif/**/lipsync.npz
+whatif/**/*.log
+whatif/**/thumb.png
