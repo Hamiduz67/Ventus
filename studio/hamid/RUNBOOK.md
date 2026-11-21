@@ -104,3 +104,19 @@ Series rules: studio/thriller/SERIES.md. State: studio/thriller/state.json (last
    `buffer_post.py schedule --channels youtube --url <raw mp4> --caption "<hook line> Aap hote toh kya karte? A ya B — comment karo! 👇 #AapKyaKarte #thriller #urdu #suspense #story #shorts"
    --title "<hook, ≤ 70 chars> | Aap Kya Karte? #shorts" --at "<today> 22:00"`.
 7. Update studio/thriller/state.json (last_n, episodes += {n, title, premise, question a/b, file, posted_at, buffer_id, elevenlabs_chars, length_s}) and push.
+
+## D. Daily What If reel "Kya Hoga Agar?" (Instagram Reel only, posts 22:00 Asia/Dubai)
+Series rules: studio/whatif/SERIES.md. State: studio/whatif/state.json. Episodes: whatif/epNNN/.
+1. `python3 studio/elevenlabs_budget.py` (same low-budget warning rule as section C; if remaining < 700, do not generate; report).
+   `buffer_post.py status` — never post the same n twice (look for "Kya Hoga Agar" #n on Instagram today).
+2. Research (last 30 days): Metricool getAnalyticsDataByMetrics for Instagram reels (brand 7980574: IGRE01 date, IGRE03 content, IGRE23 views,
+   IGRE11 reach, IGRE21 shares, IGRE12 saved, IGRE30 skip rate) + web searches for viral "what if" topics / hypotheticals / news. Pick a fresh topic,
+   add one line to state.json "trend_notes" (date, what is trending, what our reels show).
+3. Write whatif/epNNN/script.json + meta.json (template: whatif/ep001), then `python3 studio/whatif/tts.py whatif/epNNN` and
+   `python3 studio/whatif/whatif_audio.py whatif/epNNN` (exit 3 = rules broken: rewrite the script).
+4. Add the episode's scenes to studio/whatif/whatif_render.py (reuse helpers; register in WI_SC), then
+   `whatif_render.py whatif/epNNN still:0.1,0.4,1.2,<one per scene>` and `... thumb` → LOOK at them, fix overlaps; full render + mux:
+   `cd whatif/epNNN && python3 ../../studio/whatif/whatif_render.py . && ffmpeg -i video.tmp.mp4 -i mix.wav -map 0:v -map 1:a -c:v copy -af adelay=67:all=1 -c:a aac -b:a 192k -shortest -movflags +faststart KyaHogaAgar_NNN.mp4`
+5. Commit only the mp4 + thumb.jpg + script.json + meta.json + renderer changes, push, check the commit-SHA raw URL is HTTP 200, then
+   `buffer_post.py schedule --channels instagram --url <raw mp4> --caption "<hook line + emoji> … Aap kya karoge? Comment karo 👇 Roz raat 10 baje naya 'Kya Hoga Agar?' — follow karo! #KyaHogaAgar #whatif #kyahogaagar #urdu #hindi #story #reels" --title "Kya Hoga Agar? #N" --at "<today> 22:00"`.
+6. Update studio/whatif/state.json (last_n, episodes += {n, title, topic, why (trend), file, posted_at, buffer_id, elevenlabs_chars, length_s}) and push.
