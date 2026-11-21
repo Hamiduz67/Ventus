@@ -33,10 +33,10 @@ for _l in tl:
         _n, _, _d = _s.partition("@"); _wi_sfx(_n, _l["start"] + (float(_d) if _d else 0.0))
 '''
 # ---- What If pacing (owner, 2026-11-21: "too fast - make it slow with pauses so it gets interesting"):
-# natural speed (no speed-up), breathing room between lines and scenes, longer dramatic beats, and a per-line
+# owner 2026-11-21 (2nd note: "slow, make it sound like narrating a story, very curiously, with turns"): near-natural speed, short breathing room between lines and scenes, longer dramatic beats, and a per-line
 # "pause": <seconds> (extra silence after that line, for suspense). 50-80 s allowed (Instagram Reels).
-PACE = [("VOICE_TEMPO = 1.12", "VOICE_TEMPO = 1.0"), ("GAP = 0.06 ", "GAP = 0.3 "),
-        ("BEAT_MAX = 0.6; SCENE_GAP = 0.04", "BEAT_MAX = 1.3; SCENE_GAP = 0.45"),
+PACE = [("VOICE_TEMPO = 1.12", "VOICE_TEMPO = 1.15"), ("GAP = 0.06 ", "GAP = 0.12 "),
+        ("BEAT_MAX = 0.6; SCENE_GAP = 0.04", "BEAT_MAX = 1.1; SCENE_GAP = 0.3"),
         ("t += d + GAP; prev_scene", "t += d + GAP + float(l.get('pause', 0)); prev_scene"),
         ("if len(_beats) > 4:", "if len(_beats) > 6:"), ("(max 4)", "(max 6)"),
         ("if not 45 <= TOTAL <= 62:", "if not 45 <= TOTAL <= 80:"), ("(want 45-60 s)", "(want 50-80 s)")]

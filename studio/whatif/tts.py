@@ -5,7 +5,7 @@ D = sys.argv[1]
 KEY = os.environ.get("ELEVENLABS_API_KEY") or open(os.path.expanduser("~/.secrets/elevenlabs_key")).read().strip()
 # who -> (voice_id, model, stability, keep_tags)
 VOICES = {
-    "N": ("GnmcdQ5D9NktfEwK2h3j", "eleven_v3", 0.5, True),    # Narrator "Kamran M" - dramatic Urdu (series voice, keep fixed)
+    "N": ("yco9hkSzXpAeaJXfPNpa", "eleven_v3", 0.5, True),    # Narrator "Sunny Singh - Curious, Serious" (owner's pick 2026-11-21; series voice, keep fixed). Use [curious] [whispers] [excited] tags
     "H": ("4BoDaQ6aygOP6fpsUmJe", "eleven_v4", 0.4, False),   # Hamid (crossover host) - "Raghav", LOCKED, no [tags]
     "L": ("7b9mYhmnp0y2qSH1FnBL", "eleven_v3", 0.5, True),    # Bilal - "Bunty"
     "F": ("gHu9GtaHOXcSqFTK06ux", "eleven_v3", 0.5, True),    # young woman - "Anjali"

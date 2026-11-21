@@ -58,7 +58,7 @@ def caption(img, t):
     y = 1580 - 76 * max(0, len(rows) - 3)
     if cur["mode"] == "talk":
         nm, col = NAMES[cur["who"]]; paste_c(img, pill(nm, 34, col, WHITE), W / 2, y - 60, eob((t - cur["start"]) / 0.2))
-    for r in rows[:4]:
+    for r in rows[:5]:
         x = (W - sum(p.width - 10 for p in r)) / 2
         for p in r: img.alpha_composite(p, (int(x), int(y))); x += p.width - 10
         y += 76
@@ -244,7 +244,7 @@ def sc_roof_net(img, t, lt):
     if t < v2["start"]:
         k = t - v1["start"]
         draw_char(img, "H", W / 2, 1010, t, "n", 0.9, arms=(-20, 20))
-        paste_c(img, glow_text("KUCH AJEEB…", "Anton-Regular.ttf", 130, WHITE, (150, 90, 255)), W / 2, 320, eob((k - 0.8) / 0.3), rot=-3)
+        paste_c(img, glow_text("KUCH AISA HUA…", "Anton-Regular.ttf", 120, WHITE, (150, 90, 255)), W / 2, 320, eob((k - 0.8) / 0.3), rot=-3)
         paste_c(img, emoji("🤔", 100), 820, 620, eob((k - 1.0) / 0.3))
     elif t < vh["start"]:
         k = t - v2["start"]

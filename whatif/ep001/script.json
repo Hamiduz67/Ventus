@@ -3,23 +3,23 @@
 "who": "N",
 "mode": "vo",
 "scene": "hook_net",
-"dev": "[serious] ایک سیکنڈ میں… پوری دنیا کا انٹرنیٹ بند!",
-"rom": "Ek second mein… poori duniya ka internet BAND!",
+"dev": "[curious] ایک سیکنڈ… اور پوری دنیا کا انٹرنیٹ… غائب!",
+"rom": "Ek second… aur poori duniya ka internet… GHAYAB!",
 "sfx": [
 "kick"
 ],
-"pause": 0.5
+"pause": 0.3
 },
 {
 "who": "N",
 "mode": "vo",
 "scene": "title",
-"dev": "[serious] کیا ہوگا اگر… چوبیس گھنٹے انٹرنیٹ نہ ہو؟",
-"rom": "Kya hoga agar… 24 ghante internet na ho?",
+"dev": "[curious] سوچو… اگر چوبیس گھنٹے انٹرنیٹ نہ ہو… تو کیا ہوگا؟",
+"rom": "Socho… agar 24 ghante internet na ho… toh kya hoga?",
 "sfx": [
 "whoosh"
 ],
-"pause": 0.7
+"pause": 0.4
 },
 {
 "who": "H",
@@ -36,20 +36,20 @@
 "who": "N",
 "mode": "vo",
 "scene": "room_net",
-"dev": "اربوں فون… ایک ساتھ خاموش۔",
-"rom": "Arbon phone… ek saath khamosh.",
+"dev": "[curious] اربوں فون… ایک ساتھ چپ۔ لیکن یہ تو بس شروعات تھی…",
+"rom": "Arbon phone… ek saath chup. Lekin yeh toh bas shuruaat thi…",
 "sfx": [
 "hum"
 ],
-"pause": 0.6
+"pause": 0.4
 },
 {
 "who": "N",
 "mode": "vo",
 "scene": "shop_net",
 "stamp": "1 GHANTA BAAD",
-"dev": "ایک گھنٹے بعد… کارڈ مشین، اے ٹی ایم… سب بند!",
-"rom": "Ek ghante baad… card machine, ATM… sab band!",
+"dev": "[curious] ایک گھنٹے بعد… کارڈ مشین بند… اے ٹی ایم بند!",
+"rom": "Ek ghante baad… card machine band… ATM band!",
 "sfx": [
 "tick",
 "kick@2.0"
@@ -66,12 +66,11 @@
 "who": "N",
 "mode": "vo",
 "scene": "shop_net",
-"dev": "دکاندار ہنسا… صرف کیش!",
-"rom": "Dukaandar hansa… sirf CASH!",
+"dev": "[amused] اور دکاندار؟ وہ ہنس پڑا… صرف کیش!",
+"rom": "Aur dukaandar? Woh hans pada… sirf CASH!",
 "sfx": [
 "kick@1.0"
-],
-"pause": 0.3
+]
 },
 {
 "who": "H",
@@ -79,7 +78,7 @@
 "scene": "shop_net",
 "dev": "",
 "rom": "",
-"dur": 1.4,
+"dur": 0.9,
 "sfx": [
 "chime"
 ]
@@ -89,8 +88,8 @@
 "mode": "vo",
 "scene": "city_net",
 "stamp": "6 GHANTE BAAD",
-"dev": "چھ گھنٹے بعد… آن لائن آرڈر رُکے، دفتر خالی۔",
-"rom": "Chhe ghante baad… online order ruke, daftar khaali.",
+"dev": "[curious] چھ گھنٹے بعد… آن لائن آرڈر رُکے… دفتر خالی!",
+"rom": "Chhe ghante baad… online order ruke… daftar khaali!",
 "sfx": [
 "whoosh",
 "honk@1.2"
@@ -100,9 +99,8 @@
 "who": "N",
 "mode": "vo",
 "scene": "city_net",
-"dev": "میپ کے بغیر… لوگ راستہ پوچھ رہے ہیں!",
-"rom": "Map ke baghair… log raasta pooch rahe hain!",
-"pause": 0.3
+"dev": "[curious] اور میپ کے بغیر؟ لوگ… راستہ پوچھنے لگے!",
+"rom": "Aur map ke baghair? Log… raasta poochne lage!"
 },
 {
 "who": "H",
@@ -119,19 +117,19 @@
 "mode": "vo",
 "scene": "roof_net",
 "stamp": "12 GHANTE BAAD",
-"dev": "بارہ گھنٹے بعد… کچھ عجیب ہوا۔",
-"rom": "Baara ghante baad… kuch ajeeb hua.",
+"dev": "[whispers] پھر بارہ گھنٹے بعد… کچھ ایسا ہوا… جو کسی نے نہیں سوچا تھا۔",
+"rom": "Phir baara ghante baad… kuch aisa hua… jo kisi ne nahi socha tha.",
 "sfx": [
 "hum"
 ],
-"pause": 0.7
+"pause": 0.4
 },
 {
 "who": "N",
 "mode": "vo",
 "scene": "roof_net",
-"dev": "لوگ چھتوں پر… گلی میں کرکٹ… پڑوسیوں سے باتیں!",
-"rom": "Log chhaton par… gali mein cricket… padosiyon se baatein!",
+"dev": "[excited] لوگ چھتوں پر آ گئے… گلی میں کرکٹ… پڑوسیوں سے باتیں!",
+"rom": "Log chhaton par aa gaye… gali mein cricket… padosiyon se baatein!",
 "sfx": [
 "kick@1.3"
 ]
@@ -144,8 +142,7 @@
 "rom": "Yaar… aasmaan mein itne taare hote hain?",
 "sfx": [
 "chime@0.8"
-],
-"pause": 0.4
+]
 },
 {
 "who": "H",
@@ -153,19 +150,19 @@
 "scene": "roof_net",
 "dev": "",
 "rom": "",
-"dur": 1.4
+"dur": 0.9
 },
 {
 "who": "N",
 "mode": "vo",
 "scene": "back_net",
 "stamp": "24 GHANTE BAAD",
-"dev": "چوبیس گھنٹے بعد… انٹرنیٹ واپس!",
-"rom": "Chaubees ghante baad… internet WAPIS!",
+"dev": "[curious] اور پھر… چوبیس گھنٹے بعد… انٹرنیٹ واپس!",
+"rom": "Aur phir… chaubees ghante baad… internet WAPIS!",
 "sfx": [
 "kick@1.2"
 ],
-"pause": 0.5
+"pause": 0.3
 },
 {
 "who": "H",
@@ -173,7 +170,7 @@
 "scene": "back_net",
 "dev": "",
 "rom": "",
-"dur": 1.4,
+"dur": 0.9,
 "sfx": [
 "dings"
 ]
@@ -182,27 +179,26 @@
 "who": "N",
 "mode": "vo",
 "scene": "back_net",
-"dev": "ہزاروں نوٹیفکیشن… اور سب پھر سے… سکرول!",
-"rom": "Hazaaron notification… aur sab phir se… scroll!",
+"dev": "[curious] ہزاروں نوٹیفکیشن… اور سب پھر سے… سکرول! لیکن…",
+"rom": "Hazaaron notification… aur sab phir se… scroll! Lekin…",
 "sfx": [
 "whoosh@1.5"
 ],
-"pause": 0.4
+"pause": 0.3
 },
 {
 "who": "H",
 "mode": "talk",
 "scene": "back_net",
 "dev": "پر وہ رات… یاد رہے گی۔",
-"rom": "Par woh raat… yaad rahegi.",
-"pause": 0.6
+"rom": "Par woh raat… yaad rahegi."
 },
 {
 "who": "N",
 "mode": "vo",
 "scene": "back_net",
 "final": true,
-"dev": "آپ چوبیس گھنٹے بغیر انٹرنیٹ کیا کرو گے؟ کمنٹ کرو، اور فالو کرو!",
-"rom": "Aap 24 ghante bina internet kya karoge? Comment karo, aur follow karo!"
+"dev": "[curious] اب سوال آپ سے… چوبیس گھنٹے بغیر انٹرنیٹ… آپ کیا کرو گے؟ کمنٹ کرو… اور فالو کرو!",
+"rom": "Ab sawaal aap se… 24 ghante bina internet… aap kya karoge? Comment karo… aur follow karo!"
 }
 ]
