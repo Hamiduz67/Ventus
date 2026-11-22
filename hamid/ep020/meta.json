@@ -1,0 +1,4 @@
+{"day": 20, "city": "Karachi", "money": 0, "money_start": 500, "title": "Hospital Ki Line", "diary_follow": false,
+ "money_steps": [[4, 100, 0.2], [13, 300, 0.6], [16, 0, 0.3]],
+ "hook": {"text": "ABBU GIR GAYE!", "emoji": "🚑", "sub": "KARACHI • SUBAH 7 BAJE"},
+ "thumb": {"t": 40.5, "l1": "ABBU KA ILAAJ", "l2": "PAISE KAHAN?!", "emoji": "🏥", "tag": "Rs 50,000?", "mood": "shock"}}

@@ -1,0 +1,23 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook20", "dev": "ابو بس سے اترے… اور گر گئے!", "rom": "Abbu bus se utre… aur gir gaye!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن بیس۔ جیب میں پانچ سو۔", "rom": "Din bees. Jeb mein paanch sau."},
+{"who": "A", "mode": "talk", "scene": "adda20", "dev": "[worried] بیٹا! جلدی ہسپتال چلو!", "rom": "Beta! Jaldi hospital chalo!"},
+{"who": "H", "mode": "vo", "scene": "adda20", "dev": "رکشے والا بولا… چار سو!", "rom": "Rickshaw wala bola… chaar sau!"},
+{"who": "H", "mode": "vo", "scene": "adda20", "dev": "دے دیے۔ اب جیب میں سو۔", "rom": "De diye. Ab jeb mein sau."},
+{"who": "H", "mode": "vo", "scene": "hosp20", "dev": "ہسپتال میں… سو لوگوں کی لائن!", "rom": "Hospital mein… sau logon ki line!"},
+{"who": "H", "mode": "vo", "scene": "hosp20", "dev": "کھڑکی پہ لکھا… پرچی تین سو!", "rom": "Khirki pe likha… parchi teen sau!"},
+{"who": "H", "mode": "beat", "scene": "hosp20", "dev": "", "rom": "", "dur": 0.7},
+{"who": "H", "mode": "vo", "scene": "hosp20", "dev": "دو سو کم… اب کیا کروں؟", "rom": "Do sau kam… ab kya karoon?"},
+{"who": "L", "mode": "talk", "scene": "bilal20", "dev": "[excited] گھبراؤ مت! بلال آ گیا!", "rom": "Ghabrao mat! Bilal aa gaya!"},
+{"who": "H", "mode": "vo", "scene": "bilal20", "dev": "ہاتھ میں پیسے نہیں… پھولوں کا ہار!", "rom": "Haath mein paise nahi… phoolon ka haar!"},
+{"who": "L", "mode": "talk", "scene": "bilal20", "dev": "[sheepish] ابو کا ویلکم تو بنتا ہے نا!", "rom": "Abbu ka welcome toh banta hai na!"},
+{"who": "H", "mode": "vo", "scene": "abbu20", "dev": "تبھی ابو نے… جیب سے کچھ نکالا۔", "rom": "Tabhi Abbu ne… jeb se kuch nikala."},
+{"who": "H", "mode": "vo", "scene": "abbu20", "dev": "دو سو روپے… تہہ کیے ہوئے۔", "rom": "Do sau rupay… tah kiye hue."},
+{"who": "B", "mode": "talk", "scene": "abbu20", "dev": "[softly] رکھ لو… بیٹا۔", "rom": "Rakh lo… beta."},
+{"who": "H", "mode": "beat", "scene": "abbu20", "dev": "", "rom": "", "dur": 0.7},
+{"who": "H", "mode": "vo", "scene": "abbu20", "dev": "پرچی بن گئی۔ آج بھی بچ گئے۔", "rom": "Parchi ban gayi. Aaj bhi bach gaye."},
+{"who": "A", "mode": "talk", "scene": "cliff20", "dev": "[crying] بیٹا… ڈاکٹر کہتا ہے آپریشن ہوگا!", "rom": "Beta… doctor kehta hai operation hoga!"},
+{"who": "A", "mode": "talk", "scene": "cliff20", "dev": "[crying] پچاس ہزار… ایک ہفتے میں!", "rom": "Pachaas hazaar… ek hafte mein!"},
+{"who": "H", "mode": "vo", "scene": "cliff20", "dev": "پچاس ہزار… اور جیب میں صفر!", "rom": "Pachaas hazaar… aur jeb mein sifar!"},
+{"who": "H", "mode": "vo", "scene": "cliff20", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]

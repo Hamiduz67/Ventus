@@ -675,6 +675,25 @@ if "cliff17" in SPN:
     q17 = LS_("cliff17")
     for k in range(6): add(sfx, beep(900 if k % 2 else 1250, 0.18, 0.35), q17[0]["start"] + k * 0.22)
     add(sfx, kick(), q17[0]["start"] + 0.9, 0.9); add(sfx, whistle(0.6), q17[1]["start"], 0.5); add(sfx, kick(), q17[1]["start"] + 1.5, 0.8)
+# ---- Day 20: Abbu falls (thud), rickshaw honk + notes, hospital beeps + stamp, garland chime + trombone, Abbu's notes chime, operation hits + ticks
+if "hook20" in SPN:
+    h20 = LS_("hook20"); add(sfx, kick(), h20[0]["end"] - 0.7, 1.0); add(sfx, noise(0.3, 0.08), h20[0]["end"] - 0.7, 0.6)
+if "adda20" in SPN:
+    a20 = LS_("adda20"); add(sfx, honk(0.3), a20[1]["start"] + 0.1, 0.7); add(sfx, honk(0.3), a20[1]["start"] + 0.45, 0.6)
+    for k in range(4): add(sfx, noise(0.05, 0.012), a20[2]["start"] + 0.1 + k * 0.12, 0.45)
+if "hosp20" in SPN:
+    p20 = LS_("hosp20")
+    for k in range(3): add(sfx, beep(1000, 0.08, 0.3), p20[0]["start"] + 0.4 + k * 0.5)
+    add(sfx, kick(), p20[2]["start"], 1.0); add(sfx, sad_trombone(), p20[3]["start"] + 0.1, 0.3)
+if "bilal20" in SPN:
+    b20 = LS_("bilal20"); add(sfx, WHOOSH, b20[0]["start"] - 0.1, 0.6); add(sfx, CHIME, b20[1]["start"] + 1.2, 0.5)
+    add(sfx, sad_trombone(), b20[2]["end"] - 0.4, 0.4)
+if "abbu20" in SPN:
+    q20 = LS_("abbu20"); add(sfx, CHIME, q20[0]["end"] - 0.4, 0.5); add(sfx, CHIME, q20[3]["start"] + 0.1, 0.4)
+    add(sfx, kick(), q20[4]["start"], 0.8); add(sfx, CHIME, q20[4]["start"] + 0.1, 0.6)
+if "cliff20" in SPN:
+    c20 = LS_("cliff20"); add(sfx, kick(), c20[0]["start"] + 1.5, 0.9); add(sfx, kick(), c20[1]["start"] + 0.1, 1.0)
+    for k in range(6): add(sfx, TICK, c20[2]["start"] + 0.2 + k * 0.25, 0.4)
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:
