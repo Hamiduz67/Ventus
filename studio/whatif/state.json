@@ -1,6 +1,6 @@
 {
  "series": "Kya Hoga Agar?",
- "last_n": 1,
+ "last_n": 2,
  "episodes": [
   {
    "n": 1,
@@ -13,9 +13,21 @@
    "elevenlabs_chars": 1297,
    "length_s": 68.6,
    "note": "First cut (Kamran M narrator, fast) was pulled before 22:00 at the owner's request. Re-cut: narrator Sunny Singh (owner's pick), curious storytelling with turns ('socho…', 'lekin…', 'aur phir…'), short pauses."
+  },
+  {
+   "n": 2,
+   "title": "Gravity Gayab",
+   "topic": "What if Earth lost gravity for 7 seconds (timeline 1 s -> 3 s -> 5 s -> 7 s 'dharaam'); ends calling out the 12 August 2026 'Project Anchor' gravity hoax",
+   "why": "Last 30 days on IG: What If #1 (story-led, Internet Band) 213 views / 34% skip vs the science-only What If 187 / 45.6%; Hamid story reels 1,000-1,400 with a strong hook. The 7-second gravity hoax (Project Anchor) is 2026's biggest viral what-if; told as a Hamid story with the hoax called a hoax.",
+   "file": "whatif/ep002/KyaHogaAgar_002.mp4",
+   "posted_at": "2026-11-22 22:00 Asia/Dubai",
+   "buffer_id": "6b02ed9b02479690925146f3",
+   "elevenlabs_chars": 576,
+   "length_s": 50.0
   }
  ],
  "trend_notes": [
-  "2026-11-21: last 30 days on IG (Metricool): Hamid story reels 1,000-1,400 views when the hook is strong, 125-200 when weak; skip rate 17-47%. The only earlier What If (earth stops spinning, science-only, 13 Nov) got 187 views / 45.6% skip -> tell What Ifs as a story with Hamid, hook in 1-2 s. Web: the 'Earth loses gravity for 7 seconds' hoax and 'Earth stops spinning' simulations were the biggest What If virals of 2026 - good future topics (call the hoax a hoax)."
+  "2026-11-21: last 30 days on IG (Metricool): Hamid story reels 1,000-1,400 views when the hook is strong, 125-200 when weak; skip rate 17-47%. The only earlier What If (earth stops spinning, science-only, 13 Nov) got 187 views / 45.6% skip -> tell What Ifs as a story with Hamid, hook in 1-2 s. Web: the 'Earth loses gravity for 7 seconds' hoax and 'Earth stops spinning' simulations were the biggest What If virals of 2026 - good future topics (call the hoax a hoax).",
+  "2026-11-22: IG last 30 days (Metricool): What If #1 Internet Band 213 views, 176 reach, 1 save, 34.0% skip (better than the science-only What If: 187 / 45.6%); Hamid reels 1,000-1,400 views when the hook is strong (Day 13-17: 137-161 views, ~47% skip). Web: no new big 'what if' viral this month found; the Project Anchor / 'Earth loses gravity 7 seconds' hoax (NASA debunked) is still the top what-if of 2026 -> used for #2. Ideas left: Earth stops spinning (as a story), 24 h no electricity, phone ban, smog season."
  ]
 }
