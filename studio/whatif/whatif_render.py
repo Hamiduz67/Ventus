@@ -166,7 +166,7 @@ def sc_title(img, t, lt):
     globe(img, 540, 1150, 330, t, dark=0.5)
     paste_c(img, glow_text("KYA HOGA", "Anton-Regular.ttf", 170, WHITE, WI_BLUE), W / 2, 420, eob(lt / 0.3), rot=-3)
     paste_c(img, glow_text("AGAR…", "Anton-Regular.ttf", 190, YEL, (255, 120, 40)), W / 2, 600, eob((lt - 0.3) / 0.3), rot=-3)
-    paste_c(img, pill("24 GHANTE • NO INTERNET", 54, RED, WHITE), W / 2, 780, eob((lt - 1.0) / 0.3) * (1 + 0.04 * math.sin(t * 8)), rot=2)
+    paste_c(img, pill(META.get("title_pill", "24 GHANTE • NO INTERNET"), 54, RED, WHITE), W / 2, 780, eob((lt - 1.0) / 0.3) * (1 + 0.04 * math.sin(t * 8)), rot=2)
 
 def sc_room_net(img, t, lt):
     img.alpha_composite(bg_room("night")); bulb_glow(img, 50)
@@ -287,8 +287,139 @@ def sc_back_net(img, t, lt):
         paste_c(img, bubble([("PAR WOH RAAT…", INK), ("YAAD RAHEGI", (150, 90, 255))], 48, tail="left"), 380, 470, eob(k / 0.3))
         paste_c(img, emoji("🌌", 120), 800, 700, eob((k - 0.4) / 0.3))
 
+
+# ======================= EPISODE 2: Gravity Gayab (7 second bina gravity; the 12 August 2026 hoax)
+def drift(t, t0, amp, dur=2.0, seed=0): return -amp * eio((t - t0) / dur) + 10 * math.sin(t * 2.3 + seed)
+def floaters(img, t, t0, items, amp=520, y0=1330, spin=60):
+    for j, (e, x, sz) in enumerate(items):
+        y = y0 + drift(t, t0 + j * 0.12, amp * (0.6 + 0.4 * ((j * 37) % 10) / 10), 2.2, j)
+        paste_c(img, emoji(e, int(sz * 1.7)), x, y, eob((t - t0 + 0.3) / 0.3), rot=math.sin(t * 1.5 + j) * spin)
+def shake(img, t, t0, a=22, dur=0.5):
+    k = t - t0
+    if 0 <= k < dur:
+        a = a * (1 - k / dur); dx, dy = int(a * math.sin(k * 90)), int(a * math.cos(k * 70))
+        sh = img.copy(); img.paste((0, 0, 0, 255), [0, 0, W, H]); img.alpha_composite(sh, (max(dx, 0), max(dy, 0)), (max(-dx, 0), max(-dy, 0)))
+def drops(img, x, y, t, n=6):
+    d = ImageDraw.Draw(img)
+    for j in range(n):
+        a = j / n * 2 * math.pi + t * 0.8; r = 70 + 20 * math.sin(t * 2 + j); q = 10 + 6 * (j % 3)
+        cx, cy = x + math.cos(a) * r, y + math.sin(a) * r * 0.7
+        d.ellipse([cx - q, cy - q, cx + q, cy + q], fill=(150, 90, 50), outline=INK, width=3)
+def ruler(img, x, y_floor, h_px, k):
+    d = ImageDraw.Draw(img); top = y_floor - h_px * eo(k / 0.4)
+    d.line([(x, y_floor), (x, top)], fill=YEL, width=10)
+    for yy in (y_floor, top): d.line([(x - 40, yy), (x + 40, yy)], fill=YEL, width=10)
+
+def sc_hook_grav(img, t, lt):
+    img.alpha_composite(bg_room("day"))
+    floaters(img, t, 0.0, [("☕", 180, 70), ("📱", 880, 64), ("👟", 300, 80), ("📚", 760, 80), ("🍎", 520, 60), ("🧢", 960, 70)], amp=700)
+    draw_char(img, "H", 540, 1000 + drift(t, 0.3, 120, 2.5), t, "shock", 0.92, arms=(-150, 150))
+    (v0,) = L("hook_grav")
+    st = word_t(v0, "sirf", v0["end"] - 1.0)
+    if t > st - 0.1: stamp(img, "7 SECOND!", W / 2, 300, t - st + 0.1, RED, -6, 120)
+
+def sc_room_grav(img, t, lt):
+    vh, vn, b = L("room_grav")
+    img.alpha_composite(bg_room("day"))
+    if t < vn["start"]:
+        k = t - vh["start"]
+        draw_char(img, "H", 330, 1010, t, "shock", 0.95, arms=(-20, -120))
+        cy = 1060 + drift(t, vh["start"], 520, 1.8)
+        paste_c(img, emoji("☕", 170), 540, cy, 1.0, rot=k * 40)
+        drops(img, 520, cy - 40, t, int(min(6, k * 6)))
+        paste_c(img, pill("CUP: UD GAYA!", 52, RED, WHITE), 780, 300, eob((k - 0.6) / 0.3), rot=4)
+    else:
+        k = t - vn["start"]
+        lift = 260 * eio(k / 2.5) + 12 * math.sin(t * 2)
+        floaters(img, t, vn["start"] - 0.5, [("☕", 820, 90), ("📱", 160, 70), ("🧸", 900, 80)], amp=500, y0=1200)
+        d = ImageDraw.Draw(img); sw = 200 * (1 - 0.3 * eio(k / 2.5))
+        d.ellipse([330 - sw, 1395, 330 + sw, 1430], fill=(60, 40, 30, 120))
+        draw_char(img, "H", 330, 1010 - lift, t, "shock" if t < b["start"] else "happy", 0.95, arms=(-160, 160))
+        ht = word_t(vn, "hawa", vn["end"] - 0.6)
+        if t > ht - 0.1: stamp(img, "HAWA MEIN!", 760, 300, t - ht + 0.1, WI_BLUE, -6, 110)
+        if t > b["start"] - 0.05: paste_c(img, emoji("😵", 110), 760, 560, eob((t - b["start"]) / 0.25), rot=10 * math.sin(t * 6))
+
+def sc_street_grav(img, t, lt):
+    v1, vh = L("street_grav")
+    img.alpha_composite(bg_street("day"))
+    if t < vh["start"]:
+        k = t - v1["start"]
+        floaters(img, t, v1["start"], [("🩴", 150, 80), ("🐈", 420, 110), ("🩴", 650, 70), ("🐈", 900, 100), ("⚽", 280, 70), ("🪣", 780, 80)], amp=650, y0=1380)
+        draw_char(img, "Z", 560, 1060 + drift(t, v1["start"] + 0.4, 220, 2.0), t, "happy", 0.7, arms=(-160, 160), laugh=True)
+        st = word_t(v1, "sab", v1["end"] - 0.6)
+        if t > st - 0.1: stamp(img, "SAB UPAR!", W / 2, 300, t - st + 0.1, RED, -5, 120)
+    else:
+        k = t - vh["start"]
+        cyc = 1000 + drift(t, vh["start"] - 1.0, 280, 1.5, 2)
+        draw_char(img, "C", 780, cyc, t, "shock", 0.85, arms=(-160, 160))
+        paste_c(img, emoji("🪁", 120), 930, cyc - 330, 1.0, rot=15 * math.sin(t * 3))
+        draw_char(img, "H", 300, 1010 + drift(t, vh["start"] - 1.0, 160, 1.5), t, "happy", 0.88, arms=(-20, -130))
+        paste_c(img, bubble([("CHACHA! PATANG NAHI…", INK), ("AAP UD RAHE HO!", WI_BLUE)], 44, tail="left"), 420, 380, eob(k / 0.3))
+        if k > 1.2: paste_c(img, emoji("😂", 100), 560, 640, eob((k - 1.2) / 0.3))
+
+def sc_sky_grav(img, t, lt):
+    vn, vh, b = L("sky_grav")
+    img.alpha_composite(bg_street("day"))
+    lift = 230 + 14 * math.sin(t * 2)
+    d = ImageDraw.Draw(img); d.ellipse([340, 1395, 740, 1430], fill=(60, 40, 30, 110))
+    draw_char(img, "H", 540, 1000 - lift, t, "shock" if t < vh["start"] else "happy", 0.9, arms=(-160, 160), laugh=t > vh["start"])
+    floaters(img, t, vn["start"] - 3, [("🩴", 160, 70), ("🐈", 900, 100), ("🪁", 820, 90)], amp=420, y0=1300)
+    if t < vh["start"]:
+        k = t - vn["start"]
+        ruler(img, 880, 1410, 300, k - 1.2)
+        ft = word_t(vn, "foot", vn["end"] - 1.2)
+        if t > ft - 0.1: paste_c(img, pill("SIRF 1-2 FOOT", 58, YEL), W / 2, 300, eob((t - ft + 0.1) / 0.3), rot=-3)
+        paste_c(img, pill("ZAMEEN GOL HAI • NEECHE MUDTI HAI", 36, WHITE, INK), W / 2, 420, eob((k - 2.4) / 0.3))
+    else:
+        k = t - vh["start"]
+        paste_c(img, bubble([("MAZAA AA", INK), ("RAHA HAI!", GRN)], 50, tail="left"), 300, 380, eob(k / 0.3))
+        if t > b["start"] - 0.05:
+            for j in range(5): paste_c(img, emoji("✨", 70), 300 + j * 130, 250 + 60 * math.sin(t * 4 + j), eob((t - b["start"] - j * 0.05) / 0.2))
+
+def sc_fall_grav(img, t, lt):
+    v1, b, vh = L("fall_grav")
+    img.alpha_composite(bg_room("day"))
+    dt_ = word_t(v1, "dharaam", v1["end"] - 0.7)
+    if t < dt_:
+        k = t - v1["start"]
+        floaters(img, t, v1["start"] - 4, [("☕", 820, 90), ("📱", 160, 70), ("👟", 900, 80), ("📚", 260, 80)], amp=520, y0=1200)
+        draw_char(img, "H", 540, 760 + 12 * math.sin(t * 2), t, "shock", 0.9, arms=(-160, 160))
+        n = 5 + min(2, int(k / 0.7))
+        paste_c(img, glow_text(str(n), "Anton-Regular.ttf", 260, YEL, (230, 60, 70)), 850, 330, eob(((k % 0.7)) / 0.2), rot=-6)
+    else:
+        k = t - dt_
+        fall = eio(k / 0.18)
+        draw_char(img, "H", 540, lerp(760, 1080, fall), t, "shock" if t < vh["start"] else "sad", 0.9, arms=(-40, 40) if k > 0.2 else (-160, 160))
+        for j, (e, x) in enumerate((("📱", 160), ("👟", 900), ("📚", 260))):
+            paste_c(img, emoji(e, 130), x, lerp(800, 1340, fall), 1.0, rot=20 * j)
+        stamp(img, "DHARAAM!", W / 2, 300, k, RED, -6, 140)
+        if t > vh["start"] - 0.3:
+            kk = t - vh["start"] + 0.3
+            hy = 1080 - 70 * 0.9 - 150
+            paste_c(img, emoji("☕", 150), 540, lerp(400, hy, eio(kk / 0.25)), 1.0, rot=180)
+            if kk > 0.25:
+                d = ImageDraw.Draw(img)
+                for j in range(5): x = 470 + j * 35; d.line([(x, hy + 40), (x, hy + 80 + 30 * ((j * 7) % 3) * min(1, kk - 0.25))], fill=(150, 90, 50), width=10)
+            paste_c(img, pill("CHAI… SAR PAR!", 52, (150, 90, 50), WHITE), W / 2, 480, eob((kk - 0.6) / 0.3), rot=3)
+        shake(img, t, dt_, 28, 0.6)
+
+def sc_truth_grav(img, t, lt):
+    v1, fq = L("truth_grav")
+    img.alpha_composite(grad((20, 20, 50), (70, 40, 110))); sky_stars(img, t, 40)
+    k = t - v1["start"]
+    draw_char(img, "H", 300, 1010, t, "shock", 0.9, arms=(-20, 110), hold=hold_phone)
+    paste_c(img, pill("12 AUGUST 2026: KUCH NAHI HUA", 44, WHITE, INK), W / 2, 260, eob((k - 0.8) / 0.3), rot=-2)
+    at = word_t(v1, "afwah", v1["start"] + 3.0)
+    if t > at - 0.1: stamp(img, "AFWAH!", 760, 560, t - at + 0.1, RED, -8, 150)
+    gt = word_t(v1, "scientists", v1["start"] + 4.0)
+    if t > gt - 0.1:
+        paste_c(img, pill("GRAVITY BAND NAHI HO SAKTI", 44, GRN, WHITE), W / 2, 400, eob((t - gt + 0.1) / 0.3), rot=2)
+        paste_c(img, emoji("🌍", 160), 780, 850, eob((t - gt) / 0.3))
+
 WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "shop_net": sc_shop_net, "city_net": sc_city_net,
-         "roof_net": sc_roof_net, "back_net": sc_back_net}
+         "roof_net": sc_roof_net, "back_net": sc_back_net,
+         "hook_grav": sc_hook_grav, "room_grav": sc_room_grav, "street_grav": sc_street_grav, "sky_grav": sc_sky_grav,
+         "fall_grav": sc_fall_grav, "truth_grav": sc_truth_grav}
 SC.update(WI_SC)
 
 exec(compile(_MAIN + _main, HR, "exec"), globals())

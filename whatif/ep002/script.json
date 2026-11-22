@@ -1,0 +1,156 @@
+[
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "hook_grav",
+  "dev": "[excited] اچانک… گریویٹی غائب! صرف سات سیکنڈ کے لیے!",
+  "rom": "Achanak… GRAVITY GHAYAB! Sirf 7 second ke liye!",
+  "sfx": [
+   "kick"
+  ],
+  "pause": 0.3
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "title",
+  "dev": "[curious] سوچو… اگر سات سیکنڈ زمین ہمیں نہ کھینچے… تو کیا ہوگا؟",
+  "rom": "Socho… agar 7 second zameen humein na kheenche… toh kya hoga?",
+  "sfx": [
+   "whoosh"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "room_grav",
+  "dev": "ارے! میرا کپ… اُڑ رہا ہے؟",
+  "rom": "Arey! Mera cup… ud raha hai?",
+  "stamp": "1 SECOND",
+  "sfx": [
+   "whoosh@0.2"
+  ]
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "room_grav",
+  "dev": "[curious] اور پھر… حامد خود بھی… ہوا میں!",
+  "rom": "Aur phir… Hamid khud bhi… hawa mein!",
+  "pause": 0.3
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "room_grav",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "whoosh"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "street_grav",
+  "dev": "تین سیکنڈ… گلی میں چپلیں، بلیاں، بچے… سب اوپر!",
+  "rom": "3 second… gali mein chappalein, billiyan, bachay… sab UPAR!",
+  "stamp": "3 SECOND",
+  "sfx": [
+   "tick",
+   "kick@2.2"
+  ]
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "street_grav",
+  "dev": "چاچا! پتنگ نہیں… آپ اُڑ رہے ہو!",
+  "rom": "Chacha! Patang nahi… aap ud rahe ho!"
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "sky_grav",
+  "dev": "[whispers] لیکن کتنا اوپر؟ بس ایک دو فٹ… زیادہ نہیں!",
+  "rom": "Lekin kitna upar? Bas ek-do foot… zyada nahi!",
+  "stamp": "5 SECOND",
+  "sfx": [
+   "hum"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "sky_grav",
+  "dev": "یہ تو مزہ آ رہا ہے!",
+  "rom": "Yeh toh mazaa aa raha hai!",
+  "sfx": [
+   "chime@0.6"
+  ]
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "sky_grav",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "chime"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "fall_grav",
+  "dev": "[excited] اور ساتویں سیکنڈ پر… دھڑام!",
+  "rom": "Aur saatwein second par… DHARAAM!",
+  "stamp": "7 SECOND",
+  "sfx": [
+   "tick",
+   "boom@1.4"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "fall_grav",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "kick"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "fall_grav",
+  "dev": "اُف… اور چائے… سر پر!",
+  "rom": "Uff… aur chai… sar par!"
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "truth_grav",
+  "dev": "[curious] پر اصل ٹوئسٹ؟ بارہ اگست والی یہ بات… صرف افواہ تھی۔ سائنسدانوں نے کہا… گریویٹی بند نہیں ہو سکتی!",
+  "rom": "Par asli twist? 12 August wali yeh baat… sirf AFWAH thi. Scientists ne kaha… gravity band nahi ho sakti!",
+  "sfx": [
+   "kick@1.6"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "truth_grav",
+  "dev": "[curious] اب سوال آپ سے… سات سیکنڈ ہوا میں… آپ کیا پکڑو گے؟ کمنٹ کرو… اور فالو کرو!",
+  "rom": "Ab sawaal aap se… 7 second hawa mein… aap kya pakdoge? Comment karo… aur follow karo!",
+  "final": true
+ }
+]
