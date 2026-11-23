@@ -5376,6 +5376,246 @@ def sc_cliff21(img, t, lt):
         dt = word_t(v3, "ek", v3["start"] + 1.4)
         if t > dt - 0.1: paste_c(img, pill("BAAKI: Rs 47,000", 60, RED, WHITE), W / 2, 720, eob((t - dt + 0.1) / 0.3), rot=-3); clock(img, 900, 880, 5.0)
 
+# ======================= DAY 22: Kaali Gaari (double duty, puncture, Bilal's pump scheme #6 works, Ghafoor takes Rs 1,000 kiraya, Master Saleem brings the mohalla's chanda Rs 15,000 + broken gullaks, a black car's parchi)
+@lru_cache(None)
+def pump_img():
+    """Hand air pump (cylinder + T handle + hose). 160x420; handle drawn separately by pump()."""
+    s = SS; im = Image.new("RGBA", (160 * s, 420 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); P = lambda *xy: [v * s for v in xy]
+    d.rounded_rectangle(P(20, 390, 140, 414), radius=8 * s, fill=(60, 60, 70), outline=INK, width=5 * s)   # foot plate
+    d.rounded_rectangle(P(55, 120, 105, 400), radius=12 * s, fill=(40, 130, 210), outline=INK, width=6 * s)
+    d.rectangle(P(62, 160, 72, 360), fill=(140, 200, 250))
+    d.arc(P(-60, 250, 90, 420), 200, 300, fill=INK, width=8 * s)   # hose
+    return ssf(im)
+def pump(img, x, y, k, sc=1.0):
+    """k: 0..1 handle position (0 up, 1 down). (x, y) = foot of the pump."""
+    hy = y - 420 * sc + 40 * sc + k * 150 * sc
+    d = ImageDraw.Draw(img)
+    d.line([(x, hy), (x, y - 300 * sc)], fill=(170, 170, 180), width=int(10 * sc))
+    d.rounded_rectangle([x - 70 * sc, hy - 14 * sc, x + 70 * sc, hy + 14 * sc], radius=int(10 * sc), fill=(230, 60, 70), outline=INK, width=5)
+    paste_c(img, pump_img(), x, y - 210 * sc, sc)
+
+def flat_tyre(img, bx, by, sc, amt):
+    """Squash the front wheel of bike_img pasted at (bx, by): amt 1 = flat, 0 = full."""
+    if amt <= 0.02: return
+    d = ImageDraw.Draw(img); cx, cy = bx + 190 * sc, by + 100 * sc
+    d.ellipse([cx - 90 * sc, cy + 45 * sc - 30 * amt * sc, cx + 90 * sc, cy + 95 * sc], fill=(30, 30, 36), outline=INK, width=5)
+    for j in range(3): d.line([(cx - 60 * sc + j * 50 * sc, cy + 60 * sc), (cx - 40 * sc + j * 50 * sc, cy + 84 * sc)], fill=(80, 80, 90), width=4)
+
+@lru_cache(None)
+def gullak_img(broken=0):
+    """Clay piggy-pot (gullak). broken 0 = whole, 1..3 = shard variants."""
+    s = SS; im = Image.new("RGBA", (200 * s, 200 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); P = lambda *xy: [v * s for v in xy]
+    clay, dark = (200, 110, 60), (150, 75, 40)
+    if not broken:
+        d.ellipse(P(20, 40, 180, 195), fill=clay, outline=INK, width=6 * s)
+        d.rounded_rectangle(P(70, 15, 130, 55), radius=10 * s, fill=clay, outline=INK, width=6 * s)
+        d.rectangle(P(80, 28, 120, 36), fill=INK)   # slot
+        d.arc(P(40, 80, 160, 170), 20, 160, fill=dark, width=6 * s)
+    else:
+        r = np.random.default_rng(broken)
+        for j in range(4):
+            x, y = r.uniform(20, 140), r.uniform(80, 150); a = r.uniform(0, 6.28)
+            pts = [(x + math.cos(a + q * 2.1) * r.uniform(25, 45), y + math.sin(a + q * 2.1) * r.uniform(18, 35)) for q in range(3)]
+            d.polygon([(px * s, py * s) for px, py in pts], fill=clay if j % 2 else dark, outline=INK)
+        for j in range(5):   # coins
+            x = r.uniform(30, 170); d.ellipse(P(x - 14, 170, x + 14, 192), fill=(240, 200, 60), outline=INK, width=3 * s)
+    return ssf(im)
+
+@lru_cache(None)
+def black_car(win=0.0):
+    """Shiny black sedan, tinted windows; win 0..1 = rear window rolled down (shows only darkness + a gold-ringed hand)."""
+    s = SS; im = Image.new("RGBA", (760 * s, 330 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); P = lambda *xy: [v * s for v in xy]
+    d.polygon(P(170, 120, 250, 30, 540, 30, 630, 120), fill=(22, 22, 28), outline=INK)
+    d.polygon(P(195, 118, 262, 46, 385, 46, 385, 118), fill=(45, 50, 70), outline=INK)   # front window (tinted)
+    d.polygon(P(400, 118, 400, 46, 530, 46, 595, 118), fill=(45, 50, 70), outline=INK)   # rear window
+    if win > 0:
+        top = 46 + 72 * win
+        d.polygon(P(400, 118, 400, 46, 530, 46, 595, 118), fill=(8, 8, 12))
+        d.polygon(P(400, 118, 400, top, 530 + 65 * (top - 46) / 72, top, 595, 118), fill=(45, 50, 70), outline=INK) if win < 0.98 else None
+    d.rounded_rectangle(P(10, 110, 750, 250), radius=50 * s, fill=(28, 28, 34), outline=INK, width=7 * s)
+    d.line(P(60, 150, 700, 150), fill=(90, 95, 120), width=5 * s)   # shine
+    d.ellipse(P(700, 140, 745, 175), fill=(255, 245, 190), outline=INK, width=4 * s)   # headlight (car faces right)
+    d.rectangle(P(15, 145, 40, 175), fill=(220, 40, 40))   # tail light
+    for cx in (170, 590):
+        d.ellipse(P(cx - 70, 190, cx + 70, 326), fill=(20, 20, 24), outline=INK, width=6 * s); d.ellipse(P(cx - 30, 228, cx + 30, 288), fill=(190, 190, 200), outline=INK, width=3 * s)
+    return ssf(im)
+
+def parchi22():
+    c = Image.new("RGBA", (620, 360), (0, 0, 0, 0)); d = ImageDraw.Draw(c)
+    d.rounded_rectangle([0, 0, 619, 359], radius=14, fill=(250, 245, 225), outline=INK, width=7)
+    d.text((310, 80), "BAAKI PAISE MERE.", font=fnt("Poppins-Black.ttf", 44), fill=INK, anchor="mm")
+    d.text((310, 170), "BAS EK KAAM", font=fnt("Anton-Regular.ttf", 72), fill=RED, anchor="mm")
+    d.text((310, 260), "KARNA HOGA…", font=fnt("Anton-Regular.ttf", 72), fill=RED, anchor="mm")
+    d.text((560, 330), "— ?", font=fnt("Poppins-Black.ttf", 30), fill=(90, 90, 100), anchor="mm")
+    return c
+
+def sc_hook22(img, t, lt):
+    img.alpha_composite(bg_hospital("eve")); img.alpha_composite(Image.new("RGBA", (W, H), (150, 20, 40, 50)))
+    (v0,) = L("hook22")
+    draw_char(img, "H", W / 2, 1010, t, "shock", 0.9, arms=(-140, 140) if t > 1.6 else (-20, 20))
+    paste_c(img, glow_text("Rs 47,000", "Anton-Regular.ttf", 150, YEL, (230, 60, 70)), W / 2, 280, eob((t - 1.4) / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=-3)
+    et = word_t(v0, "ek", v0["start"] + 2.0)
+    calendar_strip(img, W / 2, 500, 7, 6 if t > et else 0, 0.9 * eob((t - 1.5) / 0.3), red_from=6)
+    if t > et - 0.1:
+        paste_c(img, pill("SIRF 1 DIN!", 66, RED, WHITE), W / 2, 700, eob((t - et + 0.1) / 0.3), rot=3)
+        clock(img, 880, 860, 5.0); paste_c(img, emoji("😰", 100), 200, 860, eob((t - et) / 0.3))
+
+def sc_road22(img, t, lt):
+    img.alpha_composite(bg_road("dawn"))
+    v2, v3, b, vl, vh = L("road22")
+    pt = word_t(v3, "puncture", v3["start"] + 1.6)
+    if t < pt:   # riding
+        speedlines(img, t, 8, 300, 1100)
+        bx = lerp(-200, 520, eo((t - v2["start"]) / 0.8)) if t < v3["start"] else 520 + math.sin(t * 3) * 20
+        ride(img, bx, 1250, t, "det", 0.95, box=True)
+        dust(img, bx - 330, 1340, t)
+        if t < v3["start"]:
+            k = t - v2["start"]
+            paste_c(img, pill("SUBAH 7 BAJE", 48, YEL), W / 2, 250, eob(k / 0.3), rot=-2); clock(img, 880, 420, 7.0)
+            dt = word_t(v2, "double", v2["start"] + 1.0)
+            if t > dt - 0.1: paste_c(img, glow_text("DOUBLE DUTY!", "Anton-Regular.ttf", 130, YEL, (230, 60, 70)), W / 2, 560, eob((t - dt + 0.1) / 0.25), rot=-3)
+        else:
+            paste_c(img, pill("ORDER #1", 54, (230, 60, 70), WHITE), W / 2, 260, eob((t - v3["start"]) / 0.3), rot=-3)
+        return
+    # stopped bike with a flat tyre; Bilal arrives with a pump
+    bx, by = 640, 1260
+    pump_start = word_t(vl, "hawa", vl["start"] + 1.4)
+    infl = eo((t - pump_start) / max(1.0, vh["start"] + 0.8 - pump_start)) if t > pump_start else 0
+    paste_c(img, bike_img(False, True), bx, by, 0.85, rot=4 * (1 - infl))
+    flat_tyre(img, bx, by, 0.85, 1 - infl)
+    hm = "shock" if t < b["start"] else ("sad" if t < vl["start"] else ("n" if t < vh["start"] else "happy"))
+    draw_char(img, "H", 230, 1040, t, hm, 0.82, arms=(-150, 150) if b["start"] <= t < vl["start"] else ((-120, 120) if t > vh["start"] + 0.4 else (-20, 20)))
+    if t > vl["start"] - 0.3:
+        lx = lerp(1300, 900, eo((t - vl["start"] + 0.3) / 0.5))
+        draw_char(img, "L", lx, 1000, t, "happy", 0.8, arms=(-150, 150) if t < pump_start else (-40, -40))
+        if t > pump_start - 0.2:
+            pk = 0.5 + 0.5 * math.sin((t - pump_start) * 11) if t < vh["start"] + 1.0 else 0
+            pump(img, 760, 1390, pk, 0.75)
+    if t < b["start"]:
+        k = t - pt
+        stamp(img, "PHUSSS!", W / 2, 420, k, RED, -8, 140)
+        paste_c(img, emoji("💨", 110), bx + 230, by + 40, eob(k / 0.3))
+    elif t < vl["start"]:
+        k = t - b["start"]
+        paste_c(img, pill("TYRE PUNCTURE", 56, RED, WHITE), W / 2, 330, 1.0, rot=-3)
+        paste_c(img, emoji("😩", 120), W / 2, 560, eob(k / 0.2))
+    elif t < vh["start"]:
+        k = t - vl["start"]
+        paste_c(img, glow_text("SCHEME 6.0!", "Anton-Regular.ttf", 120, YEL, (255, 130, 40)), W / 2, 270, eob(k / 0.25), rot=-3)
+        if t > pump_start - 0.1: paste_c(img, bubble([("MAIN HAWA", INK), ("BHARUNGA!", (255, 130, 40))], 48, tail="right"), 680, 520, eob((t - pump_start + 0.1) / 0.25))
+    else:
+        k = t - vh["start"]
+        paste_c(img, glow_text("PEHLI BAAR", "Anton-Regular.ttf", 110, WHITE, (40, 190, 110)), W / 2, 260, eob(k / 0.25), rot=-3)
+        ct = word_t(vh, "chal", vh["start"] + 1.6)
+        if t > ct - 0.1:
+            paste_c(img, glow_text("CHAL GAYI!", "Anton-Regular.ttf", 130, YEL, (40, 190, 110)), W / 2, 400, eob((t - ct + 0.1) / 0.25), rot=3)
+            paste_c(img, pill("SCHEMES: 5 FAIL • 1 PASS", 40, WHITE, INK), W / 2, 560, eob((t - ct - 0.2) / 0.3))
+            paste_c(img, emoji("😎", 90), 980, 760, eob((t - ct) / 0.3))
+
+def sc_count22(img, t, lt):
+    img.alpha_composite(bg_ghafoor("dawn"))
+    v7, vg, v9, b = L("count22")
+    paste_c(img, bike_img(False, True), 700, 1290, 0.7)
+    gx = lerp(1300, 820, eo((t - vg["start"] + 0.3) / 0.5)) if t > vg["start"] - 0.3 else 1500
+    paid = t > v9["start"] + 0.3
+    draw_char(img, "H", 260, 1030, t, "happy" if t < vg["start"] else ("shock" if t < v9["start"] else "sad"), 0.85,
+              arms=(-20, 110) if t < vg["start"] else ((-20, 120) if not paid else (-20, 20)), hold=hold_phone if t < vg["start"] else None)
+    if t > vg["start"] - 0.3:
+        draw_char(img, "G", gx, 1000, t, "det" if not paid else "happy", 0.88, arms=(-130, 20) if t < v9["start"] else (-110, 20),
+                  hold=hold_notes_g if paid else None)
+    if t < vg["start"]:
+        k = t - v7["start"]
+        rows = [("ORDERS: 20/20", GRN), ("KAMAI: Rs 2,000", INK)]
+        paste_c(img, phone_card("SHAAM 6 BAJE", rows, v7["start"] + 0.4, t, (40, 90, 160), 600), 720, 560, eob(k / 0.3) * 0.85, rot=3)
+        dt = word_t(v7, "do", v7["start"] + 1.8, exact=True)
+        if t > dt: paste_c(img, pill("+Rs 2,000", 60, GRN, WHITE), 300, 400, eob((t - dt) / 0.3), rot=-3)
+    elif t < v9["start"]:
+        k = t - vg["start"]
+        paste_c(img, bubble([("DAS DIN KA KIRAYA!", INK), ("ABHI DO!", RED)], 48, tail="right"), 560, 560, eob(k / 0.25))
+        paste_c(img, pill("Rs 1,000", 64, RED, WHITE), W / 2, 280, eob((k - 0.4) / 0.3), rot=-3)
+    elif t < b["start"]:
+        k = t - v9["start"]
+        q = eo(k / 0.6)
+        if q < 1: paste_c(img, notes_img(1000, 200), lerp(380, 700, q), lerp(1150, 1080, q), 0.7, rot=-20 * q)
+        paste_c(img, pill("-Rs 1,000", 64, RED, WHITE), W / 2, 280, eob(k / 0.3), rot=-3)
+        ct = word_t(v9, "chaar", v9["start"] + 1.6)
+        if t > ct - 0.1: paste_c(img, pill("JEB: Rs 4,000", 60, WHITE, GRN), W / 2, 420, eob((t - ct + 0.1) / 0.3), rot=3)
+    else:
+        k = t - b["start"]
+        paste_c(img, glow_text("BAAKI: Rs 46,000", "Anton-Regular.ttf", 110, WHITE, (230, 60, 70)), W / 2, 300, eob(k / 0.2), rot=-3)
+        paste_c(img, emoji("💔", 120), W / 2, 520, eob(k / 0.2))
+def hold_notes_g(img, x, y, sc): paste_c(img, notes_img(1000, 200), x - 150 * sc, y + 200 * sc, sc * 0.8, rot=10)
+
+def sc_saleem22(img, t, lt):
+    img.alpha_composite(bg_rauf("night")); bulb_glow(img)
+    v1, vt, v3, v4, v5 = L("saleem22")
+    tx = lerp(1300, 800, eo((t - v1["start"] - 0.5) / 0.6))
+    if t > v3["start"] - 0.3:   # two mohalla kids peeking up behind the table
+        kq = eo((t - v3["start"] + 0.3) / 0.4)
+        draw_char(img, "K", 450, lerp(1300, 1060, kq), t, "happy", 0.52, arms=(-100, 20))
+        draw_char(img, "Z", 600, lerp(1300, 1070, kq), t, "happy", 0.52, arms=(-20, -100))
+    d = ImageDraw.Draw(img); d.rectangle([300, 1250, 780, 1300], fill=(150, 100, 70), outline=INK, width=6)   # low table
+    d.rectangle([330, 1300, 750, 1460], fill=(120, 80, 55), outline=INK, width=6)
+    draw_char(img, "T", tx, 980, t, "happy" if t > vt["start"] else "n", 0.9, arms=(-120, 20) if vt["start"] < t < v3["start"] + 0.6 else (-20, 20),
+              hold=hold_lifafa_l if t < v4["start"] else None)
+    draw_char(img, "H", 230, 1030, t, "shock" if t < v4["start"] else "happy", 0.85,
+              arms=(-20, 20) if t < v4["start"] else ((-140, 140) if t > v5["start"] else (-60, 60)))
+    if t < vt["start"]:
+        k = t - v1["start"]
+        paste_c(img, pill("RAAT 9 BAJE", 48, YEL), W / 2, 500, eob(k / 0.3), rot=-2)
+        mt = word_t(v1, "master", v1["start"] + 1.6)
+        if t > mt - 0.1: paste_c(img, glow_text("MASTER SAHAB!", "Anton-Regular.ttf", 110, WHITE, (150, 50, 70)), W / 2, 650, eob((t - mt + 0.1) / 0.25), rot=-3)
+    elif t < v3["start"]:
+        k = t - vt["start"]
+        paste_c(img, bubble([("POORE MOHALLE NE", INK), ("CHANDA KIYA HAI!", (150, 50, 70))], 46, tail="right"), 600, 560, eob(k / 0.25))
+    elif t < v4["start"]:
+        k = t - v3["start"]
+        for j in range(3): paste_c(img, gullak_img(j + 1), 400 + j * 140, 1210, eob((k - j * 0.15) / 0.3) * 0.8)
+        paste_c(img, glow_text("GULLAK TOOTE!", "Anton-Regular.ttf", 110, YEL, (200, 110, 60)), W / 2, 560, eob(k / 0.25), rot=-3)
+        paste_c(img, emoji("🥹", 100), 250, 740, eob((k - 0.4) / 0.3))
+    else:
+        for j in range(3): paste_c(img, gullak_img(j + 1), 400 + j * 140, 1210, 0.8)
+        n = min(12, int((t - v4["start"]) / 1.4 * 12))
+        for j in range(n):   # notes piling on the table
+            paste_c(img, notes_img([500, 1000, 100, 5000][j % 4], 150), 420 + (j % 4) * 80, 1225 - (j // 4) * 22, 0.6, rot=(j % 3 - 1) * 9)
+        if t < v5["start"]:
+            k = t - v4["start"]
+            paste_c(img, pill("GINTI…", 50, WHITE, INK), 300, 500, eob(k / 0.3), rot=-3)
+            pt = word_t(v4, "pandrah", v4["start"] + 1.0)
+            if t > pt - 0.1: paste_c(img, glow_text("Rs 15,000!", "Anton-Regular.ttf", 150, YEL, (40, 190, 110)), W / 2, 640, eob((t - pt + 0.1) / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=3)
+        else:
+            k = t - v5["start"]
+            paste_c(img, glow_text("AAJ BHI BACH GAYE!", "Anton-Regular.ttf", 100, YEL, (255, 120, 40)), W / 2, 520, eob(k / 0.25), rot=-3)
+            bt = word_t(v5, "ikattees", v5["start"] + 1.6)
+            if t > bt - 0.1: paste_c(img, pill("BAAKI: Rs 31,000", 60, RED, WHITE), W / 2, 680, eob((t - bt + 0.1) / 0.3), rot=3)
+def hold_lifafa_l(img, x, y, sc): paste_c(img, lifafa_img(False), x - 150 * sc, y + 170 * sc, sc * 0.75, rot=8)
+
+def sc_cliff22(img, t, lt):
+    img.alpha_composite(bg_road("night")); night_tint(img, 60)
+    v1, v2, v3, ol = L("cliff22")
+    cx = lerp(1500, 680, eo((t - v1["start"]) / 0.9))
+    win = eo((t - v2["start"] - 0.2) / 0.8) if t > v2["start"] else 0
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ld = ImageDraw.Draw(lay)   # headlight beam
+    ld.polygon([(cx + 370, 1180), (W + 200, 1050), (W + 200, 1450)], fill=(255, 245, 190, 70)); img.alpha_composite(lay)
+    paste_c(img, black_car(round(win, 2)), cx, 1200, 0.95)
+    draw_char(img, "H", 180, 1030, t, "shock", 0.82, arms=(-20, 20) if t < v3["start"] else (-20, 110))
+    if t < v2["start"]:
+        k = t - v1["start"]
+        paste_c(img, glow_text("KAALI GAARI…", "Anton-Regular.ttf", 130, WHITE, (90, 90, 120)), W / 2, 330, eob((k - 0.3) / 0.25), rot=-3)
+        paste_c(img, emoji("😨", 100), 180, 640, eob((k - 0.6) / 0.3))
+    elif t < v3["start"]:
+        k = t - v2["start"]
+        paste_c(img, pill("SHEESHA NEECHE…", 54, INK, WHITE), W / 2, 330, eob(k / 0.3), rot=-3)
+        pt = word_t(v2, "parchi", v2["start"] + 1.6)
+        if t > pt - 0.2:
+            q = eo((t - pt + 0.2) / 0.7)
+            paste_c(img, parchi22(), lerp(cx + 10, 520, q), lerp(1130, 700, q), lerp(0.15, 0.55, q), rot=lerp(40, -6, q) + 8 * math.sin(t * 6) * (1 - q))
+    else:
+        k = t - v3["start"]
+        paste_c(img, parchi22(), W / 2, 560, lerp(0.55, 1.4, eo(k / 0.4)) , rot=-4 + math.sin(t * 2))
+        kt = word_t(v3, "kaam", v3["start"] + 2.2)
+        if t > kt - 0.1: paste_c(img, glow_text("KAUN SA KAAM?!", "Anton-Regular.ttf", 110, YEL, (230, 60, 70)), W / 2, 960, eob((t - kt + 0.1) / 0.25), rot=3)
+
 # ======================= OUTRO HOOK (owner, 2026-11-15): every reel ends with "Agay Hamid kya karega? Follow karein…"
 # Mark the last line of the script with "outro": true (Hamid vo). It plays over the cliffhanger frame.
 def outro(img, t):
@@ -5417,7 +5657,8 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook18": sc_hook18, "naka18": sc_naka18, "call18": sc_call18, "rauf18": sc_rauf18, "end18": sc_end18, "cliff18": sc_cliff18,
       "hook19": sc_hook19, "status19": sc_status19, "beach19": sc_beach19, "chase19": sc_chase19, "camel19": sc_camel19, "box19": sc_box19, "cliff19": sc_cliff19,
       "hook20": sc_hook20, "adda20": sc_adda20, "hosp20": sc_hosp20, "bilal20": sc_bilal20, "abbu20": sc_abbu20, "cliff20": sc_cliff20,
-      "hook21": sc_hook21, "plan21": sc_plan21, "ward21": sc_ward21, "rauf21": sc_rauf21, "hotel21": sc_hotel21, "cliff21": sc_cliff21}
+      "hook21": sc_hook21, "plan21": sc_plan21, "ward21": sc_ward21, "rauf21": sc_rauf21, "hotel21": sc_hotel21, "cliff21": sc_cliff21,
+      "hook22": sc_hook22, "road22": sc_road22, "count22": sc_count22, "saleem22": sc_saleem22, "cliff22": sc_cliff22}
 
 
 # ======================= COLD-OPEN HOOK (owner, 2026-11-19: "add an eye / ear catching hook in the start so people won't skip")

@@ -1,0 +1,22 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook22", "dev": "سینتالیس ہزار… اور صرف ایک دن!", "rom": "Saintalees hazaar… aur sirf ek din!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن بائیس۔ جیب میں تین ہزار۔", "rom": "Din baais. Jeb mein teen hazaar."},
+{"who": "H", "mode": "vo", "scene": "road22", "dev": "صبح سات بجے… ڈبل ڈیوٹی شروع!", "rom": "Subah saat baje… double duty shuru!"},
+{"who": "H", "mode": "vo", "scene": "road22", "dev": "پہلا آرڈر… اور ٹائر پنکچر!", "rom": "Pehla order… aur tyre puncture!"},
+{"who": "H", "mode": "beat", "scene": "road22", "dev": "", "rom": "", "dur": 0.6},
+{"who": "L", "mode": "talk", "scene": "road22", "dev": "[excited] سکیم نمبر چھ! میں ہوا بھروں گا!", "rom": "Scheme number chhe! Main hawa bharunga!"},
+{"who": "H", "mode": "vo", "scene": "road22", "dev": "بلال کی سکیم… پہلی بار چل گئی!", "rom": "Bilal ki scheme… pehli baar chal gayi!"},
+{"who": "H", "mode": "vo", "scene": "count22", "dev": "شام تک بیس آرڈر… دو ہزار!", "rom": "Shaam tak bees order… do hazaar!"},
+{"who": "G", "mode": "talk", "scene": "count22", "dev": "[angry] حامد! دس دن کا کرایہ! ابھی دو!", "rom": "Hamid! Das din ka kiraya! Abhi do!"},
+{"who": "H", "mode": "vo", "scene": "count22", "dev": "ایک ہزار گیا… بچے چار ہزار۔", "rom": "Ek hazaar gaya… bachay chaar hazaar."},
+{"who": "H", "mode": "beat", "scene": "count22", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "saleem22", "dev": "رات نو بجے… ہوٹل پہ ماسٹر صاحب آئے۔", "rom": "Raat nau baje… hotel pe Master sahab aaye."},
+{"who": "T", "mode": "talk", "scene": "saleem22", "dev": "[warm] پورے محلے نے چندہ کیا ہے، بیٹا۔", "rom": "Poore mohalle ne chanda kiya hai, beta."},
+{"who": "H", "mode": "vo", "scene": "saleem22", "dev": "بچوں نے اپنے گلک بھی توڑ دیے!", "rom": "Bachon ne apne gullak bhi tor diye!"},
+{"who": "H", "mode": "vo", "scene": "saleem22", "dev": "گنتی کی… پندرہ ہزار!", "rom": "Ginti ki… pandrah hazaar!"},
+{"who": "H", "mode": "vo", "scene": "saleem22", "dev": "آج بھی بچ گئے… پر اکتیس ابھی باقی!", "rom": "Aaj bhi bach gaye… par ikattees abhi baaki!"},
+{"who": "H", "mode": "vo", "scene": "cliff22", "dev": "تبھی ایک کالی گاڑی رکی…", "rom": "Tabhi ek kaali gaari ruki…"},
+{"who": "H", "mode": "vo", "scene": "cliff22", "dev": "شیشہ نیچے ہوا… ایک پرچی آئی۔", "rom": "Sheesha neeche hua… ek parchi aayi."},
+{"who": "H", "mode": "vo", "scene": "cliff22", "dev": "باقی پیسے میرے… بس ایک کام کرنا ہوگا!", "rom": "Baaki paise mere… bas ek kaam karna hoga!"},
+{"who": "H", "mode": "vo", "scene": "cliff22", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]
