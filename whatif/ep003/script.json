@@ -1,0 +1,141 @@
+[
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "hook_fut",
+  "dev": "[excited] رات بارہ بجے… میسج آیا… ’میں تم ہوں… ایک سال بعد سے!‘",
+  "rom": "Raat 12 baje… message aaya… 'Main tum hoon… ek saal baad se!'",
+  "sfx": [
+   "ring"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "title",
+  "dev": "[curious] سوچو… اگر آپ کو مستقبل سے میسج آئے… تو کیا ہوگا؟",
+  "rom": "Socho… agar aapko future se message aaye… toh kya hoga?",
+  "sfx": [
+   "whoosh"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "meme_fut",
+  "dev": "[curious] انٹرنیٹ پر سب کہہ رہے تھے… ’ریممبر نومبر‘… اور نومبر آ گیا!",
+  "rom": "Internet pe sab keh rahe the… 'Remember November'… aur November aa gaya!",
+  "stamp": "NOVEMBER 2026",
+  "sfx": [
+   "dings"
+  ]
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "room_fut",
+  "dev": "لکھا ہے… کل پیپر میں سوال نمبر تین آئے گا!",
+  "rom": "Likha hai… kal paper mein sawaal number 3 aayega!",
+  "stamp": "1 MINUTE BAAD",
+  "sfx": [
+   "beep"
+  ]
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "room_fut",
+  "dev": "[whispers] اور حامد نے ساری رات… صرف سوال نمبر تین یاد کیا۔",
+  "rom": "Aur Hamid ne saari raat… sirf sawaal number 3 yaad kiya.",
+  "stamp": "SAARI RAAT",
+  "sfx": [
+   "tick"
+  ],
+  "pause": 0.3
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "room_fut",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "whoosh"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "exam_fut",
+  "dev": "[excited] صبح پیپر کھلا… اور سوال نمبر تین… آ گیا!",
+  "rom": "Subah paper khula… aur sawaal number 3… aa gaya!",
+  "stamp": "SUBAH 9 BAJE",
+  "sfx": [
+   "tick",
+   "chime@2.4"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "exam_fut",
+  "dev": "سچ میں! مستقبل والا حامد… زندہ باد!",
+  "rom": "Sach mein! Future wala Hamid… zindabad!",
+  "sfx": [
+   "chime@0.4"
+  ]
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "twist_fut",
+  "dev": "[curious] پر اصل ٹوئسٹ؟ اگلا میسج… بلال کے نمبر سے!",
+  "rom": "Par asli twist? Agla message… Bilal ke number se!",
+  "stamp": "TWIST",
+  "sfx": [
+   "beep@1.6"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "twist_fut",
+  "dev": "[laughs] ہاہا! سوال نمبر تین تو… ہر سال آتا ہے یار!",
+  "rom": "Haha! Sawaal number 3 toh… har saal aata hai yaar!"
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "twist_fut",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "kick"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "truth_fut",
+  "dev": "[curious] اور ’ریممبر نومبر‘؟ وہ صرف ایک اے آئی میم ہے… کچھ نہیں ہونے والا۔",
+  "rom": "Aur 'Remember November'? Woh sirf ek AI meme hai… kuch nahi hone wala.",
+  "sfx": [
+   "kick@1.6"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "truth_fut",
+  "dev": "[curious] اب آپ بتاؤ… مستقبل سے میسج آئے… آپ کیا پوچھو گے؟ کمنٹ کرو… اور فالو کرو!",
+  "rom": "Ab aap batao… future se message aaye… aap kya poochoge? Comment karo… aur follow karo!",
+  "final": true
+ }
+]

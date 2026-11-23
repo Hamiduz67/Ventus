@@ -416,10 +416,166 @@ def sc_truth_grav(img, t, lt):
         paste_c(img, pill("GRAVITY BAND NAHI HO SAKTI", 44, GRN, WHITE), W / 2, 400, eob((t - gt + 0.1) / 0.3), rot=2)
         paste_c(img, emoji("🌍", 160), 780, 850, eob((t - gt) / 0.3))
 
+# ======================= EPISODE 3: Future Se Message (a message from yourself, 1 saal baad; the "Remember November 2026" AI meme)
+def chat_card(sender, rows, col=(30, 90, 170), w=520):
+    """Phone chat card: header with sender, then message bubbles (list of (text, colour))."""
+    ts = [text_img(x, "Poppins-Black.ttf", 34, c) for x, c in rows]
+    h = 150 + sum(t_.height + 34 for t_ in ts) + 40
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=44, fill=(25, 25, 30), outline=INK, width=7)
+    d.rounded_rectangle([16, 16, w - 17, h - 17], radius=32, fill=(236, 240, 232))
+    d.rounded_rectangle([16, 16, w - 17, 120], radius=32, fill=col); d.rectangle([16, 80, w - 17, 120], fill=col)
+    d.text((w / 2, 68), sender, font=fnt("Poppins-Black.ttf", 36), fill=WHITE, anchor="mm")
+    y = 150
+    for t_ in ts:
+        d.rounded_rectangle([36, y - 12, 36 + t_.width + 40, y + t_.height + 12], radius=20, fill=(215, 250, 200), outline=INK, width=3)
+        im.alpha_composite(t_, (56, int(y))); y += t_.height + 34
+    return im
+@lru_cache(None)
+def card_future(): return chat_card("HAMID (1 SAAL BAAD)", [("MAIN TUM HOON…", INK), ("FUTURE SE! ⏳" if False else "FUTURE SE!", (150, 50, 200))], (120, 50, 180))
+@lru_cache(None)
+def card_q3(): return chat_card("HAMID (1 SAAL BAAD)", [("KAL KE PAPER MEIN…", INK), ("SAWAAL NO. 3 AAYEGA!", RED)], (120, 50, 180))
+@lru_cache(None)
+def card_bilal(): return chat_card("BILAL", [("HAHA! PRANK THA 😂" if False else "HAHA! PRANK THA!", INK), ("Q3 HAR SAAL AATA HAI", RED)], (255, 130, 40))
+def hold_fphone(img, x, y, sc): paste_c(img, phone_img(True), x + 140 * sc, y + 150 * sc, sc * 0.9, rot=-10)
+@lru_cache(None)
+def meme_post(seed):
+    w, h = 300, 360; im = Image.new("RGBA", (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=26, fill=(250, 250, 255), outline=INK, width=6)
+    d.rounded_rectangle([18, 18, w - 19, 230], radius=16, fill=[(40, 50, 90), (70, 40, 110), (30, 70, 90)][seed % 3])
+    d.text((w / 2, 95), "REMEMBER", font=fnt("Anton-Regular.ttf", 50), fill=WHITE, anchor="mm")
+    d.text((w / 2, 165), "NOVEMBER", font=fnt("Anton-Regular.ttf", 50), fill=YEL, anchor="mm")
+    d.text((w / 2, 280), "♥ 2.1M  💬" if False else "♥ 2.1M   ↻ 90K", font=fnt("Poppins-Black.ttf", 28), fill=RED, anchor="mm")
+    return im
+@lru_cache(None)
+def cal_page(day=23):
+    im = Image.new("RGBA", (420, 460), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 419, 459], radius=30, fill=(255, 250, 235), outline=INK, width=8)
+    d.rounded_rectangle([0, 0, 419, 120], radius=30, fill=RED); d.rectangle([0, 80, 419, 120], fill=RED)
+    d.text((210, 62), "NOVEMBER 2026", font=fnt("Anton-Regular.ttf", 54), fill=WHITE, anchor="mm")
+    d.text((210, 290), str(day), font=fnt("Anton-Regular.ttf", 220), fill=INK, anchor="mm")
+    return im
+@lru_cache(None)
+def paper_q3(tick=False):
+    im = Image.new("RGBA", (640, 620), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 639, 619], radius=16, fill=(252, 250, 240), outline=INK, width=7)
+    d.text((320, 60), "PAPER • 9:00 AM", font=fnt("Anton-Regular.ttf", 54), fill=(150, 50, 70), anchor="mm")
+    d.line([(36, 104), (604, 104)], fill=(150, 50, 70), width=5)
+    for j, q in enumerate(("Q1.  ___________", "Q2.  ___________", "Q3.  SAWAAL NO. 3", "Q4.  ___________")):
+        y = 170 + j * 110
+        if j == 2: d.rounded_rectangle([24, y - 44, 616, y + 44], radius=14, fill=(255, 240, 150), outline=RED, width=5)
+        d.text((60, y), q, font=fnt("Poppins-Black.ttf", 40), fill=INK, anchor="lm")
+    if tick: d.text((560, 390), "✓" if False else "OK", font=fnt("Anton-Regular.ttf", 60), fill=GRN, anchor="mm")
+    return im
+
+def sc_hook_fut(img, t, lt):
+    img.alpha_composite(bg_room("night")); bulb_glow(img, 40)
+    (v0,) = L("hook_fut")
+    clock(img, 880, 330, 0.0)
+    g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(g).ellipse([520, 520, 1060, 1180], fill=(160, 120, 255, int(70 + 40 * math.sin(t * 6))))
+    img.alpha_composite(g.filter(ImageFilter.GaussianBlur(60)))
+    draw_char(img, "H", 300, 1010, t, "shock", 0.95, arms=(-20, 110), hold=hold_fphone)
+    paste_c(img, card_future(), 760, 850, eob((t - 0.15) / 0.3), rot=4 + 2 * math.sin(t * 3))
+    st = word_t(v0, "saal", v0["end"] - 1.2)
+    if t > st - 0.1: stamp(img, "1 SAAL BAAD SE!", W / 2, 1240, t - st + 0.1, (120, 50, 180), -5, 100)
+    if t > 0.2: paste_c(img, emoji("😳", 100), 520, 640, eob((t - 0.3) / 0.25))
+
+def sc_meme_fut(img, t, lt):
+    (v1,) = L("meme_fut"); k = t - v1["start"]
+    img.alpha_composite(grad((25, 20, 60), (80, 40, 130))); sky_stars(img, t, 40)
+    for j, (x, y, r) in enumerate(((190, 420, -8), (540, 380, 4), (890, 440, 9), (190, 790, 6), (890, 800, -6))):
+        paste_c(img, meme_post(j), x, y + 8 * math.sin(t * 2 + j), 0.85 * eob((k - j * 0.18) / 0.25), rot=r)
+    nt = word_t(v1, "november", v1["start"] + 2.6, exact=False)
+    nt2 = [w["t"] for w in v1["words"] if w["w"].lower().strip(".,…!?'") .startswith("november")]
+    at = nt2[-1] if len(nt2) > 1 else v1["end"] - 1.2
+    draw_char(img, "H", 470, 1110, t, "shock" if t > at else "n", 0.8, arms=(-20, 110), hold=hold_fphone)
+    if t > at - 0.1:
+        paste_c(img, cal_page(23), 820, 1120, eob((t - at + 0.1) / 0.3), rot=-5)
+        paste_c(img, emoji("😨", 110), 940, 880, eob((t - at - 0.2) / 0.25))
+    paste_c(img, pill("SAB KEH RAHE THE…", 46, YEL), W / 2, 240, eob(k / 0.3), rot=-2)
+
+def sc_room_fut(img, t, lt):
+    vh, vn, b = L("room_fut")
+    img.alpha_composite(bg_room("night")); bulb_glow(img, 50)
+    if t < vn["start"]:
+        k = t - vh["start"]
+        draw_char(img, "H", 300, 1010, t, "shock", 0.95, arms=(-20, 110), hold=hold_fphone)
+        paste_c(img, card_q3(), 770, 760, eob(k / 0.3), rot=3)
+        qt = word_t(vh, "3", vh["end"] - 1.0)
+        if t > qt - 0.1: stamp(img, "Q3!", 800, 1220, t - qt + 0.1, RED, -8, 140)
+    else:
+        k = t - vn["start"]
+        hrs = 0.0 + 8.0 * eio(min(1, k / (b["end"] - vn["start"])))
+        clock(img, 880, 330, hrs)
+        d = ImageDraw.Draw(img); d.rectangle([140, 1180, 940, 1220], fill=(120, 80, 50), outline=INK, width=5)
+        sleepy = t > b["start"]
+        draw_char(img, "H", 540, 1000 + (40 if sleepy else 0), t, "sleep" if sleepy else "det", 0.9, arms=(-60, 60), hold=hold_book)
+        for j in range(min(6, int(k * 1.6))):
+            paste_c(img, pill("SAWAAL 3", 34, WHITE, INK), 230 + (j % 2) * 620, 620 + (j // 2) * 120, eob((k - j / 1.6) / 0.2), rot=(-6, 6)[j % 2])
+        if k > 1.0: paste_c(img, emoji("☕", 90), 260, 1130, 1.0)
+        if k > 2.0: paste_c(img, emoji("☕", 90), 340, 1130, 1.0, rot=8)
+        if sleepy: zzz(img, 660, 760, t); paste_c(img, pill("RAAT 3 BAJE…", 44, YEL), W / 2, 260, eob((t - b["start"]) / 0.2), rot=-3)
+
+def sc_exam_fut(img, t, lt):
+    v1, vh = L("exam_fut")
+    img.alpha_composite(bg_hall()); d = ImageDraw.Draw(img)
+    d.rectangle([300, 230, 1000, 560], fill=(40, 70, 55), outline=(120, 80, 50), width=14)
+    d.text((650, 340), "IMTIHAAN", font=fnt("Anton-Regular.ttf", 80), fill=WHITE, anchor="mm")
+    d.text((650, 450), "9:00 AM", font=fnt("Poppins-Black.ttf", 44), fill=YEL, anchor="mm")
+    gt = word_t(v1, "gaya", v1["end"] - 0.6)
+    happy = t > gt
+    if t < vh["start"]:
+        k = t - v1["start"]
+        paste_c(img, paper_q3(False), W / 2, 1010, eob((k - 0.3) / 0.3) * 0.95, rot=-2)
+        draw_char(img, "H", 170, 1250, t, "happy" if happy else "shock", 0.6, arms=(-20, 20))
+        if happy:
+            stamp(img, "AA GAYA!", W / 2, 680, t - gt, GRN, -6, 130); shake(img, t, gt, 18, 0.4)
+    else:
+        k = t - vh["start"]
+        draw_char(img, "H", 540, 1000 + 25 * abs(math.sin(t * 6)), t, "happy", 0.95, arms=(-160, 160), laugh=True)
+        paste_c(img, bubble([("FUTURE WALA HAMID…", INK), ("ZINDABAD!", GRN)], 46, tail="left"), 430, 690, eob(k / 0.3))
+        for j in range(5): paste_c(img, emoji("✨", 70), 220 + j * 160, 620 + 50 * math.sin(t * 4 + j), eob((k - j * 0.08) / 0.2))
+
+def sc_twist_fut(img, t, lt):
+    v1, vl, b = L("twist_fut")
+    img.alpha_composite(bg_street("day"))
+    if t < vl["start"]:
+        k = t - v1["start"]
+        draw_char(img, "H", 300, 1010, t, "happy" if k < 1.2 else "shock", 0.92, arms=(-20, 110), hold=hold_fphone)
+        bt = word_t(v1, "bilal", v1["end"] - 1.2)
+        if t > bt - 0.1:
+            paste_c(img, card_bilal(), 770, 760, eob((t - bt + 0.1) / 0.3), rot=-3)
+            stamp(img, "BILAL?!", 760, 1260, t - bt + 0.1, (255, 130, 40), 6, 110)
+        else:
+            paste_c(img, pill("NAYA MESSAGE…", 50, WHITE, INK), 760, 520, eob(k / 0.3) * (1 + 0.05 * math.sin(t * 9)), rot=3)
+    else:
+        k = t - vl["start"]
+        draw_char(img, "L", 780, 1010, t, "happy", 0.92, arms=(-150, 20), hold=hold_fphone, laugh=t < b["start"])
+        draw_char(img, "H", 290, 1010, t, "shock" if t < b["start"] else "sad", 0.92, arms=(-20, 20))
+        paste_c(img, pill("HAR SAAL AATA HAI! 😂" if False else "HAR SAAL AATA HAI!", 48, YEL), W / 2, 300, eob(k / 0.3), rot=-3)
+        if k > 0.8: paste_c(img, emoji("😂", 110), 900, 560, eob((k - 0.8) / 0.25), rot=10 * math.sin(t * 6))
+        if t > b["start"] - 0.05:
+            stamp(img, "PRANK!", 300, 560, t - b["start"] + 0.05, RED, -8, 140); shake(img, t, b["start"], 20, 0.4)
+            paste_c(img, emoji("😑", 110), 300, 760, eob((t - b["start"]) / 0.25))
+
+def sc_truth_fut(img, t, lt):
+    v1, fq = L("truth_fut")
+    img.alpha_composite(grad((20, 20, 50), (70, 40, 110))); sky_stars(img, t, 40)
+    k = t - v1["start"]
+    draw_char(img, "H", 300, 1010, t, "n", 0.9, arms=(-20, 110), hold=hold_fphone)
+    paste_c(img, meme_post(1), 780, 760, eob((k - 0.2) / 0.3) * 0.9, rot=5)
+    mt = word_t(v1, "meme", v1["start"] + 2.5)
+    if t > mt - 0.1:
+        stamp(img, "SIRF AI MEME!", W / 2, 300, t - mt + 0.1, RED, -5, 110)
+        paste_c(img, pill("KUCH NAHI HONE WALA", 46, GRN, WHITE), W / 2, 470, eob((t - mt - 0.6) / 0.3), rot=2)
+
+
 WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "shop_net": sc_shop_net, "city_net": sc_city_net,
          "roof_net": sc_roof_net, "back_net": sc_back_net,
          "hook_grav": sc_hook_grav, "room_grav": sc_room_grav, "street_grav": sc_street_grav, "sky_grav": sc_sky_grav,
-         "fall_grav": sc_fall_grav, "truth_grav": sc_truth_grav}
+         "fall_grav": sc_fall_grav, "truth_grav": sc_truth_grav,
+         "hook_fut": sc_hook_fut, "meme_fut": sc_meme_fut, "room_fut": sc_room_fut, "exam_fut": sc_exam_fut, "twist_fut": sc_twist_fut,
+         "truth_fut": sc_truth_fut}
 SC.update(WI_SC)
 
 exec(compile(_MAIN + _main, HR, "exec"), globals())
