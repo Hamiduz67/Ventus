@@ -5175,6 +5175,207 @@ def sc_cliff20(img, t, lt):
         st = word_t(vh, "sifar", vh["start"] + 2.0)
         if t > st - 0.1: paste_c(img, pill("JEB: Rs 0", 66, WHITE, GRN), W / 2, 390, eob((t - st + 0.1) / 0.3), rot=3); paste_c(img, emoji("😰", 100), 600, 600, eob((t - st) / 0.3))
 
+# ======================= DAY 21: Ek Hi Din (Rs 50,000 plan, Bilal's lottery torn, guard throws Ammi out at night, Rauf gives his upstairs room + donation dabba Rs 3,000, operation moved to parson)
+def calendar_strip(img, cx, cy, n=7, crossed=0, sc=1.0, red_from=99):
+    c = Image.new("RGBA", (n * 120 + 20, 170), (0, 0, 0, 0)); d = ImageDraw.Draw(c)
+    for j in range(n):
+        x0 = 10 + j * 120
+        d.rounded_rectangle([x0, 10, x0 + 108, 160], radius=14, fill=(255, 250, 235) if j < red_from else (255, 200, 200), outline=INK, width=5)
+        d.rectangle([x0 + 4, 14, x0 + 104, 50], fill=RED)
+        d.text((x0 + 54, 105), str(j + 1), font=fnt("Anton-Regular.ttf", 60), fill=INK, anchor="mm")
+        if j < crossed:
+            d.line([(x0 + 18, 60), (x0 + 90, 150)], fill=RED, width=10); d.line([(x0 + 90, 60), (x0 + 18, 150)], fill=RED, width=10)
+    paste_c(img, c, cx, cy, sc)
+
+@lru_cache(None)
+def lottery_img(torn=0):
+    """Gaudy lottery ticket (original design). torn: 0 whole, 1 left half, 2 right half."""
+    s = SS; im = Image.new("RGBA", (360 * s, 200 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); P = lambda *xy: [v * s for v in xy]
+    d.rectangle(P(4, 4, 356, 196), fill=(255, 225, 90), outline=INK, width=6 * s)
+    d.rectangle(P(4, 4, 356, 60), fill=(200, 40, 140))
+    d.text(P(180, 34), "LUCKY LOTTERY", font=fnt("Anton-Regular.ttf", 40 * s), fill=WHITE, anchor="mm")
+    d.text(P(180, 105), "1 CRORE!", font=fnt("Anton-Regular.ttf", 60 * s), fill=RED, anchor="mm")
+    d.text(P(180, 165), "No. 777777", font=fnt("Poppins-Black.ttf", 26 * s), fill=INK, anchor="mm")
+    for x in range(14, 350, 24): d.ellipse(P(x, 186, x + 8, 194), fill=INK)
+    im = ssf(im)
+    if torn == 1: im = im.crop((0, 0, 170, 200))
+    elif torn == 2: im = im.crop((170, 0, 360, 200))
+    return im
+def hold_lottery(img, x, y, sc): paste_c(img, lottery_img(), x - 170 * sc, y + 150 * sc, sc * 0.8, rot=10)
+
+@lru_cache(None)
+def chanda_box(n=0):
+    """Clear donation box on the counter: 'ABBU KA OPERATION'. n = notes inside (0..12)."""
+    s = SS; im = Image.new("RGBA", (360 * s, 380 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); P = lambda *xy: [v * s for v in xy]
+    r = np.random.default_rng(21)
+    d.rounded_rectangle(P(20, 120, 340, 370), radius=18 * s, fill=(215, 235, 250), outline=INK, width=7 * s)
+    for j in range(n):   # notes inside, piling up
+        x = r.uniform(40, 250); y = 350 - (j // 3) * 40 - r.uniform(0, 14)
+        d.rounded_rectangle(P(x, y - 34, x + 80, y), radius=6 * s, fill=(120, 190, 130) if j % 2 else (230, 150, 170), outline=INK, width=3 * s)
+    d.line(P(50, 140, 50, 340), fill=WHITE, width=8 * s); d.line(P(70, 140, 70, 200), fill=WHITE, width=6 * s)   # glass shine
+    d.rounded_rectangle(P(20, 120, 340, 370), radius=18 * s, outline=INK, width=7 * s)
+    d.rectangle(P(130, 112, 230, 128), fill=INK)   # slot
+    d.rounded_rectangle(P(0, 10, 360, 105), radius=16 * s, fill=RED, outline=INK, width=6 * s)
+    d.text(P(180, 42), "ABBU KA", font=fnt("Anton-Regular.ttf", 40 * s), fill=WHITE, anchor="mm")
+    d.text(P(180, 82), "OPERATION 🙏" if False else "OPERATION", font=fnt("Anton-Regular.ttf", 40 * s), fill=YEL, anchor="mm")
+    return ssf(im)
+
+def sc_hook21(img, t, lt):
+    img.alpha_composite(bg_hospital("eve")); img.alpha_composite(Image.new("RGBA", (W, H), (150, 20, 40, 50)))
+    (v0,) = L("hook21")
+    draw_char(img, "H", W / 2, 1010, t, "shock", 0.9, arms=(-140, 140) if t > 1.5 else (-20, 20))
+    st = word_t(v0, "saat", v0["start"] + 1.4)
+    if t > st - 0.1: calendar_strip(img, W / 2, 520, 7, 0, 1.0 * eob((t - st + 0.1) / 0.3))
+    paste_c(img, glow_text("Rs 50,000", "Anton-Regular.ttf", 150, YEL, (230, 60, 70)), W / 2, 280, eob((t - 1.4) / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=-3)
+    kt = word_t(v0, "khaali", v0["start"] + 2.6)
+    if t > kt - 0.1:
+        paste_c(img, pill("JEB: Rs 0", 66, WHITE, GRN), W / 2, 720, eob((t - kt + 0.1) / 0.3), rot=3)
+        paste_c(img, emoji("😰", 100), 830, 860, eob((t - kt) / 0.3))
+
+def sc_plan21(img, t, lt):
+    img.alpha_composite(bg_hospital())
+    v1, vl, vh, b, vl2 = L("plan21")
+    d = ImageDraw.Draw(img)   # waiting bench
+    d.rectangle([90, 1180, 1000, 1220], fill=(60, 120, 170), outline=INK, width=6)
+    for lx in (120, 960): d.rectangle([lx, 1220, lx + 22, 1330], fill=(80, 80, 90), outline=INK, width=4)
+    torn = t > vh["start"] + 1.2
+    bx = lerp(1300, 790, eo((t - vl["start"] + 0.25) / 0.5)) if t > vl["start"] - 0.25 else 1400
+    hm = "det" if t < vl["start"] else ("shock" if t < vh["start"] else "det")
+    draw_char(img, "H", 300, 1000, t, hm, 0.85, arms=(-20, 20) if t < vh["start"] else (-120, 120), hold=hold_book if t < vl["start"] else None)
+    if t > vl["start"] - 0.25:
+        draw_char(img, "L", bx, 1000, t, "happy" if t < vh["start"] else ("shock" if t < vl2["start"] else "sad"), 0.85,
+                  arms=(-130, -60) if not torn else (-150, 150), hold=hold_lottery if t < vh["start"] + 0.5 else None)
+    if t < vl["start"]:
+        k = t - v1["start"]
+        rows = [("Rs 50,000 ÷ 7 DIN", INK), ("= Rs 7,000 ROZ!", RED)]
+        paste_c(img, phone_card("HISAAB", rows, v1["start"] + 0.3, t, (40, 90, 160), 620), W / 2, 440, eob(k / 0.3) * 0.95, rot=-3)
+    elif t < vh["start"]:
+        k = t - vl["start"]
+        paste_c(img, glow_text("SCHEME 5.0!", "Anton-Regular.ttf", 120, YEL, (200, 40, 140)), W / 2, 270, eob(k / 0.25), rot=-3)
+        lt_ = word_t(vl, "lottery", vl["start"] + 1.3)
+        if t > lt_ - 0.1: paste_c(img, lottery_img(), W / 2, 500, eob((t - lt_ + 0.1) / 0.3) * 1.1, rot=4 * math.sin(t * 6)); paste_c(img, emoji("🤑", 90), 900, 640, eob((t - lt_) / 0.3))
+    elif not torn:
+        k = t - vh["start"]
+        paste_c(img, pill("SCHEME #5?", 60, RED, WHITE), W / 2, 260, eob(k / 0.3), rot=-3)
+        paste_c(img, lottery_img(), W / 2, 500, 1.1, rot=-4)
+    else:
+        k = t - (vh["start"] + 1.2)
+        q = min(1.0, k / 0.7)
+        paste_c(img, lottery_img(1), W / 2 - 110 - 140 * q, 500 + 500 * q * q, 1.0, rot=-25 * q - 5)
+        paste_c(img, lottery_img(2), W / 2 + 110 + 140 * q, 500 + 520 * q * q, 1.0, rot=30 * q + 5)
+        if t < vl2["start"]: stamp(img, "PHARRR!", W / 2, 270, k, RED, -8, 140)
+        else:
+            k2 = t - vl2["start"]
+            paste_c(img, bubble([("WOH JEETNE", INK), ("WALI THI!", (200, 40, 140))], 50, tail="right"), 700, 420, eob(k2 / 0.25))
+            paste_c(img, emoji("😭", 110), 900, 640, eob((k2 - 0.2) / 0.3), rot=8 * math.sin(t * 8))
+            paste_c(img, emoji("🙄", 90), 230, 640, eob((k2 - 0.5) / 0.3))
+
+def sc_ward21(img, t, lt):
+    img.alpha_composite(bg_hospital("eve")); night_tint(img, 90)
+    v1, v2, v3, va, b = L("ward21")
+    d = ImageDraw.Draw(img)
+    d.rectangle([90, 1180, 640, 1220], fill=(60, 120, 170), outline=INK, width=6)
+    for lx in (120, 600): d.rectangle([lx, 1220, lx + 22, 1330], fill=(80, 80, 90), outline=INK, width=4)
+    clock(img, 200, 300, 10.0); paste_c(img, pill("RAAT 10 BAJE", 40, YEL), 210, 430, 1.0)
+    gx = lerp(1300, 880, eo((t - v1["start"] - 0.3) / 0.6))
+    guard_char(img, gx, 990, t, 0.9, whistle=t < v2["end"], arm_up=v2["start"] - 0.2 < t < v3["start"])
+    draw_char(img, "A", 470, 960, t, "sad", 0.8, arms=(-20, 20) if t < va["start"] else (-20, -90))
+    draw_char(img, "H", 230, 1040, t, "shock" if t < v3["end"] else "sad", 0.85, arms=(-20, 20))
+    if t < v2["start"]:
+        k = t - v1["start"]
+        sv = word_t(v1, "seeti", v1["start"] + 1.6)
+        if t > sv - 0.1: paste_c(img, pill("PHREEET!", 64, WHITE, INK), gx - 60, 640, eob((t - sv + 0.1) / 0.2), rot=-8)
+    elif t < v3["start"]:
+        k = t - v2["start"]
+        paste_c(img, bubble([("BAHAR NIKLO!", RED), ("RAAT KO RUKNA MANA!", INK)], 44, tail="right"), 640, 560, eob(k / 0.25))
+        paste_c(img, emoji("👉", 90), 1000, 820, eob((k - 0.3) / 0.3), rot=180)
+    elif t < va["start"]:
+        k = t - v3["start"]
+        paste_c(img, glow_text("HOTEL: Rs 2,000", "Anton-Regular.ttf", 110, WHITE, (230, 60, 70)), W / 2, 300, eob(k / 0.25), rot=-3)
+        paste_c(img, pill("JEB: Rs 0", 60, WHITE, GRN), W / 2, 450, eob((k - 0.4) / 0.3), rot=3)
+        paste_c(img, emoji("🏨", 90), 860, 620, eob((k - 0.2) / 0.3))
+    elif t < b["start"]:
+        k = t - va["start"]
+        paste_c(img, bubble([("MAIN FOOTPATH PE", INK), ("SO JAUNGI…", (40, 140, 110))], 46, tail="left"), 560, 520, eob(k / 0.25))
+    else:
+        k = t - b["start"]
+        paste_c(img, emoji("💔", 130), W / 2, 520, eob(k / 0.2))
+
+def sc_rauf21(img, t, lt):
+    img.alpha_composite(bg_hospital("eve")); night_tint(img, 70)
+    vr, vh, vr2 = L("rauf21")
+    rx = lerp(1350, 800, eo((t - vr["start"] + 0.3) / 0.5))
+    draw_char(img, "A", 470, 960, t, "shock" if t < vr2["start"] else "happy", 0.8, arms=(-20, 20) if t < vr2["end"] - 0.5 else (-110, 110))
+    draw_char(img, "H", 230, 1040, t, "shock" if t < vh["start"] + 0.6 else ("happy" if t > vr2["start"] else "n"), 0.85,
+              arms=(-150, 150) if vh["start"] < t < vh["start"] + 1.2 else (-20, 20))
+    draw_char(img, "R", rx, 980, t, "det" if t < vr2["start"] else "n", 0.95, arms=(-130, 20) if t < vh["start"] else (-110, 20) if t > vr2["start"] else (-20, 20))
+    if t < vh["start"]:
+        k = t - vr["start"]
+        paste_c(img, glow_text("FOOTPATH PE?!", "Anton-Regular.ttf", 120, YEL, (40, 110, 70)), W / 2, 280, eob(k / 0.25) * (1 + 0.03 * math.sin(t * 14)), rot=-3)
+        paste_c(img, emoji("😤", 90), 940, 560, eob((k - 0.3) / 0.3))
+    elif t < vr2["start"]:
+        k = t - vh["start"]
+        paste_c(img, pill("SETH RAUF!", 66, (40, 110, 70), WHITE), W / 2, 270, eob(k / 0.25), rot=-3)
+        bt = word_t(vh, "bilal", vh["start"] + 1.0)
+        if t > bt - 0.1: paste_c(img, pill("BILAL NE BATAYA 🤫" if False else "BILAL NE BATAYA", 46, YEL), W / 2, 400, eob((t - bt + 0.1) / 0.3), rot=3)
+    else:
+        k = t - vr2["start"]
+        key = Image.new("RGBA", (200, 90), (0, 0, 0, 0)); kd = ImageDraw.Draw(key)
+        kd.ellipse([4, 14, 74, 84], fill=(240, 200, 60), outline=INK, width=5); kd.ellipse([26, 36, 52, 62], fill=(0, 0, 0, 0), outline=INK, width=4)
+        kd.rectangle([70, 40, 190, 58], fill=(240, 200, 60), outline=INK, width=4); kd.rectangle([150, 56, 166, 78], fill=(240, 200, 60), outline=INK, width=3)
+        paste_c(img, key, rx - 210, 1140, eob((k - 0.3) / 0.3) * 1.2, rot=-10 + 8 * math.sin(t * 5))
+        paste_c(img, glow_text("UPAR WALA KAMRA", "Anton-Regular.ttf", 100, WHITE, (40, 190, 110)), W / 2, 280, eob(k / 0.25), rot=-3)
+        at = word_t(vr2, "ammi", vr2["start"] + 2.6)
+        if t > at - 0.1: paste_c(img, pill("AAJ SE AMMI KA!", 56, YEL), W / 2, 420, eob((t - at + 0.1) / 0.3), rot=3); paste_c(img, emoji("🥹", 90), 470, 620, eob((t - at) / 0.3))
+
+def sc_hotel21(img, t, lt):
+    img.alpha_composite(bg_rauf("night")); bulb_glow(img)
+    v1, v2, v3 = L("hotel21")
+    d = ImageDraw.Draw(img); d.rectangle([520, 1120, 1080, 1180], fill=(150, 100, 70), outline=INK, width=6)   # counter top
+    d.rectangle([540, 1180, 1060, 1500], fill=(120, 80, 55), outline=INK, width=6)
+    mt = word_t(v2, "teen", v2["start"] + 1.8)
+    n = 0 if t < v2["start"] else (int(min(12, (t - v2["start"]) / max(0.2, mt - v2["start"]) * 12)))
+    draw_char(img, "H", 260, 1000, t, "n" if t < v2["start"] else ("shock" if t < v3["start"] else "happy"), 0.85,
+              arms=(-20, 20) if t < v3["start"] else (-140, 140))
+    paste_c(img, chanda_box(n), 800, 960, eob((t - v1["start"]) / 0.35) * 0.95)
+    if t < v2["start"]:
+        k = t - v1["start"]
+        paste_c(img, pill("SETH KA DABBA", 56, (40, 110, 70), WHITE), W / 2, 520, eob(k / 0.3), rot=-3)
+        paste_c(img, emoji("👇", 90), 800, 680, eob((k - 0.3) / 0.3))
+    elif t < v3["start"]:
+        k = t - v2["start"]
+        for j in range(5):   # hands dropping notes
+            q = ((k * 1.4) + j * 0.2) % 1
+            paste_c(img, notes_img([50, 100, 500, 20, 1000][j], 160), 800 + (j - 2) * 50, 640 + q * 220, 0.5 * (1 - q * 0.3), rot=(j - 2) * 12)
+        paste_c(img, pill("RAAT BHAR…", 50, WHITE, INK), 300, 640, eob(k / 0.3), rot=-3)
+        if t > mt - 0.1: paste_c(img, glow_text("Rs 3,000!", "Anton-Regular.ttf", 140, YEL, (40, 190, 110)), W / 2, 500, eob((t - mt + 0.1) / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=3)
+    else:
+        k = t - v3["start"]
+        paste_c(img, pill("AMMI KO CHHAT MILI 🏠" if False else "AMMI KO CHHAT MILI", 52, GRN, WHITE), W / 2, 500, eob(k / 0.3), rot=-3)
+        at = word_t(v3, "aaj", v3["start"] + 1.2)
+        if t > at - 0.1: paste_c(img, glow_text("AAJ BHI BACH GAYE!", "Anton-Regular.ttf", 100, YEL, (255, 120, 40)), W / 2, 650, eob((t - at + 0.1) / 0.25), rot=3)
+        for j in range(6):
+            q = (k * 0.8 + j * 0.17) % 1
+            paste_c(img, emoji(["⭐", "🙏"][j % 2], 52), 120 + j * 160, 560 + q * 500, 0.9, rot=q * 200)
+
+def sc_cliff21(img, t, lt):
+    img.alpha_composite(bg_rauf("night")); night_tint(img, 120); img.alpha_composite(Image.new("RGBA", (W, H), (150, 20, 40, 50)))
+    v1, v2, v3, ol = L("cliff21")
+    draw_char(img, "H", 300, 1010, t, "n" if t < v1["start"] + 0.8 else "shock", 0.9, arms=(-20, 110) if t < v3["start"] else (-150, 150), hold=hold_phone if t < v3["start"] else None)
+    if t < v3["start"]:
+        k = t - v1["start"]
+        rows = [("OPERATION: PARSON!", RED), ("PAISE: KAL SHAAM TAK", INK), ("Rs 50,000", RED)]
+        tt = v1["start"] + 0.8
+        if t > tt - 0.2: paste_c(img, phone_card("CITY HOSPITAL", rows, tt + 0.2, t, (30, 110, 160), 620), 730, 640, eob((t - tt + 0.2) / 0.3) * 0.85, rot=4)
+        if t < v2["start"]: paste_c(img, pill("NAYA MESSAGE", 50, (30, 110, 160), WHITE), W / 2, 400, eob(k / 0.3), rot=-3)
+        else: paste_c(img, glow_text("PARSON?!", "Anton-Regular.ttf", 140, YEL, (230, 60, 70)), W / 2, 260, eob((t - v2["start"]) / 0.25) * (1 + 0.04 * math.sin(t * 12)), rot=-3)
+    else:
+        k = t - v3["start"]
+        calendar_strip(img, W / 2, 520, 7, 6 if k > 0.3 else 0, 1.0, red_from=6)
+        paste_c(img, glow_text("SIRF 1 DIN!", "Anton-Regular.ttf", 150, YEL, (230, 60, 70)), W / 2, 270, eob(k / 0.25) * (1 + 0.04 * math.sin(t * 12)), rot=3)
+        dt = word_t(v3, "ek", v3["start"] + 1.4)
+        if t > dt - 0.1: paste_c(img, pill("BAAKI: Rs 47,000", 60, RED, WHITE), W / 2, 720, eob((t - dt + 0.1) / 0.3), rot=-3); clock(img, 900, 880, 5.0)
+
 # ======================= OUTRO HOOK (owner, 2026-11-15): every reel ends with "Agay Hamid kya karega? Follow karein…"
 # Mark the last line of the script with "outro": true (Hamid vo). It plays over the cliffhanger frame.
 def outro(img, t):
@@ -5215,7 +5416,8 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook17": sc_hook17, "bilal17": sc_bilal17, "ride17": sc_ride17, "haveli17": sc_haveli17, "inside17": sc_inside17, "cliff17": sc_cliff17,
       "hook18": sc_hook18, "naka18": sc_naka18, "call18": sc_call18, "rauf18": sc_rauf18, "end18": sc_end18, "cliff18": sc_cliff18,
       "hook19": sc_hook19, "status19": sc_status19, "beach19": sc_beach19, "chase19": sc_chase19, "camel19": sc_camel19, "box19": sc_box19, "cliff19": sc_cliff19,
-      "hook20": sc_hook20, "adda20": sc_adda20, "hosp20": sc_hosp20, "bilal20": sc_bilal20, "abbu20": sc_abbu20, "cliff20": sc_cliff20}
+      "hook20": sc_hook20, "adda20": sc_adda20, "hosp20": sc_hosp20, "bilal20": sc_bilal20, "abbu20": sc_abbu20, "cliff20": sc_cliff20,
+      "hook21": sc_hook21, "plan21": sc_plan21, "ward21": sc_ward21, "rauf21": sc_rauf21, "hotel21": sc_hotel21, "cliff21": sc_cliff21}
 
 
 # ======================= COLD-OPEN HOOK (owner, 2026-11-19: "add an eye / ear catching hook in the start so people won't skip")

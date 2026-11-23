@@ -1,0 +1,4 @@
+{"day": 21, "city": "Karachi", "money": 3000, "money_start": 0, "title": "Ek Hi Din", "diary_follow": false,
+ "money_steps": [[16, 3000, 0.6]],
+ "hook": {"text": "Rs 50,000 KAHAN SE?!", "emoji": "💸", "sub": "SIRF 7 DIN • JEB KHAALI"},
+ "thumb": {"t": 45.0, "l1": "OPERATION PARSON", "l2": "PAISE KAHAN?!", "emoji": "🏥", "tag": "Rs 47,000?", "mood": "shock"}}

@@ -694,6 +694,27 @@ if "abbu20" in SPN:
 if "cliff20" in SPN:
     c20 = LS_("cliff20"); add(sfx, kick(), c20[0]["start"] + 1.5, 0.9); add(sfx, kick(), c20[1]["start"] + 0.1, 1.0)
     for k in range(6): add(sfx, TICK, c20[2]["start"] + 0.2 + k * 0.25, 0.4)
+# ---- Day 21: calendar ticks, lottery chime + rip + trombone, guard whistle, Rauf's entrance hit + key chime, notes dropping into the dabba, hospital message + ticks
+if "hook21" in SPN:
+    h21 = LS_("hook21"); add(sfx, kick(), h21[0]["end"] - 0.6, 0.9)
+    for k in range(4): add(sfx, TICK, h21[0]["start"] + 1.6 + k * 0.2, 0.4)
+if "plan21" in SPN:
+    p21 = LS_("plan21"); add(sfx, CHIME, p21[1]["start"] + 1.2, 0.5); add(sfx, noise(0.35, 0.08), p21[3]["start"], 0.8)
+    add(sfx, kick(), p21[3]["start"], 0.7); add(sfx, sad_trombone(), p21[4]["start"] + 0.3, 0.35)
+if "ward21" in SPN:
+    w21 = LS_("ward21"); add(sfx, whistle(0.6), w21[0]["start"] + 1.5, 0.5); add(sfx, kick(), w21[1]["start"], 0.7)
+    add(sfx, kick(), w21[2]["start"] + 0.9, 0.6); add(sfx, kick(), w21[4]["start"], 0.6)
+if "rauf21" in SPN:
+    r21 = LS_("rauf21"); add(sfx, WHOOSH, r21[0]["start"] - 0.2, 0.6); add(sfx, kick(), r21[0]["start"] + 0.1, 0.9)
+    add(sfx, CHIME, r21[2]["start"] + 0.4, 0.6)
+if "hotel21" in SPN:
+    o21 = LS_("hotel21"); add(sfx, kick(), o21[0]["start"] + 0.2, 0.6)
+    for k in range(10): add(sfx, noise(0.05, 0.012), o21[1]["start"] + 0.2 + k * 0.2, 0.45)
+    add(sfx, CHIME, o21[1]["end"] - 0.5, 0.7); add(sfx, CHIME, o21[2]["start"] + 1.2, 0.5)
+if "cliff21" in SPN:
+    c21 = LS_("cliff21"); add(sfx, beep(1200, 0.08, 0.5), c21[0]["start"] + 0.6); add(sfx, beep(1600, 0.1, 0.5), c21[0]["start"] + 0.75)
+    add(sfx, kick(), c21[1]["start"] + 0.1, 1.0); add(sfx, kick(), c21[2]["start"] + 0.2, 1.0)
+    for k in range(6): add(sfx, TICK, c21[2]["start"] + 0.4 + k * 0.25, 0.4)
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:
