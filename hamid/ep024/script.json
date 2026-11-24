@@ -1,0 +1,23 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook24", "dev": "خون نہیں ملا… تو آپریشن نہیں ہوگا!", "rom": "Khoon nahi mila… toh operation nahi hoga!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن چوبیس۔ صرف دو گھنٹے۔", "rom": "Din chaubees. Sirf do ghante."},
+{"who": "H", "mode": "vo", "scene": "bank24", "dev": "بلڈ بینک کی طرف بھاگا…", "rom": "Blood bank ki taraf bhaaga…"},
+{"who": "H", "mode": "vo", "scene": "bank24", "dev": "جواب ملا… او نیگیٹو ختم!", "rom": "Jawab mila… O-negative khatam!"},
+{"who": "H", "mode": "beat", "scene": "bank24", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "test24", "dev": "میرا خون ٹیسٹ ہوا… بی پازیٹو!", "rom": "Mera khoon test hua… B-positive!"},
+{"who": "L", "mode": "talk", "scene": "test24", "dev": "[excited] میرا لو! میرا ٹیسٹ کرو!", "rom": "Mera lo! Mera test karo!"},
+{"who": "H", "mode": "vo", "scene": "test24", "dev": "بلال کا اے پازیٹو۔ میچ نہیں!", "rom": "Bilal ka A-positive. Match nahi!"},
+{"who": "A", "mode": "talk", "scene": "test24", "dev": "[crying] بیٹا… صرف ایک گھنٹہ بچا ہے!", "rom": "Beta… sirf ek ghanta bacha hai!"},
+{"who": "L", "mode": "talk", "scene": "scheme24", "dev": "[excited] سکیم آٹھ! لاؤڈ سپیکر!", "rom": "Scheme aath! Loud speaker!"},
+{"who": "H", "mode": "vo", "scene": "scheme24", "dev": "رکشے پر پورے بازار میں اعلان!", "rom": "Rickshaw pe poore bazaar mein elaan!"},
+{"who": "L", "mode": "talk", "scene": "scheme24", "dev": "[shouting] او نیگیٹو چاہیے! کوئی ہے؟", "rom": "O-negative chahiye! Koi hai?"},
+{"who": "H", "mode": "beat", "scene": "scheme24", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "jadu24", "dev": "پھر بھیڑ میں ایک ہاتھ اٹھا…", "rom": "Phir bheed mein ek haath utha…"},
+{"who": "H", "mode": "vo", "scene": "jadu24", "dev": "وہی جادوگر! ڈبے والا!", "rom": "Wahi jadugar! Dabbe wala!"},
+{"who": "H", "mode": "vo", "scene": "jadu24", "dev": "اس کا کارڈ… او نیگیٹو!", "rom": "Uska card… O-negative!"},
+{"who": "H", "mode": "vo", "scene": "give24", "dev": "اس بار جادوگر نے اصلی چیز دی!", "rom": "Is baar jadugar ne asli cheez di!"},
+{"who": "H", "mode": "vo", "scene": "give24", "dev": "آپریشن کامیاب! آج بھی بچ گئے!", "rom": "Operation kamyab! Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff24", "dev": "پھر منیجر کا میسج آیا…", "rom": "Phir manager ka message aaya…"},
+{"who": "H", "mode": "vo", "scene": "cliff24", "dev": "تین دن سے غائب؟ نوکری ختم!", "rom": "Teen din se ghayab? Naukri khatam!"},
+{"who": "H", "mode": "vo", "scene": "cliff24", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]

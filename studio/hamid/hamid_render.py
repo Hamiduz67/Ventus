@@ -5817,6 +5817,197 @@ def sc_cliff23(img, t, lt):
         dt = word_t(v18, "do", v18["start"] + 1.8, exact=True)
         if t > dt - 0.1: paste_c(img, pill("SIRF 2 GHANTE!", 56, RED, WHITE), W / 2, 520, eob((t - dt + 0.1) / 0.3), rot=-4); clock(img, 900, 1080, 2.0)
 
+# ======================= DAY 24: O-Negative (blood bank out of stock, Hamid B+ / Bilal A+, Ammi: 1 ghanta, Bilal's Scheme 8.0 = rickshaw
+# loudspeaker in the bazaar, the jadugar from Day 19 raises his hand: O-negative donor; operation kamyab; manager: naukri khatam)
+def group_card(txt, ok=None, w=300):
+    c = Image.new("RGBA", (w, 220), (0, 0, 0, 0)); d = ImageDraw.Draw(c)
+    d.rounded_rectangle([4, 4, w - 4, 216], radius=24, fill=WHITE, outline=INK, width=7)
+    d.rectangle([4, 4, w - 4, 70], fill=(200, 30, 45)); d.text((w / 2, 38), "BLOOD GROUP", font=fnt("Poppins-Black.ttf", 28), fill=WHITE, anchor="mm")
+    d.text((w / 2, 140), txt, font=fnt("Anton-Regular.ttf", 96), fill=(200, 30, 45), anchor="mm")
+    if ok is False: d.line([(30, 200), (w - 30, 80)], fill=RED, width=14)
+    return c
+
+def donor_card():
+    c = Image.new("RGBA", (420, 260), (0, 0, 0, 0)); d = ImageDraw.Draw(c)
+    d.rounded_rectangle([4, 4, 416, 256], radius=24, fill=(255, 250, 235), outline=INK, width=7)
+    d.rectangle([4, 4, 416, 72], fill=(110, 50, 170)); d.text((210, 40), "DONOR CARD", font=fnt("Anton-Regular.ttf", 48), fill=WHITE, anchor="mm")
+    d.text((210, 160), "O-NEG", font=fnt("Anton-Regular.ttf", 110), fill=(200, 30, 45), anchor="mm")
+    d.text((210, 232), "♥", font=fnt("Poppins-Black.ttf", 26), fill=(200, 30, 45), anchor="mm")
+    return c
+def hold_donor(img, x, y, sc): paste_c(img, donor_card(), x + 250 * sc, y - 300 * sc, sc * 0.8, rot=-6)
+def hold_mega(img, x, y, sc): paste_c(img, emoji("📢", 120), x - 190 * sc, y + 40 * sc, sc, rot=-20)
+
+def bank_sign(img):
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([700, 380, 1060, 470], radius=12, fill=(200, 30, 45), outline=INK, width=6)
+    d.text((880, 425), "BLOOD BANK", font=fnt("Anton-Regular.ttf", 54), fill=WHITE, anchor="mm")
+
+def sc_hook24(img, t, lt):
+    img.alpha_composite(bg_hospital("eve")); img.alpha_composite(Image.new("RGBA", (W, H), (160, 20, 30, 60 + int(30 * math.sin(t * 6)))))
+    (v0,) = L("hook24")
+    draw_char(img, "H", 300, 1030, t, "shock", 0.88, arms=(-150, 150) if t > 1.6 else (-20, 20))
+    paste_c(img, blood_bag(), 820, 900, eob((t - 1.4) / 0.3) * 0.9, rot=6 + 3 * math.sin(t * 5))
+    paste_c(img, glow_text("KHOON NAHI MILA…", "Anton-Regular.ttf", 110, WHITE, (200, 30, 45)), W / 2, 290, eob((t - 1.45) / 0.25), rot=-3)
+    ot = word_t(v0, "operation", v0["start"] + 2.2)
+    if t > ot - 0.1:
+        stamp(img, "OPERATION NAHI!", W / 2, 470, t - ot + 0.1, RED, 4, 100)
+        clock(img, 860, 1230, 2.0)
+
+def sc_bank24(img, t, lt):
+    img.alpha_composite(bg_hospital("day")); bank_sign(img)
+    v1, v2, b = L("bank24")
+    run = t < v2["start"]
+    hx = lerp(-150, 480, eo((t - v1["start"]) / 1.2)) if run else 520
+    if run: speedlines(img, t, 8, 600, 1300)
+    draw_char(img, "H", hx, 1040 - (abs(math.sin(t * 14)) * 20 if run else 0), t, "det" if run else ("shock" if t > b["start"] else "n"), 0.85,
+              arms=(-60, 60) if run else ((-150, 150) if t > b["start"] else (-20, 20)))
+    if run:
+        paste_c(img, glow_text("BLOOD BANK!", "Anton-Regular.ttf", 130, WHITE, (200, 30, 45)), W / 2, 260, eob((t - v1["start"]) / 0.25), rot=-3)
+        paste_c(img, emoji("🏃", 90), 160, 560, eob((t - v1["start"] - 0.3) / 0.3))
+    elif t < b["start"]:
+        k = t - v2["start"]
+        paste_c(img, bubble([("O-NEGATIVE?", INK), ("STOCK KHATAM!", RED)], 48, tail="right"), 700, 640, eob((k - 0.4) / 0.25))
+        paste_c(img, pill("JAWAB:", 50, YEL), W / 2, 260, eob(k / 0.3), rot=-3)
+    else:
+        k = t - b["start"]
+        stamp(img, "KHATAM!", W / 2, 330, k, RED, -8, 150)
+        paste_c(img, emoji("😨", 110), 300, 640, eob((k - 0.1) / 0.25))
+
+def sc_test24(img, t, lt):
+    img.alpha_composite(bg_hospital("day"))
+    v1, vl, v3, va = L("test24")
+    ammi = t > va["start"] - 0.2
+    if ammi:
+        img.alpha_composite(Image.new("RGBA", (W, H), (150, 20, 40, 50)))
+        draw_char(img, "A", 780, 1000, t, "sad", 0.85, arms=(-20, -100))
+        tears(img, 780, 940, t - va["start"])
+        draw_char(img, "H", 260, 1030, t, "shock", 0.85, arms=(-20, 20))
+        k = t - va["start"]
+        paste_c(img, bubble([("SIRF EK GHANTA", RED), ("BACHA HAI!", INK)], 50, tail="right"), 600, 480, eob(k / 0.25))
+        clock(img, 200, 640, 1.0 - min(0.4, k * 0.1))
+        paste_c(img, pill("1 GHANTA BAAKI", 54, RED, WHITE), W / 2, 260, eob((k - 0.2) / 0.3), rot=-3)
+        return
+    draw_char(img, "H", 300, 1030, t, "shock" if t > v1["start"] + 1.6 else "n", 0.85, arms=(-20, 20) if t < vl["start"] else (-20, 20))
+    if t > vl["start"] - 0.2:
+        bx = lerp(1300, 780, eo((t - vl["start"] + 0.2) / 0.5))
+        draw_char(img, "L", bx, 1030, t, "happy" if t < v3["start"] + 1.4 else "sad", 0.85, arms=(-130, -60) if t < v3["start"] else (-20, 20))
+    if t < vl["start"]:
+        k = t - v1["start"]
+        paste_c(img, pill("TEST…", 54, WHITE, INK), W / 2, 250, eob(k / 0.3), rot=-3)
+        bt = word_t(v1, "b-positive", v1["start"] + 1.6)
+        if t > bt - 0.1:
+            paste_c(img, group_card("B+", None), 300, 560, eob((t - bt + 0.1) / 0.25))
+            paste_c(img, pill("CHAHIYE: O-", 54, RED, WHITE), 760, 560, eob((t - bt) / 0.3), rot=4)
+            if t > bt + 0.5: paste_c(img, emoji("❌", 90), 420, 470, eob((t - bt - 0.5) / 0.25))
+    elif t < v3["start"]:
+        k = t - vl["start"]
+        paste_c(img, bubble([("MERA LO!", (255, 130, 40)), ("MERA TEST KARO!", INK)], 48, tail="right"), 620, 520, eob(k / 0.25))
+        paste_c(img, emoji("💪", 90), 960, 760, eob((k - 0.3) / 0.3), rot=-10)
+    else:
+        k = t - v3["start"]
+        paste_c(img, group_card("A+", None), 780, 520, eob(k / 0.25))
+        mt = word_t(v3, "match", v3["start"] + 1.6)
+        if t > mt - 0.1: stamp(img, "MATCH NAHI!", W / 2, 280, t - mt + 0.1, RED, -6, 110)
+
+def sc_scheme24(img, t, lt):
+    img.alpha_composite(bg_bazaar())
+    vl, v2, vl2, b = L("scheme24")
+    waiting_people(img, t, 6, 120, 1000, 1150, 0.62, seed=24)
+    drive = t > v2["start"] - 0.2
+    rx = lerp(1400, 560, eo((t - v2["start"] + 0.2) / 1.0)) if drive else 1500
+    if drive: paste_c(img, rickshaw_img(), rx, 1300, 1.0)
+    if not drive:
+        draw_char(img, "L", 640, 1050, t, "happy", 0.85, arms=(-140, 20), hold=hold_mega)
+        draw_char(img, "H", 260, 1060, t, "shock", 0.82, arms=(-20, 20))
+        k = t - vl["start"]
+        paste_c(img, glow_text("SCHEME 8.0!", "Anton-Regular.ttf", 140, YEL, (255, 130, 40)), W / 2, 280, eob(k / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=-3)
+        paste_c(img, pill("LOUD SPEAKER!", 54, WHITE, INK), W / 2, 440, eob((k - 0.4) / 0.3), rot=3)
+        return
+    # Bilal hanging off the rickshaw's side with the megaphone
+    draw_char(img, "L", rx + 300, 1030 - abs(math.sin(t * 9)) * 10, t, "det", 0.74, arms=(-140, 20), hold=hold_mega)
+    if t < vl2["start"]:
+        k = t - v2["start"]
+        paste_c(img, pill("POORA BAZAAR", 54, YEL), W / 2, 260, eob(k / 0.3), rot=-3)
+        paste_c(img, emoji("📢", 90), 900, 420, eob((k - 0.5) / 0.3) * (1 + 0.08 * math.sin(t * 12)))
+    elif t < b["start"]:
+        k = t - vl2["start"]
+        paste_c(img, glow_text("O-NEGATIVE CHAHIYE!", "Anton-Regular.ttf", 100, WHITE, (200, 30, 45)), W / 2, 300, eob(k / 0.25) * (1 + 0.03 * math.sin(t * 16)), rot=-3)
+        paste_c(img, glow_text("KOI HAI?", "Anton-Regular.ttf", 130, YEL, (230, 60, 70)), W / 2, 460, eob((k - 1.0) / 0.25), rot=3)
+    else:
+        k = t - b["start"]
+        img.alpha_composite(Image.new("RGBA", (W, H), (10, 10, 30, 90)))
+        paste_c(img, pill("SANNATA…", 70, WHITE, INK), W / 2, 380, eob(k / 0.2), rot=-4)
+        paste_c(img, emoji("🦗", 90), 820, 560, eob((k - 0.1) / 0.2))
+
+def sc_jadu24(img, t, lt):
+    img.alpha_composite(bg_bazaar())
+    v1, v2, v3 = L("jadu24")
+    waiting_people(img, t, 6, 120, 1000, 1150, 0.62, seed=24)
+    up = t > word_t(v1, "haath", v1["start"] + 1.3) - 0.1
+    jx = 720; jy = 1000 - (60 * eo((t - v1["start"] - 0.8) / 0.4) if up else 0)
+    draw_char(img, "J", jx, jy, t, "happy", 0.72, arms=(-20, 150) if up else (-20, 20), hold=hold_donor if t > v3["start"] + 0.6 else None)
+    tophat(img, jx, jy, 0.72, t)
+    draw_char(img, "H", 230, 1060, t, "shock" if t > v2["start"] else "sad", 0.82, arms=(-20, 20) if t < v2["start"] else (-150, 150))
+    if t < v2["start"]:
+        k = t - v1["start"]
+        paste_c(img, pill("PHIR…", 56, WHITE, INK), W / 2, 260, eob(k / 0.3), rot=-3)
+        if up: paste_c(img, glow_text("EK HAATH!", "Anton-Regular.ttf", 130, YEL, (110, 50, 170)), W / 2, 420, eob((t - v1["start"] - 0.8) / 0.25), rot=3); paste_c(img, emoji("✋", 90), 960, 560, eob((k - 1.0) / 0.3))
+    elif t < v3["start"]:
+        k = t - v2["start"]
+        img.alpha_composite(Image.new("RGBA", (W, H), (255, 255, 255, int(180 * max(0, 1 - k / 0.25)))))
+        paste_c(img, glow_text("WAHI JADUGAR!", "Anton-Regular.ttf", 130, YEL, (110, 50, 170)), W / 2, 300, eob(k / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=-3)
+        paste_c(img, pill("DABBE WALA (DAY 19)", 46, (110, 50, 170), WHITE), W / 2, 460, eob((k - 0.6) / 0.3), rot=3)
+        paste_c(img, emoji("🎩", 90), 200, 620, eob((k - 0.3) / 0.3))
+    else:
+        k = t - v3["start"]
+        paste_c(img, pill("USKA CARD…", 56, WHITE, INK), W / 2, 250, eob(k / 0.3), rot=-3)
+        ct = word_t(v3, "o-negative", v3["start"] + 1.2)
+        if t > ct - 0.1:
+            paste_c(img, glow_text("O-NEGATIVE!", "Anton-Regular.ttf", 150, WHITE, (40, 190, 110)), W / 2, 420, eob((t - ct + 0.1) / 0.25) * (1 + 0.03 * math.sin(t * 12)), rot=3)
+            for j in range(5):
+                a = t * 2 + j * 1.26; paste_c(img, emoji("✨", 50), 900 + math.cos(a) * 160, 880 + math.sin(a) * 90, 1.0)
+
+def sc_give24(img, t, lt):
+    img.alpha_composite(bg_hospital("day"))
+    v1, v2 = L("give24")
+    d = ImageDraw.Draw(img)
+    # donor chair + drip stand with the filling bag
+    d.rounded_rectangle([600, 1130, 980, 1200], radius=20, fill=(60, 120, 170), outline=INK, width=6)
+    d.line([(540, 560), (540, 1300)], fill=(120, 120, 130), width=10); d.line([(500, 560), (600, 560)], fill=(120, 120, 130), width=10)
+    paste_c(img, blood_bag(), 540, 700, 0.6 * (1 + 0.04 * math.sin(t * 4)))
+    d.line([(540, 810), (640, 1000), (700, 1040)], fill=(200, 30, 45), width=7)
+    draw_char(img, "J", 800, 960, t, "happy", 0.78, arms=(-90, 20))
+    tophat(img, 800, 960, 0.78, t)
+    draw_char(img, "H", 230, 1040, t, "happy" if t > v1["start"] + 0.8 else "n", 0.85, arms=(-20, 20) if t < v2["start"] else (-150, 150))
+    if t < v2["start"]:
+        k = t - v1["start"]
+        paste_c(img, glow_text("ASLI CHEEZ!", "Anton-Regular.ttf", 140, YEL, (110, 50, 170)), W / 2, 280, eob((k - 0.8) / 0.25), rot=-3)
+        paste_c(img, pill("IS BAAR DHOKA NAHI!", 50, WHITE, (110, 50, 170)), W / 2, 440, eob((k - 1.3) / 0.3), rot=3)
+        paste_c(img, emoji("😂", 90), 230, 640, eob((k - 1.5) / 0.3))
+    else:
+        k = t - v2["start"]
+        stamp(img, "OPERATION KAMYAB!", W / 2, 290, k, GRN, -5, 96)
+        at = word_t(v2, "aaj", v2["start"] + 1.3)
+        if t > at - 0.1: paste_c(img, glow_text("AAJ BHI BACH GAYE!", "Anton-Regular.ttf", 100, YEL, (255, 120, 40)), W / 2, 460, eob((t - at + 0.1) / 0.25), rot=3)
+        for j in range(8):
+            q = (k * 0.8 + j * 0.13) % 1
+            paste_c(img, emoji(["⭐", "❤️"][j % 2], 56), 120 + j * 120, 200 + q * 900, 0.9, rot=q * 200)
+
+def sc_cliff24(img, t, lt):
+    img.alpha_composite(bg_hospital("eve"))
+    v1, v2, ol = L("cliff24")
+    red = t > v2["start"]
+    if red: img.alpha_composite(Image.new("RGBA", (W, H), (160, 20, 30, 60 + int(30 * math.sin(t * 6)))))
+    draw_char(img, "H", 260, 1040, t, "happy" if t < v1["start"] + 1.0 else "shock", 0.85, arms=(-20, 110) if not red else (-150, 150))
+    rows = [("3 DIN SE GHAYAB?", INK), ("NAUKRI KHATAM.", RED), ("BIKE WAPAS KARO.", INK)]
+    pt = v1["start"] + 0.9
+    if t > pt: paste_c(img, phone_card("MANAGER", rows, pt + 0.3, t), 680, 700, eob((t - pt) / 0.3) * 1.05, rot=3)
+    if not red:
+        paste_c(img, pill("PHIR…", 56, WHITE, INK), W / 2, 260, eob((t - v1["start"]) / 0.3), rot=-3)
+    else:
+        nt = word_t(v2, "naukri", v2["start"] + 1.6)
+        if t > nt - 0.1: stamp(img, "NAUKRI KHATAM?!", W / 2, 300, t - nt + 0.1, RED, -6, 110)
+
 # ======================= OUTRO HOOK (owner, 2026-11-15): every reel ends with "Agay Hamid kya karega? Follow karein…"
 # Mark the last line of the script with "outro": true (Hamid vo). It plays over the cliffhanger frame.
 def outro(img, t):
@@ -5860,7 +6051,8 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook20": sc_hook20, "adda20": sc_adda20, "hosp20": sc_hosp20, "bilal20": sc_bilal20, "abbu20": sc_abbu20, "cliff20": sc_cliff20,
       "hook21": sc_hook21, "plan21": sc_plan21, "ward21": sc_ward21, "rauf21": sc_rauf21, "hotel21": sc_hotel21, "cliff21": sc_cliff21,
       "hook22": sc_hook22, "road22": sc_road22, "count22": sc_count22, "saleem22": sc_saleem22, "cliff22": sc_cliff22,
-      "hook23": sc_hook23, "car23": sc_car23, "rauf23": sc_rauf23, "lane23": sc_lane23, "hug23": sc_hug23, "cliff23": sc_cliff23}
+      "hook23": sc_hook23, "car23": sc_car23, "rauf23": sc_rauf23, "lane23": sc_lane23, "hug23": sc_hug23, "cliff23": sc_cliff23,
+      "hook24": sc_hook24, "bank24": sc_bank24, "test24": sc_test24, "scheme24": sc_scheme24, "jadu24": sc_jadu24, "give24": sc_give24, "cliff24": sc_cliff24}
 
 
 # ======================= COLD-OPEN HOOK (owner, 2026-11-19: "add an eye / ear catching hook in the start so people won't skip")

@@ -715,6 +715,32 @@ if "cliff21" in SPN:
     c21 = LS_("cliff21"); add(sfx, beep(1200, 0.08, 0.5), c21[0]["start"] + 0.6); add(sfx, beep(1600, 0.1, 0.5), c21[0]["start"] + 0.75)
     add(sfx, kick(), c21[1]["start"] + 0.1, 1.0); add(sfx, kick(), c21[2]["start"] + 0.2, 1.0)
     for k in range(6): add(sfx, TICK, c21[2]["start"] + 0.4 + k * 0.25, 0.4)
+# ---- Day 24: heartbeat-ish kicks + ticks, blood bank stamp + trombone, test beeps, megaphone honks, silence, reveal chimes, success chimes, message ping
+if "hook24" in SPN:
+    h24 = LS_("hook24")
+    for k in range(5): add(sfx, TICK, h24[0]["start"] + 1.5 + k * 0.25, 0.4)
+if "bank24" in SPN:
+    b24 = LS_("bank24"); add(sfx, WHOOSH, b24[0]["start"], 0.5)
+    for k in range(4): add(sfx, kick(), b24[0]["start"] + 0.2 + k * 0.3, 0.35)
+    add(sfx, kick(), b24[2]["start"], 1.0); add(sfx, sad_trombone(), b24[2]["start"] + 0.1, 0.3)
+if "test24" in SPN:
+    t24 = LS_("test24")
+    for k in range(3): add(sfx, beep(1000, 0.08, 0.3), t24[0]["start"] + 0.3 + k * 0.4)
+    add(sfx, kick(), t24[2]["start"] + 1.6, 0.8); add(sfx, sad_trombone(), t24[2]["start"] + 1.8, 0.3)
+    for k in range(6): add(sfx, TICK, t24[3]["start"] + 0.2 + k * 0.25, 0.4)
+if "scheme24" in SPN:
+    s24 = LS_("scheme24"); add(sfx, CHIME, s24[0]["start"] + 0.3, 0.5)
+    add(sfx, honk(0.3), s24[1]["start"] + 0.2, 0.6); add(sfx, engine(2.0), s24[1]["start"], 0.35)
+    add(sfx, honk(0.25), s24[2]["end"] - 0.1, 0.4)
+if "jadu24" in SPN:
+    j24 = LS_("jadu24"); add(sfx, WHOOSH, j24[0]["start"] + 0.8, 0.5); add(sfx, kick(), j24[1]["start"] + 0.1, 0.8)
+    add(sfx, CHIME, j24[1]["start"] + 0.2, 0.6); add(sfx, CHIME, j24[2]["start"] + 1.0, 0.7)
+if "give24" in SPN:
+    g24 = LS_("give24"); add(sfx, CHIME, g24[0]["start"] + 0.3, 0.5)
+    add(sfx, kick(), g24[1]["start"], 0.8); add(sfx, CHIME, g24[1]["start"] + 0.1, 0.7)
+if "cliff24" in SPN:
+    c24 = LS_("cliff24"); add(sfx, beep(1200, 0.08, 0.5), c24[0]["start"] + 1.0); add(sfx, beep(1600, 0.1, 0.5), c24[0]["start"] + 1.15)
+    add(sfx, kick(), c24[1]["start"] + 0.1, 1.0); add(sfx, kick(), c24[1]["start"] + 1.6, 1.0)
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:
