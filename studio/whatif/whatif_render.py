@@ -569,13 +569,154 @@ def sc_truth_fut(img, t, lt):
         stamp(img, "SIRF AI MEME!", W / 2, 300, t - mt + 0.1, RED, -5, 110)
         paste_c(img, pill("KUCH NAHI HONE WALA", 46, GRN, WHITE), W / 2, 470, eob((t - mt - 0.6) / 0.3), rot=2)
 
+# ======================= EPISODE 4: Smog Ghayab (ek din bilkul saaf hawa; Lahore AQI 500+ in November 2026)
+def smog(img, a, t=0.0):
+    if a <= 0.01: return
+    lay = Image.new("RGBA", (W, H), (150, 140, 120, int(200 * min(a, 1)))); d = ImageDraw.Draw(lay)
+    rs = np.random.default_rng(7)
+    for j in range(14):
+        x, y, r = rs.uniform(-100, W + 100) + 40 * math.sin(t * 0.7 + j), rs.uniform(100, 1400), rs.uniform(160, 320)
+        d.ellipse([x - r, y - r * 0.6, x + r, y + r * 0.6], fill=(185, 175, 150, int(110 * min(a, 1))))
+    img.alpha_composite(lay.filter(ImageFilter.GaussianBlur(40)))
+@lru_cache(None)
+def minar_img():
+    im = Image.new("RGBA", (260, 900), (0, 0, 0, 0)); d = ImageDraw.Draw(im); c, sh = (236, 232, 222), (200, 196, 186)
+    d.polygon([(70, 890), (190, 890), (160, 240), (100, 240)], fill=c, outline=INK, width=6)
+    for y in (700, 520, 330):
+        d.rounded_rectangle([60, y - 18, 200, y + 14], radius=8, fill=sh, outline=INK, width=5)
+    d.rectangle([108, 150, 152, 240], fill=c, outline=INK, width=5)
+    d.ellipse([86, 70, 174, 170], fill=c, outline=INK, width=6); d.line([(130, 20), (130, 72)], fill=INK, width=6)
+    d.rounded_rectangle([20, 870, 240, 900], radius=8, fill=sh, outline=INK, width=5)
+    return im
+@lru_cache(None)
+def aqi_card(v):
+    col = GRN if v < 100 else ((230, 160, 40) if v < 200 else ((200, 60, 60) if v < 300 else (120, 30, 70)))
+    im = Image.new("RGBA", (520, 400), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 519, 399], radius=40, fill=(250, 248, 240), outline=INK, width=8)
+    d.rounded_rectangle([0, 0, 519, 110], radius=40, fill=INK); d.rectangle([0, 70, 519, 110], fill=INK)
+    d.text((260, 58), "LAHORE • AQI", font=fnt("Anton-Regular.ttf", 58), fill=WHITE, anchor="mm")
+    d.text((260, 240), str(v), font=fnt("Anton-Regular.ttf", 170), fill=col, anchor="mm")
+    d.text((260, 360), "HAZARDOUS" if v >= 300 else ("GOOD" if v < 100 else "UNHEALTHY"), font=fnt("Poppins-Black.ttf", 36), fill=col, anchor="mm")
+    return im
+@lru_cache(None)
+def air_bottle():
+    im = Image.new("RGBA", (200, 380), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([70, 0, 130, 50], radius=10, fill=(60, 120, 255), outline=INK, width=5)
+    d.rounded_rectangle([20, 46, 180, 370], radius=40, fill=(210, 235, 255), outline=INK, width=7)
+    d.rounded_rectangle([20, 150, 180, 270], radius=6, fill=YEL, outline=INK, width=5)
+    d.text((100, 185), "TAAZA", font=fnt("Anton-Regular.ttf", 40), fill=INK, anchor="mm")
+    d.text((100, 235), "HAWA", font=fnt("Anton-Regular.ttf", 40), fill=RED, anchor="mm")
+    return im
+def hold_air(img, x, y, sc): paste_c(img, air_bottle(), x + 150 * sc, y + 150 * sc, sc * 0.75, rot=-10)
+
+def sc_hook_smog(img, t, lt):
+    (v0,) = L("hook_smog")
+    img.alpha_composite(bg_street("day"))
+    gt = word_t(v0, "ghayab", v0["end"] - 0.8)
+    paste_c(img, minar_img(), 900, 700, 0.7)
+    smog(img, 0.95 * (1 - eo((t - gt + 0.4) / 0.7)), t)
+    draw_char(img, "H", 330, 1010, t, "shock" if t > gt - 0.3 else "n", 0.95, arms=(-150, 150) if t > gt else (-20, 20))
+    if t < gt: paste_c(img, emoji("😷", 120), 740, 1000, eob((t - 0.1) / 0.25))
+    if t > gt - 0.1:
+        stamp(img, "GHAYAB!", 720, 1180, t - gt + 0.1, GRN, -8, 140)
+        for j in range(6): paste_c(img, emoji("✨", 70), 160 + j * 160, 480 + 40 * math.sin(t * 5 + j), eob((t - gt - j * 0.05) / 0.2))
+
+def sc_fact_smog(img, t, lt):
+    (v1,) = L("fact_smog"); k = t - v1["start"]
+    img.alpha_composite(bg_street("day")); smog(img, 1.0, t)
+    v = int(535 * eio(min(1, k / 2.2)))
+    paste_c(img, aqi_card(min(535, max(20, v // 5 * 5))), W / 2, 610, eob(k / 0.3), rot=-3)
+    draw_char(img, "H", 300, 1060, t, "sad", 0.85, arms=(-20, 20))
+    paste_c(img, emoji("😷", 120), 720, 1060, eob((k - 0.3) / 0.3))
+    if k > 1.0: paste_c(img, text_img("KHAANS… KHAANS…", "Poppins-Black.ttf", 44, WHITE, 6, INK), 700, 900, eob((k - 1.0) / 0.3), rot=4)
+    dt_ = word_t(v1, "duniya", v1["end"] - 1.6)
+    if t > dt_ - 0.1: stamp(img, "DUNIYA MEIN #1", W / 2, 260, t - dt_ + 0.1, RED, -4, 100)
+
+def sc_roof_smog(img, t, lt):
+    (vh,) = L("roof_smog"); k = t - vh["start"]
+    img.alpha_composite(bg_street("day")); smog(img, 0.5 * (1 - eo(k / 0.8)), t)
+    paste_c(img, minar_img(), 840, 650, 0.85 * eob((k - 0.1) / 0.4))
+    draw_char(img, "H", 300, 1010, t, "happy", 0.95, arms=(-20, -120))
+    mt = word_t(vh, "minar", vh["start"] + 1.4)
+    if t > mt - 0.1:
+        paste_c(img, pill("SAAF NAZAR AA RAHA HAI!", 48, GRN, WHITE), W / 2, 250, eob((t - mt + 0.1) / 0.3), rot=-3)
+        paste_c(img, emoji("😍", 100), 560, 600, eob((t - mt) / 0.3))
+
+def sc_street_smog(img, t, lt):
+    v1, vl, b = L("street_smog")
+    img.alpha_composite(bg_street("day"))
+    if t < vl["start"]:
+        k = t - v1["start"]
+        draw_char(img, "K", 280, 1010, t, "happy", 0.85, arms=(-150, 150)); draw_char(img, "Z", 790, 1060, t, "happy", 0.72, arms=(-150, 150))
+        for j, x in enumerate((200, 380, 700, 880)):
+            q = max(0, k - 0.4 - j * 0.15)
+            if q > 0: paste_c(img, emoji("😷", 80), x, 700 - q * 260, 1.0, rot=q * 160)
+        paste_c(img, pill("LAMBI SAANS…", 50, WHITE, INK), W / 2, 280, eob((k - 1.2) / 0.3), rot=-2)
+        kt = word_t(v1, "ghayab", v1["end"] - 0.6)
+        if t > kt - 0.1: stamp(img, "KHAANSI: 0", W / 2, 430, t - kt + 0.1, GRN, -5, 110)
+    else:
+        k = t - vl["start"]
+        draw_char(img, "L", 760, 1010, t, "happy", 0.92, arms=(-150, 20), hold=None, laugh=t < b["start"])
+        for j in range(3): paste_c(img, air_bottle(), 620 + j * 150, 1300, 0.55, rot=(-6, 3, 8)[j])
+        draw_char(img, "H", 290, 1010, t, "shock" if t < b["start"] else "sad", 0.92, arms=(-20, 20))
+        paste_c(img, air_bottle(), 760, 560, eob(k / 0.3) * 0.8, rot=8 * math.sin(t * 4))
+        rt = word_t(vl, "100", vl["end"] - 1.0)
+        if t > rt - 0.1: paste_c(img, pill("Rs 100 KI EK!", 52, YEL), 760, 300, eob((t - rt + 0.1) / 0.3) * (1 + 0.05 * math.sin(t * 9)), rot=4)
+        if t > b["start"] - 0.05:
+            stamp(img, "BILAL!!", 300, 560, t - b["start"] + 0.05, RED, -8, 130); shake(img, t, b["start"], 20, 0.4)
+            paste_c(img, emoji("🤦", 110), 540, 700, eob((t - b["start"]) / 0.25))
+
+def sc_night_smog(img, t, lt):
+    v1, vh, b = L("night_smog")
+    img.alpha_composite(bg_street("night"))
+    n = int(40 + 160 * eio((t - v1["start"] - 1.0) / 2.5))
+    sky_stars(img, t, n, seed=11, y1=1000)
+    if t < vh["start"]:
+        k = t - v1["start"]
+        draw_char(img, "H", W / 2, 1010, t, "n", 0.9, arms=(-20, 20))
+        paste_c(img, glow_text("UPAR DEKHO…", "Anton-Regular.ttf", 110, WHITE, (150, 90, 255)), W / 2, 280, eob((k - 1.4) / 0.3), rot=-3)
+    else:
+        k = t - vh["start"]
+        draw_char(img, "H", W / 2, 1010, t, "happy", 0.92, arms=(-150, 150), laugh=t > b["start"])
+        paste_c(img, bubble([("ITNE SAARE", INK), ("TAARE?!", (150, 90, 255))], 50, tail="left"), 380, 460, eob(k / 0.3))
+        if t > b["start"] - 0.05:
+            q = eo((t - b["start"]) / 0.6)
+            for j in range(8): paste_c(img, emoji("✨", 60), 600 + (j % 4) * 120, 360 + (j // 4) * 200 + 60 * math.sin(j * 1.3) * q, eob((t - b["start"] - j * 0.03) / 0.2))
+            paste_c(img, pill("YEH LAHORE HAI?!", 52, YEL), W / 2, 230, eob((t - b["start"]) / 0.25), rot=-3)
+
+def sc_twist_smog(img, t, lt):
+    v1, v2 = L("twist_smog")
+    img.alpha_composite(bg_street("day"))
+    wt = word_t(v1, "wapis", v1["end"] - 0.6)
+    smog(img, eo((t - wt + 0.5) / 0.6) if t < v2["start"] else 1.0, t)
+    if t < v2["start"]:
+        draw_char(img, "H", 330, 1010, t, "happy" if t < wt else "shock", 0.95, arms=(-20, 20) if t < wt else (-150, 150))
+        if t < wt: paste_c(img, pill("AGLI SUBAH…", 50, WHITE, INK), W / 2, 300, eob((t - v1["start"]) / 0.3), rot=-2)
+        else:
+            stamp(img, "SMOG WAPIS!", W / 2, 300, t - wt + 0.1, RED, -5, 120); shake(img, t, wt, 24, 0.5)
+            paste_c(img, emoji("😩", 110), 760, 760, eob((t - wt) / 0.25))
+    else:
+        k = t - v2["start"]
+        draw_char(img, "H", 300, 1010, t, "det", 0.92, arms=(-20, -110))
+        for j, (e, txt) in enumerate((("🚗", "GAARI KA DHUAAN"), ("🔥", "FASAL KI AAG"), ("🏭", "FACTORY"))):
+            y = 470 + j * 190; q = eob((k - 0.8 - j * 0.35) / 0.25)
+            paste_c(img, emoji(e, 90), 600, y, q); paste_c(img, pill(txt, 42, WHITE, INK), 830, y, q, rot=(-3, 2, -2)[j])
+        paste_c(img, glow_text("JAADU NAHI!", "Anton-Regular.ttf", 110, YEL, (230, 60, 70)), W / 2, 260, eob(k / 0.3), rot=-3)
+
+def sc_end_smog(img, t, lt):
+    img.alpha_composite(bg_street("day")); smog(img, 0.4, t)
+    paste_c(img, minar_img(), 860, 700, 0.7)
+    draw_char(img, "H", 330, 1010, t, "det", 0.92, arms=(-20, 20))
+
 
 WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "shop_net": sc_shop_net, "city_net": sc_city_net,
          "roof_net": sc_roof_net, "back_net": sc_back_net,
          "hook_grav": sc_hook_grav, "room_grav": sc_room_grav, "street_grav": sc_street_grav, "sky_grav": sc_sky_grav,
          "fall_grav": sc_fall_grav, "truth_grav": sc_truth_grav,
          "hook_fut": sc_hook_fut, "meme_fut": sc_meme_fut, "room_fut": sc_room_fut, "exam_fut": sc_exam_fut, "twist_fut": sc_twist_fut,
-         "truth_fut": sc_truth_fut}
+         "truth_fut": sc_truth_fut,
+         "hook_smog": sc_hook_smog, "fact_smog": sc_fact_smog, "roof_smog": sc_roof_smog, "street_smog": sc_street_smog,
+         "night_smog": sc_night_smog, "twist_smog": sc_twist_smog, "end_smog": sc_end_smog}
 SC.update(WI_SC)
 
 exec(compile(_MAIN + _main, HR, "exec"), globals())

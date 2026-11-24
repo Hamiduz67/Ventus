@@ -1,0 +1,134 @@
+[
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "hook_smog",
+  "dev": "[excited] صبح آنکھ کھلی… اور لاہور کا سموگ… غائب!",
+  "rom": "Subah aankh khuli… aur Lahore ka smog… GHAYAB!",
+  "sfx": [
+   "whoosh"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "title",
+  "dev": "[curious] سوچو… اگر ایک دن کے لیے ہوا بالکل صاف ہو جائے… تو کیا ہوگا؟",
+  "rom": "Socho… agar ek din ke liye hawa bilkul saaf ho jaye… toh kya hoga?",
+  "sfx": [
+   "whoosh"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "fact_smog",
+  "dev": "[curious] اس نومبر لاہور کا اے کیو آئی… پانچ سو سے اوپر… دنیا میں سب سے گندی ہوا!",
+  "rom": "Is November Lahore ka AQI… 500 se upar… duniya mein sabse gandi hawa!",
+  "stamp": "NOVEMBER 2026",
+  "sfx": [
+   "dings"
+  ]
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "roof_smog",
+  "dev": "امی! چھت سے… دور والا مینار صاف نظر آ رہا ہے!",
+  "rom": "Ammi! Chhat se… door wala minar saaf nazar aa raha hai!",
+  "stamp": "SUBAH 7 BAJE",
+  "sfx": [
+   "chime"
+  ]
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "street_smog",
+  "dev": "[excited] لوگوں نے ماسک اتارے… لمبی سانس لی… اور کھانسی؟ غائب!",
+  "rom": "Logon ne mask utaare… lambi saans li… aur khaansi? Ghayab!",
+  "stamp": "1 GHANTA BAAD",
+  "pause": 0.3
+ },
+ {
+  "who": "L",
+  "mode": "talk",
+  "scene": "street_smog",
+  "dev": "[excited] حامد! یہ ہوا بوتل میں بیچیں؟ سو روپے کی ایک!",
+  "rom": "Hamid! Yeh hawa bottle mein bechein? 100 rupay ki ek!",
+  "sfx": [
+   "cash@1.8"
+  ]
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "street_smog",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "kick"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "night_smog",
+  "dev": "[whispers] اور رات کو آسمان پر… وہ دکھا جو سالوں سے نہیں دکھا تھا…",
+  "rom": "Aur raat ko aasmaan pe… woh dikha jo saalon se nahi dikha tha…",
+  "stamp": "RAAT 9 BAJE",
+  "pause": 0.4
+ },
+ {
+  "who": "H",
+  "mode": "talk",
+  "scene": "night_smog",
+  "dev": "اتنے سارے تارے؟ یہ لاہور ہے؟",
+  "rom": "Itne saare taare? Yeh Lahore hai?!",
+  "sfx": [
+   "chime"
+  ]
+ },
+ {
+  "who": "H",
+  "mode": "beat",
+  "scene": "night_smog",
+  "dev": "",
+  "rom": "",
+  "sfx": [
+   "whoosh"
+  ],
+  "dur": 0.9
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "twist_smog",
+  "dev": "[curious] پر اصل ٹوئسٹ؟ اگلی صبح… سموگ واپس!",
+  "rom": "Par asli twist? Agli subah… smog WAPIS!",
+  "stamp": "AGLI SUBAH",
+  "sfx": [
+   "boom@1.6"
+  ],
+  "pause": 0.4
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "twist_smog",
+  "dev": "[curious] صاف ہوا جادو سے نہیں آتی… دھواں کم کرنا پڑتا ہے۔",
+  "rom": "Saaf hawa jaadu se nahi aati… dhuaan kam karna padta hai.",
+  "pause": 0.3
+ },
+ {
+  "who": "N",
+  "mode": "vo",
+  "scene": "end_smog",
+  "dev": "[curious] اب آپ بتاؤ… ایک دن صاف ہوا ملے… کیا کرو گے؟ کمنٹ کرو… اور فالو کرو!",
+  "rom": "Ab aap batao… ek din saaf hawa mile… kya karoge? Comment karo… aur follow karo!",
+  "final": true
+ }
+]
