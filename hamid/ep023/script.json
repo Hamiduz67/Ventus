@@ -1,0 +1,22 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook23", "dev": "اجنبی کی کالی گاڑی… اور ایک خطرناک کام؟!", "rom": "Ajnabi ki kaali gaari… aur ek khatarnak kaam?!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن تئیس۔ جیب میں انیس ہزار۔", "rom": "Din teyees. Jeb mein unnees hazaar."},
+{"who": "L", "mode": "talk", "scene": "car23", "dev": "[scared] مت جا حامد! یہ کوئی ڈان ہے!", "rom": "Mat ja Hamid! Yeh koi don hai!"},
+{"who": "H", "mode": "vo", "scene": "car23", "dev": "دروازہ کھلا… اور اندر…", "rom": "Darwaza khula… aur andar…"},
+{"who": "H", "mode": "beat", "scene": "car23", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "car23", "dev": "اماں جی! سیٹھ رؤف کی امی!", "rom": "Amma ji! Seth Rauf ki Ammi!"},
+{"who": "H", "mode": "vo", "scene": "car23", "dev": "کام یہ تھا… رؤف کو میرے پاس لاؤ۔", "rom": "Kaam yeh tha… Rauf ko mere paas lao."},
+{"who": "H", "mode": "vo", "scene": "rauf23", "dev": "سیٹھ کو بتایا… وہ بھڑک گئے!", "rom": "Seth ko bataya… woh bhadak gaye!"},
+{"who": "R", "mode": "talk", "scene": "rauf23", "dev": "[angry] بیس سال بعد یاد آیا؟ نہیں جاؤں گا!", "rom": "Bees saal baad yaad aaya? Nahi jaunga!"},
+{"who": "H", "mode": "beat", "scene": "rauf23", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "lane23", "dev": "اور باہر… گاڑی واپس جانے لگی!", "rom": "Aur bahar… gaari wapas jaane lagi!"},
+{"who": "L", "mode": "talk", "scene": "lane23", "dev": "[excited] سکیم سات! میں گاڑی کے آگے لیٹ گیا!", "rom": "Scheme saat! Main gaari ke aage lait gaya!"},
+{"who": "H", "mode": "vo", "scene": "lane23", "dev": "میں چلایا… سیٹھ! امی جا رہی ہیں!", "rom": "Main chillaya… Seth! Ammi ja rahi hain!"},
+{"who": "H", "mode": "vo", "scene": "hug23", "dev": "سیٹھ ننگے پاؤں دوڑے!", "rom": "Seth nangay paon dauray!"},
+{"who": "R", "mode": "talk", "scene": "hug23", "dev": "[crying] امی… مجھے معاف کر دو۔", "rom": "Ammi… mujhe maaf kar do."},
+{"who": "H", "mode": "vo", "scene": "hug23", "dev": "اماں جی نے لفافہ دیا… اکتیس ہزار!", "rom": "Amma ji ne lifafa diya… ikattees hazaar!"},
+{"who": "H", "mode": "vo", "scene": "hug23", "dev": "پورے پچاس ہزار! آج بھی بچ گئے!", "rom": "Poore pachaas hazaar! Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff23", "dev": "صبح پیسے جمع… پھر ڈاکٹر بولا…", "rom": "Subah paise jama… phir doctor bola…"},
+{"who": "H", "mode": "vo", "scene": "cliff23", "dev": "خون چاہیے! او نیگیٹو… دو گھنٹے میں!", "rom": "Khoon chahiye! O-negative… do ghante mein!"},
+{"who": "H", "mode": "vo", "scene": "cliff23", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]
