@@ -1,0 +1,11 @@
+{
+ "day": 26,
+ "city": "Karachi",
+ "money": 400,
+ "money_start": 500,
+ "title": "Pakode Wali Kitaab",
+ "diary_follow": false,
+ "hook": {"text": "KITAABEIN RADDI MEIN!", "emoji": "📚", "sub": "KAL 8 BAJE QUIZ"},
+ "thumb": {"t": 30.0, "l1": "PAKODE KA LIFAFA", "l2": "QUIZ PASS?", "emoji": "📚", "tag": "SCHOLARSHIP?", "mood": "shock"},
+ "money_steps": [[8, 400, 1.2]]
+}
