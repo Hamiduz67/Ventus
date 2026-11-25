@@ -1,0 +1,14 @@
+[
+ {"who": "N", "mode": "vo", "scene": "hook_reel", "dev": "[excited] فون کھولا… اور ریلز… بند!", "rom": "Phone khola… aur reels… BAND!", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "N", "mode": "vo", "scene": "title", "dev": "[curious] سوچو… اگر پورے ایک ہفتے کے لیے ساری ریلز بند ہو جائیں… تو کیا ہوگا؟", "rom": "Socho… agar poore ek hafte ke liye saari reels band ho jayein… toh kya hoga?", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "H", "mode": "talk", "scene": "scroll_reel", "dev": "انگوٹھا ابھی بھی سکرول کر رہا ہے… پر کچھ نہیں آ رہا!", "rom": "Angootha abhi bhi scroll kar raha hai… par kuch nahi aa raha!", "stamp": "1 MINUTE BAAD", "sfx": ["beep"]},
+ {"who": "N", "mode": "vo", "scene": "street_reel", "dev": "[curious] لوگ سڑک پر… ایک دوسرے کو دیکھ رہے تھے… جیسے پہلی بار ملے ہوں؟", "rom": "Log sadak pe… ek doosre ko dekh rahe the… jaise pehli baar mile hon?", "stamp": "1 GHANTA BAAD", "pause": 0.3},
+ {"who": "L", "mode": "talk", "scene": "street_reel", "dev": "[excited] حامد! میں خود ریل بنوں گا… لائیو، سڑک پر!", "rom": "Hamid! Main khud reel banunga… LIVE, sadak pe!", "sfx": ["dings@1.2"]},
+ {"who": "H", "mode": "beat", "scene": "street_reel", "dev": "", "rom": "", "sfx": ["kick"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "home_reel", "dev": "[curious] اور پھر… امی کی بات پوری سنی گئی… ابو کے پرانے قصے… واپس آ گئے!", "rom": "Aur phir… Ammi ki baat poori suni gayi… Abbu ke purane qisse… wapis aa gaye!", "stamp": "3 DIN BAAD", "pause": 0.3},
+ {"who": "H", "mode": "talk", "scene": "home_reel", "dev": "میں رات گیارہ بجے سو گیا… زندگی میں پہلی بار!", "rom": "Main raat 11 baje so gaya… zindagi mein pehli baar!", "sfx": ["chime"]},
+ {"who": "N", "mode": "vo", "scene": "twist_reel", "dev": "[whispers] ساتویں دن ریلز واپس آئیں… پر اصل ٹوئسٹ؟ حامد نے فون… رکھ دیا!", "rom": "7th din reels wapis aayin… par asli twist? Hamid ne phone… RAKH DIYA!", "stamp": "7 DIN BAAD", "sfx": ["boom@2.6"], "pause": 0.4},
+ {"who": "H", "mode": "beat", "scene": "twist_reel", "dev": "", "rom": "", "sfx": ["whoosh"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "truth_reel", "dev": "[curious] ویسے، بین والی وائرل نوٹیفکیشن… جھوٹی تھی۔ پی ٹی اے نے خود کہا!", "rom": "Waise, ban wali viral notification… jhooti thi. PTA ne khud kaha!", "pause": 0.3},
+ {"who": "N", "mode": "vo", "scene": "end_reel", "dev": "[curious] اب آپ بتاؤ… ایک ہفتہ بغیر ریلز… کیا کرو گے؟ کمنٹ کرو… اور فالو کرو!", "rom": "Ab aap batao… ek hafta bina reels… kya karoge? Comment karo… aur follow karo!", "final": true}
+]

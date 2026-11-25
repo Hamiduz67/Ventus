@@ -708,6 +708,162 @@ def sc_end_smog(img, t, lt):
     paste_c(img, minar_img(), 860, 700, 0.7)
     draw_char(img, "H", 330, 1010, t, "det", 0.92, arms=(-20, 20))
 
+# ======================= EPISODE 5: Reels Band (1 hafta bina reels; 5 Nov 2026 viral "ban" notification - PTA: fake)
+def reel_phone(state, t=0.0, k=0.0):
+    """Big phone. state: feed (a reel playing) | band (error) | load (spinner) | back (notification 'REELS WAPIS!')"""
+    ph = Image.new("RGBA", (440, 760), (0, 0, 0, 0)); d = ImageDraw.Draw(ph)
+    d.rounded_rectangle([0, 0, 439, 759], radius=52, fill=(25, 25, 30), outline=INK, width=7)
+    f = lambda n: fnt("Poppins-Black.ttf", n)
+    if state == "feed":
+        d.rounded_rectangle([18, 18, 421, 741], radius=38, fill=(60, 40, 110))
+        off = (t * 300) % 360
+        for j in range(3):
+            y = 60 + j * 360 - off
+            d.rounded_rectangle([40, y, 400, y + 330], radius=26, fill=[(230, 90, 120), (60, 150, 230), (250, 180, 50)][j % 3], outline=INK, width=5)
+            d.ellipse([170, y + 120, 270, y + 220], fill=(255, 255, 255)); d.polygon([(205, y + 145), (205, y + 195), (245, y + 170)], fill=INK)
+        d.text((380, 600), "♥", font=f(60), fill=WHITE, anchor="mm")
+    elif state == "band":
+        d.rounded_rectangle([18, 18, 421, 741], radius=38, fill=(20, 20, 28))
+        d.ellipse([120, 170, 320, 370], outline=RED, width=18); d.line([(150, 200), (290, 340)], fill=RED, width=18)
+        d.text((220, 450), "REELS", font=fnt("Anton-Regular.ttf", 90), fill=WHITE, anchor="mm")
+        d.text((220, 560), "BAND", font=fnt("Anton-Regular.ttf", 90), fill=RED, anchor="mm")
+        d.text((220, 650), "7 DIN KE LIYE", font=f(30), fill=(200, 200, 210), anchor="mm")
+    elif state == "load":
+        d.rounded_rectangle([18, 18, 421, 741], radius=38, fill=(20, 20, 28))
+        for j in range(8):
+            a = j / 8 * 2 * math.pi + t * 5; c = int(80 + 170 * (j / 8))
+            d.ellipse([220 + math.cos(a) * 70 - 14, 330 + math.sin(a) * 70 - 14, 220 + math.cos(a) * 70 + 14, 330 + math.sin(a) * 70 + 14], fill=(c, c, c))
+        d.text((220, 500), "KUCH NAHI", font=fnt("Anton-Regular.ttf", 70), fill=WHITE, anchor="mm")
+        d.text((220, 580), "0 REELS", font=f(40), fill=RED, anchor="mm")
+    elif state == "back":
+        d.rounded_rectangle([18, 18, 421, 741], radius=38, fill=(30, 60, 110))
+        d.text((220, 120), "7:00", font=fnt("Anton-Regular.ttf", 120), fill=WHITE, anchor="mm")
+        d.rounded_rectangle([40, 260, 400, 420], radius=26, fill=(245, 245, 250), outline=INK, width=5)
+        d.text((220, 310), "🔔" if False else "NOTIFICATION", font=f(30), fill=(120, 120, 130), anchor="mm")
+        d.text((220, 370), "REELS WAPIS!", font=fnt("Anton-Regular.ttf", 64), fill=RED, anchor="mm")
+    return ph
+def hold_rphone(img, x, y, sc): paste_c(img, phone_img(True), x + 140 * sc, y + 150 * sc, sc * 0.9, rot=-10)
+@lru_cache(None)
+def fake_notice():
+    im = Image.new("RGBA", (620, 520), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 619, 519], radius=20, fill=(252, 250, 240), outline=INK, width=7)
+    d.rectangle([0, 0, 619, 110], fill=(60, 90, 70), outline=INK, width=7)
+    d.text((310, 56), "NOTIFICATION", font=fnt("Anton-Regular.ttf", 64), fill=WHITE, anchor="mm")
+    for j in range(5): d.rounded_rectangle([50, 160 + j * 52, 570 - (j % 2) * 120, 184 + j * 52], radius=8, fill=(190, 190, 195))
+    d.text((310, 455), "REELS APP BAN!", font=fnt("Anton-Regular.ttf", 64), fill=INK, anchor="mm")
+    return im
+
+def sc_hook_reel(img, t, lt):
+    (v0,) = L("hook_reel")
+    img.alpha_composite(bg_room("night")); bulb_glow(img, 40)
+    bt = word_t(v0, "band", v0["end"] - 0.6)
+    g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(g).ellipse([520, 420, 1060, 1180], fill=(120, 90, 255, 70) if t < bt else (230, 60, 70, int(60 + 40 * math.sin(t * 9))))
+    img.alpha_composite(g.filter(ImageFilter.GaussianBlur(60)))
+    draw_char(img, "H", 290, 1010, t, "shock" if t > bt - 0.2 else "happy", 0.92, arms=(-20, 110), hold=hold_rphone)
+    paste_c(img, reel_phone("band" if t > bt - 0.1 else "feed", t), 780, 800, 0.95 * eob((t + 0.2) / 0.3), rot=4)
+    if t > bt - 0.1:
+        stamp(img, "BAND!", 780, 1300, t - bt + 0.1, RED, -8, 130); shake(img, t, bt, 20, 0.4)
+        for j in range(6):
+            a = j / 6 * 2 * math.pi + t
+            paste_c(img, emoji("📵", 70), 780 + math.cos(a) * 330, 800 + math.sin(a) * 420, eob((t - bt - j * 0.05) / 0.2))
+
+def sc_scroll_reel(img, t, lt):
+    (vh,) = L("scroll_reel"); k = t - vh["start"]
+    img.alpha_composite(bg_room("night")); bulb_glow(img, 45)
+    draw_char(img, "H", 280, 1010, t, "shock", 0.92, arms=(-20, 110), hold=hold_rphone)
+    paste_c(img, reel_phone("load", t), 770, 760, 0.95 * eob(k / 0.3), rot=3)
+    sw = (t * 2.2) % 1
+    paste_c(img, emoji("👆", 120), 975, 1130 - 380 * eo(sw), 1.0, alpha=1.0 if sw < 0.8 else (1 - sw) * 5)
+    paste_c(img, pill("SCROLL… SCROLL…", 50, YEL), 770, 300, eob((k - 0.4) / 0.3) * (1 + 0.04 * math.sin(t * 9)), rot=-3)
+    nt = word_t(vh, "kuch", vh["end"] - 1.0)
+    if t > nt - 0.1: paste_c(img, emoji("😩", 110), 300, 560, eob((t - nt + 0.1) / 0.25))
+
+def sc_street_reel(img, t, lt):
+    v1, vl, b = L("street_reel")
+    img.alpha_composite(bg_street("day"))
+    if t < vl["start"]:
+        k = t - v1["start"]
+        draw_char(img, "K", 270, 1030, t, "shock" if k < 1.6 else "happy", 0.85, arms=(-20, 20) if k < 1.6 else (-20, -140))
+        draw_char(img, "Z", 800, 1080, t, "shock" if k < 1.6 else "happy", 0.72, arms=(-20, 20) if k < 1.6 else (140, 20))
+        if k > 0.2:
+            for j in range(3): paste_c(img, emoji("👀", 70), 440 + j * 90, 640 + 20 * math.sin(t * 6 + j), eob((k - 0.3 - j * 0.1) / 0.2))
+        pt = word_t(v1, "pehli", v1["end"] - 1.2)
+        if t > pt - 0.1:
+            paste_c(img, pill("ASSALAM-O-ALAIKUM!", 50, GRN, WHITE), W / 2, 300, eob((t - pt + 0.1) / 0.3), rot=-3)
+            paste_c(img, emoji("👋", 100), 540, 480, eob((t - pt) / 0.25), rot=15 * math.sin(t * 10))
+    else:
+        k = t - vl["start"]; fall = t > b["start"] - 0.05
+        draw_char(img, "H", 260, 1010, t, "happy" if fall else "n", 0.88, arms=(-20, 20), laugh=fall)
+        bx = 770; by = 1010 + (180 * eo((t - b["start"]) / 0.25) if fall else -30 * abs(math.sin(t * 7)))
+        draw_char(img, "L", bx, by, t, "shock" if fall else "happy", 0.9, arms=(-150, 150) if not fall else (-60, 60))
+        paste_c(img, pill("LIVE", 52, RED, WHITE), 800, 300, eob(k / 0.3) * (1 + 0.05 * math.sin(t * 9)), rot=3); paste_c(img, emoji("🔴", 56), 690, 300, eob(k / 0.3) * (0.7 + 0.3 * abs(math.sin(t * 5))))
+        if not fall and k > 1.0:
+            for j in range(3): paste_c(img, emoji("🕺" if j == 1 else "🎵", 80), 600 + j * 150, 560 + 30 * math.sin(t * 6 + j), eob((k - 1.0 - j * 0.1) / 0.2))
+        if fall:
+            q = t - b["start"] + 0.05
+            stamp(img, "0 VIEWS!", 760, 560, q, RED, -8, 120); shake(img, t, b["start"], 22, 0.45)
+            paste_c(img, emoji("💥", 120), 830, 1220, eob(q / 0.2)); paste_c(img, emoji("😂", 100), 260, 600, eob((q - 0.1) / 0.25))
+
+def sc_home_reel(img, t, lt):
+    v1, vh = L("home_reel")
+    if t < vh["start"]:
+        k = t - v1["start"]
+        img.alpha_composite(bg_room("eve")); charpai(img)
+        draw_char(img, "A", 230, 1000, t, "happy", 0.8, arms=(-20, -100))
+        draw_char(img, "B", 560, 1000, t, "happy", 0.8, arms=(-20, 140))
+        draw_char(img, "H", 870, 1060, t, "happy", 0.75, arms=(-20, 20), laugh=k > 3.5)
+        at = word_t(v1, "ammi", v1["start"] + 0.8)
+        if t > at - 0.1: paste_c(img, pill("AMMI KI BAAT: POORI SUNI ✓" if False else "AMMI KI BAAT: POORI SUNI!", 42, (230, 90, 140), WHITE), W / 2, 300, eob((t - at + 0.1) / 0.3), rot=-2)
+        qt = word_t(v1, "abbu", v1["end"] - 2.0)
+        if t > qt - 0.1:
+            paste_c(img, bubble([("1985 MEIN…", INK), ("MAIN BHI HERO THA!", (150, 120, 90))], 40, tail="left"), 620, 560, eob((t - qt + 0.1) / 0.3))
+    else:
+        k = t - vh["start"]
+        img.alpha_composite(bg_room("night")); bulb_glow(img, 20)
+        clock(img, 300, 330, 11.0)
+        d = ImageDraw.Draw(img); d.rectangle([140, 1180, 940, 1220], fill=(120, 80, 50), outline=INK, width=5)
+        draw_char(img, "H", 540, 1040, t, "sleep", 0.9, arms=(-30, 30))
+        zzz(img, 680, 780, t)
+        paste_c(img, pill("RAAT 11 BAJE", 50, YEL), 760, 300, eob(k / 0.3), rot=3)
+        pt = word_t(vh, "pehli", vh["end"] - 1.0)
+        if t > pt - 0.1: stamp(img, "PEHLI BAAR!", W / 2, 1340, t - pt + 0.1, GRN, -5, 110)
+
+def sc_twist_reel(img, t, lt):
+    v1, b = L("twist_reel")
+    img.alpha_composite(bg_room("day"))
+    rt = word_t(v1, "rakh", v1["end"] - 0.6)
+    if t < rt - 0.1:
+        k = t - v1["start"]
+        draw_char(img, "H", 290, 1010, t, "shock" if k > 0.5 else "n", 0.92, arms=(-20, 110), hold=hold_rphone)
+        paste_c(img, reel_phone("back", t), 780, 780, 0.9 * eob(k / 0.3), rot=4 + 2 * math.sin(t * 3))
+        tw = word_t(v1, "twist", v1["start"] + 2.6)
+        if t > tw - 0.1: paste_c(img, glow_text("PAR…", "Anton-Regular.ttf", 130, YEL, (230, 60, 70)), W / 2, 300, eob((t - tw + 0.1) / 0.25), rot=-3)
+    else:
+        q = t - rt + 0.1
+        d = ImageDraw.Draw(img); d.rectangle([600, 1200, 1000, 1240], fill=(120, 80, 50), outline=INK, width=5)
+        paste_c(img, phone_img(False), 800, 1170, 0.9 * eob(q / 0.25), rot=90)
+        bk = t > b["start"] - 0.05
+        draw_char(img, "H", 330, 1010, t, "happy", 0.92, arms=(-20, 110) if bk else (-20, 20), hold=hold_book if bk else None)
+        stamp(img, "PHONE RAKH DIYA!", W / 2, 300, q, GRN, -5, 100)
+        if q > 0.1: shake(img, t, rt, 18, 0.35)
+        if bk:
+            for j in range(5): paste_c(img, emoji("✨", 70), 200 + j * 170, 620 + 50 * math.sin(t * 4 + j), eob((t - b["start"] - j * 0.06) / 0.2))
+
+def sc_truth_reel(img, t, lt):
+    (v1,) = L("truth_reel"); k = t - v1["start"]
+    img.alpha_composite(grad((20, 20, 50), (70, 40, 110))); sky_stars(img, t, 40)
+    paste_c(img, fake_notice(), 600, 760, 0.95 * eob(k / 0.3), rot=-3)
+    draw_char(img, "H", 200, 1150, t, "n", 0.75, arms=(-20, 110), hold=hold_rphone)
+    jt = word_t(v1, "jhooti", v1["start"] + 2.2)
+    if t > jt - 0.1:
+        stamp(img, "FAKE!", 640, 760, t - jt + 0.1, RED, -14, 170)
+        pt = word_t(v1, "pta", v1["end"] - 1.0)
+        if t > pt - 0.1: paste_c(img, pill("PTA: JHOOTI KHABAR (5 NOV)", 44, GRN, WHITE), W / 2, 300, eob((t - pt + 0.1) / 0.3), rot=2)
+
+def sc_end_reel(img, t, lt):
+    img.alpha_composite(bg_street("day"))
+    draw_char(img, "H", 330, 1010, t, "happy", 0.92, arms=(-20, 110), hold=hold_book)
+
 
 WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "shop_net": sc_shop_net, "city_net": sc_city_net,
          "roof_net": sc_roof_net, "back_net": sc_back_net,
@@ -716,7 +872,9 @@ WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "s
          "hook_fut": sc_hook_fut, "meme_fut": sc_meme_fut, "room_fut": sc_room_fut, "exam_fut": sc_exam_fut, "twist_fut": sc_twist_fut,
          "truth_fut": sc_truth_fut,
          "hook_smog": sc_hook_smog, "fact_smog": sc_fact_smog, "roof_smog": sc_roof_smog, "street_smog": sc_street_smog,
-         "night_smog": sc_night_smog, "twist_smog": sc_twist_smog, "end_smog": sc_end_smog}
+         "night_smog": sc_night_smog, "twist_smog": sc_twist_smog, "end_smog": sc_end_smog,
+         "hook_reel": sc_hook_reel, "scroll_reel": sc_scroll_reel, "street_reel": sc_street_reel, "home_reel": sc_home_reel,
+         "twist_reel": sc_twist_reel, "truth_reel": sc_truth_reel, "end_reel": sc_end_reel}
 SC.update(WI_SC)
 
 exec(compile(_MAIN + _main, HR, "exec"), globals())
