@@ -1,0 +1,28 @@
+{
+ "day": 25,
+ "city": "Karachi",
+ "money": 500,
+ "money_start": 0,
+ "title": "Pachaas Biryani",
+ "diary_follow": false,
+ "hook": {
+  "text": "NAUKRI KHATAM!",
+  "emoji": "🏍️",
+  "sub": "BIKE BHI GAYI?"
+ },
+ "thumb": {
+  "t": 26.0,
+  "l1": "50 BIRYANI",
+  "l2": "8 BAJE TAK?",
+  "emoji": "🍛",
+  "tag": "LAST MAUKA",
+  "mood": "shock"
+ },
+ "money_steps": [
+  [
+   16,
+   500,
+   1.2
+  ]
+ ]
+}

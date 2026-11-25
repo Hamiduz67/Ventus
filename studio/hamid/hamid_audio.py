@@ -741,6 +741,28 @@ if "give24" in SPN:
 if "cliff24" in SPN:
     c24 = LS_("cliff24"); add(sfx, beep(1200, 0.08, 0.5), c24[0]["start"] + 1.0); add(sfx, beep(1600, 0.1, 0.5), c24[0]["start"] + 1.15)
     add(sfx, kick(), c24[1]["start"] + 0.1, 1.0); add(sfx, kick(), c24[1]["start"] + 1.6, 1.0)
+# ---- Day 25: door slam, key toss, phone ping, rickshaw engine + honk, speed-breaker thud + whoosh, catch chime, success chimes, message pings
+if "office25" in SPN:
+    o25 = LS_("office25"); add(sfx, kick(), o25[2]["start"], 1.0); add(sfx, kick(), o25[2]["start"] + 0.12, 0.7)
+if "ghafoor25" in SPN:
+    g25 = LS_("ghafoor25"); add(sfx, kick(), g25[0]["start"] + 0.1, 0.5); add(sfx, CHIME, g25[1]["start"] + 0.3, 0.3)
+    add(sfx, sad_trombone(), g25[1]["end"] - 0.9, 0.25)
+if "turn25" in SPN:
+    u25 = LS_("turn25"); add(sfx, WHOOSH, u25[0]["start"], 0.5)
+    add(sfx, ring(0.8), u25[1]["start"], 0.35); add(sfx, kick(), u25[2]["start"], 0.6)
+if "scheme25" in SPN:
+    s25 = LS_("scheme25"); add(sfx, engine(2.0), s25[0]["start"], 0.35); add(sfx, honk(0.3), s25[0]["start"] + 0.5, 0.6)
+    for k in range(6): add(sfx, kick(), s25[1]["start"] + 0.1 + k * 0.35, 0.3)
+if "ride25" in SPN:
+    r25 = LS_("ride25"); add(sfx, engine(3.0), r25[0]["start"], 0.3)
+    add(sfx, kick(), r25[1]["start"] - 0.1, 1.0); add(sfx, WHOOSH, r25[1]["start"], 0.6); add(sfx, CHIME, r25[2]["start"] + 0.1, 0.6)
+if "hall25" in SPN:
+    h25 = LS_("hall25"); add(sfx, CHIME, h25[0]["start"] + 1.2, 0.6); add(sfx, kick(), h25[1]["start"], 0.6)
+    add(sfx, CHIME, h25[1]["start"] + 1.0, 0.6); add(sfx, CHIME, h25[2]["start"], 0.7)
+if "cliff25" in SPN:
+    c25 = LS_("cliff25"); add(sfx, beep(1200, 0.08, 0.5), c25[0]["start"] + 0.7); add(sfx, beep(1600, 0.1, 0.5), c25[0]["start"] + 0.85)
+    add(sfx, kick(), c25[1]["start"] + 0.2, 1.0); add(sfx, kick(), c25[2]["start"] + 1.6, 1.0); add(sfx, sad_trombone(), c25[2]["start"] + 1.8, 0.3)
+
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:
