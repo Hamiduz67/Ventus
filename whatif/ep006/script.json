@@ -1,0 +1,14 @@
+[
+ {"who": "N", "mode": "vo", "scene": "hook_gas", "dev": "[excited] سردی کی صبح… اور گیس… چوبیس گھنٹے!", "rom": "Sardi ki subah… aur gas… 24 GHANTE!", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "N", "mode": "vo", "scene": "title", "dev": "[curious] سوچو… اگر سردیوں میں ایک دن گیس بالکل نہ جائے… تو کیا ہوگا؟", "rom": "Socho… agar sardiyon mein ek din gas bilkul na jaye… toh kya hoga?", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "H", "mode": "talk", "scene": "bath_gas", "dev": "گیزر چل گیا… اور میں زندگی میں پہلی بار… گرم پانی سے نہایا!", "rom": "Geyser chal gaya… aur main zindagi mein pehli baar… garam paani se nahaya!", "stamp": "SUBAH 6 BAJE", "sfx": ["chime"]},
+ {"who": "A", "voice": "W", "mode": "talk", "scene": "kitchen_gas", "dev": "[excited] پراٹھے، حلوہ، نہاری… آج سب کچھ بنے گا!", "rom": "Parathe, halwa, nihari… aaj sab kuch banega!", "stamp": "DOPAHAR 12 BAJE", "sfx": ["dings@1.0"]},
+ {"who": "H", "mode": "beat", "scene": "kitchen_gas", "dev": "", "rom": "", "sfx": ["kick"], "dur": 0.9},
+ {"who": "L", "mode": "talk", "scene": "street_gas", "dev": "[excited] حامد! میں نے گرم پانی کا ٹھیلا لگا لیا… دس روپے بالٹی!", "rom": "Hamid! Maine garam paani ka thela laga liya… 10 rupay balti!", "stamp": "SHAAM 5 BAJE", "sfx": ["cash@1.6"]},
+ {"who": "H", "mode": "beat", "scene": "street_gas", "dev": "", "rom": "", "sfx": ["kick"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "night_gas", "dev": "[whispers] پورا محلہ گرم… سب سکون سے سو گئے… لیکن اصل ٹوئسٹ تو اب آیا…", "rom": "Poora mohalla garam… sab sukoon se so gaye… lekin asli twist toh ab aaya…", "stamp": "RAAT 11 BAJE", "pause": 0.4},
+ {"who": "N", "mode": "vo", "scene": "twist_gas", "dev": "[excited] گیس کا بل آیا! ابو نے دیکھا… اور بے ہوش!", "rom": "Gas ka BILL aaya! Abbu ne dekha… aur BEHOSH!", "stamp": "AGLE MAHINE", "sfx": ["boom@3.1"], "pause": 0.3},
+ {"who": "H", "mode": "beat", "scene": "twist_gas", "dev": "", "rom": "", "sfx": ["whoosh"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "truth_gas", "dev": "[curious] ویسے، اس سردی پنجاب میں گیس صرف کھانے کے وقت آتی ہے… یہ تو بس ایک کہانی تھی۔", "rom": "Waise, is sardi Punjab mein gas sirf khaane ke waqt aati hai… yeh toh bas ek kahani thi.", "pause": 0.3},
+ {"who": "N", "mode": "vo", "scene": "end_gas", "dev": "[curious] اب آپ بتاؤ… ایک دن پوری گیس ملے… تو سب سے پہلے کیا کرو گے؟ کمنٹ کرو… اور فالو کرو!", "rom": "Ab aap batao… ek din poori gas mile… toh sabse pehle kya karoge? Comment karo… aur follow karo!", "final": true}
+]

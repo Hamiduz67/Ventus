@@ -865,6 +865,195 @@ def sc_end_reel(img, t, lt):
     draw_char(img, "H", 330, 1010, t, "happy", 0.92, arms=(-20, 110), hold=hold_book)
 
 
+# ======================= EPISODE 6: Gas 24 Ghante (sardi mein ek din bina load-shedding ke gas; Nov 2026: Punjab/KP gas sirf khaane ke waqt)
+def soft_steam(img, x, y, t, n=3, sc=1.0):
+    lay = Image.new("RGBA", (W, H), (0, 0, 0, 0)); steam(lay, x, y, t, n, sc); img.alpha_composite(lay)
+def flame(img, x, y, t, sc=1.0, a=1.0):
+    if a <= 0.02: return
+    d = ImageDraw.Draw(img)
+    for j in range(5):
+        fx = x + (j - 2) * 26 * sc; h = (46 + 14 * math.sin(t * 17 + j * 1.7)) * sc * a
+        d.polygon([(fx - 13 * sc, y), (fx + 13 * sc, y), (fx, y - h)], fill=(60, 120, 255))
+        d.polygon([(fx - 6 * sc, y), (fx + 6 * sc, y), (fx, y - h * 0.55)], fill=(170, 220, 255))
+def gas_stove(img, x, y, t, on=1.0, burners=2):
+    d = ImageDraw.Draw(img); w = 190 * burners
+    d.rounded_rectangle([x - w, y, x + w, y + 90], radius=14, fill=(200, 200, 210), outline=INK, width=7)
+    for k in range(3): d.ellipse([x - w + 40 + k * 60, y + 50, x - w + 76 + k * 60, y + 82], fill=INK)
+    for b in range(burners):
+        bx = x - w + 190 + b * 380
+        d.ellipse([bx - 90, y - 16, bx + 90, y + 16], fill=(60, 60, 70), outline=INK, width=6)
+        flame(img, bx, y - 6, t + b, 1.2, on)
+@lru_cache(None)
+def geyser_img(hot=True):
+    im = Image.new("RGBA", (260, 520), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([20, 10, 240, 430], radius=60, fill=(245, 245, 240), outline=INK, width=8)
+    d.ellipse([80, 110, 180, 210], fill=WHITE, outline=INK, width=6)
+    d.line([(130, 160), (165 if hot else 95, 130)], fill=RED if hot else INK, width=8)
+    d.text((130, 280), "HOT" if hot else "COLD", font=fnt("Anton-Regular.ttf", 60), fill=RED if hot else (60, 120, 255), anchor="mm")
+    d.rectangle([70, 430, 90, 510], fill=(150, 150, 160), outline=INK, width=4); d.rectangle([170, 430, 190, 510], fill=(150, 150, 160), outline=INK, width=4)
+    return im
+@lru_cache(None)
+def bucket_img():
+    im = Image.new("RGBA", (220, 220), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.arc([30, 0, 190, 110], 180, 360, fill=INK, width=8)
+    d.polygon([(20, 60), (200, 60), (175, 210), (45, 210)], fill=(60, 140, 230), outline=INK)
+    d.ellipse([20, 40, 200, 80], fill=(150, 210, 255), outline=INK, width=6)
+    return im
+def hold_bucket(img, x, y, sc): paste_c(img, bucket_img(), x + 160 * sc, y + 230 * sc, sc * 0.6)
+@lru_cache(None)
+def gas_bill():
+    im = Image.new("RGBA", (520, 640), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 519, 639], radius=18, fill=(252, 250, 240), outline=INK, width=8)
+    d.rectangle([0, 0, 519, 120], fill=(40, 110, 70), outline=INK, width=8)
+    d.text((260, 62), "GAS BILL", font=fnt("Anton-Regular.ttf", 76), fill=WHITE, anchor="mm")
+    for j in range(4): d.rounded_rectangle([40, 160 + j * 50, 470 - (j % 2) * 140, 184 + j * 50], radius=8, fill=(200, 200, 205))
+    d.text((260, 420), "TOTAL", font=fnt("Poppins-Black.ttf", 44), fill=INK, anchor="mm")
+    d.text((260, 530), "Rs 48,500", font=fnt("Anton-Regular.ttf", 110), fill=RED, anchor="mm")
+    return im
+def hold_bill(img, x, y, sc): paste_c(img, gas_bill(), x + 170 * sc, y + 120 * sc, sc * 0.45, rot=-8)
+@lru_cache(None)
+def timing_card():
+    im = Image.new("RGBA", (760, 560), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 759, 559], radius=36, fill=(250, 248, 240), outline=INK, width=8)
+    d.rounded_rectangle([0, 0, 759, 130], radius=36, fill=INK); d.rectangle([0, 90, 759, 130], fill=INK)
+    d.text((380, 66), "SARDI 2026 • PUNJAB", font=fnt("Anton-Regular.ttf", 64), fill=WHITE, anchor="mm")
+    for j, (e, txt) in enumerate((("🍳", "NAASHTA"), ("🍛", "DOPAHAR"), ("🍲", "RAAT KA KHAANA"))):
+        y = 210 + j * 110
+        im.alpha_composite(emoji(e, 70), (70, y - 35)); d.text((170, y), txt, font=fnt("Poppins-Black.ttf", 50), fill=INK, anchor="lm")
+    d.text((380, 520), "BAAQI WAQT: GAS NAHI", font=fnt("Poppins-Black.ttf", 40), fill=RED, anchor="mm")
+    return im
+def heater_glow(img, x, y, t, a=1.0):
+    g = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(g).ellipse([x - 300, y - 300, x + 300, y + 300], fill=(255, 140, 40, int((70 + 15 * math.sin(t * 5)) * a)))
+    img.alpha_composite(g.filter(ImageFilter.GaussianBlur(60)))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([x - 110, y - 120, x + 110, y + 120], radius=16, fill=(90, 90, 100), outline=INK, width=7)
+    for k in range(4): d.rounded_rectangle([x - 80, y - 90 + k * 50, x + 80, y - 60 + k * 50], radius=10, fill=mixc((255, 120, 40), (255, 210, 80), 0.5 + 0.5 * math.sin(t * 6 + k)))
+
+def sc_hook_gas(img, t, lt):
+    (v0,) = L("hook_gas")
+    img.alpha_composite(bg_room("day"))
+    gt = word_t(v0, "24", v0["end"] - 0.9)
+    on = eob((t - gt + 0.2) / 0.3) if t > gt - 0.2 else 0.0
+    if on > 0: heater_glow(img, 540, 760, t, on * 0.6)
+    gas_stove(img, 700, 1250, t, on, 2)
+    draw_char(img, "H", 300, 1000, t, "shock" if t > gt - 0.2 else "sad", 0.92, arms=(-150, 150) if t > gt else (-60, 60))
+    if t < gt - 0.2:
+        paste_c(img, emoji("🥶", 120), 700, 760, eob((t - 0.1) / 0.25), rot=10 * math.sin(t * 20))
+        paste_c(img, pill("BRRR…", 56, WHITE, (60, 120, 255)), 700, 560, eob((t - 0.3) / 0.25), rot=-4)
+    else:
+        stamp(img, "24 GHANTE!", 700, 640, t - gt + 0.2, RED, -8, 120); shake(img, t, gt, 20, 0.4)
+        for j in range(6):
+            a = j / 6 * 2 * math.pi + t
+            paste_c(img, emoji("🔥", 70), 700 + math.cos(a) * 330, 700 + math.sin(a) * 300, eob((t - gt - j * 0.05) / 0.2))
+
+def sc_bath_gas(img, t, lt):
+    (vh,) = L("bath_gas"); k = t - vh["start"]
+    img.alpha_composite(bg_room("day"))
+    paste_c(img, geyser_img(True), 820, 560, 0.95 * eob(k / 0.3))
+    for j in range(3): soft_steam(img, 180 + j * 150, 900, t + j * 0.4, 3, 1.3)
+    draw_char(img, "H", 330, 1010, t, "happy", 0.92, arms=(-150, -110), laugh=k > 3.4)
+    paste_c(img, emoji("🧼", 90), 150, 720, eob((k - 0.5) / 0.25), rot=15 * math.sin(t * 6))
+    gt = word_t(vh, "garam", vh["end"] - 1.2)
+    if t > gt - 0.1:
+        stamp(img, "GARAM PAANI!", W / 2, 300, t - gt + 0.1, (230, 90, 40), -5, 110)
+        paste_c(img, emoji("😌", 110), 600, 560, eob((t - gt) / 0.25))
+    else: paste_c(img, pill("GEYSER: ON", 50, GRN, WHITE), 820, 240, eob((k - 0.2) / 0.3), rot=3)
+
+def sc_kitchen_gas(img, t, lt):
+    va, b = L("kitchen_gas")
+    img.alpha_composite(bg_room("eve"))
+    gas_stove(img, W / 2, 1260, t, 1.0, 2)
+    if t < b["start"]:
+        k = t - va["start"]
+        draw_char(img, "A", 330, 1000, t, "happy", 0.9, arms=(-20, -130))
+        draw_char(img, "H", 820, 1050, t, "happy", 0.78, arms=(-20, 20))
+        for j, (w_, e) in enumerate((("parathe", "🫓"), ("halwa", "🍮"), ("nihari", "🍲"))):
+            wt = word_t(va, w_, va["start"] + 0.6 * j)
+            if t > wt - 0.1: paste_c(img, emoji(e, 120), 260 + j * 280, 380 + 20 * math.sin(t * 5 + j), eob((t - wt + 0.1) / 0.25))
+        st = word_t(va, "sab", va["end"] - 1.0)
+        if t > st - 0.1: paste_c(img, pill("AAJ SAB KUCH!", 54, YEL), W / 2, 580, eob((t - st + 0.1) / 0.3), rot=-3)
+    else:
+        q = t - b["start"]
+        draw_char(img, "A", 260, 1000, t, "happy", 0.85, arms=(-20, -130), laugh=True)
+        draw_char(img, "H", 760, 1000, t, "shock", 0.92, arms=(-120, 120))
+        for j in range(5): paste_c(img, emoji(("🫓", "🍮", "🍲", "🫓", "🍛")[j], 90), 760 + (j % 2) * 30 - 15, 820 - j * 75, eob((q - j * 0.05) / 0.15))
+        stamp(img, "PET FULL!", W / 2, 300, q, RED, -6, 120); shake(img, t, b["start"], 18, 0.35)
+
+def gas_cart(img, t):
+    d = ImageDraw.Draw(img)
+    d.ellipse([600, 1010, 920, 1110], fill=(80, 80, 90), outline=INK, width=7)
+    d.rectangle([520, 1080, 1000, 1190], fill=(170, 110, 60), outline=INK, width=7)
+    for wx in (600, 920): d.ellipse([wx - 40, 1160, wx + 40, 1240], fill=INK)
+    soft_steam(img, 680, 1010, t, 3, 1.0)
+    paste_c(img, pill("GARAM PAANI • Rs 10 BALTI", 38, YEL), 760, 1135, 1.0, rot=-2)
+def sc_street_gas(img, t, lt):
+    vl, b = L("street_gas")
+    img.alpha_composite(bg_street("day"))
+    if t < b["start"]:
+        k = t - vl["start"]
+        draw_char(img, "L", 890, 760, t, "happy", 0.85, arms=(-150, 20))
+        gas_cart(img, t)
+        draw_char(img, "H", 230, 1010, t, "shock", 0.85, arms=(-20, 20))
+        rt = word_t(vl, "10", vl["end"] - 1.0)
+        if t > rt - 0.1: stamp(img, "Rs 10!", 760, 300, t - rt + 0.1, GRN, -6, 120)
+    else:
+        q = t - b["start"]
+        draw_char(img, "L", 890, 760, t, "shock", 0.85, arms=(-150, 150))
+        gas_cart(img, t)
+        for j, (who, x) in enumerate((("K", 90), ("Z", 250), ("K", 410))):
+            draw_char(img, who, x - 120 * (1 - eo(q / 0.4)), 1080, t, "happy", 0.6, arms=(-20, 110), hold=hold_bucket)
+        stamp(img, "LAMBI LINE!", W / 2, 300, q, RED, -6, 110); shake(img, t, b["start"], 18, 0.35)
+        paste_c(img, emoji("😂", 100), 300, 600, eob((q - 0.1) / 0.25))
+
+def sc_night_gas(img, t, lt):
+    (v1,) = L("night_gas"); k = t - v1["start"]
+    img.alpha_composite(bg_room("night"))
+    heater_glow(img, 860, 980, t, 1.0)
+    d = ImageDraw.Draw(img); d.rectangle([80, 1150, 700, 1200], fill=(120, 80, 50), outline=INK, width=5)
+    draw_char(img, "H", 390, 1030, t, "sleep", 0.88, arms=(-30, 30))
+    d = ImageDraw.Draw(img); d.rounded_rectangle([170, 1080, 640, 1180], radius=30, fill=(200, 80, 90), outline=INK, width=6)
+    zzz(img, 520, 780, t)
+    paste_c(img, pill("SAB SUKOON SE…", 50, WHITE, INK), W / 2, 300, eob((k - 0.6) / 0.3), rot=-2)
+    lt_ = word_t(v1, "lekin", v1["end"] - 1.8)
+    if t > lt_ - 0.1:
+        img.alpha_composite(Image.new("RGBA", (W, H), (0, 0, 0, int(110 * eo((t - lt_) / 0.4)))))
+        paste_c(img, glow_text("LEKIN…", "Anton-Regular.ttf", 160, YEL, (230, 60, 70)), W / 2, 560, eob((t - lt_ + 0.1) / 0.25), rot=-3)
+
+def sc_twist_gas(img, t, lt):
+    v1, b = L("twist_gas")
+    img.alpha_composite(bg_room("day"))
+    bt = word_t(v1, "behosh", v1["end"] - 0.7)
+    if t < bt - 0.1:
+        k = t - v1["start"]
+        draw_char(img, "B", 680, 1000, t, "shock" if k > 1.6 else "n", 0.92, arms=(-20, 110))
+        draw_char(img, "H", 250, 1050, t, "n", 0.78, arms=(-20, 20))
+        paste_c(img, gas_bill(), 680, 620, 0.75 * eob((k - 0.1) / 0.3), rot=-4 + 2 * math.sin(t * 3))
+        if k > 1.6: paste_c(img, emoji("😱", 110), 940, 380, eob((k - 1.6) / 0.25))
+    else:
+        q = t - bt + 0.1
+        lying(img, "B", 640, 1230, t, "sad", 0.7, arms=(-150, 150))
+        draw_char(img, "H", 250, 1010, t, "shock", 0.88, arms=(-150, 150))
+        paste_c(img, gas_bill(), 860, 900, 0.45, rot=24)
+        stamp(img, "BEHOSH!", W / 2, 300, q, RED, -6, 130); shake(img, t, bt, 24, 0.5)
+        for j in range(5): paste_c(img, emoji("💸", 70), 300 + j * 140, 520 + 40 * math.sin(t * 5 + j), eob((q - 0.1 - j * 0.05) / 0.2))
+        if t > b["start"] - 0.05: paste_c(img, emoji("😵", 100), 760, 1040, eob((t - b["start"]) / 0.25))
+
+def sc_truth_gas(img, t, lt):
+    (v1,) = L("truth_gas"); k = t - v1["start"]
+    img.alpha_composite(grad((20, 20, 50), (70, 40, 110))); sky_stars(img, t, 40)
+    paste_c(img, timing_card(), W / 2, 700, 0.95 * eob(k / 0.3), rot=-2)
+    draw_char(img, "H", 230, 1180, t, "n", 0.7, arms=(-20, 20))
+    st = word_t(v1, "sirf", v1["start"] + 1.6)
+    if t > st - 0.1: paste_c(img, pill("SIRF KHAANE KE WAQT", 48, RED, WHITE), W / 2, 300, eob((t - st + 0.1) / 0.3), rot=2)
+    kt = word_t(v1, "kahani", v1["end"] - 0.6)
+    if t > kt - 0.1: stamp(img, "SIRF KAHANI!", 680, 1150, t - kt + 0.1, GRN, -8, 100)
+
+def sc_end_gas(img, t, lt):
+    img.alpha_composite(bg_room("eve"))
+    gas_stove(img, W / 2, 1260, t, 1.0, 2)
+    draw_char(img, "H", 330, 1000, t, "happy", 0.92, arms=(-20, 110), hold=hold_cup)
+
+
 WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "shop_net": sc_shop_net, "city_net": sc_city_net,
          "roof_net": sc_roof_net, "back_net": sc_back_net,
          "hook_grav": sc_hook_grav, "room_grav": sc_room_grav, "street_grav": sc_street_grav, "sky_grav": sc_sky_grav,
@@ -874,7 +1063,9 @@ WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "s
          "hook_smog": sc_hook_smog, "fact_smog": sc_fact_smog, "roof_smog": sc_roof_smog, "street_smog": sc_street_smog,
          "night_smog": sc_night_smog, "twist_smog": sc_twist_smog, "end_smog": sc_end_smog,
          "hook_reel": sc_hook_reel, "scroll_reel": sc_scroll_reel, "street_reel": sc_street_reel, "home_reel": sc_home_reel,
-         "twist_reel": sc_twist_reel, "truth_reel": sc_truth_reel, "end_reel": sc_end_reel}
+         "twist_reel": sc_twist_reel, "truth_reel": sc_truth_reel, "end_reel": sc_end_reel,
+         "hook_gas": sc_hook_gas, "bath_gas": sc_bath_gas, "kitchen_gas": sc_kitchen_gas, "street_gas": sc_street_gas,
+         "night_gas": sc_night_gas, "twist_gas": sc_twist_gas, "truth_gas": sc_truth_gas, "end_gas": sc_end_gas}
 SC.update(WI_SC)
 
 exec(compile(_MAIN + _main, HR, "exec"), globals())
