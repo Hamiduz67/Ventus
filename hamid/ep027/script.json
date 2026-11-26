@@ -1,0 +1,23 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook27", "dev": "دو بجے ڈیوٹی… اور بائیک نہیں!", "rom": "Do baje duty… aur bike nahi!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن ستائیس۔ دوپہر ایک بجے۔", "rom": "Din sattaees. Dopahar ek baje."},
+{"who": "H", "mode": "vo", "scene": "ghafoor27", "dev": "سیدھا غفور چاچا کے پاس!", "rom": "Seedha Ghafoor chacha ke paas!"},
+{"who": "G", "mode": "talk", "scene": "ghafoor27", "dev": "[angry] پہلے کرایہ دو! پورے ہزار روپے!", "rom": "Pehle kiraya do! Poore hazaar rupay!"},
+{"who": "H", "mode": "vo", "scene": "ghafoor27", "dev": "جیب میں صرف چار سو…", "rom": "Jeb mein sirf chaar sau…"},
+{"who": "L", "mode": "talk", "scene": "ghafoor27", "dev": "[excited] چاچا! باقی کے بدلے… میں گروی!", "rom": "Chacha! Baaki ke badle… main girwi!"},
+{"who": "G", "mode": "talk", "scene": "ghafoor27", "dev": "[amused] ٹھیک ہے… چل برتن دھو!", "rom": "Theek hai… chal bartan dho!"},
+{"who": "H", "mode": "beat", "scene": "ghafoor27", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "road27", "dev": "ڈیڑھ بجے… بیچ سڑک پیٹرول ختم!", "rom": "Dedh baje… beech sarak petrol khatam!"},
+{"who": "H", "mode": "vo", "scene": "road27", "dev": "پمپ دو کلومیٹر دور… اور جیب خالی!", "rom": "Pump do kilometer door… aur jeb khaali!"},
+{"who": "H", "mode": "vo", "scene": "shop27", "dev": "دھکا لگاتے لگاتے… ایک دکان۔", "rom": "Dhakka lagate lagate… ek dukaan."},
+{"who": "S", "mode": "talk", "scene": "shop27", "dev": "[cheerful] اوہو! پانی پیو گے؟", "rom": "Oho! Paani piyoge?"},
+{"who": "H", "mode": "vo", "scene": "shop27", "dev": "میں نے کہا… پانی نہیں، پیٹرول!", "rom": "Maine kaha… paani nahi, petrol!"},
+{"who": "S", "mode": "talk", "scene": "shop27", "dev": "[laughing] جنریٹر والا ہے… ایک لیٹر، ادھار!", "rom": "Generator wala hai… ek litre, udhaar!"},
+{"who": "H", "mode": "beat", "scene": "shop27", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "shop27", "dev": "نام پوچھا… بولی، سعدیہ!", "rom": "Naam poocha… boli, Sadia!"},
+{"who": "H", "mode": "vo", "scene": "office27", "dev": "دو بجنے میں ایک منٹ… آفس!", "rom": "Do bajne mein ek minute… office!"},
+{"who": "H", "mode": "vo", "scene": "office27", "dev": "آج بھی بچ گئے!", "rom": "Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff27", "dev": "پہلا آرڈر کھولا… اسی دکان کا!", "rom": "Pehla order khola… usi dukaan ka!"},
+{"who": "H", "mode": "vo", "scene": "cliff27", "dev": "اور نوٹ… پیٹرول چور کو بھیجو!", "rom": "Aur note… petrol chor ko bhejo!"},
+{"who": "H", "mode": "vo", "scene": "cliff27", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]

@@ -788,6 +788,32 @@ if "cliff26" in SPN:
     add(sfx, kick(), c26[1]["start"] + 0.1, 1.0); add(sfx, kick(), c26[1]["start"] + 1.5, 1.0)
     for k in range(5): add(sfx, TICK, c26[1]["start"] + 1.7 + k * 0.25, 0.4)
 
+# ---- Day 27: ticks, chain rattle, angry thud, key toss chime, engine sputter + stop, trombone, glug, name chime, success chimes, order ping
+if "hook27" in SPN:
+    h27 = LS_("hook27")
+    for k in range(5): add(sfx, TICK, h27[0]["start"] + 1.5 + k * 0.25, 0.4)
+if "ghafoor27" in SPN:
+    g27 = LS_("ghafoor27"); add(sfx, WHOOSH, g27[0]["start"], 0.5); add(sfx, kick(), g27[1]["start"] + 0.1, 0.7)
+    add(sfx, sad_trombone(), g27[2]["end"] - 0.8, 0.25); add(sfx, WHOOSH, g27[3]["start"], 0.5)
+    add(sfx, noise(0.6, 0.05), g27[4]["start"] + 0.7, 0.3)
+    add(sfx, WHOOSH, g27[5]["start"], 0.5); add(sfx, CHIME, g27[5]["start"] + 0.4, 0.7)
+if "road27" in SPN:
+    r27 = LS_("road27"); add(sfx, engine(1.3), r27[0]["start"], 0.4)
+    for k in range(3): add(sfx, kick(), r27[0]["start"] + 1.2 + k * 0.18, 0.5)
+    add(sfx, sad_trombone(), r27[0]["start"] + 1.8, 0.3); add(sfx, kick(), r27[1]["start"] + 1.6, 0.8)
+if "shop27" in SPN:
+    s27 = LS_("shop27"); add(sfx, CHIME, s27[1]["start"], 0.4); add(sfx, kick(), s27[2]["start"] + 0.9, 0.6)
+    add(sfx, CHIME, s27[3]["start"] + 1.5, 0.6)
+    for k in range(4): add(sfx, beep(300 - k * 30, 0.09, 0.4), s27[4]["start"] + k * 0.14)
+    add(sfx, CHIME, s27[5]["start"] + 1.2, 0.7); add(sfx, CHIME, s27[5]["start"] + 1.4, 0.5)
+if "office27" in SPN:
+    o27 = LS_("office27"); add(sfx, WHOOSH, o27[0]["start"], 0.5); add(sfx, kick(), o27[0]["start"] + 1.4, 0.8)
+    add(sfx, CHIME, o27[0]["start"] + 1.5, 0.6); add(sfx, CHIME, o27[1]["start"], 0.7)
+if "cliff27" in SPN:
+    c27 = LS_("cliff27"); add(sfx, beep(1200, 0.08, 0.5), c27[0]["start"] + 0.5); add(sfx, beep(1600, 0.1, 0.5), c27[0]["start"] + 0.65)
+    add(sfx, kick(), c27[0]["start"] + 1.5, 0.8); add(sfx, kick(), c27[1]["start"] + 0.1, 1.0); add(sfx, kick(), c27[1]["start"] + 1.4, 1.0)
+    for k in range(5): add(sfx, TICK, c27[1]["start"] + 1.6 + k * 0.25, 0.4)
+
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:

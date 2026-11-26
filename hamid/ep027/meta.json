@@ -1,0 +1,11 @@
+{
+ "day": 27,
+ "city": "Karachi",
+ "money": 0,
+ "money_start": 400,
+ "title": "Petrol Chor",
+ "diary_follow": false,
+ "hook": {"text": "BIKE NAHI!", "emoji": "🏍️", "sub": "2 BAJE DUTY"},
+ "thumb": {"t": 26.8, "l1": "PETROL KHATAM…", "l2": "WOH KAUN HAI?", "emoji": "⛽", "tag": "Rs 0", "mood": "shock"},
+ "money_steps": [[6, 0, 0.6]]
+}
