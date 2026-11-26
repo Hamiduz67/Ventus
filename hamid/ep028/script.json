@@ -1,0 +1,22 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook28", "dev": "پیٹرول چور؟! پہلا آرڈر ہی خطرے میں!", "rom": "Petrol chor?! Pehla order hi khatre mein!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن اٹھائیس۔ دوپہر دو بجے۔", "rom": "Din atthaees. Dopahar do baje."},
+{"who": "S", "mode": "talk", "scene": "shop28", "dev": "[teasing] آ گئے پیٹرول چور؟ پہلے میرا لیٹر!", "rom": "Aa gaye petrol chor? Pehle mera litre!"},
+{"who": "H", "mode": "vo", "scene": "shop28", "dev": "جیب میں زیرو… میں نے کہا، تنخواہ پہ!", "rom": "Jeb mein zero… maine kaha, tankhwah pe!"},
+{"who": "S", "mode": "talk", "scene": "shop28", "dev": "[cheerful] ٹھیک ہے! یہ تیس انڈے… ماسٹر سلیم کے گھر۔", "rom": "Theek hai! Yeh tees ande… Master Saleem ke ghar."},
+{"who": "S", "mode": "talk", "scene": "shop28", "dev": "[teasing] ایک بھی ٹوٹا… تو پیسے تمہارے!", "rom": "Ek bhi toota… toh paise tumhare!"},
+{"who": "H", "mode": "vo", "scene": "ride28", "dev": "پہلا گڑھا… انڈے اچھلے!", "rom": "Pehla gaddha… ande uchhle!"},
+{"who": "H", "mode": "beat", "scene": "ride28", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "ride28", "dev": "پھر… بچوں کی کرکٹ بال، سیدھی میری طرف!", "rom": "Phir… bachon ki cricket ball, seedhi meri taraf!"},
+{"who": "H", "mode": "vo", "scene": "ride28", "dev": "ایک ہاتھ سے پکڑا… جیب میں ڈالا!", "rom": "Ek haath se pakda… jeb mein daala!"},
+{"who": "T", "mode": "talk", "scene": "door28", "dev": "[warm] آؤ حامد! ذرا گن لوں…", "rom": "Aao Hamid! Zara gin loon…"},
+{"who": "T", "mode": "talk", "scene": "door28", "dev": "[surprised] انتیس انڈے… اور ایک گیند؟", "rom": "Untees ande… aur ek gend?"},
+{"who": "H", "mode": "vo", "scene": "door28", "dev": "یعنی… میں نے کیچ انڈا کیا تھا!", "rom": "Yaani… maine catch anda kiya tha!"},
+{"who": "H", "mode": "beat", "scene": "door28", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "door28", "dev": "جیب سے نکالا… سلامت!", "rom": "Jeb se nikala… salamat!"},
+{"who": "T", "mode": "talk", "scene": "door28", "dev": "[laughing] واہ! ایسا کیچ… یہ لو سو روپے!", "rom": "Waah! Aisa catch… yeh lo sau rupay!"},
+{"who": "H", "mode": "vo", "scene": "door28", "dev": "آج بھی بچ گئے!", "rom": "Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff28", "dev": "تبھی بلال کا وائس نوٹ…", "rom": "Tabhi Bilal ka voice note…"},
+{"who": "L", "mode": "talk", "scene": "cliff28", "dev": "[panicked] یار! دس پلیٹیں ٹوٹ گئیں… چاچا بول رہے ہیں، دو ہزار!", "rom": "Yaar! Das pletein toot gayin… chacha bol rahe hain, do hazaar!"},
+{"who": "H", "mode": "vo", "scene": "cliff28", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]

@@ -1,0 +1,11 @@
+{
+ "day": 28,
+ "city": "Karachi",
+ "money": 100,
+ "money_start": 0,
+ "title": "Tees Ande",
+ "diary_follow": false,
+ "hook": {"text": "PETROL CHOR?!", "emoji": "🥚", "sub": "PEHLA ORDER KHATRE MEIN"},
+ "thumb": {"t": 28.6, "l1": "30 ANDE…", "l2": "EK GAYAB?!", "emoji": "🥚", "tag": "Rs 0", "mood": "shock"},
+ "money_steps": [[15, 100, 0.6]]
+}
