@@ -59,7 +59,7 @@ def pill(txt, size, bg, fg=INK, name="Poppins-Black.ttf"):
 def ssf(im): return im.resize((im.width // SS, im.height // SS), Image.LANCZOS)
 
 # ======================= CHARACTERS
-SKIN = {"H": (200, 146, 106), "A": (214, 160, 122), "B": (182, 128, 92), "L": (176, 122, 84), "K": (190, 136, 98), "C": (176, 124, 90), "X": (170, 118, 82), "G": (186, 132, 96), "M": (196, 142, 104), "T": (192, 138, 100), "Z": (168, 116, 80), "R": (188, 130, 92), "P": (184, 130, 94), "N": (206, 156, 120), "J": (194, 140, 102), "W": (180, 126, 88), "S": (212, 158, 120)}
+SKIN = {"H": (214, 164, 128), "A": (214, 160, 122), "B": (182, 128, 92), "L": (176, 122, 84), "K": (190, 136, 98), "C": (176, 124, 90), "X": (170, 118, 82), "G": (186, 132, 96), "M": (196, 142, 104), "T": (192, 138, 100), "Z": (168, 116, 80), "R": (188, 130, 92), "P": (184, 130, 94), "N": (206, 156, 120), "J": (194, 140, 102), "W": (180, 126, 88), "S": (226, 180, 150)}
 HW = 300
 @lru_cache(None)
 def head(who, eyes, mouth, brows):
@@ -68,9 +68,12 @@ def head(who, eyes, mouth, brows):
     if who in ("A", "N"):  # dupatta / white chaddar behind head
         d.ellipse([cx - r - 34 * s, cy - r - 34 * s, cx + r + 34 * s, cy + r + 70 * s], fill=(40, 140, 110) if who == "A" else (236, 236, 240), outline=INK, width=6 * s)
     if who == "S":  # Sadia (Day 27): long black hair falling behind the shoulders + a braid on her right side
-        d.rounded_rectangle([cx - r - 6 * s, cy - r - 4 * s, cx + r + 6 * s, cy + r + 16 * s], radius=80 * s, fill=(28, 22, 30), outline=INK, width=6 * s)   # flowing hair behind (fits the head canvas)
-        for k in range(3): d.ellipse([cx + r - 22 * s, cy + 30 * s + k * 34 * s, cx + r + 14 * s, cy + 66 * s + k * 34 * s], fill=(28, 22, 30), outline=INK, width=4 * s)   # braid
-        d.ellipse([cx + r - 16 * s, cy + 130 * s, cx + r + 8 * s, cy + 148 * s], fill=(230, 70, 140), outline=INK, width=3 * s)
+        hc = (30, 22, 24)   # owner's photo (2026-11-27): straight, shoulder-length dark hair with a centre parting
+        d.ellipse([cx - r - 4 * s, cy - r - 8 * s, cx + r + 4 * s, cy + 40 * s], fill=hc, outline=INK, width=6 * s)
+        for sx in (-1, 1):   # hair falling straight down each side to the shoulders, ends curving softly
+            d.rounded_rectangle([cx + (sx * (r * 0.55) if sx > 0 else -r - 10 * s), cy - 20 * s, cx + (r + 10 * s if sx > 0 else -r * 0.55), cy + r + 20 * s],
+                                radius=34 * s, fill=hc, outline=INK, width=6 * s)
+        d.rectangle([cx - r * 0.7, cy + 20 * s, cx + r * 0.7, cy + r + 4 * s], fill=hc)
     fw = r * 0.86 if who == "S" else r   # Sadia (owner, 2026-11-27): slim, pretty - narrower oval face, no ears showing
     if who != "S":
         for sx in (-1, 1):
@@ -80,11 +83,23 @@ def head(who, eyes, mouth, brows):
     else:
         d.ellipse([cx - r, cy - r * 1.02, cx + r, cy + r * 1.08], fill=skin, outline=INK, width=7 * s)
     if who == "H":
-        d.chord([cx - r - 4 * s, cy - r - 26 * s, cx + r + 4 * s, cy + 6 * s], 180, 360, fill=(25, 22, 28), outline=INK, width=6 * s)
-        for k in range(7):
-            x = cx - r + 18 * s + k * 32 * s
-            d.polygon([(x - 22 * s, cy - r + 14 * s), (x + 4 * s, cy - r - 38 * s - (k % 2) * 10 * s), (x + 24 * s, cy - r + 10 * s)], fill=(25, 22, 28))
-        d.chord([cx - 70 * s, cy + 40 * s, cx + 70 * s, cy + r * 1.08], 20, 160, fill=(150, 105, 75, 120))  # stubble
+        hc = (24, 20, 24); bc = (66, 50, 46)
+        # short, neatly trimmed full beard on the jaw + chin (face shape still shows), skin open around the mouth, moustache
+        d.chord([cx - r + 6 * s, cy - r * 0.2, cx + r - 6 * s, cy + r * 1.07], 12, 168, fill=bc)
+        d.arc([cx - r + 6 * s, cy - r * 0.2, cx + r - 6 * s, cy + r * 1.07], 12, 168, fill=INK, width=6 * s)
+        d.ellipse([cx - 42 * s, cy + 38 * s, cx + 42 * s, cy + 90 * s], fill=SKIN["H"])
+        d.chord([cx - 48 * s, cy + 32 * s, cx + 48 * s, cy + 64 * s], 180, 360, fill=bc)
+        # medium-length wavy hair: one soft mass with a wavy top (stays inside the head canvas), short sides, a swoop over the forehead
+        pts = [(cx - r + 6 * s, cy - 10 * s)]
+        for k in range(13):
+            a_ = math.pi * (1 - k / 12)
+            rr_ = (r + 12 * s) + (8 * s if k % 2 else -4 * s)
+            pts.append((cx + rr_ * math.cos(a_) * (0.96 if k in (0, 12) else 1.0), cy - 22 * s - rr_ * math.sin(a_) * 0.95))
+        pts += [(cx + r - 6 * s, cy - 10 * s), (cx + r - 22 * s, cy - 62 * s),
+                (cx + 40 * s, cy - 80 * s), (cx - 6 * s, cy - 62 * s), (cx - 40 * s, cy - 50 * s), (cx - 66 * s, cy - 60 * s), (cx - r + 20 * s, cy - 40 * s)]
+        d.polygon(pts, fill=hc, outline=INK); d.line(pts + [pts[0]], fill=INK, width=6 * s, joint="curve")
+        d.arc([cx - 70 * s, cy - r - 20 * s, cx + 10 * s, cy - r + 30 * s], 200, 300, fill=(84, 78, 88), width=4 * s)   # shine
+        d.arc([cx - 10 * s, cy - r - 10 * s, cx + 60 * s, cy - r + 40 * s], 220, 320, fill=(84, 78, 88), width=4 * s)
     elif who == "A":
         d.chord([cx - r - 14 * s, cy - r - 30 * s, cx + r + 14 * s, cy + 2 * s], 180, 360, fill=(48, 160, 125), outline=INK, width=6 * s)
         d.line([(cx, cy - r + 8 * s), (cx, cy - r + 30 * s)], fill=(30, 22, 25), width=8 * s)
@@ -96,13 +111,13 @@ def head(who, eyes, mouth, brows):
             d.arc([cx + sx * 74 * s - 18 * s, cy + 40 * s, cx + sx * 74 * s + 18 * s, cy + 80 * s], 90 if sx < 0 else 0, 180 if sx < 0 else 90, fill=(150, 100, 75), width=4 * s)
         d.line([(cx - 30 * s, cy - 70 * s), (cx + 30 * s, cy - 70 * s)], fill=(160, 112, 85), width=3 * s)
     elif who == "S":  # Sadia: centre-parted black hair + pink dupatta draped over the head, small gold earrings
-        d.ellipse([cx - fw - 12 * s, cy - r - 18 * s, cx + 8 * s, cy - 56 * s], fill=(28, 22, 30))   # centre parting: two soft swept lobes
-        d.ellipse([cx - 8 * s, cy - r - 18 * s, cx + fw + 12 * s, cy - 56 * s], fill=(28, 22, 30))
-        d.line([(cx, cy - r - 6 * s), (cx, cy - r + 30 * s)], fill=(70, 60, 75), width=4 * s)
-        d.polygon([(cx - fw - 8 * s, cy - 50 * s + 40 * s), (cx - fw + 14 * s, cy - 60 * s), (cx - fw + 4 * s, cy + 60 * s)], fill=(28, 22, 30))
-        d.polygon([(cx + fw + 8 * s, cy - 10 * s), (cx + fw - 14 * s, cy - 60 * s), (cx + fw - 4 * s, cy + 60 * s)], fill=(28, 22, 30))
-        d.arc([cx - r - 30 * s, cy - r - 46 * s, cx + r + 30 * s, cy + r * 0.9], 190, 350, fill=(235, 100, 160), width=26 * s)
-        for sx in (-1, 1): d.ellipse([cx + sx * r - 9 * s, cy + 40 * s, cx + sx * r + 9 * s, cy + 58 * s], fill=(250, 200, 60), outline=INK, width=3 * s)
+        hc = (30, 22, 24)
+        for sx in (-1, 1):   # each curtain: from the parting, over the temple, down past the cheek to the jaw
+            d.polygon([(cx + sx * 2 * s, cy - r - 4 * s), (cx + sx * (fw * 0.55), cy - r + 6 * s), (cx + sx * (fw + 10 * s), cy - 40 * s),
+                       (cx + sx * (fw + 8 * s), cy + 100 * s), (cx + sx * (fw - 16 * s), cy + 96 * s), (cx + sx * (fw - 30 * s), cy - 20 * s),
+                       (cx + sx * (fw * 0.45), cy - r * 0.62), (cx + sx * 6 * s, cy - r * 0.78)], fill=hc)
+            d.arc([cx + sx * 20 * s - 40 * s, cy - r + 4 * s, cx + sx * 20 * s + 40 * s, cy - r + 60 * s], 200 if sx < 0 else 260, 280 if sx < 0 else 340, fill=(85, 70, 70), width=4 * s)   # shine
+        for sx in (-1, 1): d.ellipse([cx + sx * (fw - 6 * s) - 6 * s, cy + 40 * s, cx + sx * (fw - 6 * s) + 6 * s, cy + 52 * s], fill=(250, 210, 90), outline=INK, width=2 * s)   # tiny studs
     elif who == "W":  # pakode wala (Day 26): orange head rumal tied at the side, short black hair under it
         d.chord([cx - r - 8 * s, cy - r - 24 * s, cx + r + 8 * s, cy - 6 * s], 180, 360, fill=(235, 120, 40), outline=INK, width=6 * s)
         for k in range(5): d.ellipse([cx - r + 20 * s + k * 42 * s, cy - r - 4 * s, cx - r + 34 * s + k * 42 * s, cy - r + 10 * s], fill=(255, 200, 80))
@@ -174,10 +189,14 @@ def head(who, eyes, mouth, brows):
             pr = 8 if eyes == "wide" else 11
             d.ellipse([ex - pr * s, ey - pr * s + dy, ex + pr * s, ey + pr * s + dy], fill=INK)
             d.ellipse([ex - 3 * s, ey - 8 * s + dy, ex + 4 * s, ey - 1 * s + dy], fill=WHITE)
+        if who == "H" and eyes in ("open", "down"):   # relaxed, slightly hooded upper lid (owner's photo)
+            d.chord([ex - 26 * s, ey - 32 * s, ex + 26 * s, ey - 6 * s], 180, 360, fill=SKIN["H"])
+            d.arc([ex - 24 * s, ey - 26 * s, ex + 24 * s, ey - 8 * s], 200, 340, fill=INK, width=5 * s)
         by = ey - 42 * s; bw = 10 * s if who not in ("A", "S") else 7 * s
+        if who == "H": by = ey - 38 * s; bw = 15 * s
         if who == "S":   # thin arched brows
             lift = {"up": 10, "sad": -2, "angry": -6}.get(brows, 4) * s
-            d.arc([ex - 26 * s, by - 6 * s - lift, ex + 26 * s, by + 22 * s - lift], 200, 340, fill=(25, 22, 28), width=6 * s); continue
+            d.arc([ex - 26 * s, by - 6 * s - lift, ex + 26 * s, by + 22 * s - lift], 200, 340, fill=(35, 26, 26), width=8 * s); continue
         bcol = (25, 22, 28) if who not in ("B", "C", "G", "N") else (150, 150, 155)
         if who == "G": bw = 13 * s
         if who == "L": bw = 12 * s
@@ -210,7 +229,10 @@ def head(who, eyes, mouth, brows):
         for sx in (-1, 1):
             ex = cx + sx * 44 * s; d.ellipse([ex - 34 * s, ey - 32 * s, ex + 34 * s, ey + 32 * s], outline=INK, width=6 * s)
         d.line([(cx - 10 * s, ey), (cx + 10 * s, ey)], fill=INK, width=6 * s)
-    d.arc([cx - 14 * s, cy + 6 * s, cx + 14 * s, cy + 34 * s], 300, 80, fill=INK, width=5 * s)
+    if who == "H":
+        d.line([(cx + 4 * s, cy - 18 * s), (cx + 10 * s, cy + 18 * s)], fill=(170, 120, 92), width=5 * s)
+        d.arc([cx - 18 * s, cy + 8 * s, cx + 18 * s, cy + 38 * s], 300, 80, fill=INK, width=5 * s)
+    else: d.arc([cx - 14 * s, cy + 6 * s, cx + 14 * s, cy + 34 * s], 300, 80, fill=INK, width=5 * s)
     my = cy + 62 * s
     if mouth == "sad":
         d.arc([cx - 28 * s, my - 2 * s, cx + 28 * s, my + 26 * s], 200, 340, fill=INK, width=7 * s)
@@ -259,7 +281,6 @@ def head(who, eyes, mouth, brows):
                 d.ellipse([ex - 14 * s, ey - 14 * s + dy, ex + 14 * s, ey + 14 * s + dy], fill=(115, 70, 40), outline=INK, width=3 * s)
                 d.ellipse([ex - 7 * s, ey - 7 * s + dy, ex + 7 * s, ey + 7 * s + dy], fill=INK)
                 d.ellipse([ex - 8 * s, ey - 11 * s + dy, ex - 1 * s, ey - 4 * s + dy], fill=WHITE)
-        d.ellipse([cx + 14 * s, cy + 22 * s, cx + 20 * s, cy + 28 * s], fill=(255, 225, 120))   # nose stud
         if mouth == 0:
             d.chord([cx - 26 * s, my - 18 * s, cx + 26 * s, my + 12 * s], 20, 160, fill=(215, 70, 105), outline=INK, width=4 * s)
         elif mouth == "sad":
