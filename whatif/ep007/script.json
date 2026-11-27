@@ -1,0 +1,14 @@
+[
+ {"who": "N", "mode": "vo", "scene": "hook_end", "dev": "[excited] خبر آئی… کل دنیا ختم!", "rom": "Khabar aayi… kal DUNIYA KHATAM!", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "N", "mode": "vo", "scene": "title", "dev": "[curious] سوچو… اگر سچ میں صرف چوبیس گھنٹے بچے ہوں… تو کیا ہوگا؟", "rom": "Socho… agar sach mein sirf 24 ghante bache hon… toh kya hoga?", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "H", "mode": "talk", "scene": "ammi_end", "dev": "امی… سوری! آج سے آپ کی ہر بات مانوں گا!", "rom": "Ammi… sorry! Aaj se aap ki har baat maanunga!", "stamp": "24 GHANTE BAAQI", "sfx": ["chime"]},
+ {"who": "H", "mode": "beat", "scene": "ammi_end", "dev": "", "rom": "", "sfx": ["chime"], "dur": 0.9},
+ {"who": "L", "mode": "talk", "scene": "bilal_end", "dev": "[excited] حامد، سچ بتاؤں؟ تمہارے سموسے… ہمیشہ میں ہی کھاتا تھا!", "rom": "Hamid, sach bataun? Tumhare samosay… hamesha main hi khata tha!", "stamp": "12 GHANTE BAAQI"},
+ {"who": "H", "mode": "beat", "scene": "bilal_end", "dev": "", "rom": "", "sfx": ["kick"], "dur": 0.9},
+ {"who": "H", "mode": "talk", "scene": "spend_end", "dev": "ساری بچت آج ہی خرچ! سب کو بریانی… میری طرف سے!", "rom": "Saari bachat aaj hi kharch! Sab ko biryani… meri taraf se!", "stamp": "3 GHANTE BAAQI", "sfx": ["cash@1.2"]},
+ {"who": "N", "mode": "vo", "scene": "night_end", "dev": "[whispers] گھڑی بارہ کی طرف… سب نے آنکھیں بند کیں… اور پھر…", "rom": "Ghari 12 ki taraf… sab ne aankhein band kin… aur phir…", "stamp": "RAAT 11:59", "sfx": ["tick"], "pause": 0.5},
+ {"who": "N", "mode": "vo", "scene": "twist_end", "dev": "[excited] صبح ہو گئی! دنیا بالکل ٹھیک… اور حامد کی جیب… خالی!", "rom": "Subah ho gayi! Duniya bilkul theek… aur Hamid ki jeb… KHAALI!", "stamp": "AGLI SUBAH", "sfx": ["chime"], "pause": 0.3},
+ {"who": "H", "mode": "beat", "scene": "twist_end", "dev": "", "rom": "", "sfx": ["boom"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "truth_end", "dev": "[curious] ویسے، تیرہ نومبر کو دنیا ختم ہونے والی بات… انیس سو ساٹھ کا ایک پرانا حساب تھا، پیشگوئی نہیں!", "rom": "Waise, 13 November ko duniya khatam hone wali baat… 1960 ka ek purana hisaab tha, peshgoi nahi!", "pause": 0.3},
+ {"who": "N", "mode": "vo", "scene": "end_end", "dev": "[curious] اب آپ بتاؤ… اگر صرف ایک دن بچا ہو… تو آپ کیا کرو گے؟ کمنٹ کرو… اور فالو کرو!", "rom": "Ab aap batao… agar sirf ek din bacha ho… toh aap kya karoge? Comment karo… aur follow karo!", "final": true}
+]
