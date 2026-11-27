@@ -7185,6 +7185,192 @@ def sc_cliff29(img, t, lt):
             paste_c(img, emoji("😨", 90), 120, 800, eob((t - lt_ - 0.2) / 0.25))
 
 
+# ======================= Day 30: Lahore Wapas? (Abbu discharged: three bus tickets for tonight, "sadkon pe dhakke - ye naukri hai?";
+# office message: late at 2 = chhutti; Seth Rauf walks in - "raat ko bartan, din mein delivery, subah college!" + "mere 5,000 kaun dega?";
+# Abbu: "ek mahina… kuch ban ke dikhao" and tears Hamid's ticket; cliffhanger at the bus adda: "ek mahine mein tees hazaar… warna Lahore!")
+@lru_cache(None)
+def bus_ticket(torn=0, name="HAMID"):
+    """Plain bus ticket (original design). torn: 0 whole, 1 left half, 2 right half."""
+    s = SS; im = Image.new("RGBA", (360 * s, 190 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); P = lambda *xy: [v * s for v in xy]
+    d.rounded_rectangle(P(4, 4, 356, 186), radius=14 * s, fill=(235, 245, 255), outline=INK, width=6 * s)
+    d.rectangle(P(6, 6, 354, 56), fill=(30, 110, 70))
+    d.text(P(180, 31), "KARACHI → LAHORE", font=fnt("Anton-Regular.ttf", 36 * s), fill=WHITE, anchor="mm")
+    d.text(P(180, 98), name, font=fnt("Anton-Regular.ttf", 50 * s), fill=INK, anchor="mm")
+    d.text(P(180, 152), "RAAT 10:00 • SEAT 14", font=fnt("Poppins-Black.ttf", 24 * s), fill=RED, anchor="mm")
+    for y in range(60, 184, 16): d.line(P(268, y, 268, y + 8), fill=INK, width=3 * s)
+    im = ssf(im)
+    if torn == 1: im = im.crop((0, 0, 175, 190))
+    elif torn == 2: im = im.crop((175, 0, 360, 190))
+    return im
+def ticket_fan(img, x, y, k, sc=1.0, n=3):
+    for j, nm in enumerate(["ABBU", "AMMI", "HAMID"][:n]):
+        paste_c(img, bus_ticket(0, nm), x + (j - 1) * 120 * sc, y + abs(j - 1) * 20 * sc, sc * 0.75 * eob((k - j * 0.12) / 0.25), rot=(j - 1) * 14)
+def hold_tickets(img, x, y, sc):
+    for j in range(3): paste_c(img, bus_ticket(0, ["ABBU", "AMMI", "HAMID"][j]), x + 130 * sc + j * 22 * sc, y + 160 * sc - j * 14 * sc, sc * 0.45, rot=-12 + j * 12)
+def hold_fruit(img, x, y, sc):
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([x + 90 * sc, y + 170 * sc, x + 250 * sc, y + 310 * sc], radius=int(20 * sc), fill=(250, 245, 230), outline=INK, width=5)
+    for j, e in enumerate("🍌🍎🍊"): paste_c(img, emoji(e, 64), x + 120 * sc + j * 50 * sc, y + 170 * sc, sc)
+def ward_bed(img):
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([40, 1050, 520, 1150], radius=16, fill=(240, 244, 248), outline=INK, width=6)   # mattress
+    d.rectangle([40, 1150, 520, 1180], fill=(130, 150, 170), outline=INK, width=5)
+    for lx in (60, 490): d.rectangle([lx, 1180, lx + 22, 1330], fill=(130, 150, 170), outline=INK, width=4)
+    d.rectangle([30, 900, 60, 1180], fill=(130, 150, 170), outline=INK, width=5)
+    d.rounded_rectangle([70, 1000, 230, 1060], radius=24, fill=WHITE, outline=INK, width=5)    # pillow
+    d.rounded_rectangle([300, 1040, 520, 1110], radius=10, fill=(120, 170, 220), outline=INK, width=5)   # folded blanket
+def phone_buzz(img, x, y, k):
+    paste_c(img, phone_img(True), x + 8 * math.sin(k * 60), y, eob(k / 0.15) * 0.95, rot=-8 + 6 * math.sin(k * 50))
+    paste_c(img, pill("BZZZ!", 50, YEL), x + 10, y - 190, eob((k - 0.05) / 0.15), rot=8)
+
+def sc_hook30(img, t, lt):
+    img.alpha_composite(bg_hospital()); img.alpha_composite(Image.new("RGBA", (W, H), (160, 20, 30, 60 + int(30 * math.sin(t * 6)))))
+    ward_bed(img)
+    draw_char(img, "B", 300, 900, t, "det", 0.8, arms=(-20, -100), hold=hold_tickets)
+    draw_char(img, "H", 790, 1040, t, "shock", 0.88, arms=(-150, 150) if t > 1.5 else (-20, 20))
+    if t > 1.5:
+        k = t - 1.5
+        paste_c(img, bus_img(), W / 2, 380, eob(k / 0.25) * 0.7, rot=-3)
+        stamp(img, "RAAT 10 BAJE!", W / 2, 640, k - 0.2, RED, -6, 100)
+
+def sc_ward30(img, t, lt):
+    img.alpha_composite(bg_hospital())
+    b2, h3, b4, bt, h6, b7, a8 = L("ward30")
+    ward_bed(img)
+    angry = b4["start"] < t < b4["end"] + 0.2 or b7["start"] < t < b7["end"] + 0.2
+    draw_char(img, "B", 260, 900, t, "det" if t < a8["start"] else "sad", 0.8, arms=(-20, -110) if t < h3["start"] else ((-20, -160 + 20 * math.sin(t * 14)) if angry else (-20, 20)),
+              hold=hold_tickets if t < h3["start"] else None)
+    draw_char(img, "A", 560, 930, t, "sad", 0.74, arms=(-20, 20) if t < a8["start"] else (-20, -90))
+    phone = bt["start"] < t < b7["start"]
+    hm = "n" if t < h3["start"] else ("det" if t < b4["start"] else ("shock" if t < a8["start"] else "sad"))
+    draw_char(img, "H", 860, 1040, t, hm, 0.86, arms=(-20, 110) if phone else ((-120, 120) if h3["start"] < t < h3["end"] else (-20, 20)), hold=hold_phone if phone else None)
+    if t < h3["start"]:
+        k = t - b2["start"]
+        paste_c(img, bubble([("BAS!", RED), ("TEEN TICKET!", INK)], 54, tail="left"), 480, 330, eob(k / 0.25))
+        ticket_fan(img, W / 2, 600, k - 0.6, 1.0)
+    elif t < b4["start"]:
+        k = t - h3["start"]
+        paste_c(img, bubble([("MERI PADHAI?", (40, 90, 200)), ("MERI NAUKRI?", (40, 140, 90))], 52, tail="right"), 640, 340, eob(k / 0.25))
+        paste_c(img, emoji("📚", 90), 220, 560, eob((k - 0.2) / 0.25), rot=-8); paste_c(img, emoji("🛵", 90), 380, 600, eob((k - 0.6) / 0.25), rot=6)
+    elif t < bt["start"]:
+        k = t - b4["start"]
+        paste_c(img, bubble([("SADKON PE DHAKKE!", INK), ("YE NAUKRI HAI?", RED)], 50, tail="left"), 500, 330, eob(k / 0.25))
+        paste_c(img, emoji("😠", 90), 120, 620, eob((k - 0.3) / 0.25))
+    elif t < h6["start"]:
+        phone_buzz(img, 640, 600, t - bt["start"])
+    elif t < b7["start"]:
+        k = t - h6["start"]
+        paste_c(img, pill("OFFICE KA MESSAGE", 54, WHITE, INK), W / 2, 240, eob(k / 0.25), rot=-3)
+        lt_ = word_t(h6, "late", h6["start"] + 1.6)
+        if t > lt_ - 0.1: paste_c(img, glow_text("2 BAJE LATE?", "Anton-Regular.ttf", 120, WHITE, (230, 60, 70)), W / 2, 400, eob((t - lt_ + 0.1) / 0.2), rot=-3)
+        ct = word_t(h6, "chhutti", h6["start"] + 2.6)
+        if t > ct - 0.1: stamp(img, "CHHUTTI!", W / 2, 580, t - ct + 0.1, RED, 6, 120)
+        clock(img, 160, 560, 9.0)
+    elif t < a8["start"]:
+        k = t - b7["start"]
+        stamp(img, "SAAMAAN BAANDHO!", W / 2, 320, k, RED, -6, 96)
+        paste_c(img, bag_img(), 640, 1250, eob((k - 0.3) / 0.25) * 0.9, rot=-4)
+        paste_c(img, emoji("😤", 90), 120, 620, eob((k - 0.2) / 0.25))
+    else:
+        k = t - a8["start"]
+        paste_c(img, bubble([("BETA…", (40, 140, 110)), ("ABBU KI BAAT MAAN LO", INK)], 46, tail="left"), 600, 360, eob(k / 0.25))
+        paste_c(img, emoji("💔", 110), 860, 660, eob((k - 0.6) / 0.25) * (1 + 0.05 * math.sin(t * 8)))
+
+def sc_rauf30(img, t, lt):
+    img.alpha_composite(bg_hospital())
+    h9, r10, r11, r12 = L("rauf30")
+    ward_bed(img)
+    rx = lerp(1350, 830, eo((t - h9["start"] - 0.3) / 0.6))
+    draw_char(img, "B", 260, 900, t, "det" if t < r11["start"] else ("shock" if t < r12["start"] else "n"), 0.8, arms=(-20, 20))
+    draw_char(img, "H", 520, 1040, t, "shock" if t < r11["start"] else ("happy" if t < r12["start"] else "shock"), 0.84,
+              arms=(-20, 20) if t < r12["start"] else (-150, 150), laugh=t > r12["start"] + 0.8)
+    draw_char(img, "R", rx, 980, t, "det" if t < r11["start"] else "happy", 0.92, arms=(-20, -130) if r10["start"] < t < r11["start"] else (-20, 20),
+              hold=hold_fruit, laugh=t > r12["start"] + 0.9)
+    if t < r10["start"]:
+        k = t - h9["start"]
+        paste_c(img, pill("TABHI DARWAZE PE…", 54, WHITE, INK), W / 2, 230, eob(k / 0.25), rot=-3)
+        st = word_t(h9, "seth", h9["start"] + 1.2)
+        if t > st - 0.1: paste_c(img, glow_text("SETH RAUF!", "Anton-Regular.ttf", 140, YEL, (40, 110, 70)), W / 2, 420, eob((t - st + 0.1) / 0.2), rot=-3)
+    elif t < r11["start"]:
+        k = t - r10["start"]
+        paste_c(img, bubble([("KAUN", INK), ("LAHORE JA RAHA HAI?", RED)], 50, tail="right"), 600, 340, eob(k / 0.2))
+        paste_c(img, emoji("😤", 90), 980, 640, eob((k - 0.2) / 0.25))
+    elif t < r12["start"]:
+        for j, (w_, txt, e, col) in enumerate((("raat", "RAAT: BARTAN", "🌙", (60, 70, 140)), ("din", "DIN: DELIVERY", "☀️", (230, 120, 30)), ("subah", "SUBAH: COLLEGE", "📚", (40, 140, 90)))):
+            wt = word_t(r11, w_, r11["start"] + 0.2 + j * 1.0)
+            if t > wt - 0.1:
+                kk = t - wt + 0.1
+                paste_c(img, pill(txt, 56, col, WHITE), W / 2 + 40, 260 + j * 140, eob(kk / 0.2), rot=(-3, 2, -2)[j])
+                paste_c(img, emoji(e, 80), 150, 260 + j * 140, eob(kk / 0.2))
+    else:
+        k = t - r12["start"]
+        paste_c(img, bubble([("AUR MERE", INK), ("Rs 5,000 KAUN DEGA?", RED)], 48, tail="right"), 600, 340, eob(k / 0.2))
+        if k > 0.8: paste_c(img, emoji("😂", 100), 980, 640, eob((k - 0.8) / 0.25), rot=10 * math.sin(t * 8))
+        if k > 1.0: paste_c(img, emoji("😅", 90), 520, 700, eob((k - 1.0) / 0.25))
+
+def sc_tear30(img, t, lt):
+    img.alpha_composite(bg_hospital())
+    bt, b14, h15, h16 = L("tear30")
+    ward_bed(img)
+    tear = word_t(h15, "phaad", h15["start"] + 1.4)
+    torn = t > tear - 0.1
+    draw_char(img, "B", 300, 900, t, "n" if t < h15["start"] else "happy", 0.8, arms=(-20, -120) if not torn else (-150, 150))
+    draw_char(img, "R", 900, 980, t, "happy", 0.9, arms=(-20, 20), hold=hold_fruit, laugh=t > h16["start"])
+    draw_char(img, "H", 610, 1040, t, "shock" if t < b14["start"] + 0.8 else ("det" if not torn else "happy"), 0.84,
+              arms=(-20, 20) if t < h16["start"] else (-150, 150), laugh=t > h16["start"])
+    tx, ty = W / 2, 560
+    if not torn:
+        paste_c(img, bus_ticket(0, "HAMID"), tx, ty, eob((t - bt["start"]) / 0.25) * 1.15, rot=-4 + 2 * math.sin(t * 3))
+    else:
+        k = t - tear + 0.1; q = min(1.0, k / 0.8)
+        paste_c(img, bus_ticket(1, "HAMID"), tx - 100 - 160 * q, ty + 620 * q * q, 1.15, rot=-25 * q - 5)
+        paste_c(img, bus_ticket(2, "HAMID"), tx + 100 + 160 * q, ty + 640 * q * q, 1.15, rot=30 * q + 5)
+    if t < b14["start"]:
+        paste_c(img, pill("…", 70, WHITE, INK), 300, 330, eob((t - bt["start"]) / 0.2))
+    elif t < h15["start"]:
+        k = t - b14["start"]
+        paste_c(img, bubble([("EK MAHINA…", (150, 120, 90)), ("KUCH BAN KE DIKHAO!", INK)], 46, tail="left"), 540, 300, eob(k / 0.25))
+        calendar_strip(img, W / 2 + 20, 745, 7, 0, 0.6 * eob((k - 0.5) / 0.3))
+    elif t < h16["start"]:
+        k = t - h15["start"]
+        if torn: stamp(img, "PHARRR!", W / 2, 300, t - tear + 0.1, RED, -8, 140)
+        else: paste_c(img, pill("ABBU NE…", 56, WHITE, INK), W / 2, 280, eob(k / 0.2), rot=-3)
+        if torn: paste_c(img, emoji("🥹", 100), 610, 760, eob((t - tear) / 0.25))
+    else:
+        kk = t - h16["start"]
+        paste_c(img, glow_text("AAJ BHI BACH GAYE!", "Anton-Regular.ttf", 110, YEL, (255, 120, 40)), W / 2, 280, eob(kk / 0.25), rot=-3)
+        for j in range(8):
+            q = (kk * 0.8 + j * 0.13) % 1
+            paste_c(img, emoji(["🎉", "⭐"][j % 2], 56), 120 + j * 120, 420 + q * 600, 0.9, rot=q * 200)
+
+def sc_cliff30(img, t, lt):
+    img.alpha_composite(bg_station("night")); tube_glow(img)
+    c0, c1, ol = L("cliff30")
+    red = t > c1["start"]
+    if red: img.alpha_composite(Image.new("RGBA", (W, H), (160, 20, 30, 50 + int(30 * math.sin(t * 6)))))
+    bx = 640 + (max(0.0, t - ol["start"]) ** 2) * 60
+    bus = bus_img(); paste_c(img, bus, bx, 1000, 1.0)
+    # Abbu's face in the bus window (lip-synced)
+    amp = speaking("B", t); mouth = 1 if amp < 0.3 else (2 if amp < 0.6 else 3)
+    if amp <= 0.08: mouth = 0
+    wx, wy = bx - 450 + 237, 1000 - 210 + 118
+    d = ImageDraw.Draw(img); d.rounded_rectangle([wx - 55, wy - 58, wx + 55, wy + 52], radius=14, fill=(250, 220, 150))
+    paste_c(img, head("B", "open" if not red else "open", mouth, "angry" if red else "n"), wx, wy + 6, 0.4)
+    d.rounded_rectangle([wx - 55, wy - 58, wx + 55, wy + 52], radius=14, outline=INK, width=6)
+    draw_char(img, "H", 200, 1180, t, "n" if not red else "shock", 0.8, arms=(-20, -150) if not red else (-20, 20))
+    if not red:
+        k = t - c0["start"]
+        paste_c(img, pill("RAAT 10 BAJE…", 54, WHITE, INK), W / 2, 230, eob(k / 0.3), rot=-3)
+        paste_c(img, emoji("👋", 80), 120, 980, eob((k - 0.3) / 0.25), rot=12 * math.sin(t * 8))
+    else:
+        k = t - c1["start"]
+        paste_c(img, bubble([("EK MAHINE MEIN", INK), ("Rs 30,000…", RED)], 50, tail="left"), 560, 470, eob(k / 0.25))
+        lt_ = word_t(c1, "warna", c1["start"] + 1.9)
+        if t > lt_ - 0.1:
+            stamp(img, "WARNA LAHORE!", W / 2, 240, t - lt_ + 0.1, RED, -6, 110)
+            paste_c(img, emoji("😨", 90), 330, 920, eob((t - lt_) / 0.25))
+
+
 # ======================= OUTRO HOOK (owner, 2026-11-15): every reel ends with "Agay Hamid kya karega? Follow karein…"
 # Mark the last line of the script with "outro": true (Hamid vo). It plays over the cliffhanger frame.
 def outro(img, t):
@@ -7234,7 +7420,8 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook26": sc_hook26, "raddi26": sc_raddi26, "pakora26": sc_pakora26, "night26": sc_night26, "quiz26": sc_quiz26, "result26": sc_result26, "cliff26": sc_cliff26,
       "hook27": sc_hook27, "ghafoor27": sc_ghafoor27, "road27": sc_road27, "shop27": sc_shop27, "office27": sc_office27, "cliff27": sc_cliff27,
       "hook28": sc_hook28, "shop28": sc_shop28, "ride28": sc_ride28, "door28": sc_door28, "cliff28": sc_cliff28,
-      "hook29": sc_hook29, "ghafoor29": sc_ghafoor29, "store29": sc_store29, "test29": sc_test29, "cliff29": sc_cliff29}
+      "hook29": sc_hook29, "ghafoor29": sc_ghafoor29, "store29": sc_store29, "test29": sc_test29, "cliff29": sc_cliff29,
+      "hook30": sc_hook30, "ward30": sc_ward30, "rauf30": sc_rauf30, "tear30": sc_tear30, "cliff30": sc_cliff30}
 
 
 # ======================= COLD-OPEN HOOK (owner, 2026-11-19: "add an eye / ear catching hook in the start so people won't skip")

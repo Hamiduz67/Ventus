@@ -1,0 +1,21 @@
+{
+ "day": 30,
+ "city": "Karachi",
+ "money": 0,
+ "money_start": 0,
+ "title": "Lahore Wapas?",
+ "diary_follow": false,
+ "hook": {
+  "text": "LAHORE WAPAS?!",
+  "emoji": "🚌",
+  "sub": "AAJ RAAT KI BUS"
+ },
+ "thumb": {
+  "t": 14.0,
+  "l1": "ABBU KA FAISLA…",
+  "l2": "KARACHI CHHOD DE?!",
+  "emoji": "🚌",
+  "tag": "RAAT 10 BAJE",
+  "mood": "shock"
+ }
+}

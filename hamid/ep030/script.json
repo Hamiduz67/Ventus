@@ -1,0 +1,22 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook30", "dev": "لاہور واپس! آج رات کی بس!", "rom": "Lahore wapas! Aaj raat ki bus!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن تیس۔ ہسپتال، صبح نو بجے۔", "rom": "Din tees. Hospital, subah nau baje."},
+{"who": "B", "mode": "talk", "scene": "ward30", "dev": "[firm] بس! تین ٹکٹ لے لیے۔ رات دس بجے۔", "rom": "Bas! Teen ticket le liye. Raat das baje."},
+{"who": "H", "mode": "vo", "scene": "ward30", "dev": "میری پڑھائی؟ میری نوکری؟", "rom": "Meri padhai? Meri naukri?"},
+{"who": "B", "mode": "talk", "scene": "ward30", "dev": "[angry] سڑکوں پہ دھکے! یہ نوکری ہے؟", "rom": "Sadkon pe dhakke! Ye naukri hai?"},
+{"who": "H", "mode": "beat", "scene": "ward30", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "ward30", "dev": "آفس کا میسج… دو بجے لیٹ، تو چھٹی!", "rom": "Office ka message… do baje late, toh chhutti!"},
+{"who": "B", "mode": "talk", "scene": "ward30", "dev": "[angry] دیکھا! سامان باندھو!", "rom": "Dekha! Saamaan baandho!"},
+{"who": "A", "mode": "talk", "scene": "ward30", "dev": "[sad] بیٹا… ابو کی بات مان لو۔", "rom": "Beta… Abbu ki baat maan lo."},
+{"who": "H", "mode": "vo", "scene": "rauf30", "dev": "تبھی دروازے پہ… سیٹھ رؤف!", "rom": "Tabhi darwaze pe… Seth Rauf!"},
+{"who": "R", "mode": "talk", "scene": "rauf30", "dev": "[loud] کون لاہور جا رہا ہے؟", "rom": "Kaun Lahore ja raha hai?"},
+{"who": "R", "mode": "talk", "scene": "rauf30", "dev": "[proud] رات کو برتن، دن میں ڈیلیوری، صبح کالج!", "rom": "Raat ko bartan, din mein delivery, subah college!"},
+{"who": "R", "mode": "talk", "scene": "rauf30", "dev": "[laughing] اور میرے پانچ ہزار کون دے گا؟", "rom": "Aur mere paanch hazaar kaun dega?"},
+{"who": "H", "mode": "beat", "scene": "tear30", "dev": "", "rom": "", "dur": 0.6},
+{"who": "B", "mode": "talk", "scene": "tear30", "dev": "[softly] ایک مہینہ… کچھ بن کے دکھاؤ۔", "rom": "Ek mahina… kuch ban ke dikhao."},
+{"who": "H", "mode": "vo", "scene": "tear30", "dev": "اور ابو نے میرا ٹکٹ پھاڑ دیا!", "rom": "Aur Abbu ne mera ticket phaad diya!"},
+{"who": "H", "mode": "vo", "scene": "tear30", "dev": "آج بھی بچ گئے!", "rom": "Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff30", "dev": "رات دس بجے، بس کی کھڑکی سے…", "rom": "Raat das baje, bus ki khidki se…"},
+{"who": "B", "mode": "talk", "scene": "cliff30", "dev": "[serious] ایک مہینے میں تیس ہزار… ورنہ لاہور!", "rom": "Ek mahine mein tees hazaar… warna Lahore!"},
+{"who": "H", "mode": "vo", "scene": "cliff30", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]

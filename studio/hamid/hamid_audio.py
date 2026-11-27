@@ -863,6 +863,36 @@ if "cliff29" in SPN:
     add(sfx, kick(), c29[1]["start"] + 0.1, 0.8); add(sfx, honk(0.5), c29[1]["end"] - 1.2, 0.6); add(sfx, kick(), c29[1]["end"] - 1.2, 1.0)
     for k in range(4): add(sfx, TICK, c29[1]["end"] - 0.6 + k * 0.25, 0.4)
 
+# ---- Day 30: bus horn + stamp, ticket whooshes, angry thuds, phone buzz + alert, bag thud, door + Rauf entry, three-word chimes, laugh, ticket tear, success chimes, bus engine
+def buzz30(n_s=0.5):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return (np.sign(np.sin(2 * np.pi * 150 * x)) * 0.25 * (np.sin(2 * np.pi * 9 * x) > 0)).astype(np.float32)
+if "hook30" in SPN:
+    h30 = LS_("hook30"); add(sfx, honk(0.5), h30[0]["start"] + 1.5, 0.6); add(sfx, kick(), h30[0]["start"] + 1.75, 0.9)
+if "ward30" in SPN:
+    w30 = LS_("ward30"); add(sfx, kick(), w30[0]["start"] + 0.1, 0.7)
+    for k in range(3): add(sfx, WHOOSH, w30[0]["start"] + 0.6 + k * 0.12, 0.3)
+    add(sfx, CHIME, w30[1]["start"] + 0.2, 0.3); add(sfx, kick(), w30[2]["start"] + 0.1, 0.8)
+    add(sfx, buzz30(0.55), w30[3]["start"], 0.8); add(sfx, beep(1200, 0.08, 0.5), w30[4]["start"] + 0.3); add(sfx, kick(), w30[4]["end"] - 0.9, 0.8)
+    for k in range(4): add(sfx, TICK, w30[4]["end"] - 0.7 + k * 0.2, 0.35)
+    add(sfx, kick(), w30[5]["start"] + 0.1, 0.9); add(sfx, kick(), w30[5]["start"] + 0.4, 0.6)
+    add(sfx, sad_trombone(), w30[6]["start"] + 0.6, 0.15)
+if "rauf30" in SPN:
+    r30 = LS_("rauf30"); add(sfx, bell(), r30[0]["start"] + 0.2, 0.3); add(sfx, WHOOSH, r30[0]["start"] + 0.4, 0.5); add(sfx, kick(), r30[0]["start"] + 1.1, 0.8)
+    add(sfx, kick(), r30[1]["start"] + 0.1, 0.6)
+    for k in range(3): add(sfx, CHIME, r30[2]["start"] + 0.2 + k * 1.0, 0.5)
+    add(sfx, kick(), r30[3]["start"] + 0.2, 0.5); add(sfx, sad_trombone(), r30[3]["end"] - 0.6, 0.2)
+if "tear30" in SPN:
+    t30 = LS_("tear30")
+    for k in range(3): add(sfx, TICK, t30[0]["start"] + k * 0.2, 0.4)
+    add(sfx, CHIME, t30[1]["start"] + 0.6, 0.3)
+    add(sfx, tear(), t30[2]["start"] + 1.2, 0.9); add(sfx, kick(), t30[2]["start"] + 1.3, 0.8); add(sfx, CHIME, t30[3]["start"], 0.7); add(sfx, CHIME, t30[3]["start"] + 0.2, 0.5)
+if "cliff30" in SPN:
+    c30 = LS_("cliff30"); add(sfx, engine(2.0), c30[0]["start"], 0.3); add(sfx, honk(0.4), c30[0]["start"] + 0.4, 0.4)
+    add(sfx, kick(), c30[1]["start"] + 0.1, 0.8); add(sfx, kick(), c30[1]["end"] - 1.1, 1.0)
+    for k in range(4): add(sfx, TICK, c30[1]["end"] - 0.6 + k * 0.25, 0.4)
+    add(sfx, engine(2.5), c30[2]["start"], 0.35)
+
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:
