@@ -1,0 +1,11 @@
+{
+ "day": 29,
+ "city": "Karachi",
+ "money": 0,
+ "money_start": 100,
+ "title": "Steel Ki Plate",
+ "diary_follow": false,
+ "hook": {"text": "Rs 2,000 KARZA!", "emoji": "🍽️", "sub": "JEB MEIN SIRF Rs 100"},
+ "thumb": {"t": 9.0, "l1": "BILAL GIRWI…", "l2": "AZAAD HOGA?!", "emoji": "🍽️", "tag": "Rs 2,000", "mood": "shock"},
+ "money_steps": [[12, 0, 1.3]]
+}

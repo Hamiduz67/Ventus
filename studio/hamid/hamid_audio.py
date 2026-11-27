@@ -837,6 +837,32 @@ if "cliff28" in SPN:
     add(sfx, kick(), c28[1]["end"] - 0.8, 1.0)
     for k in range(4): add(sfx, TICK, c28[1]["end"] - 0.6 + k * 0.25, 0.4)
 
+# ---- Day 29: plate crash, soap squeak, laugh thud, glue squelch, door chime, steel plate TANNN (metal ring), chimes, voice-note ping + bus horn
+def clang(n_s=1.6):
+    n = int(n_s * SR); x = np.arange(n) / SR
+    return (sum(a * np.sin(2 * np.pi * f * x) * np.exp(-x * dk) for f, a, dk in ((1180, 1.0, 2.2), (2730, 0.6, 3.0), (4410, 0.4, 4.5), (6020, 0.25, 6.0))) * 0.4).astype(np.float32)
+if "hook29" in SPN:
+    h29 = LS_("hook29"); add(sfx, noise(0.5, 0.08), h29[0]["start"] + 1.5, 0.8)
+    for k in range(4): add(sfx, TICK, h29[0]["start"] + 1.8 + k * 0.25, 0.35)
+if "ghafoor29" in SPN:
+    g29 = LS_("ghafoor29"); add(sfx, kick(), g29[0]["start"] + 0.1, 0.7); add(sfx, noise(0.4, 0.06), g29[0]["start"] + 0.2, 0.5)
+    add(sfx, beep(900, 0.12, 0.3), g29[1]["start"] + 0.4); add(sfx, beep(1300, 0.1, 0.3), g29[1]["start"] + 0.55)
+    add(sfx, sad_trombone(), g29[2]["end"] - 0.7, 0.2); add(sfx, kick(), g29[3]["start"] + 0.1, 0.6)
+    add(sfx, WHOOSH, g29[4]["start"], 0.5); add(sfx, noise(0.3, 0.1), g29[5]["start"] + 0.1, 0.4); add(sfx, kick(), g29[5]["start"] + 0.15, 0.7)
+    add(sfx, sad_trombone(), g29[6]["start"] + 1.4, 0.25)
+if "store29" in SPN:
+    s29 = LS_("store29"); add(sfx, bell(), s29[0]["start"] + 0.5, 0.3); add(sfx, CHIME, s29[1]["start"] + 0.2, 0.4)
+    add(sfx, WHOOSH, s29[3]["start"] + 0.3, 0.5); add(sfx, clang(0.5), s29[3]["start"] + 0.7, 0.3)
+    add(sfx, CHIME, s29[3]["start"] + 1.3, 0.5); add(sfx, kick(), s29[3]["end"] - 0.9, 0.7)
+if "test29" in SPN:
+    t29 = LS_("test29"); add(sfx, WHOOSH, t29[1]["start"], 0.6); add(sfx, kick(), t29[1]["start"] + 0.28, 0.9); add(sfx, clang(), t29[1]["start"] + 0.28, 1.0)
+    add(sfx, clang(0.6), t29[1]["start"] + 0.55, 0.4); add(sfx, kick(), t29[2]["start"], 0.7); add(sfx, CHIME, t29[2]["start"] + 0.1, 0.7)
+    add(sfx, CHIME, t29[3]["start"] + 0.3, 0.5); add(sfx, CHIME, t29[4]["start"], 0.7)
+if "cliff29" in SPN:
+    c29 = LS_("cliff29"); add(sfx, beep(1200, 0.08, 0.5), c29[0]["start"] + 0.5); add(sfx, beep(1600, 0.1, 0.5), c29[0]["start"] + 0.65)
+    add(sfx, kick(), c29[1]["start"] + 0.1, 0.8); add(sfx, honk(0.5), c29[1]["end"] - 1.2, 0.6); add(sfx, kick(), c29[1]["end"] - 1.2, 1.0)
+    for k in range(4): add(sfx, TICK, c29[1]["end"] - 0.6 + k * 0.25, 0.4)
+
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:

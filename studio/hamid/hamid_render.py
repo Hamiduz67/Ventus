@@ -6981,6 +6981,210 @@ def sc_cliff28(img, t, lt):
         if t > ht + 0.3: paste_c(img, pill("KARZA: 600 SE 2,000!", 48, WHITE, RED), W / 2, 440, eob((t - ht - 0.3) / 0.25), rot=3)
 
 
+# ======================= Day 29: Steel Ki Plate (Ghafoor wants Rs 2,000 for Bilal's 10 broken plates; Rs 100 laughed off; Bilal's
+# Scheme 11.0 - glue: the plate doesn't join, his fingers do; Sadia gives 10 steel plates (Rs 100 now, baaki udhaar); Ghafoor drops one -
+# TANNN, doesn't break: hisaab barabar, Bilal azaad; cliffhanger: Ammi - Abbu discharged tomorrow, he says Hamid Lahore wapas chale)
+@lru_cache(None)
+def plate_img(kind="china", sz=200):
+    """kind: china (white, blue rim) | steel | broken (china shards)."""
+    s = 2; w = sz * s; im = Image.new("RGBA", (w, w), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    if kind == "broken":
+        r = np.random.default_rng(29)
+        for k in range(6):
+            cx, cy = w * (0.2 + 0.6 * r.random()), w * (0.25 + 0.5 * r.random())
+            pts = [(cx + math.cos(a) * w * (0.08 + 0.1 * r.random()), cy + math.sin(a) * w * (0.06 + 0.08 * r.random())) for a in np.linspace(0, 2 * math.pi, 4, endpoint=False) + r.random()]
+            d.polygon(pts, fill=(250, 250, 245), outline=INK); d.line(pts[:2], fill=(60, 110, 200), width=5 * s)
+        return im.resize((sz, sz), Image.LANCZOS)
+    steel = kind == "steel"
+    d.ellipse([6 * s, sz * 0.3 * s, w - 6 * s, sz * 0.7 * s * 1.0 + sz * 0.3 * s - sz * 0.3 * s], fill=(205, 210, 220) if steel else (250, 250, 245), outline=INK, width=6 * s)
+    d.ellipse([sz * 0.18 * s, sz * 0.38 * s, w - sz * 0.18 * s, sz * 0.62 * s], fill=(180, 188, 200) if steel else (255, 255, 255), outline=(120, 130, 145) if steel else (60, 110, 200), width=4 * s)
+    if steel: d.arc([sz * 0.12 * s, sz * 0.33 * s, w - sz * 0.5 * s, sz * 0.6 * s], 190, 260, fill=WHITE, width=6 * s)
+    return im.resize((sz, sz), Image.LANCZOS)
+@lru_cache(None)
+def steel_stack(n=10):
+    im = Image.new("RGBA", (260, 80 + n * 14), (0, 0, 0, 0))
+    for k in range(n): im.alpha_composite(plate_img("steel", 240).crop((0, 60, 240, 180)), (10, (n - 1 - k) * 14))
+    return im
+@lru_cache(None)
+def glue_tube():
+    s = 2; im = Image.new("RGBA", (220 * s, 90 * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([10 * s, 15 * s, 160 * s, 75 * s], radius=14 * s, fill=(250, 200, 40), outline=INK, width=5 * s)
+    d.polygon([(160 * s, 25 * s), (200 * s, 40 * s), (200 * s, 50 * s), (160 * s, 65 * s)], fill=(240, 240, 240), outline=INK)
+    d.text((85 * s, 45 * s), "GOND", font=fnt("Anton-Regular.ttf", 34 * s), fill=RED, anchor="mm")
+    return im.resize((220, 90), Image.LANCZOS)
+def hold_glue(img, x, y, sc): paste_c(img, glue_tube(), x + 150 * sc, y + 170 * sc, sc * 0.9, rot=-25)
+def hold_shard(img, x, y, sc): paste_c(img, plate_img("china", 260), x + 150 * sc, y + 170 * sc + 8 * math.sin(T_NOW[0] * 30) * sc, sc * 0.85, rot=20 + 14 * math.sin(T_NOW[0] * 30))
+def hold_steel(img, x, y, sc): paste_c(img, plate_img("steel", 220), x - 150 * sc, y - 60 * sc, sc * 0.9, rot=-10)
+def hold_note100(img, x, y, sc): paste_c(img, notes_img(100, 180), x + 140 * sc, y + 190 * sc, sc * 0.8, rot=-10)
+T_NOW = [0.0]
+def shards(img, x, y, t):
+    paste_c(img, plate_img("broken", 380), x, y, 1.0)
+    paste_c(img, plate_img("broken", 320), x + 200, y + 30, 1.0, rot=120)
+    paste_c(img, plate_img("broken", 280), x - 200, y + 20, 1.0, rot=60)
+def soap(img, x, y, t, n=7):
+    d = ImageDraw.Draw(img)
+    for k in range(n):
+        q = (t * 0.7 + k / n) % 1; r = 10 + 8 * (k % 3)
+        d.ellipse([x - 140 + k * 40 - r, y - q * 260 - r, x - 140 + k * 40 + r, y - q * 260 + r], outline=(210, 235, 255), width=4)
+
+def sc_hook29(img, t, lt):
+    img.alpha_composite(bg_ghafoor("night")); img.alpha_composite(Image.new("RGBA", (W, H), (160, 20, 30, 60 + int(30 * math.sin(t * 6)))))
+    shards(img, 560, 1420, t)
+    draw_char(img, "L", 760, 1060, t, "sad", 0.72, arms=(-60, 60)); dish_tub(img, 760, 1330, t)
+    draw_char(img, "H", 280, 1040, t, "shock", 0.86, arms=(-20, 110), hold=hold_note100)
+    if t > 1.5:
+        k = t - 1.5
+        stamp(img, "Rs 2,000!", W / 2, 300, k, RED, -6, 130)
+        paste_c(img, pill("JEB: Rs 100", 60, WHITE, INK), W / 2, 480, eob((k - 0.4) / 0.25), rot=3)
+
+def sc_ghafoor29(img, t, lt):
+    T_NOW[0] = t
+    img.alpha_composite(bg_ghafoor("night"))
+    g0, l1, h2, g3, l4, b, h5 = L("ghafoor29")
+    stuck = t > b["start"] + 0.2
+    shards(img, 520, 1430, t)
+    draw_char(img, "G", 900, 990, t, "det" if t < g3["start"] else ("happy" if t < l4["start"] else "shock"), 0.86,
+              arms=(-20, -150) if t < l1["start"] else (-20, 20), laugh=g3["start"] < t < l4["start"] or t > h5["start"] + 0.3)
+    larms = (-60, 60) if t < l4["start"] else ((-20, -120) if not stuck else (-20, -150 + 25 * math.sin(t * 22)))
+    lhold = None if t < l4["start"] else (hold_glue if not stuck else hold_shard)
+    draw_char(img, "L", 560, 1060, t, "sad" if t < l4["start"] else ("happy" if not stuck else "shock"), 0.72, arms=larms, hold=lhold)
+    if t < l4["start"]: dish_tub(img, 560, 1330, t); soap(img, 560, 1260, t)
+    draw_char(img, "H", 165, 1040, t, "shock" if t < h2["start"] else ("det" if t < g3["start"] else ("sad" if t < l4["start"] else "happy")), 0.82,
+              arms=(-20, 110) if h2["start"] < t < l4["start"] else (-20, 20), hold=hold_note100 if h2["start"] < t < l4["start"] else None,
+              laugh=t > h5["start"] + 0.4)
+    if t < l1["start"]:
+        k = t - g0["start"]
+        paste_c(img, bubble([("10 PLETEIN!", INK), ("Rs 2,000 NIKALO!", RED)], 52, tail="right"), 640, 330, eob(k / 0.25))
+        paste_c(img, emoji("😠", 90), 980, 620, eob((k - 0.3) / 0.25))
+        paste_c(img, pill("10:05 PM", 50, WHITE, INK), 200, 600, eob((k - 0.2) / 0.3), rot=-3)
+    elif t < h2["start"]:
+        k = t - l1["start"]
+        paste_c(img, bubble([("SAABUN THA…", INK), ("PHISAL GAYI!", (40, 90, 200))], 52, tail="left"), 470, 360, eob(k / 0.25))
+        paste_c(img, emoji("🧼", 100), 760, 760, eob((k - 0.3) / 0.25), rot=20 * math.sin(t * 6))
+    elif t < g3["start"]:
+        k = t - h2["start"]
+        paste_c(img, pill("SIRF Rs 100…", 64, YEL), W / 2, 260, eob(k / 0.25), rot=-3)
+        paste_c(img, emoji("🥺", 90), 200, 700, eob((k - 0.3) / 0.25))
+    elif t < l4["start"]:
+        k = t - g3["start"]
+        paste_c(img, bubble([("SAU?!", RED), ("SAAL BHAR BARTAN!", INK)], 50, tail="right"), 640, 330, eob(k / 0.25))
+        paste_c(img, emoji("😂", 90), 1000, 620, eob((k - 0.2) / 0.25))
+        if k > 1.0: paste_c(img, pill("365 DIN!", 50, (255, 130, 40), WHITE), 560, 600, eob((k - 1.0) / 0.25), rot=4)
+    elif t < b["start"]:
+        k = t - l4["start"]
+        paste_c(img, pill("SCHEME 11.0", 56, (255, 130, 40), WHITE), W / 2, 230, eob(k / 0.3), rot=-3)
+        paste_c(img, bubble([("GOND SE", INK), ("JOD DOONGA!", (40, 140, 90))], 52, tail="left"), 520, 420, eob((k - 0.2) / 0.25))
+    elif t < h5["start"]:
+        k = t - b["start"]
+        paste_c(img, glow_text("CHIPAK!", "Anton-Regular.ttf", 150, YEL, (230, 60, 70)), W / 2, 330, eob(k / 0.15), rot=-5)
+    else:
+        k = t - h5["start"]
+        paste_c(img, pill("PLATE NAHI JUDI…", 54, WHITE, INK), W / 2, 230, eob(k / 0.25), rot=-3)
+        ut = word_t(h5, "ungli", h5["start"] + 1.6)
+        if t > ut - 0.1: stamp(img, "UNGLIYAN JUD GAYIN!", W / 2, 400, t - ut + 0.1, RED, 5, 84)
+        paste_c(img, emoji("😵", 90), 560, 640, eob((k - 0.4) / 0.25))
+
+def sc_store29(img, t, lt):
+    T_NOW[0] = t
+    img.alpha_composite(bg_store()); night_tint(img, 70)
+    lamp = Image.new("RGBA", (W, H), (0, 0, 0, 0)); ImageDraw.Draw(lamp).ellipse([420, 560, 1060, 1200], fill=(255, 210, 120, 60)); img.alpha_composite(lamp.filter(ImageFilter.GaussianBlur(60)))
+    h0, s1, h2, s3 = L("store29")
+    draw_char(img, "S", 760, 860, t, "happy", 0.78, arms=(-20, 20) if t < s3["start"] else (-140, 20), laugh=(s1["start"] + 0.3 < t < h2["start"]) or t > s3["start"] + 1.8)
+    store_counter(img)
+    if t > s3["start"] + 0.3: paste_c(img, steel_stack(10), lerp(950, 700, eo((t - s3["start"] - 0.3) / 0.4)), 1000, 0.8)
+    bx = lerp(-150, 340, eo((t - h0["start"]) / 0.6))
+    draw_char(img, "L", bx - 190, 1110, t, "sad", 0.62, arms=(-20, -150 + 25 * math.sin(t * 22)), hold=hold_shard)
+    pay = word_t(s3, "sau", s3["start"] + 1.2)
+    hm = "det" if t < s1["start"] else ("sad" if t < h2["start"] else ("det" if t < s3["start"] else "happy"))
+    draw_char(img, "H", bx, 1060, t, hm, 0.8, arms=(-20, 110) if s3["start"] < t < pay + 0.4 else (-20, 20), hold=hold_note100 if s3["start"] < t < pay + 0.4 else None)
+    if t < s1["start"]:
+        k = t - h0["start"]
+        paste_c(img, pill("10:20 PM", 54, WHITE, INK), W / 2, 230, eob(k / 0.3), rot=-3)
+        paste_c(img, pill("AAKHRI UMEED…", 60, YEL), W / 2, 370, eob((k - 0.4) / 0.3), rot=2)
+    elif t < h2["start"]:
+        k = t - s1["start"]
+        paste_c(img, bubble([("PHIR UDHAAR?", (220, 70, 140)), ("PEHLE PETROL, AB KYA?", INK)], 44, tail="right"), 620, 320, eob(k / 0.25))
+        paste_c(img, emoji("⛽", 90), 960, 560, eob((k - 0.6) / 0.25)); paste_c(img, emoji("😏", 80), 1000, 680, eob((k - 0.8) / 0.25))
+    elif t < s3["start"]:
+        k = t - h2["start"]
+        paste_c(img, bubble([("PLETEIN…", INK), ("JO KABHI NA TOOTEIN!", (40, 90, 200))], 48, tail="left"), 460, 340, eob(k / 0.25))
+        paste_c(img, emoji("🍽️", 90), 200, 640, eob((k - 0.4) / 0.25))
+    else:
+        k = t - s3["start"]
+        paste_c(img, pill("STEEL x10 • Rs 500", 56, (90, 100, 120), WHITE), W / 2, 230, eob(k / 0.25), rot=-3)
+        if t > pay - 0.1: paste_c(img, pill("Rs 100 ABHI", 52, GRN, WHITE), W / 2, 370, eob((t - pay + 0.1) / 0.25), rot=2)
+        ut = word_t(s3, "udhaar", s3["start"] + 2.2)
+        if t > ut - 0.1: stamp(img, "BAAKI UDHAAR!", 640, 560, t - ut + 0.1, (220, 70, 140), 6, 84)
+
+def sc_test29(img, t, lt):
+    T_NOW[0] = t
+    img.alpha_composite(bg_ghafoor("night"))
+    g0, b, l2, g3, h4 = L("test29")
+    drop = b["start"]
+    free = t > l2["start"]
+    gm = "det" if t < drop else ("shock" if t < g3["start"] else "happy")
+    draw_char(img, "G", 820, 990, t, gm, 0.86, arms=(-20, -175) if t < drop else ((-150, 150) if t < g3["start"] else (-20, 20)),
+              hold=hold_steel if t < drop else None, laugh=t > g3["start"])
+    # the plate falls, bounces, spins on the floor - in one piece
+    if drop <= t < g3["start"]:
+        k = t - drop
+        if k < 0.28: px, py, rot = 700, lerp(820, 1450, (k / 0.28) ** 2), k * 300
+        else:
+            kk = k - 0.28; px = 700 - 60 * min(1, kk); py = 1450 - 120 * abs(math.sin(min(kk, 0.9) * math.pi * 2)) * max(0, 1 - kk / 0.9); rot = 90 + kk * 500 * max(0, 1 - kk / 2)
+        paste_c(img, plate_img("steel", 220), px, py, 1.0, rot=rot)
+        if 0.25 < k and t < l2["start"]:
+            paste_c(img, glow_text("TANNN!", "Anton-Regular.ttf", 170, WHITE, (90, 160, 255)), W / 2, 420, eob((k - 0.25) / 0.12) * (1 + 0.06 * math.sin(t * 40)), rot=-5)
+            d = ImageDraw.Draw(img)
+            for j in range(8):
+                a = j / 8 * 2 * math.pi; r0 = 140 + 60 * ((k * 3) % 1)
+                d.line([(700 + math.cos(a) * r0, 1450 + math.sin(a) * r0 * 0.5), (700 + math.cos(a) * (r0 + 50), 1450 + math.sin(a) * (r0 + 50) * 0.5)], fill=YEL, width=8)
+    ly = 1060 - (abs(math.sin(t * 7)) * 50 if free and t < h4["start"] else 0)
+    draw_char(img, "L", 480, ly, t, "shock" if not free else "happy", 0.74, arms=(-150, 150) if free else (-20, -150 + 25 * math.sin(t * 22)),
+              hold=None if free else hold_shard, laugh=free)
+    draw_char(img, "H", 190, 1040, t, "det" if t < drop else ("shock" if not free else "happy"), 0.82, arms=(-150, 150) if t > h4["start"] else (-20, 20), laugh=t > g3["start"])
+    if t < drop:
+        k = t - g0["start"]
+        paste_c(img, bubble([("STEEL?", INK), ("DEKHTE HAIN!", RED)], 54, tail="right"), 600, 330, eob(k / 0.25))
+        paste_c(img, emoji("🤨", 90), 980, 600, eob((k - 0.3) / 0.25))
+    elif t < l2["start"]: pass
+    elif t < g3["start"]:
+        k = t - l2["start"]
+        stamp(img, "TOOTI NAHI!", W / 2, 300, k, GRN, -6, 120)
+        at = word_t(l2, "azaad", l2["start"] + 1.4)
+        if t > at - 0.1: paste_c(img, glow_text("BILAL AZAAD!", "Anton-Regular.ttf", 120, YEL, (255, 120, 40)), W / 2, 500, eob((t - at + 0.1) / 0.2), rot=4)
+        if k < 1.2: paste_c(img, plate_img("china", 220), 600 - 260 * k, 880 - 900 * k + 300 * k * k, 1.0, rot=k * 500)   # the glued plate finally flies off his fingers
+    elif t < h4["start"]:
+        k = t - g3["start"]
+        paste_c(img, bubble([("HISAAB BARABAR!", (40, 140, 90)), ("KIRAYA TANKHWAH PE!", INK)], 46, tail="right"), 620, 320, eob(k / 0.25))
+        paste_c(img, emoji("🤝", 100), 640, 620, eob((k - 0.4) / 0.25))
+    else:
+        kk = t - h4["start"]
+        paste_c(img, glow_text("AAJ BHI BACH GAYE!", "Anton-Regular.ttf", 110, YEL, (255, 120, 40)), W / 2, 280, eob(kk / 0.25), rot=-3)
+        for j in range(8):
+            q = (kk * 0.8 + j * 0.13) % 1
+            paste_c(img, emoji(["🎉", "⭐"][j % 2], 56), 120 + j * 120, 420 + q * 700, 0.9, rot=q * 200)
+
+def sc_cliff29(img, t, lt):
+    img.alpha_composite(bg_street("night")); night_tint(img, 40)
+    c0, c1, ol = L("cliff29")
+    red = t > c1["start"]
+    if red: img.alpha_composite(Image.new("RGBA", (W, H), (160, 20, 30, 50 + int(30 * math.sin(t * 6)))))
+    draw_char(img, "H", 270, 1060, t, "happy" if t < c1["start"] + 0.6 else "shock", 0.85, arms=(-20, 110), hold=hold_phone)
+    kin = eob((t - c0["start"] - 0.4) / 0.3)
+    call_inset(img, "A", 760, 760, t, "sad", ((250, 225, 180), (230, 190, 150)), "AMMI • VOICE NOTE", kin * 0.95)
+    if not red:
+        paste_c(img, pill("RAAT 11 BAJE…", 54, WHITE, INK), W / 2, 230, eob((t - c0["start"]) / 0.3), rot=-3)
+        paste_c(img, emoji("🎤", 80), 600, 470, kin)
+    else:
+        k = t - c1["start"]
+        paste_c(img, pill("KAL ABBU KI CHHUTTI", 52, GRN, WHITE), W / 2, 230, eob(k / 0.25), rot=-3)
+        lt_ = word_t(c1, "lahore", c1["start"] + 2.8)
+        if t > lt_ - 0.2:
+            stamp(img, "LAHORE WAPAS?!", W / 2, 400, t - lt_ + 0.2, RED, -6, 110)
+            paste_c(img, emoji("🚌", 110), 200, 640, eob((t - lt_) / 0.25), rot=-6)
+            paste_c(img, emoji("😨", 90), 120, 800, eob((t - lt_ - 0.2) / 0.25))
+
+
 # ======================= OUTRO HOOK (owner, 2026-11-15): every reel ends with "Agay Hamid kya karega? Follow karein…"
 # Mark the last line of the script with "outro": true (Hamid vo). It plays over the cliffhanger frame.
 def outro(img, t):
@@ -7029,7 +7233,8 @@ SC = {"hook": sc_hook, "daycard": sc_daycard, "home": sc_home, "fees": sc_fees, 
       "hook25": sc_hook25, "office25": sc_office25, "ghafoor25": sc_ghafoor25, "turn25": sc_turn25, "scheme25": sc_scheme25, "ride25": sc_ride25, "hall25": sc_hall25, "cliff25": sc_cliff25,
       "hook26": sc_hook26, "raddi26": sc_raddi26, "pakora26": sc_pakora26, "night26": sc_night26, "quiz26": sc_quiz26, "result26": sc_result26, "cliff26": sc_cliff26,
       "hook27": sc_hook27, "ghafoor27": sc_ghafoor27, "road27": sc_road27, "shop27": sc_shop27, "office27": sc_office27, "cliff27": sc_cliff27,
-      "hook28": sc_hook28, "shop28": sc_shop28, "ride28": sc_ride28, "door28": sc_door28, "cliff28": sc_cliff28}
+      "hook28": sc_hook28, "shop28": sc_shop28, "ride28": sc_ride28, "door28": sc_door28, "cliff28": sc_cliff28,
+      "hook29": sc_hook29, "ghafoor29": sc_ghafoor29, "store29": sc_store29, "test29": sc_test29, "cliff29": sc_cliff29}
 
 
 # ======================= COLD-OPEN HOOK (owner, 2026-11-19: "add an eye / ear catching hook in the start so people won't skip")

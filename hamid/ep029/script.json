@@ -1,0 +1,23 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook29", "dev": "دو ہزار کا قرضہ! جیب میں صرف سو!", "rom": "Do hazaar ka karza! Jeb mein sirf sau!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن انتیس۔ رات دس بجے۔", "rom": "Din untees. Raat das baje."},
+{"who": "G", "mode": "talk", "scene": "ghafoor29", "dev": "[angry] دس پلیٹیں! دو ہزار نکالو!", "rom": "Das pletein! Do hazaar nikalo!"},
+{"who": "L", "mode": "talk", "scene": "ghafoor29", "dev": "[sheepish] صابن تھا… پلیٹ پھسل گئی!", "rom": "Saabun tha… plate phisal gayi!"},
+{"who": "H", "mode": "vo", "scene": "ghafoor29", "dev": "میں نے سو کا نوٹ آگے کیا…", "rom": "Maine sau ka note aage kiya…"},
+{"who": "G", "mode": "talk", "scene": "ghafoor29", "dev": "[laughing] سو؟ بلال سال بھر برتن دھوئے گا!", "rom": "Sau? Bilal saal bhar bartan dhoyega!"},
+{"who": "L", "mode": "talk", "scene": "ghafoor29", "dev": "[excited] سکیم گیارہ! گوند سے جوڑ دوں گا!", "rom": "Scheme gyarah! Gond se jod doonga!"},
+{"who": "H", "mode": "beat", "scene": "ghafoor29", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "ghafoor29", "dev": "پلیٹ نہیں جڑی… بلال کی انگلیاں جڑ گئیں!", "rom": "Plate nahi judi… Bilal ki ungliyan jud gayin!"},
+{"who": "H", "mode": "vo", "scene": "store29", "dev": "آخری امید… نور جنرل سٹور۔", "rom": "Aakhri umeed… Noor General Store."},
+{"who": "S", "mode": "talk", "scene": "store29", "dev": "[teasing] پھر ادھار؟ پہلے پیٹرول، اب کیا؟", "rom": "Phir udhaar? Pehle petrol, ab kya?"},
+{"who": "H", "mode": "vo", "scene": "store29", "dev": "پلیٹیں… جو کبھی نہ ٹوٹیں!", "rom": "Pletein… jo kabhi na tootein!"},
+{"who": "S", "mode": "talk", "scene": "store29", "dev": "[cheerful] سٹیل کی دس پلیٹیں! سو ابھی، باقی ادھار!", "rom": "Steel ki das pletein! Sau abhi, baaki udhaar!"},
+{"who": "G", "mode": "talk", "scene": "test29", "dev": "[suspicious] سٹیل؟ دیکھتے ہیں!", "rom": "Steel? Dekhte hain!"},
+{"who": "H", "mode": "beat", "scene": "test29", "dev": "", "rom": "", "dur": 0.6},
+{"who": "L", "mode": "talk", "scene": "test29", "dev": "[laughing] ٹوٹی نہیں! میں آزاد!", "rom": "Tooti nahi! Main azaad!"},
+{"who": "G", "mode": "talk", "scene": "test29", "dev": "[happy] حساب برابر! کرایہ تنخواہ پہ!", "rom": "Hisaab barabar! Kiraya tankhwah pe!"},
+{"who": "H", "mode": "vo", "scene": "test29", "dev": "آج بھی بچ گئے!", "rom": "Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff29", "dev": "تبھی امی کا وائس نوٹ…", "rom": "Tabhi Ammi ka voice note…"},
+{"who": "A", "mode": "talk", "scene": "cliff29", "dev": "[worried] کل ابو کی چھٹی… کہتے ہیں، حامد لاہور واپس چلے!", "rom": "Kal Abbu ki chhutti… kehte hain, Hamid Lahore wapas chale!"},
+{"who": "H", "mode": "vo", "scene": "cliff29", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]
