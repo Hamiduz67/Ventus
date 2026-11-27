@@ -68,9 +68,9 @@ def head(who, eyes, mouth, brows):
     if who in ("A", "N"):  # dupatta / white chaddar behind head
         d.ellipse([cx - r - 34 * s, cy - r - 34 * s, cx + r + 34 * s, cy + r + 70 * s], fill=(40, 140, 110) if who == "A" else (236, 236, 240), outline=INK, width=6 * s)
     if who == "S":  # Sadia (Day 27): long black hair falling behind the shoulders + a braid on her right side
-        d.ellipse([cx - r - 6 * s, cy - r - 4 * s, cx + r + 6 * s, cy + r + 70 * s], fill=(28, 22, 30), outline=INK, width=6 * s)   # flowing hair behind
-        for k in range(4): d.ellipse([cx + r - 22 * s, cy + 40 * s + k * 38 * s, cx + r + 18 * s, cy + 80 * s + k * 38 * s], fill=(28, 22, 30), outline=INK, width=4 * s)   # braid
-        d.ellipse([cx + r - 16 * s, cy + 190 * s, cx + r + 12 * s, cy + 210 * s], fill=(230, 70, 140), outline=INK, width=3 * s)
+        d.rounded_rectangle([cx - r - 6 * s, cy - r - 4 * s, cx + r + 6 * s, cy + r + 16 * s], radius=80 * s, fill=(28, 22, 30), outline=INK, width=6 * s)   # flowing hair behind (fits the head canvas)
+        for k in range(3): d.ellipse([cx + r - 22 * s, cy + 30 * s + k * 34 * s, cx + r + 14 * s, cy + 66 * s + k * 34 * s], fill=(28, 22, 30), outline=INK, width=4 * s)   # braid
+        d.ellipse([cx + r - 16 * s, cy + 130 * s, cx + r + 8 * s, cy + 148 * s], fill=(230, 70, 140), outline=INK, width=3 * s)
     fw = r * 0.86 if who == "S" else r   # Sadia (owner, 2026-11-27): slim, pretty - narrower oval face, no ears showing
     if who != "S":
         for sx in (-1, 1):
@@ -253,6 +253,12 @@ def head(who, eyes, mouth, brows):
             for j in range(3):   # lashes on the outer corner
                 ax = ex + sx * (10 + j * 8) * s; ay = top + (j * 4) * s
                 d.line([(ax, ay), (ax + sx * 14 * s, ay - 12 * s)], fill=INK, width=5 * s)
+        if eyes in ("open", "down", "wide"):   # warm brown irises
+            for sx in (-1, 1):
+                ex = cx + sx * 44 * s; dy = 8 * s if eyes == "down" else 0
+                d.ellipse([ex - 14 * s, ey - 14 * s + dy, ex + 14 * s, ey + 14 * s + dy], fill=(115, 70, 40), outline=INK, width=3 * s)
+                d.ellipse([ex - 7 * s, ey - 7 * s + dy, ex + 7 * s, ey + 7 * s + dy], fill=INK)
+                d.ellipse([ex - 8 * s, ey - 11 * s + dy, ex - 1 * s, ey - 4 * s + dy], fill=WHITE)
         d.ellipse([cx + 14 * s, cy + 22 * s, cx + 20 * s, cy + 28 * s], fill=(255, 225, 120))   # nose stud
         if mouth == 0:
             d.chord([cx - 26 * s, my - 18 * s, cx + 26 * s, my + 12 * s], 20, 160, fill=(215, 70, 105), outline=INK, width=4 * s)
@@ -327,7 +333,9 @@ def torso(who):
         d.rounded_rectangle([118 * s, 50 * s, w - 118 * s, 110 * s], radius=30 * s, fill=(110, 180, 235), outline=INK, width=7 * s)
         d.chord([w / 2 - 50 * s, 20 * s, w / 2 + 50 * s, 110 * s], 0, 180, fill=SKIN["S"], outline=INK, width=5 * s)
         for k in range(5): d.ellipse([w / 2 - 46 * s + k * 20 * s, 108 * s, w / 2 - 38 * s + k * 20 * s, 116 * s], fill=WHITE)
-        d.polygon([(125 * s, 60 * s), (190 * s, 55 * s), (w - 130 * s, 290 * s), (w - 150 * s, 340 * s)], fill=(235, 100, 160), outline=INK)
+        # pink dupatta: a slim fold over her left shoulder falling straight down (not a sash), gota dots at the hem
+        d.polygon([(w / 2 - 92 * s, 52 * s), (w / 2 - 48 * s, 58 * s), (w / 2 - 64 * s, h + 80 * s), (w / 2 - 108 * s, h + 80 * s)], fill=(235, 100, 160), outline=INK)
+        for k in range(3): d.ellipse([w / 2 - 92 * s, (380 + k * 22) * s, w / 2 - 80 * s, (392 + k * 22) * s], fill=(250, 200, 60))
     elif who == "W":   # green banyan + white apron with oil spots
         d.rounded_rectangle([60 * s, 50 * s, w - 60 * s, h + 80 * s], radius=130 * s, fill=(90, 140, 90), outline=INK, width=7 * s)
         d.chord([w / 2 - 70 * s, 10 * s, w / 2 + 70 * s, 110 * s], 0, 180, fill=SKIN["W"], outline=INK, width=5 * s)
@@ -355,6 +363,8 @@ def arm(who):
     s = SS; L = 220; im = Image.new("RGBA", (66 * s, (L + 66) * s), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     sleeve = {"H": (245, 245, 240), "A": (150, 40, 70), "B": (200, 200, 195), "L": (255, 190, 50), "K": (150, 200, 240), "C": (110, 140, 170), "X": (190, 170, 120), "G": SKIN["G"], "M": (170, 205, 240), "T": (240, 240, 235), "Z": (225, 140, 70), "R": (240, 230, 205), "P": (40, 55, 95), "N": (170, 150, 200), "J": (30, 28, 40), "W": (90, 140, 90), "S": (110, 180, 235)}[who]
     d.rounded_rectangle([6 * s, 6 * s, 60 * s, (L - 40) * s], radius=26 * s, fill=sleeve, outline=INK, width=6 * s)
+    if who == "S":   # Sadia: gold bangles at the wrist
+        for k in range(2): d.rounded_rectangle([6 * s, (L - 58 + k * 10) * s, 60 * s, (L - 51 + k * 10) * s], radius=3 * s, fill=(250, 200, 60), outline=INK, width=2 * s)
     d.ellipse([4 * s, (L - 58) * s, 62 * s, L * s], fill=SKIN[who], outline=INK, width=6 * s)
     return ssf(im)
 def rot_arm(img, who, sx, sy, angle, sc=1.0):

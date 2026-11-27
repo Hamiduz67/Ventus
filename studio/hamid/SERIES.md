@@ -26,8 +26,8 @@ Turning points (weekly episodes): bus ticket out of Lahore, visa arrives, first 
 - G **Chacha Ghafoor**: rents bikes and rooms; always asking for kiraya.
 - S **Sadia**: Hamid meets her in **Karachi**; works at a shop he delivers to, ambitious, studies at night. Love interest.
   Look (owner, 2026-11-27: "make Sadia slim and attractive, she should be very pretty" — every reel from now on): an adult (about 19–20),
-  slim figure in a fitted sky-blue kurta with a narrow waist, pink dupatta over the head and across the shoulders, slim oval face, soft
-  centre-parted hair with a long braid, thin arched brows, long lashes + kohl, rosy cheeks, pink lips, small gold earrings and nose stud.
+  slim figure in a fitted sky-blue kurta with a narrow waist, pink dupatta over the head and in a slim fold over her left shoulder (not a sash), slim oval face, soft
+  centre-parted hair with a long braid, thin arched brows, long lashes + kohl, rosy cheeks, pink lips, small gold earrings and nose stud, warm brown eyes, gold bangles.
   Already built into hamid_render.py (head/torso/draw_char for "S") — use draw_char("S", …) as is, don't redraw her bulkier.
   Keep it tasteful and in character (modest clothes, pretty-cartoon, never sexualised).
 New characters may be added (draw them in hamid_render.py `head()/torso()/arm()`, add a voice in tts.py).
