@@ -3,7 +3,7 @@ Usage: hamid_render.py <episode dir> [still:t1,t2,...]"""
 import json, math, subprocess, sys
 from functools import lru_cache
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageChops
 
 D = sys.argv[1]; ONLY = sys.argv[2] if len(sys.argv) > 2 else None
 W, H, FPS, SS = 1080, 1920, 30, 2
@@ -78,17 +78,29 @@ def head(who, eyes, mouth, brows):
     if who != "S":
         for sx in (-1, 1):
             d.ellipse([cx + sx * r - 24 * s, cy - 6 * s, cx + sx * r + 24 * s, cy + 44 * s], fill=skin, outline=INK, width=6 * s)
-    if who == "S":   # slim oval face with a soft pointed chin
-        d.ellipse([cx - fw, cy - r * 1.0, cx + fw, cy + r * 1.12], fill=skin, outline=INK, width=7 * s)
+    if who in ("H", "S"):   # owner's photos (2026-11-27): a defined jawline - Hamid squarer with a firm chin, Sadia a soft V
+        jx, jy, chx, chy, by_ = ((r * 0.9, r * 0.5, r * 0.34, r * 1.02, r * 1.1) if who == "H" else (fw * 0.94, r * 0.44, fw * 0.36, r * 0.98, r * 1.05))
+        fwid = r if who == "H" else fw
+        pts = [(cx + fwid * math.cos(math.radians(a)), cy - (r if who == "H" else r) * 1.0 * math.sin(math.radians(a)) * -1) for a in range(180, 361, 10)]
+        pts = [(x_, cy + (y_ - cy) * (1.02 if who == "H" else 1.0)) for x_, y_ in pts]
+        pts += [(cx + jx, cy + jy), (cx + chx, cy + chy), (cx, cy + by_), (cx - chx, cy + chy), (cx - jx, cy + jy)]
+        FACE_PTS = pts
+        d.polygon(pts, fill=skin); d.line(pts + [pts[0], pts[1]], fill=INK, width=7 * s, joint="curve")
     else:
         d.ellipse([cx - r, cy - r * 1.02, cx + r, cy + r * 1.08], fill=skin, outline=INK, width=7 * s)
     if who == "H":
-        hc = (24, 20, 24); bc = (66, 50, 46)
-        # short, neatly trimmed full beard on the jaw + chin (face shape still shows), skin open around the mouth, moustache
-        d.chord([cx - r + 6 * s, cy - r * 0.2, cx + r - 6 * s, cy + r * 1.07], 12, 168, fill=bc)
-        d.arc([cx - r + 6 * s, cy - r * 0.2, cx + r - 6 * s, cy + r * 1.07], 12, 168, fill=INK, width=6 * s)
-        d.ellipse([cx - 42 * s, cy + 38 * s, cx + 42 * s, cy + 90 * s], fill=SKIN["H"])
-        d.chord([cx - 48 * s, cy + 32 * s, cx + 48 * s, cy + 64 * s], 180, 360, fill=bc)
+        hc = (24, 20, 24)
+        # short trimmed beard like the photo: light (skin shows through), crisp cheek line angled down to the moustache, follows the jaw
+        bm = Image.new("L", im.size, 0); bmd = ImageDraw.Draw(bm)
+        bmd.polygon([(cx - r * 0.99, cy + 14 * s), (cx - r * 0.8, cy + 40 * s), (cx - 50 * s, cy + 56 * s), (cx - 26 * s, cy + 46 * s), (cx, cy + 45 * s),
+                     (cx + 26 * s, cy + 46 * s), (cx + 50 * s, cy + 56 * s), (cx + r * 0.8, cy + 40 * s), (cx + r * 0.99, cy + 14 * s),
+                     (cx + r * 1.1, cy + r * 0.6), (cx, cy + r * 1.3), (cx - r * 1.1, cy + r * 0.6)], fill=105)
+        bmd.ellipse([cx - 38 * s, cy + 52 * s, cx + 38 * s, cy + 86 * s], fill=0)   # skin around the lips
+        fm = Image.new("L", im.size, 0); ImageDraw.Draw(fm).polygon(FACE_PTS, fill=255)
+        bm = ImageChops.multiply(bm, fm)
+        im.paste(Image.new("RGBA", im.size, (45, 34, 32, 255)), (0, 0), bm); d = ImageDraw.Draw(im)
+        d.line(FACE_PTS[-6:] + [FACE_PTS[0]], fill=INK, width=7 * s)   # keep the jawline crisp over the beard
+        for sx in (-1, 1): d.line([(cx + sx * r * 0.8, cy + 40 * s), (cx + sx * 50 * s, cy + 56 * s)], fill=(120, 88, 72), width=2 * s)   # crisp, subtle cheek line
         # medium-length wavy hair: one soft mass with a wavy top (stays inside the head canvas), short sides, a swoop over the forehead
         pts = [(cx - r + 6 * s, cy - 10 * s)]
         for k in range(13):
