@@ -79,11 +79,14 @@ def head(who, eyes, mouth, brows):
         for sx in (-1, 1):
             d.ellipse([cx + sx * r - 24 * s, cy - 6 * s, cx + sx * r + 24 * s, cy + 44 * s], fill=skin, outline=INK, width=6 * s)
     if who in ("H", "S"):   # owner's photos (2026-11-27): a defined jawline - Hamid squarer with a firm chin, Sadia a soft V
-        jx, jy, chx, chy, by_ = ((r * 0.9, r * 0.5, r * 0.34, r * 1.02, r * 1.1) if who == "H" else (fw * 0.94, r * 0.44, fw * 0.36, r * 0.98, r * 1.05))
+        # subtle (owner: "less, not fake"): an ellipse whose lower half is only gently squared (Hamid) or gently tapered (Sadia)
         fwid = r if who == "H" else fw
-        pts = [(cx + fwid * math.cos(math.radians(a)), cy - (r if who == "H" else r) * 1.0 * math.sin(math.radians(a)) * -1) for a in range(180, 361, 10)]
-        pts = [(x_, cy + (y_ - cy) * (1.02 if who == "H" else 1.0)) for x_, y_ in pts]
-        pts += [(cx + jx, cy + jy), (cx + chx, cy + chy), (cx, cy + by_), (cx - chx, cy + chy), (cx - jx, cy + jy)]
+        pts = [(cx + fwid * math.cos(math.radians(a)), cy + r * 1.02 * math.sin(math.radians(a))) for a in range(180, 360, 6)]
+        n_, R_ = (2.35, r * 1.08) if who == "H" else (2.0, r * 1.1)
+        for a in range(0, 181, 6):
+            c_, sn = math.cos(math.radians(a)), math.sin(math.radians(a))
+            x_ = fwid * math.copysign(abs(c_) ** (2 / n_), c_) * (1 - (0.1 * sn ** 3 if who == "S" else 0.0))
+            pts.append((cx + x_, cy + R_ * abs(sn) ** (2 / n_)))
         FACE_PTS = pts
         d.polygon(pts, fill=skin); d.line(pts + [pts[0], pts[1]], fill=INK, width=7 * s, joint="curve")
     else:
@@ -99,7 +102,7 @@ def head(who, eyes, mouth, brows):
         fm = Image.new("L", im.size, 0); ImageDraw.Draw(fm).polygon(FACE_PTS, fill=255)
         bm = ImageChops.multiply(bm, fm)
         im.paste(Image.new("RGBA", im.size, (45, 34, 32, 255)), (0, 0), bm); d = ImageDraw.Draw(im)
-        d.line(FACE_PTS[-6:] + [FACE_PTS[0]], fill=INK, width=7 * s)   # keep the jawline crisp over the beard
+        d.line(FACE_PTS[30:] + [FACE_PTS[0]], fill=INK, width=7 * s, joint="curve")   # keep the jaw outline crisp over the beard
         for sx in (-1, 1): d.line([(cx + sx * r * 0.8, cy + 40 * s), (cx + sx * 50 * s, cy + 56 * s)], fill=(120, 88, 72), width=2 * s)   # crisp, subtle cheek line
         # medium-length wavy hair: one soft mass with a wavy top (stays inside the head canvas), short sides, a swoop over the forehead
         pts = [(cx - r + 6 * s, cy - 10 * s)]
