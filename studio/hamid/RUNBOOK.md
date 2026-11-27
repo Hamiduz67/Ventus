@@ -33,7 +33,7 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
      `"hook": {"text": "<2-4 BIG Roman words>", "emoji": "<object at stake>", "sub": "<optional small red line>"}`. Check stills at 0.1, 0.4 and 1.2 s. It must tease the episode's central question
      without giving away the ending (curiosity gap), in simple Roman Urdu, max ~4 words per line.
 3. Voices: `python3 studio/hamid/tts.py hamid/epNNN`. Optional check: transcribe with faster-whisper small (language "ur") and redo garbled lines (delete that v##.wav and rerun).
-4. Scenes: reuse existing scene functions in `studio/hamid/hamid_render.py`; add new ones (dhaba, street, bus station, Karachi room, rain, etc.) in the same flat 2D style, and new characters/props as needed. Commit renderer changes so later runs reuse them. Keep Hamid/Ammi/Abbu exactly as drawn.
+4. Scenes: reuse existing scene functions in `studio/hamid/hamid_render.py`; add new ones (dhaba, street, bus station, Karachi room, rain, etc.) in the same flat 2D style, and new characters/props as needed. Commit renderer changes so later runs reuse them. Keep Hamid/Ammi/Abbu/Sadia exactly as drawn now (Hamid + Sadia faces from the owner's photos, approved 2026-11-27 — see SERIES.md).
 5. Audio + render:
    `python3 studio/hamid/hamid_audio.py hamid/epNNN` then `python3 studio/hamid/hamid_render.py hamid/epNNN still:<4–8 times>` and LOOK at the frames (contact sheet). Fix overlaps/cut-off text. Then full render and mux:
    `python3 studio/hamid/hamid_render.py hamid/epNNN thumb` writes thumb.png/thumb.jpg — LOOK at it (readable at phone-grid size, key elements

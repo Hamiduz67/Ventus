@@ -25,11 +25,15 @@ Turning points (weekly episodes): bus ticket out of Lahore, visa arrives, first 
 - R **Seth Rauf**: first boss in Karachi; stingy, loud, secretly fair; becomes a mentor.
 - G **Chacha Ghafoor**: rents bikes and rooms; always asking for kiraya.
 - S **Sadia**: Hamid meets her in **Karachi**; works at a shop he delivers to, ambitious, studies at night. Love interest.
-  Look (owner, 2026-11-27: "make Sadia slim and attractive, she should be very pretty" — every reel from now on): an adult (about 19–20),
-  slim figure in a fitted sky-blue kurta with a narrow waist, pink dupatta over the head and in a slim fold over her left shoulder (not a sash), slim oval face, soft
-  centre-parted hair with a long braid, thin arched brows, long lashes + kohl, rosy cheeks, pink lips, small gold earrings and nose stud, warm brown eyes, gold bangles.
-  Already built into hamid_render.py (head/torso/draw_char for "S") — use draw_char("S", …) as is, don't redraw her bulkier.
-  Keep it tasteful and in character (modest clothes, pretty-cartoon, never sexualised).
+  Look (owner, 2026-11-27 — every reel from now on): slim and very pretty, drawn from the OWNER'S PHOTO of Sadia (approved 2026-11-27):
+  straight shoulder-length dark hair with a centre parting framing the face (no braid), soft oval face gently tapering to the chin,
+  fuller arched brows, big brown eyes with lashes, rosy cheeks, pink lips, tiny gold studs (no nose stud), slim fitted sky-blue kurta,
+  pink dupatta in a slim fold over one shoulder (off the head), gold bangles. Keep it tasteful and modest (pretty-cartoon, never sexualised).
+- **Real-likeness exception (owner, 2026-11-27):** Hamid and Sadia are drawn from the owner's own photos. HAMID's look (from Day 29):
+  wavy, medium-length black hair with a swoop over the forehead (no more spiky hair), thick straight brows, relaxed lids, straight nose,
+  a short, light, neatly trimmed beard + moustache with a crisp cheek line, face gently squared at the jaw (subtle, not sharp), lighter skin;
+  same white kurta. All built into hamid_render.py (head/torso/arm "H" and "S") — use draw_char as is; don't redraw them.
+  Everyone else stays fully original (no other real people).
 New characters may be added (draw them in hamid_render.py `head()/torso()/arm()`, add a voice in tts.py).
 
 ## First 10 days (planned)
@@ -75,4 +79,4 @@ Recurring: day counter + money counter (top corners), Ammi's voice notes, Hamid'
 - Simple everyday Urdu–Hindi–English mix, the way young people talk. No difficult/formal words. Write voice text in Urdu script; captions in Roman (Hinglish/Urdu) script.
 - ElevenLabs ONLY for speech. Music + SFX are generated in code (free). Max 600 characters of voice per reel and ≤ 300 new characters per weekly episode (Starter plan: 40,000/month; 60 reels × 600 = 36,000). A 45–60 s voice-led reel needs ~450–600 characters (≈12 chars per second of speech); stay ≤ 600 by keeping lines short, not by adding silent beats. The outro line is free (reused recording).
 - Hamid's voice is locked: Raghav on eleven_v4 (no [tags] in his text; use "…" for pauses).
-- 2D cartoon style (same characters/look as Day 1). Fully original: no real brands/logos, no real people, no copyrighted music.
+- 2D cartoon style (same look as Day 1; Hamid + Sadia's faces updated from the owner's photos on 2026-11-27). Fully original: no real brands/logos, no other real people, no copyrighted music.
