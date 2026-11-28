@@ -1204,6 +1204,174 @@ def sc_end_end(img, t, lt):
     draw_char(img, "H", 720, 1000, t, "happy", 0.92, arms=(-20, 110), hold=hold_cup)
 
 
+# ======================= EPISODE 8: Bijli 90 Din Band (the viral "17 Nov 2026 90-day blackout" = a hoax; in the US it was only an emergency alert test)
+def dark(img, a): img.alpha_composite(Image.new("RGBA", (W, H), (5, 5, 20, int(a))))
+def hold_phone8(img, x, y, sc): paste_c(img, phone_img(True), x + 140 * sc, y + 150 * sc, sc * 0.9, rot=-10)
+@lru_cache(None)
+def charge_board(n=4):
+    im = Image.new("RGBA", (560, 300), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 559, 299], radius=20, fill=(90, 70, 50), outline=INK, width=7)
+    for j in range(n):
+        x = 40 + j * 130; d.rounded_rectangle([x, 40, x + 90, 200], radius=14, fill=(25, 25, 30), outline=INK, width=5)
+        d.rectangle([x + 12, 52, x + 78, 188], fill=(30, 60, 40)); d.text((x + 45, 120), "⚡" if False else "+", font=fnt("Anton-Regular.ttf", 60), fill=GRN, anchor="mm")
+    d.text((280, 252), "Rs 10 / MINUT", font=fnt("Anton-Regular.ttf", 54), fill=YEL, anchor="mm")
+    return im
+@lru_cache(None)
+def hoax_card():
+    im = Image.new("RGBA", (780, 600), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([0, 0, 779, 599], radius=32, fill=(252, 250, 245), outline=INK, width=8)
+    d.rounded_rectangle([0, 0, 779, 120], radius=32, fill=INK); d.rectangle([0, 80, 779, 120], fill=INK)
+    d.text((390, 62), "VIRAL POST • 17 NOV 2026", font=fnt("Anton-Regular.ttf", 60), fill=WHITE, anchor="mm")
+    d.text((390, 210), "90 DIN KA", font=fnt("Anton-Regular.ttf", 90), fill=INK, anchor="mm")
+    d.text((390, 310), "BLACKOUT!", font=fnt("Anton-Regular.ttf", 90), fill=INK, anchor="mm")
+    d.line([(90, 150), (690, 350)], fill=(230, 60, 70, 200), width=9); d.line([(90, 350), (690, 150)], fill=(230, 60, 70, 200), width=9)
+    d.text((390, 440), "ASAL MEIN:", font=fnt("Poppins-Black.ttf", 44), fill=(120, 120, 130), anchor="mm")
+    d.text((390, 520), "SIRF EK ALERT TEST", font=fnt("Poppins-Black.ttf", 52), fill=GRN, anchor="mm")
+    return im
+def roof_floor(img):
+    d = ImageDraw.Draw(img); d.rectangle([0, 1250, W, 1300], fill=(110, 90, 90), outline=INK, width=5); d.rectangle([0, 1300, W, H], fill=(70, 60, 70))
+
+def sc_hook_bij(img, t, lt):
+    (v0,) = L("hook_bij")
+    img.alpha_composite(bg_room("night"))
+    bt = word_t(v0, "bijli", v0["start"] + 0.8)
+    off = t > bt
+    if not off: bulb_glow(img, 90); fan(img, W / 2, 250, t)
+    else: fan(img, W / 2, 250, bt)
+    d = ImageDraw.Draw(img); d.line([(W / 2, 0), (W / 2, 120)], fill=(100, 100, 110), width=6)
+    draw_char(img, "H", 330, 1010, t, "shock" if off else "happy", 0.95, arms=(-20, 110), hold=hold_phone8)
+    if off:
+        dark(img, 150 * eo((t - bt) / 0.2))
+        shake(img, t, bt, 22, 0.45)
+        paste_c(img, emoji("💡", 120), 760, 560, 1.0, rot=20 * math.sin(t * 9))
+        nt = word_t(v0, "90", v0["end"] - 1.2)
+        if t > nt - 0.1:
+            stamp(img, "90 DIN!", 760, 820, t - nt + 0.1, RED, -8, 140)
+            for j in range(6):
+                a = j / 6 * 2 * math.pi + t
+                paste_c(img, emoji("⚡", 70), 760 + math.cos(a) * 300, 820 + math.sin(a) * 260, eob((t - nt - j * 0.05) / 0.2))
+
+def sc_phone_bij(img, t, lt):
+    vh, b = L("phone_bij")
+    img.alpha_composite(bg_room("night")); candle(img, 160, 1180, t); dark(img, 40)
+    socket(img, 930, 900)
+    d = ImageDraw.Draw(img); d.line([(930, 900), (880, 1000), (760, 1040)], fill=INK, width=8)
+    if t < b["start"]:
+        k = t - vh["start"]
+        draw_char(img, "H", 430, 1010, t, "sad", 0.92, arms=(-20, 110), hold=hold_phone8)
+        paste_c(img, phone_big("charging", t, 2), 770, 500, 0.6 * eob(k / 0.3), rot=4)
+        if k > 0.3: paste_c(img, pill("2% 🔋" if False else "BATTERY 2%", 50, WHITE, RED), 770, 210, eob((k - 0.3) / 0.25) * (1 + 0.05 * math.sin(t * 9)))
+        bt = word_t(vh, "bekaar", vh["end"] - 0.6)
+        if t > bt - 0.1: stamp(img, "CHARGER BEKAAR!", W / 2, 360 + 420, t - bt + 0.1, RED, -6, 90)
+    else:
+        q = t - b["start"]
+        draw_char(img, "H", 430, 1010, t, "shock", 0.92, arms=(-150, 150))
+        paste_c(img, phone_big("dead"), 770, 500, 0.6, rot=4 + 6 * math.sin(q * 20) * max(0, 1 - q * 2))
+        stamp(img, "PHONE MAR GAYA!", W / 2, 820, q, RED, -6, 100); shake(img, t, b["start"], 20, 0.4)
+        paste_c(img, emoji("😭", 110), 430, 600, eob((q - 0.1) / 0.25))
+
+def pedal(img, t, x=560, y=1000, mood="det", sc=1.0):
+    bob = abs(math.sin(t * 9)) * 14
+    draw_char(img, "H", x, y - 60 - bob, t, mood, 0.85 * sc, arms=(60, 40))
+    paste_c(img, cycle_img(), x, y + 120, 1.0 * sc)
+    d = ImageDraw.Draw(img)
+    for j in range(3):
+        a = t * 12 + j * 2.1; d.line([(x + 20 * sc, y + 150), (x + 20 * sc + math.cos(a) * 40, y + 150 + math.sin(a) * 40)], fill=INK, width=6)
+def sc_cycle_bij(img, t, lt):
+    vl, b = L("cycle_bij")
+    img.alpha_composite(bg_street("day"))
+    paste_c(img, charge_board(), 540, 560, 0.95)
+    d = ImageDraw.Draw(img); d.line([(540, 710), (560, 960)], fill=INK, width=8)
+    if t < b["start"]:
+        k = t - vl["start"]
+        pedal(img, t, 470, 1000, "det")
+        draw_char(img, "L", 870, 1010, t, "happy", 0.82, arms=(-150, 20))
+        rt = word_t(vl, "10", vl["end"] - 1.2)
+        if t > rt - 0.1: stamp(img, "Rs 10!", 220, 820, t - rt + 0.1, GRN, -8, 120)
+        if k > 0.5: paste_c(img, pill("BILAL CHARGING CO.", 46, YEL), 540, 260, eob((k - 0.5) / 0.3), rot=-3)
+    else:
+        q = t - b["start"]
+        pedal(img, t * 1.6, 470, 1000, "sad")
+        draw_char(img, "L", 870, 1010, t, "happy", 0.82, arms=(-20, 110), hold=hold_notes, laugh=True)
+        for j, (who, x) in enumerate((("K", 90), ("Z", 230))):
+            draw_char(img, who, x - 100 * (1 - eo(q / 0.4)), 1120, t, "happy", 0.55, arms=(-20, 110), hold=hold_phone8)
+        stamp(img, "LAMBI LINE!", 540, 300, q, RED, -6, 110); shake(img, t, b["start"], 16, 0.35)
+        paste_c(img, emoji("🥵", 100), 640, 760, eob((q - 0.1) / 0.25))
+
+def sc_roof_bij(img, t, lt):
+    vn, vh = L("roof_bij")
+    img.alpha_composite(grad((10, 14, 45), (40, 40, 100)))
+    k = t - vn["start"]
+    ht = word_t(vn, "hazaaron", vn["end"] - 1.4)
+    n = 30 if t < ht - 0.1 else int(30 + 170 * eo((t - ht + 0.1) / 0.8))
+    sky_stars(img, t, n, 8, 1050)
+    roof_floor(img)
+    if t < vh["start"]:
+        for who, x, sc_ in (("B", 160, 0.7), ("A", 370, 0.7), ("H", 600, 0.8), ("L", 860, 0.72)):
+            draw_char(img, who, x, 1080, t, "happy", sc_, arms=(-20, 20))
+        mt = word_t(vn, "mohalla", vn["start"] + 1.6)
+        if t > mt - 0.1: paste_c(img, pill("POORA MOHALLA CHHAT PE", 46, WHITE, INK), W / 2, 260, eob((t - mt + 0.1) / 0.3), rot=-2)
+        if t > ht - 0.1: stamp(img, "HAZAARON TAARE!", W / 2, 520, t - ht + 0.1, YEL, -5, 100); paste_c(img, emoji("✨", 100), 900, 680, eob((t - ht) / 0.3))
+    else:
+        q = t - vh["start"]
+        draw_char(img, "B", 260, 1060, t, "happy", 0.82, arms=(-150, 20), laugh=True)
+        draw_char(img, "A", 500, 1080, t, "happy", 0.72, arms=(-20, 110), hold=hold_cup)
+        draw_char(img, "H", 780, 1060, t, "happy", 0.85, arms=(-20, 110), hold=hold_cup, laugh=q > 3.0)
+        kt = word_t(vh, "kahaniyan", vh["start"] + 1.2)
+        if t > kt - 0.1: paste_c(img, pill("ABBU KI KAHANIYAN", 46, (255, 130, 40), WHITE), 360, 300, eob((t - kt + 0.1) / 0.3), rot=-4)
+        ct = word_t(vh, "chai", vh["start"] + 2.6)
+        if t > ct - 0.1: paste_c(img, emoji("☕", 110), 820, 330, eob((t - ct + 0.1) / 0.25))
+        zt = word_t(vh, "maza", vh["end"] - 1.0)
+        if t > zt - 0.1: stamp(img, "MAZA AA GAYA!", W / 2, 520, t - zt + 0.1, GRN, -5, 110)
+
+def sc_twist_bij(img, t, lt):
+    vn, vl, b = L("twist_bij")
+    img.alpha_composite(bg_room("day"))
+    bt = word_t(vn, "bijli", vn["start"] + 0.9)
+    lit = t > bt - 0.1
+    fan(img, W / 2, 250, t if lit else 0); ImageDraw.Draw(img).line([(W / 2, 0), (W / 2, 120)], fill=(100, 100, 110), width=6)
+    if not lit: dark(img, 150)
+    else: bulb_glow(img, 70)
+    if t < vl["start"]:
+        st = word_t(vn, "siwaye", vn["end"] - 1.4)
+        if t < st - 0.1:
+            for who, x, sc_ in (("A", 230, 0.85), ("H", 540, 0.92), ("B", 850, 0.85)):
+                draw_char(img, who, x, 1010, t, "happy" if lit else "shock", sc_, arms=(-150, 150) if lit else (-20, 20), laugh=lit)
+            if lit:
+                stamp(img, "BIJLI WAPIS!", W / 2, 470, t - bt + 0.1, GRN, -5, 120); shake(img, t, bt, 18, 0.35)
+                for j in range(5): paste_c(img, emoji("🎉", 80), 200 + j * 170, 650 + 30 * math.sin(t * 5 + j), eob((t - bt - j * 0.05) / 0.2))
+        else:
+            q = t - st + 0.1
+            draw_char(img, "H", 300, 1010, t, "n", 0.9, arms=(-20, 20))
+            draw_char(img, "L", 760, 1010, t, "sad", 0.92, arms=(-20, 20))
+            paste_c(img, emoji("❓", 110), 760, 560, eob(q / 0.25), rot=10 * math.sin(t * 4))
+    else:
+        q = t - vl["start"]
+        paste_c(img, cycle_img(True), 760, 1200, 0.9)
+        draw_char(img, "L", 760, 1000, t, "sad", 0.92, arms=(-150, 150) if t > b["start"] else (-120, -20))
+        tears(img, 752, 975, q, 30)
+        draw_char(img, "H", 280, 1010, t, "happy" if t > b["start"] else "n", 0.9, arms=(-20, 20), laugh=t > b["start"])
+        ct = word_t(vl, "band", vl["end"] - 0.5)
+        if t > ct - 0.1: stamp(img, "COMPANY BAND!", W / 2, 470, t - ct + 0.1, RED, -6, 110)
+        if t > b["start"]:
+            shake(img, t, b["start"], 22, 0.45)
+            paste_c(img, emoji("😂", 110), 280, 640, eob((t - b["start"]) / 0.25)); paste_c(img, emoji("😭", 110), 760, 640, eob((t - b["start"] - 0.05) / 0.25))
+
+def sc_truth_bij(img, t, lt):
+    (v1,) = L("truth_bij"); k = t - v1["start"]
+    img.alpha_composite(grad((20, 20, 50), (70, 40, 110))); sky_stars(img, t, 40)
+    paste_c(img, hoax_card(), W / 2, 740, 0.95 * eob(k / 0.3), rot=-2)
+    draw_char(img, "H", 230, 1190, t, "n", 0.7, arms=(-20, 20))
+    at = word_t(v1, "afwah", v1["start"] + 2.6)
+    if t > at - 0.1: stamp(img, "AFWAH!", 700, 330, t - at + 0.1, RED, -8, 130)
+    tt = word_t(v1, "test", v1["end"] - 0.5)
+    if t > tt - 0.1: paste_c(img, pill("SIRF KAHANI HAI", 48, GRN, WHITE), 680, 1150, eob((t - tt + 0.1) / 0.3), rot=3)
+
+def sc_end_bij(img, t, lt):
+    img.alpha_composite(bg_room("night")); candle(img, 860, 1180, t); dark(img, 30)
+    draw_char(img, "H", 360, 1000, t, "happy", 0.92, arms=(-20, 110), hold=hold_cup)
+
+
 WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "shop_net": sc_shop_net, "city_net": sc_city_net,
          "roof_net": sc_roof_net, "back_net": sc_back_net,
          "hook_grav": sc_hook_grav, "room_grav": sc_room_grav, "street_grav": sc_street_grav, "sky_grav": sc_sky_grav,
@@ -1217,7 +1385,9 @@ WI_SC = {"hook_net": sc_hook_net, "title": sc_title, "room_net": sc_room_net, "s
          "hook_gas": sc_hook_gas, "bath_gas": sc_bath_gas, "kitchen_gas": sc_kitchen_gas, "street_gas": sc_street_gas,
          "night_gas": sc_night_gas, "twist_gas": sc_twist_gas, "truth_gas": sc_truth_gas, "end_gas": sc_end_gas,
          "hook_end": sc_hook_end, "ammi_end": sc_ammi_end, "bilal_end": sc_bilal_end, "spend_end": sc_spend_end,
-         "night_end": sc_night_end, "twist_end": sc_twist_end, "truth_end": sc_truth_end, "end_end": sc_end_end}
+         "night_end": sc_night_end, "twist_end": sc_twist_end, "truth_end": sc_truth_end, "end_end": sc_end_end,
+         "hook_bij": sc_hook_bij, "phone_bij": sc_phone_bij, "cycle_bij": sc_cycle_bij, "roof_bij": sc_roof_bij,
+         "twist_bij": sc_twist_bij, "truth_bij": sc_truth_bij, "end_bij": sc_end_bij}
 SC.update(WI_SC)
 
 exec(compile(_MAIN + _main, HR, "exec"), globals())

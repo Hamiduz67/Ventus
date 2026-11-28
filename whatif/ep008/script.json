@@ -1,0 +1,15 @@
+[
+ {"who": "N", "mode": "vo", "scene": "hook_bij", "dev": "[excited] اچانک… بجلی گئی… پورے نوے دن کے لیے!", "rom": "Achanak… BIJLI GAYI… poore 90 din ke liye!", "sfx": ["hum"], "pause": 0.4},
+ {"who": "N", "mode": "vo", "scene": "title", "dev": "[curious] سوچو… اگر سچ میں نوے دن بجلی نہ آئے… تو کیا ہوگا؟", "rom": "Socho… agar sach mein 90 din bijli na aaye… toh kya hoga?", "sfx": ["whoosh"], "pause": 0.4},
+ {"who": "H", "mode": "talk", "scene": "phone_bij", "dev": "فون دو پرسنٹ پر… اور چارجر بیکار!", "rom": "Phone 2 percent pe… aur charger bekaar!", "stamp": "1 GHANTA BAAD"},
+ {"who": "H", "mode": "beat", "scene": "phone_bij", "dev": "", "rom": "", "sfx": ["beep"], "dur": 0.9},
+ {"who": "L", "mode": "talk", "scene": "cycle_bij", "dev": "[excited] حامد، سائیکل چلاؤ! فون چارج کرو… دس روپے فی منٹ!", "rom": "Hamid, cycle chalao! Phone charge karo… 10 rupay fi minute!", "stamp": "1 HAFTA BAAD", "sfx": ["cash@1.5"]},
+ {"who": "H", "mode": "beat", "scene": "cycle_bij", "dev": "", "rom": "", "sfx": ["kick"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "roof_bij", "dev": "[curious] لیکن پھر… چھت پر پورا محلہ… اور آسمان میں ہزاروں تارے!", "rom": "Lekin phir… chhat pe poora mohalla… aur aasmaan mein hazaaron taare!", "stamp": "30 DIN BAAD", "sfx": ["chime"], "pause": 0.3},
+ {"who": "H", "mode": "talk", "scene": "roof_bij", "dev": "ابو کی پرانی کہانیاں… امی کی چائے… یار، مزہ آ گیا!", "rom": "Abbu ki purani kahaniyan… Ammi ki chai… yaar, maza aa gaya!"},
+ {"who": "N", "mode": "vo", "scene": "twist_bij", "dev": "[excited] اور پھر… بجلی واپس! سب خوش… سوائے ایک بندے کے!", "rom": "Aur phir… BIJLI WAPIS! Sab khush… siwaye ek bande ke!", "stamp": "90 DIN BAAD", "sfx": ["hum"], "pause": 0.4},
+ {"who": "L", "mode": "talk", "scene": "twist_bij", "dev": "[crying] میری سائیکل کمپنی… بند!", "rom": "Meri cycle company… BAND!"},
+ {"who": "H", "mode": "beat", "scene": "twist_bij", "dev": "", "rom": "", "sfx": ["boom"], "dur": 0.9},
+ {"who": "N", "mode": "vo", "scene": "truth_bij", "dev": "[curious] ویسے، سترہ نومبر والا نوے دن کا بلیک آؤٹ… افواہ تھی! امریکہ میں صرف ایک الرٹ ٹیسٹ تھا۔", "rom": "Waise, 17 November wala 90 din ka blackout… afwah thi! America mein sirf ek alert test tha.", "pause": 0.3},
+ {"who": "N", "mode": "vo", "scene": "end_bij", "dev": "[curious] اب آپ بتاؤ… نوے دن بنا بجلی… آپ سب سے پہلے کیا کرو گے؟ کمنٹ کرو… اور فالو کرو!", "rom": "Ab aap batao… 90 din bina bijli… aap sabse pehle kya karoge? Comment karo… aur follow karo!", "final": true}
+]
