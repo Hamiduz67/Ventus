@@ -1,0 +1,11 @@
+{
+ "day": 31,
+ "city": "Karachi",
+ "money": 800,
+ "money_start": 0,
+ "title": "Exam Special Chai",
+ "diary_follow": false,
+ "hook": {"text": "30 DIN, Rs 30,000!", "emoji": "⏳", "sub": "JEB MEIN: Rs 0"},
+ "thumb": {"t": 20.0, "l1": "COLLEGE GATE PE…", "l2": "CHAI SE 30 HAZAAR?!", "emoji": "☕", "tag": "Rs 30,000", "mood": "shock"},
+ "money_steps": [[15, 800, 1.2]]
+}

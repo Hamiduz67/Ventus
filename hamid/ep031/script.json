@@ -1,0 +1,22 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook31", "dev": "تیس دن! تیس ہزار! جیب میں زیرو!", "rom": "Tees din! Tees hazaar! Jeb mein zero!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن اکتیس۔ صبح چھ بجے۔", "rom": "Din iktees. Subah chhe baje."},
+{"who": "H", "mode": "vo", "scene": "plan31", "dev": "یعنی روز ہزار روپے… ورنہ لاہور!", "rom": "Yaani roz hazaar rupay… warna Lahore!"},
+{"who": "H", "mode": "vo", "scene": "plan31", "dev": "پلان: کالج کے گیٹ پہ چائے!", "rom": "Plan: college ke gate pe chai!"},
+{"who": "R", "mode": "talk", "scene": "plan31", "dev": "[laughing] کیتلی لے جاؤ… دودھ تمہارا!", "rom": "Ketli le jao… doodh tumhara!"},
+{"who": "H", "mode": "vo", "scene": "plan31", "dev": "دودھ چار سو کا… وہ بھی ادھار!", "rom": "Doodh chaar sau ka… woh bhi udhaar!"},
+{"who": "H", "mode": "beat", "scene": "gate31", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "gate31", "dev": "گارڈ کی سیٹی! یہاں ٹھیلا منع ہے!", "rom": "Guard ki seeti! Yahan thela mana hai!"},
+{"who": "H", "mode": "vo", "scene": "gate31", "dev": "سڑک کے پار… کوئی رکتا ہی نہیں!", "rom": "Sadak ke paar… koi rukta hi nahi!"},
+{"who": "H", "mode": "vo", "scene": "gate31", "dev": "پونے آٹھ بجے… چائے بھی ٹھنڈی، میں بھی!", "rom": "Paune aath baje… chai bhi thandi, main bhi!"},
+{"who": "L", "mode": "talk", "scene": "sell31", "dev": "[excited] رکو! سکیم نمبر بارہ!", "rom": "Ruko! Scheme number baarah!"},
+{"who": "L", "mode": "talk", "scene": "sell31", "dev": "[shouting] ایگزام سپیشل چائے! ایک کپ، پورا سلیبس یاد!", "rom": "Exam special chai! Ek cup, poora syllabus yaad!"},
+{"who": "H", "mode": "beat", "scene": "sell31", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "sell31", "dev": "لائن لگ گئی! گارڈ بھی آیا…", "rom": "Line lag gayi! Guard bhi aaya…"},
+{"who": "H", "mode": "vo", "scene": "sell31", "dev": "دو کپ لیے، بولا: کسی کو مت بتانا!", "rom": "Do cup liye, bola: kisi ko mat batana!"},
+{"who": "H", "mode": "vo", "scene": "sell31", "dev": "چالیس کپ! دودھ کے پیسے نکال کے… آٹھ سو!", "rom": "Chaalees cup! Doodh ke paise nikaal ke… aath sau!"},
+{"who": "H", "mode": "vo", "scene": "sell31", "dev": "آج بھی بچ گئے!", "rom": "Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff31", "dev": "کلاس کے بعد… آفس کا نیا میسج…", "rom": "Class ke baad… office ka naya message…"},
+{"who": "H", "mode": "vo", "scene": "cliff31", "dev": "کل سے ڈیوٹی صبح آٹھ بجے! تو کالج؟ اور چائے؟", "rom": "Kal se duty subah aath baje! Toh college? Aur chai?"},
+{"who": "H", "mode": "vo", "scene": "cliff31", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]
