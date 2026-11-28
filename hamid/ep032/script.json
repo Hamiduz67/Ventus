@@ -1,0 +1,22 @@
+[
+{"who": "H", "mode": "vo", "scene": "hook32", "dev": "آٹھ بجے ڈیوٹی! آٹھ بجے کلاس! جاؤں کہاں؟!", "rom": "Aath baje duty! Aath baje class! Jaaun kahan?!"},
+{"who": "H", "mode": "vo", "scene": "daycard", "dev": "دن بتیس۔ صبح پانچ بجے۔", "rom": "Din battees. Subah paanch baje."},
+{"who": "H", "mode": "vo", "scene": "chai32", "dev": "پلان: چائے ساڑھے چھ بجے شروع!", "rom": "Plan: chai saadhe chhe baje shuru!"},
+{"who": "H", "mode": "vo", "scene": "chai32", "dev": "لیکن کالج خالی… صرف دس کپ!", "rom": "Lekin college khaali… sirf das cup!"},
+{"who": "L", "mode": "talk", "scene": "chai32", "dev": "[excited] سکیم تیرہ! تیری کلاس میں میں بیٹھوں گا!", "rom": "Scheme terah! Teri class mein main baithunga!"},
+{"who": "H", "mode": "vo", "scene": "chai32", "dev": "بلال… اور بی بی اے؟!", "rom": "Bilal… aur BBA?!"},
+{"who": "H", "mode": "beat", "scene": "office32", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "office32", "dev": "آٹھ بجے آفس… پہلا آرڈر…", "rom": "Aath baje office… pehla order…"},
+{"who": "H", "mode": "vo", "scene": "office32", "dev": "ایڈریس: سٹی کالج! روم نمبر تین!", "rom": "Address: City College! Room number teen!"},
+{"who": "H", "mode": "vo", "scene": "class32", "dev": "دروازہ کھولا… بلال میری سیٹ پہ!", "rom": "Darwaza khola… Bilal meri seat pe!"},
+{"who": "H", "mode": "vo", "scene": "class32", "dev": "سر نے پوچھا: تم حامد ہو؟", "rom": "Sir ne poocha: tum Hamid ho?"},
+{"who": "L", "mode": "talk", "scene": "class32", "dev": "[nervous] جی سر… آج تھوڑا موٹا لگ رہا ہوں!", "rom": "Ji sir… aaj thoda mota lag raha hoon!"},
+{"who": "H", "mode": "beat", "scene": "class32", "dev": "", "rom": "", "dur": 0.6},
+{"who": "H", "mode": "vo", "scene": "class32", "dev": "اور اصلی حامد… ہاتھ میں سر کا ناشتہ!", "rom": "Aur asli Hamid… haath mein sir ka naashta!"},
+{"who": "H", "mode": "vo", "scene": "sir32", "dev": "سچ بتایا: صبح چائے، دن میں ڈیوٹی!", "rom": "Sach bataya: subah chai, din mein duty!"},
+{"who": "H", "mode": "vo", "scene": "sir32", "dev": "سر بولے: تو شام کی کلاس میں آؤ!", "rom": "Sir bole: toh shaam ki class mein aao!"},
+{"who": "H", "mode": "vo", "scene": "sir32", "dev": "ٹپ سو روپے! آج بھی بچ گئے!", "rom": "Tip sau rupay! Aaj bhi bach gaye!"},
+{"who": "H", "mode": "vo", "scene": "cliff32", "dev": "شام چھ بجے… نئی کلاس… پہلی بینچ پہ…", "rom": "Shaam chhe baje… nayi class… pehli bench pe…"},
+{"who": "S", "mode": "talk", "scene": "cliff32", "dev": "[surprised] تم؟ میرا پٹرول کب دو گے؟", "rom": "Tum? Mera petrol kab doge?"},
+{"who": "H", "mode": "vo", "scene": "cliff32", "outro": true, "dev": "آگے حامد کیا کرے گا؟ فالو کریں، اگلے پارٹ کے لیے!", "rom": "Agay Hamid kya karega? Follow karein, agle part ke liye!"}
+]

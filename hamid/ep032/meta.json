@@ -1,0 +1,11 @@
+{
+ "day": 32,
+ "city": "Karachi",
+ "money": 1200,
+ "money_start": 800,
+ "title": "Ek Hamid, Do Jagah",
+ "diary_follow": false,
+ "hook": {"text": "DUTY YA CLASS?!", "emoji": "⏰", "sub": "DONO 8 BAJE!"},
+ "thumb": {"t": 30.0, "l1": "BILAL BANA…", "l2": "NAKLI HAMID?!", "emoji": "🎒", "tag": "ROOM 3", "mood": "shock"},
+ "money_steps": [[3, 1100, 1.6], [16, 1200, 1.0]]
+}

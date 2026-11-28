@@ -923,6 +923,31 @@ if "cliff31" in SPN:
     for k in range(3): add(sfx, kick(), c31[1]["start"] + 2.0 + k * 0.6, 0.5)
     for k in range(4): add(sfx, TICK, c31[1]["end"] - 0.6 + k * 0.25, 0.4)
 
+# ---- Day 32: clock ticks, cricket chirp-tick + sad trombone (empty college), Bilal whoosh, vroom, phone beep, class laugh, tip chime, heartbeat-kick
+if "hook32" in SPN:
+    h32 = LS_("hook32")
+    for k in range(6): add(sfx, TICK, h32[0]["start"] + 1.4 + k * 0.25, 0.4)
+    add(sfx, kick(), h32[0]["end"] - 0.6, 0.8)
+if "chai32" in SPN:
+    c32 = LS_("chai32"); add(sfx, CHIME, c32[0]["start"] + 0.2, 0.4)
+    add(sfx, sad_trombone(), c32[1]["end"] - 0.9, 0.15); add(sfx, kick(), c32[1]["start"] + 1.6, 0.6)
+    add(sfx, WHOOSH, c32[2]["start"] - 0.3, 0.6); add(sfx, kick(), c32[3]["start"] + 0.8, 0.8)
+if "office32" in SPN:
+    o32 = LS_("office32"); add(sfx, engine(0.9), o32[0]["start"], 0.35); add(sfx, kick(), o32[0]["start"] + 0.1, 0.8)
+    for k in range(3): add(sfx, beep(1200, 0.08, 0.5), o32[1]["start"] + 1.5 + k * 0.18)
+    add(sfx, kick(), o32[2]["end"] - 1.0, 0.9)
+if "class32" in SPN:
+    k32 = LS_("class32"); add(sfx, WHOOSH, k32[0]["start"], 0.5); add(sfx, kick(), k32[0]["start"] + 1.3, 0.7)
+    add(sfx, kick(), k32[2]["end"] - 0.3, 0.6); add(sfx, kick(), k32[3]["start"], 1.0)
+    for k in range(5): add(sfx, TICK, k32[3]["start"] + k * 0.1, 0.3)
+    add(sfx, kick(), k32[4]["end"] - 1.0, 0.7)
+if "sir32" in SPN:
+    r32 = LS_("sir32"); add(sfx, CHIME, r32[1]["start"] + 1.2, 0.5)
+    add(sfx, kick(), r32[2]["start"] + 0.1, 0.8); add(sfx, CHIME, r32[2]["start"] + 1.4, 0.7); add(sfx, CHIME, r32[2]["start"] + 1.6, 0.5)
+if "cliff32" in SPN:
+    f32 = LS_("cliff32"); add(sfx, WHOOSH, f32[0]["start"], 0.4)
+    for k in range(3): add(sfx, kick(), f32[1]["start"] + k * 0.5, 0.6)
+
 # ---- Cold-open hook sting (owner, 2026-11-19: ear-catching start so people don't skip): boom + crack + brass stab + whoosh at 0 s
 HOOK = _DAY >= 15 or "hook" in (json.load(open(f"{D}/meta.json")) if os.path.exists(f"{D}/meta.json") else {})
 if HOOK:
