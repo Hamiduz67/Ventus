@@ -49,7 +49,11 @@ Read SERIES.md first. All paths below are relative to the Ventus repo root. The 
    YouTube Shorts: Buffer/YouTube give no custom-thumbnail control for Shorts; YouTube picks the frame itself.)
    (time is Asia/Dubai: today 18:00 or 20:00 = the run's slot). This posts to YouTube Shorts + TikTok + Instagram Reel.
    Facebook gets the Reel automatically through Instagram's "share Reels to Facebook" setting — nothing to do.
-   Caption: hook line + "Day N+1 kal… follow karo" + #HamidZeroSeShuru #struggle #pakistan #motivation #story #urdu.
+   Caption (YouTube + TikTok): hook line + "Day N+1 kal… follow karo" + #HamidZeroSeShuru #struggle #pakistan #motivation #story #urdu.
+   **Instagram caption (owner, 2026-11-28): keywords instead of hashtags — NO hashtags on Instagram.** Always pass `--ig-caption`:
+   hook line + "Day N+1 kal… follow karo" + one or two plain sentences of searchable keywords woven in naturally, e.g.
+   "Hamid Zero Se Shuru Day N: Pakistani animated story in Urdu and Hindi about struggle, motivation and a poor student's life in Karachi."
+   + 3–5 episode-specific keywords (e.g. "chai wala, college, delivery boy job"). Simple everyday words, no keyword stuffing, no "#".
    Before scheduling, run `buffer_post.py status` and make sure this day isn't already queued/sent (never double-post).
    After the post time has passed (if the run is still going) or at the start of the NEXT run, check `buffer_post.py status`
    for the previous episode; if a channel shows an error, report it (and for TikTok only, a Metricool post is an emergency fallback).
@@ -118,5 +122,6 @@ Series rules: studio/whatif/SERIES.md. State: studio/whatif/state.json. Episodes
    `whatif_render.py whatif/epNNN still:0.1,0.4,1.2,<one per scene>` and `... thumb` → LOOK at them, fix overlaps; full render + mux:
    `cd whatif/epNNN && python3 ../../studio/whatif/whatif_render.py . && ffmpeg -i video.tmp.mp4 -i mix.wav -map 0:v -map 1:a -c:v copy -af adelay=67:all=1 -c:a aac -b:a 192k -shortest -movflags +faststart KyaHogaAgar_NNN.mp4`
 5. Commit only the mp4 + thumb.jpg + script.json + meta.json + renderer changes, push, check the commit-SHA raw URL is HTTP 200, then
-   `buffer_post.py schedule --channels instagram --url <raw mp4> --caption "<hook line + emoji> … Aap kya karoge? Comment karo 👇 Roz raat 10 baje naya 'Kya Hoga Agar?' — follow karo! #KyaHogaAgar #whatif #kyahogaagar #urdu #hindi #story #reels" --title "Kya Hoga Agar? #N" --at "<today> 22:00"`.
+   `buffer_post.py schedule --channels instagram --url <raw mp4> --caption "<same as --ig-caption>" --ig-caption "<hook line + emoji> … Aap kya karoge? Comment karo 👇 Roz raat 10 baje naya 'Kya Hoga Agar?' — follow karo! Kya Hoga Agar: what if story in Urdu and Hindi about <topic keywords>, funny animated cartoon story." --title "Kya Hoga Agar? #N" --at "<today> 22:00"`.
+   **Owner, 2026-11-28: keywords instead of hashtags on Instagram — NO hashtags in the caption;** weave 4–8 searchable keywords into plain sentences.
 6. Update studio/whatif/state.json (last_n, episodes += {n, title, topic, why (trend), file, posted_at, buffer_id, elevenlabs_chars, length_s}) and push.

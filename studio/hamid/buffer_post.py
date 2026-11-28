@@ -5,6 +5,9 @@ Usage:
   buffer_post.py schedule --url <public mp4 url> --caption "<text>" --title "<YouTube title>" \
                           --tiktok-title "<short title>" --at "2026-11-15 13:00" [--channels youtube,tiktok,instagram]
                           [--thumb-url <public thumb.jpg url>] [--thumb-ms 20]
+                          [--ig-caption "<Instagram caption: keywords in plain sentences, NO hashtags>"]
+  Instagram captions (owner, 2026-11-28): use searchable keywords instead of hashtags on Instagram. --ig-caption replaces
+  --caption for the instagram channel only (YouTube/TikTok keep --caption with hashtags). Always pass it when instagram is posted.
   Cover/thumbnail (owner, 2026-11-18): hamid_render.py puts the designed thumbnail in the video's first frames, and
   --thumb-ms (default 20 ms) points Buffer's thumbnailOffset there (Instagram Reel cover + TikTok cover).
   --thumb-url is also sent as thumbnailUrl; Buffer rejects it (2026-11-18), so the retry drops it but KEEPS thumbnailOffset
@@ -46,7 +49,7 @@ def schedule(a):
         video = {"url": a.url}
         if a.thumb_ms is not None and a.thumb_ms >= 0: video["metadata"] = {"thumbnailOffset": a.thumb_ms}
         if a.thumb_url: video["thumbnailUrl"] = a.thumb_url
-        inp = {"channelId": CHANNELS[svc], "text": a.caption, "assets": [{"video": video}], "metadata": meta[svc],
+        inp = {"channelId": CHANNELS[svc], "text": (a.ig_caption if svc == "instagram" and a.ig_caption else a.caption), "assets": [{"video": video}], "metadata": meta[svc],
                "schedulingType": "automatic", "mode": "customScheduled", "dueAt": due.strftime("%Y-%m-%dT%H:%M:%SZ"),
                "needsApproval": False}
         d = gql(CREATE, {"input": inp}, soft=True)
@@ -82,6 +85,7 @@ p = argparse.ArgumentParser(); sub = p.add_subparsers(dest="cmd", required=True)
 s = sub.add_parser("schedule"); s.add_argument("--url", required=True); s.add_argument("--caption", required=True)
 s.add_argument("--title", required=True); s.add_argument("--tiktok-title"); s.add_argument("--at", required=True)
 s.add_argument("--channels", default="youtube,tiktok,instagram")
+s.add_argument("--ig-caption", help="Instagram-only caption: keywords, no hashtags (owner, 2026-11-28)")
 s.add_argument("--thumb-url"); s.add_argument("--thumb-ms", type=int, default=20)
 st = sub.add_parser("status"); st.add_argument("--since-hours", type=int, default=24)
 dl = sub.add_parser("delete"); dl.add_argument("--ids", required=True)
